@@ -9,8 +9,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    private let emailTextField = BasicTextField(type: .email)
-    private let passwordTextField = BasicTextField(type: .password)
+    private let emailTextField = BasicTextField(type: .email, returnType: .next)
+    private let passwordTextField = BasicTextField(type: .password, returnType: .done)
     private let loginButton = BasicButton(title: "로그인")
     private let stackView: UIStackView = {
         let stack = UIStackView()
@@ -33,6 +33,7 @@ class LoginViewController: UIViewController {
         return button
     }()
 
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,11 +45,13 @@ class LoginViewController: UIViewController {
 // MARK: - Action
 extension LoginViewController {
     @objc func login() {
-        /// 로그인
+        // 로그인
+        view.endEditing(true)
     }
     
     @objc func signUp() {
-        /// 회원가입
+        // 회원가입
+        
     }
 }
 
@@ -65,6 +68,11 @@ extension LoginViewController {
         [signUpLabel, signUpButton].forEach({    
             stackView.addArrangedSubview($0)
         })
+        
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
         
         loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(signUp), for: .touchUpInside)
@@ -89,6 +97,26 @@ extension LoginViewController {
         
         stackView.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 40).isActive = true
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+
+}
+
+// MARK: - UITextFieldDelegate
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        switch textField {
+        case emailTextField:
+            passwordTextField.becomeFirstResponder()
+            
+        case passwordTextField:
+            login()
+            
+        default: break
+        }
+
+        
+        return true
     }
 
 }
