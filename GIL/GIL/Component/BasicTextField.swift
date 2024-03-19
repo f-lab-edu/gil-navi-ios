@@ -34,10 +34,13 @@ class BasicTextField: UITextField {
     private let padding: UIEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
     private let formType: FormType
     
-    init(type: FormType) {
+    init(type: FormType,
+         returnType: UIReturnKeyType? = nil
+    ) {
         self.formType = type
         super.init(frame: .zero)
         
+        self.returnKeyType = returnType ?? .default
         configureUI()
     }
     
