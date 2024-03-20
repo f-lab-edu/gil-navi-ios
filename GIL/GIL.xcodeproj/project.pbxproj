@@ -16,7 +16,6 @@
 		584FA3FE2BA41485002600F1 /* GILTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA3FD2BA41485002600F1 /* GILTests.swift */; };
 		584FA4082BA41485002600F1 /* GILUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4072BA41485002600F1 /* GILUITests.swift */; };
 		584FA40A2BA41485002600F1 /* GILUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4092BA41485002600F1 /* GILUITestsLaunchTests.swift */; };
-		584FA4172BA42CFE002600F1 /* .gitignore  in Resources */ = {isa = PBXBuildFile; fileRef = 584FA4162BA42CFE002600F1 /* .gitignore  */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +49,6 @@
 		584FA4032BA41485002600F1 /* GILUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GILUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		584FA4072BA41485002600F1 /* GILUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GILUITests.swift; sourceTree = "<group>"; };
 		584FA4092BA41485002600F1 /* GILUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GILUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		584FA4162BA42CFE002600F1 /* .gitignore  */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".gitignore "; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +102,6 @@
 				584FA3E62BA41484002600F1 /* AppDelegate.swift */,
 				584FA3E82BA41484002600F1 /* SceneDelegate.swift */,
 				584FA3EA2BA41484002600F1 /* ViewController.swift */,
-				584FA4162BA42CFE002600F1 /* .gitignore  */,
 				584FA3EC2BA41484002600F1 /* Main.storyboard */,
 				584FA3EF2BA41485002600F1 /* Assets.xcassets */,
 				584FA3F12BA41485002600F1 /* LaunchScreen.storyboard */,
@@ -235,7 +232,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				584FA3F32BA41485002600F1 /* LaunchScreen.storyboard in Resources */,
-				584FA4172BA42CFE002600F1 /* .gitignore  in Resources */,
 				584FA3F02BA41485002600F1 /* Assets.xcassets in Resources */,
 				584FA3EE2BA41484002600F1 /* Main.storyboard in Resources */,
 			);
