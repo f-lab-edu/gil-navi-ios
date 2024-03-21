@@ -9,8 +9,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    private let emailTextField = BasicTextField(type: .email, returnType: .next)
-    private let passwordTextField = BasicTextField(type: .password, returnType: .done)
+    private let emailTextField = BasicTextField(type: .email, returnKeyType: .next)
+    private let passwordTextField = BasicTextField(type: .password, returnKeyType: .done)
     private let loginButton = BasicButton(title: "로그인")
     private let stackView: UIStackView = {
         let stack = UIStackView()
