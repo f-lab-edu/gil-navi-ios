@@ -11,13 +11,15 @@ class BasicTextField: UITextField {
     enum FormType {
         case email
         case password
+        case unknown
         
         var keyboardType: UIKeyboardType {
             switch self {
             case .email:
                 return .emailAddress
-            case .password:
+            default:
                 return .default
+                
             }
         }
         
@@ -27,6 +29,8 @@ class BasicTextField: UITextField {
                 return "Email"
             case .password:
                 return "Password"
+            case .unknown:
+                return ""
             }
         }
     }
@@ -35,11 +39,13 @@ class BasicTextField: UITextField {
     private let formType: FormType
     
     init(type: FormType,
+         placeholder: String? = nil,
          returnType: UIReturnKeyType? = nil
     ) {
         self.formType = type
         super.init(frame: .zero)
         
+        self.placeholder = placeholder ?? self.formType.placeholder
         self.returnKeyType = returnType ?? .default
         configureUI()
     }
@@ -62,7 +68,6 @@ class BasicTextField: UITextField {
 extension BasicTextField {
     func configureUI() {
         keyboardType = formType.keyboardType
-        placeholder = formType.placeholder
         textColor = .black
         font = .systemFont(ofSize: 14, weight: .medium)
         layer.borderColor = UIColor.lightGray.cgColor
