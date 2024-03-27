@@ -41,18 +41,20 @@ class BasicTextField: UITextField {
     }
     
     private let padding: UIEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
-    private let formType: FormType
-    private let returnType: UIReturnKeyType
     
     // MARK: - Initialization
-    init(type: FormType,
-         returnKeyType: UIReturnKeyType = .default
+    init(
+        type: FormType,
+        returnKeyType: UIReturnKeyType = .default,
+        textColor: UIColor = .black,
+        font: UIFont = .systemFont(ofSize: 14, weight: .medium)
     ) {
-        self.formType = type
-        self.returnType = returnKeyType
         super.init(frame: .zero)
 
-        configureUI()
+        configureUI(formType: type,
+                    returnKeyType: returnKeyType,
+                    textColor: textColor,
+                    font: font)
     }
     
     required init?(coder: NSCoder) {
@@ -72,19 +74,24 @@ class BasicTextField: UITextField {
 
 // MARK: - Configure UI
 extension BasicTextField {
-    func configureUI() {
-        let config = TextFieldConfiguration(keyboardType: formType.keyboardType,
-                                            returnKeyType: returnType,
-                                            contentType: formType.contentType,
-                                            placeholder: formType.placeholder,
-                                            textColor: .black,
-                                            font: .systemFont(ofSize: 14, weight: .medium),
-                                            borderColor: UIColor.lightGray.cgColor,
-                                            borderWidth: 1,
-                                            cornerRadius: 6,
-                                            autocorrectionType: .no,
-                                            autocapitalizationType: .none,
-                                            isSecureTextEntry: formType == .password ? true : false)
-        applyStyle(config)
+    func configureUI(
+        formType: FormType,
+        returnKeyType returnType: UIReturnKeyType,
+        textColor txtColor: UIColor,
+        font txtFont: UIFont
+    ) {
+        keyboardType = formType.keyboardType
+        textContentType = formType.contentType
+        placeholder = formType.placeholder
+        isSecureTextEntry = formType == .password ? true : false
+        returnKeyType = returnType
+        textColor = txtColor
+        font = txtFont
+        backgroundColor = .white
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderWidth = 1
+        layer.cornerRadius = 6
+        autocorrectionType = .no
+        autocapitalizationType = .none
     }
 }

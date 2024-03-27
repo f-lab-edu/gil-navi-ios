@@ -10,9 +10,18 @@ import UIKit
 class BasicButton: UIButton {
     
     // MARK: - Initialization
-    init(title: String) {
+    init(
+        title: String,
+        titleColor: UIColor = .white,
+        font: UIFont = .systemFont(ofSize: 18, weight: .bold),
+        backgroundColor: UIColor? = .mainGreenColor
+    ) {
         super.init(frame: .zero)
-        configureUI(title: title)
+        
+        configureUI(title: title,
+                    titleColor: titleColor,
+                    font: font,
+                    backgroundColor: backgroundColor)
     }
     
     required init?(coder: NSCoder) {
@@ -23,13 +32,17 @@ class BasicButton: UIButton {
 
 // MARK: - Configure UI
 extension BasicButton {
-    func configureUI(title: String) {
-        let config = ButtonConfiguration(title: title,
-                                         titleColor: .white,
-                                         font: .systemFont(ofSize: 18, weight: .bold),
-                                         backgroundColor: .mainGreenColor,
-                                         cornerRadius: 6)
-        applyStyle(config)
+    func configureUI(
+        title: String,
+        titleColor: UIColor,
+        font: UIFont,
+        backgroundColor bgColor: UIColor?
+    ) {
+        setTitle(title, for: .normal)
+        setTitleColor(titleColor, for: .normal)
+        titleLabel?.font = font
+        backgroundColor = bgColor
+        layer.cornerRadius = 6
     }
 }
 
