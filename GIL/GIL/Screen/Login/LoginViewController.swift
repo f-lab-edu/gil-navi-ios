@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import Combine
 
 class LoginViewController: UIViewController {
-    
+    private var viewModel = LoginViewModel()
     private var loginView = LoginView()
 
     // MARK: - Life Cycle
@@ -28,6 +29,7 @@ extension LoginViewController {
     func setupBindings() {
         bindTextFields()
         bindButtons()
+        bindPublishers()
     }
     
     private func bindTextFields() {
@@ -38,6 +40,22 @@ extension LoginViewController {
     private func bindButtons() {
         loginView.loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         loginView.signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        loginView.appleLoginButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
+    }
+    
+    private func bindPublishers() {
+        viewModel.loginPublisher
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .finished:
+                    print("Finished")
+                case .failure(let failure):
+                    print("Failure : \(failure.localizedDescription)")
+                }
+            }, receiveValue: { [weak self] _ in
+                print("로그인 성공 ")
+            })
+            .store(in: &viewModel.cancellables)
     }
 }
 
@@ -51,6 +69,11 @@ extension LoginViewController {
     @objc func signUpButtonTapped() {
         // 회원가입
         
+    }
+    
+    @objc func appleLoginButtonTapped() {
+        // 애플 로그인
+        viewModel.didTappedLoginButton()
     }
 }
 
