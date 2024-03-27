@@ -14,7 +14,6 @@
 		584FA3FE2BA41485002600F1 /* GILTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA3FD2BA41485002600F1 /* GILTests.swift */; };
 		584FA4082BA41485002600F1 /* GILUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4072BA41485002600F1 /* GILUITests.swift */; };
 		584FA40A2BA41485002600F1 /* GILUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4092BA41485002600F1 /* GILUITestsLaunchTests.swift */; };
-		584FA4172BA42CFE002600F1 /* .gitignore  in Resources */ = {isa = PBXBuildFile; fileRef = 584FA4162BA42CFE002600F1 /* .gitignore  */; };
 		584FA41B2BA7F606002600F1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA41A2BA7F606002600F1 /* LoginViewController.swift */; };
 		584FA41E2BA82886002600F1 /* BasicTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA41D2BA82886002600F1 /* BasicTextField.swift */; };
 		584FA4222BA84254002600F1 /* BasicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4212BA84254002600F1 /* BasicButton.swift */; };
@@ -22,6 +21,7 @@
 		584FA42A2BA926B3002600F1 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4292BA926B3002600F1 /* ViewController+Extension.swift */; };
 		584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA42F2BABC0EE002600F1 /* LoginView.swift */; };
 		584FA44A2BB15D51002600F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4492BB15D51002600F1 /* LoginViewModel.swift */; };
+		584FA4172BA42CFE002600F1 /* .gitignore  in Resources */ = {isa = PBXBuildFile; fileRef = 584FA4162BA42CFE002600F1 /* .gitignore  */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,7 +118,9 @@
 				584FA4262BA84CF5002600F1 /* Extension */,
 				584FA3E62BA41484002600F1 /* AppDelegate.swift */,
 				584FA3E82BA41484002600F1 /* SceneDelegate.swift */,
-				584FA4162BA42CFE002600F1 /* .gitignore  */,
+				584FA3EA2BA41484002600F1 /* ViewController.swift */,
+				584FA3EC2BA41484002600F1 /* Main.storyboard */,
+				584FA3EF2BA41485002600F1 /* Assets.xcassets */,
 				584FA3F12BA41485002600F1 /* LaunchScreen.storyboard */,
 				584FA3EF2BA41485002600F1 /* Assets.xcassets */,
 				584FA3F42BA41485002600F1 /* Info.plist */,
@@ -284,7 +286,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				584FA3F32BA41485002600F1 /* LaunchScreen.storyboard in Resources */,
-				584FA4172BA42CFE002600F1 /* .gitignore  in Resources */,
 				584FA3F02BA41485002600F1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
