@@ -20,6 +20,7 @@
 		584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4272BA84D00002600F1 /* UIColor+Extension.swift */; };
 		584FA42A2BA926B3002600F1 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4292BA926B3002600F1 /* ViewController+Extension.swift */; };
 		584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA42F2BABC0EE002600F1 /* LoginView.swift */; };
+		584FA4172BA42CFE002600F1 /* .gitignore  in Resources */ = {isa = PBXBuildFile; fileRef = 584FA4162BA42CFE002600F1 /* .gitignore  */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
