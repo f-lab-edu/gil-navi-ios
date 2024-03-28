@@ -38,11 +38,16 @@ final class LoginView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
-        makeConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Drawing Cycle
+    override func updateConstraints() {
+        setConstraints()
+        super.updateConstraints()
     }
 }
 
@@ -61,23 +66,22 @@ extension LoginView {
     }
     
     
-    func makeConstraints() {
-        emailTextField.topAnchor.constraint(equalTo: topAnchor, constant: 120).isActive = true
-        emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        emailTextField.heightAnchor.constraint(equalToConstant: 55).isActive = true
-        
-        passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10).isActive = true
-        passwordTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor).isActive = true
-        passwordTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor).isActive = true
-        passwordTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor).isActive = true
-        
-        loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
-        loginButton.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor).isActive = true
-        loginButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor).isActive = true
-        loginButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        stackView.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 40).isActive = true
-        stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    func setConstraints() {
+        NSLayoutConstraint.activate([
+            emailTextField.topAnchor.constraint(equalTo: topAnchor, constant: 120),
+            emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            emailTextField.heightAnchor.constraint(equalToConstant: 55),
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10),
+            passwordTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
+            passwordTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
+            passwordTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
+            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30),
+            loginButton.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor),
+            loginButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
+            loginButton.heightAnchor.constraint(equalToConstant: 60),
+            stackView.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 40),
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor)
+        ])
     }
 }
