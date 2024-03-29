@@ -7,9 +7,14 @@
 
 import UIKit
 
+// MARK: - Primary Color Set
 extension UIColor {
     static let mainGreenColor = UIColor(named: "mainGreenColor")
-    
+    static let borderGrayColor = UIColor(named: "borderGrayColor")
+}
+
+// MARK: - 16진수 문자열을 사용하여 UIColor 객체를 생성
+extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
@@ -24,5 +29,4 @@ extension UIColor {
 
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
-
 }

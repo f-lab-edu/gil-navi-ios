@@ -51,7 +51,7 @@ final class LoginView: UIView {
     }()
     let border: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor(hex: "#DADADA")
+        label.backgroundColor = .borderGrayColor
         return label
     }()
     
