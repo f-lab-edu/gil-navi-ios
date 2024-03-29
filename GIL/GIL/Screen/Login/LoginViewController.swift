@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     private var viewModel = LoginViewModel()
     private var loginView = LoginView()
 
@@ -38,9 +38,14 @@ extension LoginViewController {
     }
     
     private func bindButtons() {
-        loginView.loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        loginView.signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-        loginView.appleLoginButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
+        let loginAction = UIAction { _ in self.loginButtonTapped() }
+        loginView.loginButton.addAction(loginAction, for: .touchUpInside)
+        
+        let signUpAction = UIAction { _ in self.signUpButtonTapped() }
+        loginView.signUpButton.addAction(signUpAction, for: .touchUpInside)
+     
+        let appleLoginAction = UIAction { _ in self.appleLoginButtonTapped() }
+        loginView.appleLoginButton.addAction(appleLoginAction, for: .touchUpInside)
     }
     
     private func bindPublishers() {
@@ -61,17 +66,16 @@ extension LoginViewController {
 
 // MARK: - Actions
 extension LoginViewController {
-    @objc func loginButtonTapped() {
+    func loginButtonTapped() {
         // 로그인
         view.endEditing(true)
     }
     
-    @objc func signUpButtonTapped() {
+    func signUpButtonTapped() {
         // 회원가입
-        
     }
     
-    @objc func appleLoginButtonTapped() {
+    func appleLoginButtonTapped() {
         // 애플 로그인
         viewModel.didTappedLoginButton()
     }
