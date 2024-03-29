@@ -83,7 +83,7 @@ extension BasicTextField {
         keyboardType = formType.keyboardType
         textContentType = formType.contentType
         placeholder = formType.placeholder
-        isSecureTextEntry = formType == .password ? true : false
+        isSecureTextEntry = formType == .password
         returnKeyType = returnType
         textColor = txtColor
         font = txtFont

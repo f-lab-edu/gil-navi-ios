@@ -8,8 +8,8 @@
 import UIKit
 
 final class LoginView: UIView {
-    let emailTextField = BasicTextField(type: .email, returnType: .next)
-    let passwordTextField = BasicTextField(type: .password, returnType: .done)
+    let emailTextField = BasicTextField(type: .email, returnKeyType: .next)
+    let passwordTextField = BasicTextField(type: .password, returnKeyType: .done)
     let loginButton = BasicButton(title: "로그인")
     
     let signUpButton: UIButton = {
