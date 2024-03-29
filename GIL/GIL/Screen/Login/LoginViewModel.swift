@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import AuthenticationServices
+import OSLog
 
 protocol LoginViewModelIntput {
     func didTappedLoginButton()
@@ -55,25 +56,30 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
                 let fullName = appleIDCredential.fullName
                 let email = appleIDCredential.email
 
+                var args: [String : Any] = [
+                    "userIdentifier" : userIdentifier,
+                    "fullName" : fullName?.debugDescription ?? "",
+                    "email" : email?.debugDescription ?? ""
+                ]
+                
                 if let authorizationCode = appleIDCredential.authorizationCode,
                    let identityToken = appleIDCredential.identityToken,
                    let authString = String(data: authorizationCode, encoding: .utf8),
                    let tokenString = String(data: identityToken, encoding: .utf8) {
-                    print("authString: \(authString)")
-                    print("tokenString: \(tokenString)")
+                    args.updateValue(authString, forKey: "authorizationCode")
+                    args.updateValue(tokenString, forKey: "identityToken")
 
                 }
-                print("useridentifier: \(userIdentifier)")
-                print("fullName: \(fullName)")
-                print("email: \(email)")
+                Log.network("ASAuthorizationAppleIDCredential", args)
 
             case let passwordCredential as ASPasswordCredential:
                 let username = passwordCredential.user
                 let password = passwordCredential.password
-
-                print("username: \(username)")
-                print("password: \(password)")
-
+                Log.network("ASPasswordCredential", [
+                    "username" : username,
+                    "password" : password
+                ])
+                
             default:
                 break
             }
