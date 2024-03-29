@@ -9,9 +9,19 @@ import UIKit
 import Combine
 
 final class LoginViewController: UIViewController {
-    private var viewModel = LoginViewModel()
+    private var viewModel: LoginViewModel
     private var loginView = LoginView()
 
+    // MARK: - Initialization
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Life Cycle
     override func loadView() {
         view = loginView
@@ -19,7 +29,6 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupBindings()
     }
 }
