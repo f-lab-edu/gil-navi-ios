@@ -34,14 +34,6 @@ class LoginViewModel: NSObject, LoginViewModelIO {
         controller.delegate = self
         controller.performRequests()
     }
-    
-    
-    override init() {
-        super.init()
-    }
-    
-    
-    
 }
 
 // MARK: - ASAuthorizationControllerDelegate
