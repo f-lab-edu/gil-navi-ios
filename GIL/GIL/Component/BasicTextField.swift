@@ -47,6 +47,9 @@ class BasicTextField: UITextField {
     }
     
     private let padding: UIEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
+    static let defaultBorderColor = UIColor.lightGray.cgColor
+    static let validBorderColor = UIColor.mainGreenColor?.cgColor
+    static let invalidBorderColor = UIColor.red.cgColor
     
     // MARK: - Initialization
     init(
@@ -97,7 +100,7 @@ extension BasicTextField {
         textColor = txtColor
         font = txtFont
         backgroundColor = .white
-        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderColor = BasicTextField.defaultBorderColor
         layer.borderWidth = 1
         layer.cornerRadius = 6
         autocorrectionType = .no

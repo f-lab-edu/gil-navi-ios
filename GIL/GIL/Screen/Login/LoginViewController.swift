@@ -82,7 +82,7 @@ extension LoginViewController {
     
     func signUpButtonTapped() {
         // 회원가입
-        let signUpViewController = SignUpViewController()
+        let signUpViewController = SignUpViewController(viewModel: SignUpViewModel())
         signUpViewController.modalPresentationStyle = .fullScreen
         present(signUpViewController, animated: true)
     }
