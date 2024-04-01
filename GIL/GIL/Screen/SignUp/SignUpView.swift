@@ -15,10 +15,10 @@ final class SignUpView: UIView {
         btn.layer.borderWidth = 1
         return btn
     }()
-    let emailTextField = BasicTextField(type: .email, returnType: .next)
-    let nameTextField = BasicTextField(type: .unknown, placeholder: "Name", returnType: .next)
-    let passwordTextField = BasicTextField(type: .password, returnType: .next)
-    let confirmPasswordTextField = BasicTextField(type: .password, returnType: .done)
+    let emailTextField = BasicTextField(type: .email, returnKeyType: .next)
+    let nameTextField = BasicTextField(type: .unknown(placeholder: "Name"), returnKeyType: .next)
+    let passwordTextField = BasicTextField(type: .password, returnKeyType: .next)
+    let confirmPasswordTextField = BasicTextField(type: .password, returnKeyType: .done)
     let confirmButton = BasicButton(title: "완료")
     
     // MARK: - Initialization

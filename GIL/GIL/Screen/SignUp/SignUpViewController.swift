@@ -28,6 +28,9 @@ extension SignUpViewController {
     }
     
     private func bindButtons() {
+        let closeAction = UIAction { _ in self.closeButtonTapped() }
+        signUpView.closeButton.addAction(closeAction, for: .touchUpInside)
+        
         let confirmAction = UIAction { _ in self.confirmButtonTapped() }
         signUpView.confirmButton.addAction(confirmAction, for: .touchUpInside)
     }
@@ -35,6 +38,10 @@ extension SignUpViewController {
 
 // MARK: - Action
 extension SignUpViewController {
+    func closeButtonTapped() {
+        dismiss(animated: true)
+    }
+    
     func confirmButtonTapped() {
         dismiss(animated: true)
     }
