@@ -36,7 +36,6 @@ class LoginViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
         makeConstraints()
     }
@@ -51,7 +50,9 @@ extension LoginViewController {
     
     @objc func signUp() {
         // 회원가입
-        
+        let signUpViewController = SignUpViewController()
+        signUpViewController.modalPresentationStyle = .fullScreen
+        present(signUpViewController, animated: true)
     }
 }
 
@@ -72,7 +73,6 @@ extension LoginViewController {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        
         
         loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(signUp), for: .touchUpInside)
