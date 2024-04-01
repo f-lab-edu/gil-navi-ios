@@ -60,11 +60,15 @@ extension SignUpViewController {
             .sink(receiveCompletion: { _ in},
                   receiveValue: { [weak self] email in
                 guard let `self` = self else { return }
-                if email.isValidEmail() {
-                    self.signUpView.emailTextField.layer.borderColor = BasicTextField.validBorderColor
-                } else {
-                    self.signUpView.emailTextField.layer.borderColor = BasicTextField.invalidBorderColor
-                }
+                self.signUpView.emailTextField.layer.borderColor = (email.isValidEmail() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor)
+            })
+            .store(in: &viewModel.cancellables)
+        
+        viewModel.namePublisher
+            .sink(receiveCompletion: { _ in},
+                  receiveValue: { [weak self] name in
+                guard let `self` = self else { return }
+                self.signUpView.nameTextField.layer.borderColor = (name.isEmpty ? BasicTextField.invalidBorderColor : BasicTextField.validBorderColor)
             })
             .store(in: &viewModel.cancellables)
         
@@ -103,7 +107,12 @@ extension SignUpViewController: UITextFieldDelegate {
         return true
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        guard string != " " else { return false }
         guard let currentText = textField.text else { return true }
         
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
@@ -111,9 +120,14 @@ extension SignUpViewController: UITextFieldDelegate {
         switch textField {
         case signUpView.emailTextField:
             viewModel.emailPublisher.send(newText)
+            
+        case signUpView.nameTextField:
+            viewModel.namePublisher.send(newText)
         
         default: break
         }
         return true
     }
+    
+    
 }

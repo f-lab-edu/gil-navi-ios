@@ -9,6 +9,7 @@ import Combine
 
 class SignUpViewModel {
     var emailPublisher = PassthroughSubject<String, Error>()
+    var namePublisher = PassthroughSubject<String, Error>()
     var cancellables = Set<AnyCancellable>()
     
     func checkSignUpRequirements() {
