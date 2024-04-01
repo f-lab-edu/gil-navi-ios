@@ -52,12 +52,14 @@ class BasicTextField: UITextField {
     init(
         type: FormType,
         returnKeyType: UIReturnKeyType = .default,
+        clearButtonMode: UITextField.ViewMode = .never,
         textColor: UIColor = .black,
         font: UIFont = .systemFont(ofSize: 14, weight: .medium)
     ) {
         super.init(frame: .zero)
         configureUI(formType: type,
                     returnKeyType: returnKeyType,
+                    clearButtonMode: clearButtonMode,
                     textColor: textColor,
                     font: font)
     }
@@ -82,6 +84,7 @@ extension BasicTextField {
     func configureUI(
         formType: FormType,
         returnKeyType returnType: UIReturnKeyType,
+        clearButtonMode clearMode: UITextField.ViewMode,
         textColor txtColor: UIColor,
         font txtFont: UIFont
     ) {
@@ -90,6 +93,7 @@ extension BasicTextField {
         placeholder = formType.placeholder
         isSecureTextEntry = formType == .password
         returnKeyType = returnType
+        clearButtonMode = clearMode
         textColor = txtColor
         font = txtFont
         backgroundColor = .white
