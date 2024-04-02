@@ -11,6 +11,7 @@ class SignUpViewModel {
     var emailPublisher = PassthroughSubject<String, Error>()
     var namePublisher = PassthroughSubject<String, Error>()
     var passwordPublisher = PassthroughSubject<String, Error>()
+    var confirmPasswordPublisher = PassthroughSubject<String, Error>()
     var cancellables = Set<AnyCancellable>()
     
     func checkSignUpRequirements() {
