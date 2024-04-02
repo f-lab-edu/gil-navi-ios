@@ -23,4 +23,50 @@ extension String {
             return false
         }
     }
+    
+    /**
+     비밀번호 유효성 검사 함수
+     - Returns: 비밀번호 유효성 검사 결과. 다음 조건을 모두 만족해야 `true`반환
+     - 최소 10자 이상
+     - 적어도 하나의 소문자를 포함
+     - 적어도 하나의 대문자를 포함
+     - 적어도 하나의 숫자를 포함
+     - 영문자와 숫자만을 포함
+     */
+    func isValidPassword() -> Bool {
+        // 최소 10자 이상
+        guard self.count >= 10 else {
+            return false
+        }
+
+        // 영문자와 숫자만 포함
+        let alphanumericRegex = "^[A-Za-z0-9]+$"
+        let alphanumericTest = NSPredicate(format:"SELF MATCHES %@", alphanumericRegex)
+        if !alphanumericTest.evaluate(with: self) {
+            return false
+        }
+
+        // 대문자 포함
+        let uppercaseLetterRegex = ".*[A-Z]+.*"
+        let uppercaseLetterTest = NSPredicate(format:"SELF MATCHES %@", uppercaseLetterRegex)
+        guard uppercaseLetterTest.evaluate(with: self) else {
+            return false
+        }
+
+        // 소문자 포함
+        let lowercaseLetterRegex = ".*[a-z]+.*"
+        let lowercaseLetterTest = NSPredicate(format:"SELF MATCHES %@", lowercaseLetterRegex)
+        guard lowercaseLetterTest.evaluate(with: self) else {
+            return false
+        }
+
+        // 숫자 포함
+        let numberRegex = ".*[0-9]+.*"
+        let numberTest = NSPredicate(format:"SELF MATCHES %@", numberRegex)
+        guard numberTest.evaluate(with: self) else {
+            return false
+        }
+
+        return true
+    }
 }

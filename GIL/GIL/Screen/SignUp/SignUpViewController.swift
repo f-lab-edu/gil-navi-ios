@@ -72,6 +72,14 @@ extension SignUpViewController {
             })
             .store(in: &viewModel.cancellables)
         
+        viewModel.passwordPublisher
+            .sink(receiveCompletion: { _ in},
+                  receiveValue: { [weak self] password in
+                guard let `self` = self else { return }
+                self.signUpView.passwordTextField.layer.borderColor = (password.isValidPassword() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor)
+            })
+            .store(in: &viewModel.cancellables)
+        
     }
 }
 
@@ -123,6 +131,19 @@ extension SignUpViewController: UITextFieldDelegate {
             
         case signUpView.nameTextField:
             viewModel.namePublisher.send(newText)
+            
+        case signUpView.passwordTextField:
+            let regex = "^[A-Za-z0-9]+$"
+            
+            if string.isEmpty { // 백스페이스
+                return true
+            }
+            
+            if !NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: string) {
+                return false
+            }
+            
+            viewModel.passwordPublisher.send(newText)
         
         default: break
         }
