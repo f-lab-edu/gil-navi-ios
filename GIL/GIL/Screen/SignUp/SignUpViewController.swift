@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class SignUpViewController: UIViewController {
     private var viewModel: SignUpViewModel
@@ -57,37 +58,46 @@ extension SignUpViewController {
     
     private func bindPublishers() {
         viewModel.emailPublisher
-            .sink(receiveCompletion: { _ in},
-                  receiveValue: { [weak self] email in
+            .dropFirst()
+            .sink { [weak self] email in
                 guard let `self` = self else { return }
-                self.signUpView.emailTextField.layer.borderColor = (email.isValidEmail() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor)
-            })
+                self.signUpView.emailTextField.layer.borderColor = email.isValidEmail() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
+            }
             .store(in: &viewModel.cancellables)
         
         viewModel.namePublisher
-            .sink(receiveCompletion: { _ in},
-                  receiveValue: { [weak self] name in
+            .dropFirst()
+            .sink(receiveValue: { [weak self] name in
                 guard let `self` = self else { return }
-                self.signUpView.nameTextField.layer.borderColor = (name.isEmpty ? BasicTextField.invalidBorderColor : BasicTextField.validBorderColor)
+                self.signUpView.nameTextField.layer.borderColor = !name.isEmpty ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
             })
             .store(in: &viewModel.cancellables)
         
         viewModel.passwordPublisher
-            .sink(receiveCompletion: { _ in},
-                  receiveValue: { [weak self] password in
+            .dropFirst()
+            .sink(receiveValue: { [weak self] password in
                 guard let `self` = self else { return }
-                self.signUpView.passwordTextField.layer.borderColor = (password.isValidPassword() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor)
+                self.signUpView.passwordTextField.layer.borderColor = password.isValidPassword() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
             })
             .store(in: &viewModel.cancellables)
         
         viewModel.confirmPasswordPublisher
-            .sink(receiveCompletion: { _ in},
-                  receiveValue: { [weak self] password in
+            .dropFirst()
+            .sink(receiveValue: { [weak self] password in
                 guard let `self` = self else { return }
-                self.signUpView.confirmPasswordTextField.layer.borderColor = (password == self.signUpView.passwordTextField.text ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor)
+                self.signUpView.confirmPasswordTextField.layer.borderColor = (password == viewModel.passwordPublisher.value) ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
             })
             .store(in: &viewModel.cancellables)
         
+        viewModel.isFormValidPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isValid in
+                guard let `self` = self else { return }
+                self.signUpView.confirmButton.isEnabled = isValid
+                self.signUpView.confirmButton.backgroundColor = isValid ? BasicButton.enabledBackgroundColor : BasicButton.disabledBackgroundColor
+            }
+            .store(in: &viewModel.cancellables)
+
     }
 }
 
@@ -142,27 +152,36 @@ extension SignUpViewController: UITextFieldDelegate {
             
         case signUpView.passwordTextField,
             signUpView.confirmPasswordTextField:
-            let regex = "^[A-Za-z0-9]+$"
             
-            if string.isEmpty { // 백스페이스
+            if string.isEmpty { // 백스페이스 허용
+                updatePasswordPublisher(textField: textField, text: newText)
                 return true
             }
             
-            if !NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: string) {
-                return false
+            let regex = "^[A-Za-z0-9]+$"
+            let isMatch = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: string)
+            if isMatch {
+                updatePasswordPublisher(textField: textField, text: newText)
             }
-            
-            if textField == signUpView.passwordTextField {
-                viewModel.passwordPublisher.send(newText)
-            } else {
-                viewModel.confirmPasswordPublisher.send(newText)
-            }
-            
+            return isMatch
         
         default: break
         }
+        
         return true
     }
+    
+    private func updatePasswordPublisher(
+        textField: UITextField,
+        text: String
+    ) {
+        if textField == signUpView.passwordTextField {
+            viewModel.passwordPublisher.send(text)
+        } else if textField == signUpView.confirmPasswordTextField {
+            viewModel.confirmPasswordPublisher.send(text)
+        }
+    }
+
     
     
 }
