@@ -158,12 +158,12 @@ extension SignUpViewController: UITextFieldDelegate {
                 return true
             }
             
-            let regex = "^[A-Za-z0-9]+$"
-            let isMatch = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: string)
-            if isMatch {
+            let isValid = viewModel.validateAlphaNumericString(inputString: string)
+            if isValid {
                 updatePasswordPublisher(textField: textField, text: newText)
             }
-            return isMatch
+ 
+            return isValid
         
         default: break
         }

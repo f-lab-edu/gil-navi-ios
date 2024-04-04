@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 class SignUpViewModel {
     var emailPublisher = CurrentValueSubject<String, Never>("")
