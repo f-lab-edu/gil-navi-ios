@@ -26,7 +26,9 @@
 		584FA43F2BAD5607002600F1 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 584FA43E2BAD5607002600F1 /* FirebaseCrashlytics */; };
 		584FA4452BAD6068002600F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 584FA4442BAD6068002600F1 /* GoogleService-Info.plist */; };
 		584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA42F2BABC0EE002600F1 /* LoginView.swift */; };
-		584FA4172BA42CFE002600F1 /* .gitignore  in Resources */ = {isa = PBXBuildFile; fileRef = 584FA4162BA42CFE002600F1 /* .gitignore  */; };
+		584FA44A2BB15D51002600F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4492BB15D51002600F1 /* LoginViewModel.swift */; };
+		58BDFBC22BB6A748006AC994 /* OSLog+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBC12BB6A748006AC994 /* OSLog+Extension.swift */; };
+		58BDFBC52BB6AFFB006AC994 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BDFBC42BB6AFFB006AC994 /* OSLog.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,10 @@
 		584FA4292BA926B3002600F1 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		584FA4442BAD6068002600F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		584FA42F2BABC0EE002600F1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		584FA4492BB15D51002600F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		58BDFB9F2BB16F93006AC994 /* GIL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GIL.entitlements; sourceTree = "<group>"; };
+		58BDFBC12BB6A748006AC994 /* OSLog+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extension.swift"; sourceTree = "<group>"; };
+		58BDFBC42BB6AFFB006AC994 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,7 @@
 				584FA43F2BAD5607002600F1 /* FirebaseCrashlytics in Frameworks */,
 				584FA4392BAD5607002600F1 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				584FA43D2BAD5607002600F1 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				58BDFBC52BB6AFFB006AC994 /* OSLog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +111,7 @@
 				584FA3FC2BA41485002600F1 /* GILTests */,
 				584FA4062BA41485002600F1 /* GILUITests */,
 				584FA3E42BA41484002600F1 /* Products */,
+				58BDFBC32BB6AFFB006AC994 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,6 +128,7 @@
 		584FA3E52BA41484002600F1 /* GIL */ = {
 			isa = PBXGroup;
 			children = (
+				58BDFB9F2BB16F93006AC994 /* GIL.entitlements */,
 				584FA4192BA7F5E1002600F1 /* Screen */,
 				584FA4202BA82D26002600F1 /* Component */,
 				584FA4262BA84CF5002600F1 /* Extension */,
@@ -163,6 +172,7 @@
 			children = (
 				584FA41A2BA7F606002600F1 /* LoginViewController.swift */,
 				584FA42F2BABC0EE002600F1 /* LoginView.swift */,
+				584FA4492BB15D51002600F1 /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -181,8 +191,17 @@
 			children = (
 				584FA4272BA84D00002600F1 /* UIColor+Extension.swift */,
 				584FA4292BA926B3002600F1 /* ViewController+Extension.swift */,
+				58BDFBC12BB6A748006AC994 /* OSLog+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		58BDFBC32BB6AFFB006AC994 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				58BDFBC42BB6AFFB006AC994 /* OSLog.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,10 +376,12 @@
 				584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */,
 				584FA4222BA84254002600F1 /* BasicButton.swift in Sources */,
 				584FA42A2BA926B3002600F1 /* ViewController+Extension.swift in Sources */,
+				58BDFBC22BB6A748006AC994 /* OSLog+Extension.swift in Sources */,
 				584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */,
 				584FA41E2BA82886002600F1 /* BasicTextField.swift in Sources */,
 				584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */,
 				584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */,
+				584FA44A2BB15D51002600F1 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +553,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GIL/GIL.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -564,6 +586,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GIL/GIL.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
