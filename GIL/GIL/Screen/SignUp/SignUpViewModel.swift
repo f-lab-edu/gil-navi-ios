@@ -34,4 +34,10 @@ class SignUpViewModel {
     }
 
     
+    func validateAlphaNumericString(inputString: String) -> Bool {
+        let regex = "^[A-Za-z0-9]+$"
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: inputString)
+    }
+
+    
 }
