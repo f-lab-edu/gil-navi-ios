@@ -31,6 +31,7 @@
 		58BDFBC52BB6AFFB006AC994 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BDFBC42BB6AFFB006AC994 /* OSLog.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */; };
 		58BDFBD32BBE6ED2006AC994 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBD22BBE6ED2006AC994 /* HomeViewModel.swift */; };
+		58BDFBD52BBE889D006AC994 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 58BDFBD42BBE889D006AC994 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 				584FA43F2BAD5607002600F1 /* FirebaseCrashlytics in Frameworks */,
 				584FA4392BAD5607002600F1 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				584FA43D2BAD5607002600F1 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				58BDFBD52BBE889D006AC994 /* FirebaseAuth in Frameworks */,
 				58BDFBC52BB6AFFB006AC994 /* OSLog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +243,7 @@
 				584FA43A2BAD5607002600F1 /* FirebaseAnalyticsSwift */,
 				584FA43C2BAD5607002600F1 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				584FA43E2BAD5607002600F1 /* FirebaseCrashlytics */,
+				58BDFBD42BBE889D006AC994 /* FirebaseAuth */,
 			);
 			productName = GIL;
 			productReference = 584FA3E32BA41484002600F1 /* GIL.app */;
@@ -798,6 +801,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 584FA4352BAD5607002600F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		58BDFBD42BBE889D006AC994 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 584FA4352BAD5607002600F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -9,9 +9,11 @@ import Foundation
 import Combine
 import AuthenticationServices
 import OSLog
+import CryptoKit
+import FirebaseAuth
 
 protocol LoginViewModelIntput {
-    func didTappedLoginButton()
+    func startSignInWithAppleFlow()
 }
 
 protocol LoginViewModelOutput {
@@ -25,14 +27,20 @@ class LoginViewModel: NSObject, LoginViewModelIO {
     var loginPublisher = PassthroughSubject<Void, Error>()
     var cancellables = Set<AnyCancellable>()
     
-    func didTappedLoginButton() {
+    fileprivate var currentNonce: String?
+    
+    func startSignInWithAppleFlow() {
+        let nonce = randomNonceString()
+        currentNonce = nonce
         let appleProvider = ASAuthorizationAppleIDProvider()
         let request = appleProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
+        request.nonce = sha256(nonce)
         
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
         controller.performRequests()
+        
     }
 }
 
@@ -42,40 +50,48 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
         controller: ASAuthorizationController,
         didCompleteWithAuthorization authorization: ASAuthorization
     ) {
-            switch authorization.credential {
-            case let appleIDCredential as ASAuthorizationAppleIDCredential:
-                let userIdentifier = appleIDCredential.user
-                let fullName = appleIDCredential.fullName
-                let email = appleIDCredential.email
-
-                var args: [String : Any] = [
-                    "userIdentifier" : userIdentifier,
-                    "fullName" : fullName?.debugDescription ?? "",
-                    "email" : email?.debugDescription ?? ""
-                ]
-                
-                if let authorizationCode = appleIDCredential.authorizationCode,
-                   let identityToken = appleIDCredential.identityToken,
-                   let authString = String(data: authorizationCode, encoding: .utf8),
-                   let tokenString = String(data: identityToken, encoding: .utf8) {
-                    args.updateValue(authString, forKey: "authorizationCode")
-                    args.updateValue(tokenString, forKey: "identityToken")
-
-                }
-                Log.network("ASAuthorizationAppleIDCredential", args)
-
-            case let passwordCredential as ASPasswordCredential:
-                let username = passwordCredential.user
-                let password = passwordCredential.password
-                Log.network("ASPasswordCredential", [
-                    "username" : username,
-                    "password" : password
-                ])
-                
-            default:
-                break
-            }
+        
+        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
+            return
         }
+        
+        guard let nonce = currentNonce else {
+            Log.error("Invalid state: A login callback was received, but no login request was sent.")
+            return
+        }
+        
+        guard let appleIDToken = appleIDCredential.identityToken else {
+            Log.error("Unable to fetch identity token")
+            return
+        }
+        
+        guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+            Log.error("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+            return
+        }
+        
+        let credential = OAuthProvider.appleCredential(withIDToken: idTokenString,
+                                                       rawNonce: nonce,
+                                                       fullName: appleIDCredential.fullName)
+        
+        Auth.auth().signIn(with: credential) { result, error in
+            if let error = error {
+                Log.error(error)
+                return
+            }
+            
+            switch result {
+            case .some(let ss):
+                Log.network(ss, "성공")
+                self.loginPublisher.send(completion: .finished)
+            case .none:
+                Log.error("None..")
+            }
+            
+            
+        }
+        
+    }
 
     func authorizationController(
         controller: ASAuthorizationController,
@@ -84,3 +100,40 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
         loginPublisher.send(completion: .failure(error))
     }
 }
+
+// MARK: - Apple Login
+extension LoginViewModel {
+
+    private func randomNonceString(length: Int = 32) -> String {
+      precondition(length > 0)
+      var randomBytes = [UInt8](repeating: 0, count: length)
+      let errorCode = SecRandomCopyBytes(kSecRandomDefault, randomBytes.count, &randomBytes)
+      if errorCode != errSecSuccess {
+        fatalError(
+          "Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)"
+        )
+      }
+
+      let charset: [Character] =
+        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+
+      let nonce = randomBytes.map { byte in
+        // Pick a random character from the set, wrapping around if needed.
+        charset[Int(byte) % charset.count]
+      }
+
+      return String(nonce)
+    }
+
+    private func sha256(_ input: String) -> String {
+      let inputData = Data(input.utf8)
+      let hashedData = SHA256.hash(data: inputData)
+      let hashString = hashedData.compactMap {
+        String(format: "%02x", $0)
+      }.joined()
+
+      return hashString
+    }
+}
+
+

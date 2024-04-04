@@ -53,22 +53,23 @@ extension LoginViewController {
         let signUpAction = UIAction { _ in self.signUpButtonTapped() }
         loginView.signUpButton.addAction(signUpAction, for: .touchUpInside)
      
-        let appleLoginAction = UIAction { _ in self.appleLoginButtonTapped() }
+        let appleLoginAction = UIAction { _ in self.viewModel.startSignInWithAppleFlow() }
         loginView.appleLoginButton.addAction(appleLoginAction, for: .touchUpInside)
     }
     
     private func bindPublishers() {
         viewModel.loginPublisher
-            .sink(receiveCompletion: { [weak self] completion in
-                switch completion {
+            .sink { [weak self] result in
+                guard let `self` = self else { return }
+                switch result {
                 case .finished:
-                    print("Finished")
+                    self.navigateToHomeAndRemoveLoginScreen()
+                    
                 case .failure(let failure):
-                    print("Failure : \(failure.localizedDescription)")
+                    Log.error("Failure : \(failure.localizedDescription)")
+                    
                 }
-            }, receiveValue: { [weak self] _ in
-                print("로그인 성공 ")
-            })
+            } receiveValue: { _ in }
             .store(in: &viewModel.cancellables)
     }
 }
@@ -84,10 +85,16 @@ extension LoginViewController {
         // 회원가입
     }
     
-    func appleLoginButtonTapped() {
-        // 애플 로그인
-        viewModel.didTappedLoginButton()
+    func navigateToHomeAndRemoveLoginScreen() {
+        let homeViewController = HomeViewController(viewModel: HomeViewModel())
+        if let navigationController = self.navigationController {
+            var viewControllers = navigationController.viewControllers
+            viewControllers.removeLast()  // 로그인 화면 제거
+            viewControllers.append(homeViewController)  // 홈 화면 추가
+            navigationController.setViewControllers(viewControllers, animated: true)
+        }
     }
+    
 }
 
 // MARK: - UITextFieldDelegate
