@@ -59,8 +59,7 @@ extension LoginViewController {
     
     private func bindPublishers() {
         viewModel.loginPublisher
-            .sink { [weak self] result in
-                guard let `self` = self else { return }
+            .sink { result in
                 switch result {
                 case .finished:
                     AuthenticationManager.shared.signIn()
