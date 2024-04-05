@@ -42,8 +42,8 @@ final class LoginView: UIView {
     }()
     let appleLoginButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "logo-apple-white"), for: .normal)
-        button.setImage(UIImage(named: "logo-apple-white"), for: .highlighted)
+        button.setImage(UIImage(named: "logo-apple"), for: .normal)
+        button.setImage(UIImage(named: "logo-apple"), for: .highlighted)
         button.clipsToBounds = true
         button.layer.cornerRadius = 55/2
         button.backgroundColor = .black
