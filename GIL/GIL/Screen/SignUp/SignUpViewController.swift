@@ -10,7 +10,7 @@ import Combine
 
 class SignUpViewController: UIViewController {
     private var viewModel: SignUpViewModel
-    private var signUpView = SignUpView()
+    var signUpView = SignUpView()
     
     // MARK: - Initialization
     init(viewModel: SignUpViewModel) {
