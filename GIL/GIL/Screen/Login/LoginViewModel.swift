@@ -24,10 +24,11 @@ protocol LoginViewModelIO: LoginViewModelIntput & LoginViewModelOutput { }
 
 
 class LoginViewModel: NSObject, LoginViewModelIO {
+    
     var loginPublisher = PassthroughSubject<Void, Error>()
     var cancellables = Set<AnyCancellable>()
     
-    fileprivate var currentNonce: String?
+    private var currentNonce: String?
     
     func startSignInWithAppleFlow() {
         let nonce = randomNonceString()
@@ -40,7 +41,6 @@ class LoginViewModel: NSObject, LoginViewModelIO {
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
         controller.performRequests()
-        
     }
 }
 
@@ -52,21 +52,17 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
     ) {
         
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
+            let error = NSError(domain: "LoginError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to retrieve Apple ID credential"])
+            loginPublisher.send(completion: .failure(error))
             return
         }
         
-        guard let nonce = currentNonce else {
-            Log.error("Invalid state: A login callback was received, but no login request was sent.")
-            return
-        }
-        
-        guard let appleIDToken = appleIDCredential.identityToken else {
-            Log.error("Unable to fetch identity token")
-            return
-        }
-        
-        guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-            Log.error("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+        guard let nonce = currentNonce,
+              let appleIDToken = appleIDCredential.identityToken,
+              let idTokenString = String(data: appleIDToken, encoding: .utf8)
+        else {
+            let error = NSError(domain: "LoginError", code: -2, userInfo: [NSLocalizedDescriptionKey: "Invalid nonce or id token"])
+            loginPublisher.send(completion: .failure(error))
             return
         }
         
@@ -74,21 +70,20 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
                                                        rawNonce: nonce,
                                                        fullName: appleIDCredential.fullName)
         
+        
         Auth.auth().signIn(with: credential) { result, error in
             if let error = error {
-                Log.error(error)
+                self.loginPublisher.send(completion: .failure(error))
                 return
             }
             
-            switch result {
-            case .some(let ss):
-                Log.network(ss, "성공")
-                self.loginPublisher.send(completion: .finished)
-            case .none:
-                Log.error("None..")
+            guard result != nil else {
+                let error = NSError(domain: "LoginError", code: -3, userInfo: [NSLocalizedDescriptionKey: "Firebase authentication failed"])
+                self.loginPublisher.send(completion: .failure(error))
+                return
             }
-            
-            
+
+            self.loginPublisher.send(completion: .finished)
         }
         
     }

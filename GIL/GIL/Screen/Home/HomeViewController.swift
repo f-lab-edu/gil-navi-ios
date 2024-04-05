@@ -49,5 +49,6 @@ extension HomeViewController {
 // MARK: - Actions
 extension HomeViewController {
     func logoutButtonTapped() {
+        AuthenticationManager.shared.signOut()
     }
 }

@@ -63,8 +63,7 @@ extension LoginViewController {
                 guard let `self` = self else { return }
                 switch result {
                 case .finished:
-                    self.navigateToHomeAndRemoveLoginScreen()
-                    
+                    AuthenticationManager.shared.signIn()
                 case .failure(let failure):
                     Log.error("Failure : \(failure.localizedDescription)")
                     
@@ -83,16 +82,6 @@ extension LoginViewController {
     
     func signUpButtonTapped() {
         // 회원가입
-    }
-    
-    func navigateToHomeAndRemoveLoginScreen() {
-        let homeViewController = HomeViewController(viewModel: HomeViewModel())
-        if let navigationController = self.navigationController {
-            var viewControllers = navigationController.viewControllers
-            viewControllers.removeLast()  // 로그인 화면 제거
-            viewControllers.append(homeViewController)  // 홈 화면 추가
-            navigationController.setViewControllers(viewControllers, animated: true)
-        }
     }
     
 }
