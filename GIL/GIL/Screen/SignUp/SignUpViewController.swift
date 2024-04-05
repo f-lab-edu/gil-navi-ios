@@ -60,7 +60,7 @@ extension SignUpViewController {
         viewModel.emailPublisher
             .dropFirst()
             .sink { [weak self] email in
-                guard let `self` = self else { return }
+                guard let self else { return }
                 self.signUpView.emailTextField.layer.borderColor = email.isValidEmail() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
             }
             .store(in: &viewModel.cancellables)
@@ -68,7 +68,7 @@ extension SignUpViewController {
         viewModel.namePublisher
             .dropFirst()
             .sink(receiveValue: { [weak self] name in
-                guard let `self` = self else { return }
+                guard let self else { return }
                 self.signUpView.nameTextField.layer.borderColor = !name.isEmpty ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
             })
             .store(in: &viewModel.cancellables)
@@ -76,7 +76,7 @@ extension SignUpViewController {
         viewModel.passwordPublisher
             .dropFirst()
             .sink(receiveValue: { [weak self] password in
-                guard let `self` = self else { return }
+                guard let self else { return }
                 self.signUpView.passwordTextField.layer.borderColor = password.isValidPassword() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
             })
             .store(in: &viewModel.cancellables)
@@ -84,7 +84,7 @@ extension SignUpViewController {
         viewModel.confirmPasswordPublisher
             .dropFirst()
             .sink(receiveValue: { [weak self] password in
-                guard let `self` = self else { return }
+                guard let self else { return }
                 self.signUpView.confirmPasswordTextField.layer.borderColor = (password == viewModel.passwordPublisher.value) ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
             })
             .store(in: &viewModel.cancellables)
@@ -92,7 +92,7 @@ extension SignUpViewController {
         viewModel.isFormValidPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isValid in
-                guard let `self` = self else { return }
+                guard let self else { return }
                 self.signUpView.confirmButton.isEnabled = isValid
                 self.signUpView.confirmButton.backgroundColor = isValid ? BasicButton.enabledBackgroundColor : BasicButton.disabledBackgroundColor
             }
