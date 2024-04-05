@@ -8,9 +8,10 @@
 import UIKit
 
 class BasicTextField: UITextField {
-    enum FormType {
+    enum FormType: Equatable {
         case email
         case password
+        case unknown(placeholder: String)
         
         var contentType: UITextContentType {
             switch self {
@@ -18,6 +19,8 @@ class BasicTextField: UITextField {
                 return .emailAddress
             case .password:
                 return .password
+            case .unknown:
+                return .init(rawValue: "unknown")
             }
         }
         
@@ -25,8 +28,9 @@ class BasicTextField: UITextField {
             switch self {
             case .email:
                 return .emailAddress
-            case .password:
+            default:
                 return .default
+                
             }
         }
         
@@ -36,23 +40,29 @@ class BasicTextField: UITextField {
                 return "Email"
             case .password:
                 return "Password"
+            case .unknown(let placeholder):
+                return placeholder
             }
         }
     }
     
     private let padding: UIEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
+    static let defaultBorderColor = UIColor.lightGray.cgColor
+    static let validBorderColor = UIColor.mainGreenColor?.cgColor
+    static let invalidBorderColor = UIColor.red.cgColor
     
     // MARK: - Initialization
     init(
         type: FormType,
         returnKeyType: UIReturnKeyType = .default,
+        clearButtonMode: UITextField.ViewMode = .never,
         textColor: UIColor = .black,
         font: UIFont = .systemFont(ofSize: 14, weight: .medium)
     ) {
         super.init(frame: .zero)
-
         configureUI(formType: type,
                     returnKeyType: returnKeyType,
+                    clearButtonMode: clearButtonMode,
                     textColor: textColor,
                     font: font)
     }
@@ -77,6 +87,7 @@ extension BasicTextField {
     func configureUI(
         formType: FormType,
         returnKeyType returnType: UIReturnKeyType,
+        clearButtonMode clearMode: UITextField.ViewMode,
         textColor txtColor: UIColor,
         font txtFont: UIFont
     ) {
@@ -85,10 +96,11 @@ extension BasicTextField {
         placeholder = formType.placeholder
         isSecureTextEntry = formType == .password
         returnKeyType = returnType
+        clearButtonMode = clearMode
         textColor = txtColor
         font = txtFont
         backgroundColor = .white
-        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderColor = BasicTextField.defaultBorderColor
         layer.borderWidth = 1
         layer.cornerRadius = 6
         autocorrectionType = .no

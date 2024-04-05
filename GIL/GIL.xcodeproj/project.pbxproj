@@ -27,6 +27,8 @@
 		584FA43F2BAD5607002600F1 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 584FA43E2BAD5607002600F1 /* FirebaseCrashlytics */; };
 		584FA4452BAD6068002600F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 584FA4442BAD6068002600F1 /* GoogleService-Info.plist */; };
 		584FA44A2BB15D51002600F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4492BB15D51002600F1 /* LoginViewModel.swift */; };
+		58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBA12BB2B8F5006AC994 /* SignUpViewController.swift */; };
+		58BDFBA42BB2E536006AC994 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBA32BB2E536006AC994 /* SignUpView.swift */; };
 		58BDFBC22BB6A748006AC994 /* OSLog+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBC12BB6A748006AC994 /* OSLog+Extension.swift */; };
 		58BDFBC52BB6AFFB006AC994 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BDFBC42BB6AFFB006AC994 /* OSLog.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */; };
@@ -34,6 +36,9 @@
 		58BDFBD52BBE889D006AC994 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 58BDFBD42BBE889D006AC994 /* FirebaseAuth */; };
 		58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */; };
 		58BDFBDF2BBEA890006AC994 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBDE2BBEA890006AC994 /* AuthenticationManager.swift */; };
+		58BDFBC82BBA8C32006AC994 /* StatusbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBC72BBA8C32006AC994 /* StatusbarManager.swift */; };
+		58BDFBCA2BBA9B27006AC994 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBC92BBA9B27006AC994 /* SignUpViewModel.swift */; };
+		58BDFBCC2BBAA78F006AC994 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBCB2BBAA78F006AC994 /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,12 +79,17 @@
 		584FA4442BAD6068002600F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		584FA4492BB15D51002600F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		58BDFB9F2BB16F93006AC994 /* GIL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GIL.entitlements; sourceTree = "<group>"; };
+		58BDFBA12BB2B8F5006AC994 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		58BDFBA32BB2E536006AC994 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		58BDFBC12BB6A748006AC994 /* OSLog+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extension.swift"; sourceTree = "<group>"; };
 		58BDFBC42BB6AFFB006AC994 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
 		58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		58BDFBD22BBE6ED2006AC994 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		58BDFBDE2BBEA890006AC994 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		58BDFBC72BBA8C32006AC994 /* StatusbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusbarManager.swift; sourceTree = "<group>"; };
+		58BDFBC92BBA9B27006AC994 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		58BDFBCB2BBAA78F006AC994 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +152,7 @@
 				584FA4192BA7F5E1002600F1 /* Screen */,
 				584FA4202BA82D26002600F1 /* Component */,
 				584FA4262BA84CF5002600F1 /* Extension */,
-				58BDFBD62BBE95F8006AC994 /* Utilities */,
+				58BDFBC62BBA8C21006AC994 /* Utilities */,
 				584FA3E62BA41484002600F1 /* AppDelegate.swift */,
 				584FA3E82BA41484002600F1 /* SceneDelegate.swift */,
 				584FA3F12BA41485002600F1 /* LaunchScreen.storyboard */,
@@ -174,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				58BDFBCF2BBE5B43006AC994 /* Home */,
+				58BDFBA02BB2B865006AC994 /* SignUp */,
 				584FA41F2BA82CE3002600F1 /* Login */,
 			);
 			path = Screen;
@@ -204,8 +215,19 @@
 				584FA4272BA84D00002600F1 /* UIColor+Extension.swift */,
 				584FA4292BA926B3002600F1 /* ViewController+Extension.swift */,
 				58BDFBC12BB6A748006AC994 /* OSLog+Extension.swift */,
+				58BDFBCB2BBAA78F006AC994 /* String+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		58BDFBA02BB2B865006AC994 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				58BDFBA12BB2B8F5006AC994 /* SignUpViewController.swift */,
+				58BDFBA32BB2E536006AC994 /* SignUpView.swift */,
+				58BDFBC92BBA9B27006AC994 /* SignUpViewModel.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		58BDFBC32BB6AFFB006AC994 /* Frameworks */ = {
@@ -226,10 +248,11 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		58BDFBD62BBE95F8006AC994 /* Utilities */ = {
+		58BDFBC62BBA8C21006AC994 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				58BDFBDE2BBEA890006AC994 /* AuthenticationManager.swift */,
+                                58BDFBDE2BBEA890006AC994 /* AuthenticationManager.swift */,
+				58BDFBC72BBA8C32006AC994 /* StatusbarManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -406,15 +429,20 @@
 				58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */,
 				584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */,
 				58BDFBDF2BBEA890006AC994 /* AuthenticationManager.swift in Sources */,
+				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
+				58BDFBC82BBA8C32006AC994 /* StatusbarManager.swift in Sources */,
 				584FA4222BA84254002600F1 /* BasicButton.swift in Sources */,
 				584FA42A2BA926B3002600F1 /* ViewController+Extension.swift in Sources */,
+				58BDFBCA2BBA9B27006AC994 /* SignUpViewModel.swift in Sources */,
 				58BDFBC22BB6A748006AC994 /* OSLog+Extension.swift in Sources */,
 				584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */,
 				584FA41E2BA82886002600F1 /* BasicTextField.swift in Sources */,
 				58BDFBD32BBE6ED2006AC994 /* HomeViewModel.swift in Sources */,
 				58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */,
+				58BDFBA42BB2E536006AC994 /* SignUpView.swift in Sources */,
 				584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */,
 				584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */,
+				58BDFBCC2BBAA78F006AC994 /* String+Extension.swift in Sources */,
 				584FA44A2BB15D51002600F1 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
