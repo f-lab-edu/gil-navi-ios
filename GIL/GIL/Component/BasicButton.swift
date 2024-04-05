@@ -8,13 +8,15 @@
 import UIKit
 
 class BasicButton: UIButton {
+    static let enabledBackgroundColor = UIColor.mainGreenColor
+    static let disabledBackgroundColor = UIColor.lightGray
     
     // MARK: - Initialization
     init(
         title: String,
         titleColor: UIColor = .white,
         font: UIFont = .systemFont(ofSize: 18, weight: .bold),
-        backgroundColor: UIColor? = .mainGreenColor
+        backgroundColor: UIColor? = BasicButton.enabledBackgroundColor
     ) {
         super.init(frame: .zero)
         
