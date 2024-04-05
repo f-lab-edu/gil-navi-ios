@@ -32,6 +32,7 @@
 		58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */; };
 		58BDFBD32BBE6ED2006AC994 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBD22BBE6ED2006AC994 /* HomeViewModel.swift */; };
 		58BDFBD52BBE889D006AC994 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 58BDFBD42BBE889D006AC994 /* FirebaseAuth */; };
+		58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		58BDFBC42BB6AFFB006AC994 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
 		58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		58BDFBD22BBE6ED2006AC994 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */,
+				58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */,
 				58BDFBD22BBE6ED2006AC994 /* HomeViewModel.swift */,
 			);
 			path = Home;
@@ -389,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				584FA41B2BA7F606002600F1 /* LoginViewController.swift in Sources */,
+				58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */,
 				584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */,
 				584FA4222BA84254002600F1 /* BasicButton.swift in Sources */,
 				584FA42A2BA926B3002600F1 /* ViewController+Extension.swift in Sources */,
