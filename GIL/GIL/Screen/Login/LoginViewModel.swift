@@ -24,6 +24,12 @@ protocol LoginViewModelIO: LoginViewModelIntput & LoginViewModelOutput { }
 
 
 class LoginViewModel: NSObject, LoginViewModelIO {
+    enum LoginError: Error {
+        case randomBytesGenerationFailed(String)
+        case appleIDCredentialRetrievalFailed
+        case invalidNonceOrIDToken
+        case firebaseAuthenticationFailed
+    }
     
     var loginPublisher = PassthroughSubject<Void, Error>()
     var cancellables = Set<AnyCancellable>()
@@ -31,16 +37,22 @@ class LoginViewModel: NSObject, LoginViewModelIO {
     private var currentNonce: String?
     
     func startSignInWithAppleFlow() {
-        let nonce = randomNonceString()
-        currentNonce = nonce
-        let appleProvider = ASAuthorizationAppleIDProvider()
-        let request = appleProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        request.nonce = sha256(nonce)
+        do {
+            let nonce = try randomNonceString()
+            currentNonce = nonce
+            let appleProvider = ASAuthorizationAppleIDProvider()
+            let request = appleProvider.createRequest()
+            request.requestedScopes = [.fullName, .email]
+            request.nonce = sha256(nonce)
+            
+            let controller = ASAuthorizationController(authorizationRequests: [request])
+            controller.delegate = self
+            controller.performRequests()
+            
+        } catch {
+            loginPublisher.send(completion: .failure(error))
+        }
         
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.performRequests()
     }
 }
 
@@ -52,8 +64,7 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
     ) {
         
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            let error = NSError(domain: "LoginError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to retrieve Apple ID credential"])
-            loginPublisher.send(completion: .failure(error))
+            loginPublisher.send(completion: .failure(LoginError.appleIDCredentialRetrievalFailed))
             return
         }
         
@@ -61,8 +72,7 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
               let appleIDToken = appleIDCredential.identityToken,
               let idTokenString = String(data: appleIDToken, encoding: .utf8)
         else {
-            let error = NSError(domain: "LoginError", code: -2, userInfo: [NSLocalizedDescriptionKey: "Invalid nonce or id token"])
-            loginPublisher.send(completion: .failure(error))
+            loginPublisher.send(completion: .failure(LoginError.invalidNonceOrIDToken))
             return
         }
         
@@ -78,8 +88,7 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
             }
             
             guard result != nil else {
-                let error = NSError(domain: "LoginError", code: -3, userInfo: [NSLocalizedDescriptionKey: "Firebase authentication failed"])
-                self.loginPublisher.send(completion: .failure(error))
+                self.loginPublisher.send(completion: .failure(LoginError.firebaseAuthenticationFailed))
                 return
             }
 
@@ -99,14 +108,12 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
 // MARK: - Apple Login
 extension LoginViewModel {
 
-    private func randomNonceString(length: Int = 32) -> String {
+    private func randomNonceString(length: Int = 32) throws -> String {
       precondition(length > 0)
       var randomBytes = [UInt8](repeating: 0, count: length)
       let errorCode = SecRandomCopyBytes(kSecRandomDefault, randomBytes.count, &randomBytes)
       if errorCode != errSecSuccess {
-        fatalError(
-          "Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)"
-        )
+          throw LoginError.randomBytesGenerationFailed("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
       }
 
       let charset: [Character] =
