@@ -47,7 +47,11 @@ class BasicTextField: UITextField {
     }
     
     private let padding: UIEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
-    static let defaultBorderColor = UIColor.lightGray.cgColor
+    private var lightModePlaceholderColor: UIColor = .lightGray
+    private var darkModePlaceholderColor: UIColor = .white
+    private let lightModeBorderColor = UIColor.lightGray.cgColor
+    private let darkModeBorderColor = UIColor.darkGray.cgColor
+    
     static let validBorderColor = UIColor.mainGreenColor?.cgColor
     static let invalidBorderColor = UIColor.red.cgColor
     
@@ -80,6 +84,17 @@ class BasicTextField: UITextField {
         return bounds.inset(by: padding)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if let placeholder = placeholder,
+           traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            layer.borderColor = (traitCollection.userInterfaceStyle == .dark ? darkModeBorderColor : lightModeBorderColor)
+            
+            let placeholderColor = traitCollection.userInterfaceStyle == .dark ? darkModePlaceholderColor : lightModePlaceholderColor
+            attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: placeholderColor])
+        }
+    }
 }
 
 // MARK: - Configure UI
@@ -99,11 +114,15 @@ extension BasicTextField {
         clearButtonMode = clearMode
         textColor = txtColor
         font = txtFont
-        backgroundColor = .white
-        layer.borderColor = BasicTextField.defaultBorderColor
+        backgroundColor = .systemBackground
+        layer.borderColor = (traitCollection.userInterfaceStyle == .dark) ? darkModeBorderColor : lightModeBorderColor
         layer.borderWidth = 1
         layer.cornerRadius = 6
         autocorrectionType = .no
         autocapitalizationType = .none
+        let placeholderColor = (traitCollection.userInterfaceStyle == .dark) ? darkModePlaceholderColor : lightModePlaceholderColor
+        if let placeholderText = placeholder {
+            attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [.foregroundColor: placeholderColor])
+        }
     }
 }
