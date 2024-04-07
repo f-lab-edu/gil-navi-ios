@@ -87,9 +87,12 @@ class BasicTextField: UITextField {
 
         if let placeholder = placeholder,
            traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            layer.borderColor = (traitCollection.userInterfaceStyle == .dark ? darkModeBorderColor : lightModeBorderColor)
             
-            let placeholderColor = traitCollection.userInterfaceStyle == .dark ? darkModePlaceholderColor : lightModePlaceholderColor
+            var isDarkMode = traitCollection.userInterfaceStyle == .dark
+            
+            layer.borderColor = isDarkMode ? darkModeBorderColor : lightModeBorderColor
+            
+            let placeholderColor = isDarkMode ? darkModePlaceholderColor : lightModePlaceholderColor
             attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: placeholderColor])
         }
     }
@@ -103,21 +106,23 @@ extension BasicTextField {
         clearButtonMode clearMode: UITextField.ViewMode,
         font txtFont: UIFont
     ) {
+        var isDarkMode = traitCollection.userInterfaceStyle == .dark
+        
         keyboardType = formType.keyboardType
         textContentType = formType.contentType
         placeholder = formType.placeholder
         isSecureTextEntry = formType == .password
         returnKeyType = returnType
         clearButtonMode = clearMode
-        textColor = (traitCollection.userInterfaceStyle == .dark) ? .white : .black
+        textColor = isDarkMode ? .white : .black
         font = txtFont
         backgroundColor = .systemBackground
-        layer.borderColor = (traitCollection.userInterfaceStyle == .dark) ? darkModeBorderColor : lightModeBorderColor
+        layer.borderColor = isDarkMode ? darkModeBorderColor : lightModeBorderColor
         layer.borderWidth = 1
         layer.cornerRadius = 6
         autocorrectionType = .no
         autocapitalizationType = .none
-        let placeholderColor = (traitCollection.userInterfaceStyle == .dark) ? darkModePlaceholderColor : lightModePlaceholderColor
+        let placeholderColor = isDarkMode ? darkModePlaceholderColor : lightModePlaceholderColor
         if let placeholderText = placeholder {
             attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [.foregroundColor: placeholderColor])
         }
