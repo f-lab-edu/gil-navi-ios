@@ -48,7 +48,7 @@ class BasicTextField: UITextField {
     
     private let padding: UIEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
     private var lightModePlaceholderColor: UIColor = .lightGray
-    private var darkModePlaceholderColor: UIColor = .white
+    private var darkModePlaceholderColor: UIColor = .darkGray
     private let lightModeBorderColor = UIColor.lightGray.cgColor
     private let darkModeBorderColor = UIColor.darkGray.cgColor
     
@@ -60,14 +60,12 @@ class BasicTextField: UITextField {
         type: FormType,
         returnKeyType: UIReturnKeyType = .default,
         clearButtonMode: UITextField.ViewMode = .never,
-        textColor: UIColor = .black,
         font: UIFont = .systemFont(ofSize: 14, weight: .medium)
     ) {
         super.init(frame: .zero)
         configureUI(formType: type,
                     returnKeyType: returnKeyType,
                     clearButtonMode: clearButtonMode,
-                    textColor: textColor,
                     font: font)
     }
     
@@ -103,7 +101,6 @@ extension BasicTextField {
         formType: FormType,
         returnKeyType returnType: UIReturnKeyType,
         clearButtonMode clearMode: UITextField.ViewMode,
-        textColor txtColor: UIColor,
         font txtFont: UIFont
     ) {
         keyboardType = formType.keyboardType
@@ -112,7 +109,7 @@ extension BasicTextField {
         isSecureTextEntry = formType == .password
         returnKeyType = returnType
         clearButtonMode = clearMode
-        textColor = txtColor
+        textColor = (traitCollection.userInterfaceStyle == .dark) ? .white : .black
         font = txtFont
         backgroundColor = .systemBackground
         layer.borderColor = (traitCollection.userInterfaceStyle == .dark) ? darkModeBorderColor : lightModeBorderColor
