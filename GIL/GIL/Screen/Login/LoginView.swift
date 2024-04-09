@@ -29,7 +29,7 @@ final class LoginView: UIView {
         let label = UILabel()
         label.text = "아직 회원이 아니신가요?"
         label.textColor = .black
-        label.font = .systemFont(ofSize: 15, weight: .medium)
+        label.applyDynamicTypeFont(.body, font: .systemFont(ofSize: 15, weight: .medium))
         return label
     }()
     let socialLabel: UILabel = {
@@ -37,7 +37,7 @@ final class LoginView: UIView {
         label.text = "SNS 계정으로 로그인"
         label.backgroundColor = .white
         label.textColor = .lightGray
-        label.font = .systemFont(ofSize: 15, weight: .medium)
+        label.applyDynamicTypeFont(.footnote, font: .systemFont(ofSize: 15, weight: .medium))
         return label
     }()
     let appleLoginButton: UIButton = {
