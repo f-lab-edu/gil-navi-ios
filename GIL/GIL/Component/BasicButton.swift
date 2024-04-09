@@ -42,7 +42,7 @@ extension BasicButton {
     ) {
         setTitle(title, for: .normal)
         setTitleColor(titleColor, for: .normal)
-        titleLabel?.font = font
+        applyDynamicTypeFont(.body, font: font)
         backgroundColor = bgColor
         layer.cornerRadius = 6
     }

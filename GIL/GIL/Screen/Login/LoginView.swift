@@ -16,7 +16,7 @@ final class LoginView: UIView {
         let button = UIButton()
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(.red, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
+        button.applyDynamicTypeFont(.body, font: .systemFont(ofSize: 15, weight: .semibold))
         return button
     }()
     private let stackView: UIStackView = {
