@@ -98,7 +98,7 @@ extension BasicTextField {
         returnKeyType = returnType
         clearButtonMode = clearMode
         textColor = txtColor
-        font = txtFont
+        applyDynamicTypeFont(.body, font: txtFont)
         backgroundColor = .white
         layer.borderColor = BasicTextField.defaultBorderColor
         layer.borderWidth = 1
