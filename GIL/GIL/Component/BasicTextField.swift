@@ -57,14 +57,16 @@ class BasicTextField: UITextField {
         returnKeyType: UIReturnKeyType = .default,
         clearButtonMode: UITextField.ViewMode = .never,
         textColor: UIColor = .black,
-        font: UIFont = .systemFont(ofSize: 14, weight: .medium)
+        fontSize: CGFloat = 10,
+        fontWeight: UIFont.Weight = .medium
     ) {
         super.init(frame: .zero)
         configureUI(formType: type,
                     returnKeyType: returnKeyType,
                     clearButtonMode: clearButtonMode,
                     textColor: textColor,
-                    font: font)
+                    fontSize: fontSize,
+                    fontWeight: fontWeight)
     }
     
     required init?(coder: NSCoder) {
@@ -89,7 +91,8 @@ extension BasicTextField {
         returnKeyType returnType: UIReturnKeyType,
         clearButtonMode clearMode: UITextField.ViewMode,
         textColor txtColor: UIColor,
-        font txtFont: UIFont
+        fontSize: CGFloat,
+        fontWeight: UIFont.Weight
     ) {
         keyboardType = formType.keyboardType
         textContentType = formType.contentType
@@ -98,7 +101,7 @@ extension BasicTextField {
         returnKeyType = returnType
         clearButtonMode = clearMode
         textColor = txtColor
-        applyDynamicTypeFont(.body, font: txtFont)
+        applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
         backgroundColor = .white
         layer.borderColor = BasicTextField.defaultBorderColor
         layer.borderWidth = 1

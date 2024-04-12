@@ -15,14 +15,16 @@ class BasicButton: UIButton {
     init(
         title: String,
         titleColor: UIColor = .white,
-        font: UIFont = .systemFont(ofSize: 18, weight: .bold),
+        fontSize: CGFloat = 18,
+        fontWeight: UIFont.Weight = .bold,
         backgroundColor: UIColor? = BasicButton.enabledBackgroundColor
     ) {
         super.init(frame: .zero)
         
         configureUI(title: title,
                     titleColor: titleColor,
-                    font: font,
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
                     backgroundColor: backgroundColor)
     }
     
@@ -37,12 +39,13 @@ extension BasicButton {
     func configureUI(
         title: String,
         titleColor: UIColor,
-        font: UIFont,
+        fontSize: CGFloat,
+        fontWeight: UIFont.Weight,
         backgroundColor bgColor: UIColor?
     ) {
         setTitle(title, for: .normal)
         setTitleColor(titleColor, for: .normal)
-        applyDynamicTypeFont(.body, font: font)
+        applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
         backgroundColor = bgColor
         layer.cornerRadius = 6
     }
