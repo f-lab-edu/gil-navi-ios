@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAuth
 
 final class LoginViewController: UIViewController {
     private var viewModel: LoginViewModel
@@ -62,7 +63,7 @@ extension LoginViewController {
             .sink { result in
                 switch result {
                 case .finished:
-                    AuthenticationManager.shared.signIn()
+                    Auth.auth().signInAnonymously()
                 case .failure(let failure):
                     Log.error("Failure : \(failure.localizedDescription)")
                     

@@ -5,8 +5,14 @@
 //  Created by 송우진 on 4/4/24.
 //
 
-import Foundation
+import FirebaseAuth
 
 class HomeViewModel {
-    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            Log.error("Error signing out: \(signOutError)")
+        }
+    }
 }
