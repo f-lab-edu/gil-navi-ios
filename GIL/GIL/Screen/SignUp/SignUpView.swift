@@ -19,7 +19,7 @@ final class SignUpView: UIView {
     let nameTextField = BasicTextField(type: .unknown(placeholder: "Name"), returnKeyType: .next, clearButtonMode: .whileEditing)
     let passwordTextField = BasicTextField(type: .password, returnKeyType: .next)
     let confirmPasswordTextField = BasicTextField(type: .password, returnKeyType: .done)
-    let confirmButton = BasicButton(title: "완료")
+    let confirmButton = BasicButton(title: "완료".localized())
     
     // MARK: - Initialization
     override init(frame: CGRect) {
