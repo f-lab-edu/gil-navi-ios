@@ -6,11 +6,10 @@
 //
 
 import Foundation
+import RegexBuilder
 
 // MARK: - 정규식
 extension String {
-    // 이메일 형식
-    static let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
     // 영문자와 숫자만 포함
     static let alphanumericRegex = "^[A-Za-z0-9]+$"
     // 최소 하나의 대문자를 포함
@@ -23,17 +22,41 @@ extension String {
 
 // MARK: - 회원가입, 로그인에 필요한 유효성 검사
 extension String {
+    
     /**
      주어진 문자열이 유효한 이메일 주소인지 검사
      - Returns: 이메일 주소가 유효한 경우 true, 그렇지 않은 경우 false를 반환
      */
     func isValidEmail() -> Bool {
-        do {
-            let emailRegex = try Regex(String.emailRegex)
-            return self.firstMatch(of: emailRegex) != nil
-        } catch {
-            return false
+        let pattern = Regex {
+            OneOrMore {
+                ChoiceOf {
+                    "a"..."z"
+                    "A"..."Z"
+                    "0"..."9"
+                    "."
+                    "_"
+                }
+            }
+            "@"
+            OneOrMore {
+                ChoiceOf {
+                    "a"..."z"
+                    "A"..."Z"
+                    "0"..."9"
+                    "."
+                }
+            }
+            "."
+            OneOrMore {
+                ChoiceOf {
+                    "a"..."z"
+                    "A"..."Z"
+                }
+            }
         }
+
+        return self.wholeMatch(of: pattern) != nil
     }
     
     /**
@@ -82,5 +105,6 @@ extension String {
             return false
         }
     }
+    
     
 }
