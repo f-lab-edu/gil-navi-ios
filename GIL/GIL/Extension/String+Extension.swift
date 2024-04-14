@@ -63,48 +63,38 @@ extension String {
      비밀번호 유효성 검사
      - Returns: 비밀번호 유효성 검사 결과. 다음 조건을 모두 만족해야 `true`반환
      - 최소 10자 이상
-     - 적어도 하나의 소문자를 포함
      - 적어도 하나의 대문자를 포함
      - 적어도 하나의 숫자를 포함
-     - 영문자와 숫자만을 포함
+     - 특수 문자 포함 ( !@#$%^&*()-_=+[{]}\\|;:'\",<.>/? )
      */
     func isValidPassword() -> Bool {
-        do {
-            // 최소 10자 이상
-            guard self.count >= 10 else {
-                return false
-            }
-            
-            // 영문자와 숫자만 포함
-            let alphanumericRegex = try Regex(String.alphanumericRegex)
-            guard let _ = self.firstMatch(of: alphanumericRegex) else {
-                return false
-            }
-            
-            // 대문자 포함
-            let uppercaseLetterRegex = try Regex(String.uppercaseLetterRegex)
-            guard let _ = self.firstMatch(of: uppercaseLetterRegex) else {
-                return false
-            }
-            
-            // 소문자 포함
-            let lowercaseLetterRegex = try Regex(String.lowercaseLetterRegex)
-            guard let _ = self.firstMatch(of: lowercaseLetterRegex) else {
-                return false
-            }
-            
-            // 숫자 포함
-            let numberRegex = try Regex(String.numberRegex)
-            guard let _ = self.firstMatch(of: numberRegex) else {
-                return false
-            }
-            
-            return true
+        let specialCharacters = CharacterClass.anyOf("!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?")
 
-        } catch {
+        guard self.count >= 10 else {
             return false
         }
+        
+        let digitPattern = Regex {
+            OneOrMore(CharacterClass.digit)
+        }
+
+        let specialCharPattern = Regex {
+            OneOrMore(specialCharacters)
+        }
+        
+        let uppercasePattern = Regex {
+            OneOrMore {
+                ChoiceOf {
+                    "A"..."Z"
+                }
+            }
+        }
+        
+        
+        let hasDigit = self.contains(digitPattern)
+        let hasSpecialCharacter = self.contains(specialCharPattern)
+        let hasUppercase = self.contains(uppercasePattern)
+        
+        return hasDigit && hasUppercase && hasSpecialCharacter
     }
-    
-    
 }
