@@ -47,11 +47,6 @@ class BasicTextField: UITextField {
     }
     
     private let padding: UIEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
-    private var lightModePlaceholderColor: UIColor = .lightGray
-    private var darkModePlaceholderColor: UIColor = .darkGray
-    private let lightModeBorderColor = UIColor.lightGray.cgColor
-    private let darkModeBorderColor = UIColor.darkGray.cgColor
-    
     static let validBorderColor = UIColor.mainGreenColor?.cgColor
     static let invalidBorderColor = UIColor.red.cgColor
     
@@ -91,13 +86,11 @@ class BasicTextField: UITextField {
 
         if let placeholder = placeholder,
            traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            
-            var isDarkMode = traitCollection.userInterfaceStyle == .dark
-            
-            layer.borderColor = isDarkMode ? darkModeBorderColor : lightModeBorderColor
-            
-            let placeholderColor = isDarkMode ? darkModePlaceholderColor : lightModePlaceholderColor
-            attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: placeholderColor])
+            layer.borderColor = UIColor.borderGrayColor?.cgColor
+            attributedPlaceholder = NSAttributedString(
+                string: placeholder,
+                attributes: [.foregroundColor: UIColor.placeholderColor ?? .darkGray]
+            )
         }
     }
 }
@@ -112,25 +105,25 @@ extension BasicTextField {
         fontSize: CGFloat,
         fontWeight: UIFont.Weight
     ) {
-        var isDarkMode = traitCollection.userInterfaceStyle == .dark
-        
         keyboardType = formType.keyboardType
         textContentType = formType.contentType
         placeholder = formType.placeholder
         isSecureTextEntry = formType == .password
         returnKeyType = returnType
         clearButtonMode = clearMode
-        textColor = isDarkMode ? .white : .black
+        textColor = .textColor
         applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
         backgroundColor = .systemBackground
-        layer.borderColor = isDarkMode ? darkModeBorderColor : lightModeBorderColor
+        layer.borderColor = UIColor.borderGrayColor?.cgColor
         layer.borderWidth = 1
         layer.cornerRadius = 6
         autocorrectionType = .no
         autocapitalizationType = .none
-        let placeholderColor = isDarkMode ? darkModePlaceholderColor : lightModePlaceholderColor
         if let placeholderText = placeholder {
-            attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [.foregroundColor: placeholderColor])
+            attributedPlaceholder = NSAttributedString(
+                string: placeholderText,
+                attributes: [.foregroundColor: UIColor.placeholderColor ?? .darkGray]
+            )
         }
     }
 }

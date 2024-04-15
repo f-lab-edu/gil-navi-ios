@@ -12,6 +12,7 @@ extension UIColor {
     static let mainGreenColor = UIColor(named: "mainGreenColor")
     static let borderGrayColor = UIColor(named: "borderGrayColor")
     static let textColor = UIColor(named: "textColor")
+    static let placeholderColor = UIColor(named: "placeholderColor")
 }
 
 // MARK: - 16진수 문자열을 사용하여 UIColor 객체를 생성
