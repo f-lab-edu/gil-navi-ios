@@ -84,20 +84,15 @@ class BasicTextField: UITextField {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
 
-        if let placeholder = placeholder,
-           traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            layer.borderColor = UIColor.borderGrayColor?.cgColor
-            attributedPlaceholder = NSAttributedString(
-                string: placeholder,
-                attributes: [.foregroundColor: UIColor.placeholderColor ?? .darkGray]
-            )
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            configurePlaceholderAndBorder()
         }
     }
 }
 
 // MARK: - Configure UI
 extension BasicTextField {
-    func configureUI(
+    private func configureUI(
         formType: FormType,
         returnKeyType returnType: UIReturnKeyType,
         clearButtonMode clearMode: UITextField.ViewMode,
@@ -114,14 +109,18 @@ extension BasicTextField {
         textColor = .textColor
         applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
         backgroundColor = .systemBackground
-        layer.borderColor = UIColor.borderGrayColor?.cgColor
         layer.borderWidth = 1
         layer.cornerRadius = 6
         autocorrectionType = .no
         autocapitalizationType = .none
-        if let placeholderText = placeholder {
+        configurePlaceholderAndBorder()
+    }
+    
+    private func configurePlaceholderAndBorder() {
+        layer.borderColor = UIColor.borderGrayColor?.cgColor
+        if let placeholder = placeholder {
             attributedPlaceholder = NSAttributedString(
-                string: placeholderText,
+                string: placeholder,
                 attributes: [.foregroundColor: UIColor.placeholderColor ?? .darkGray]
             )
         }
