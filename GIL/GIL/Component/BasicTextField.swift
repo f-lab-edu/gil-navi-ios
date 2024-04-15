@@ -16,7 +16,7 @@ class BasicTextField: UITextField {
         var contentType: UITextContentType {
             switch self {
             case .email:
-                return .emailAddress
+                return .emailAddress 
             case .password:
                 return .password
             case .unknown:
@@ -60,13 +60,17 @@ class BasicTextField: UITextField {
         type: FormType,
         returnKeyType: UIReturnKeyType = .default,
         clearButtonMode: UITextField.ViewMode = .never,
-        font: UIFont = .systemFont(ofSize: 14, weight: .medium)
+        textColor: UIColor = .black,
+        fontSize: CGFloat = 10,
+        fontWeight: UIFont.Weight = .medium
     ) {
         super.init(frame: .zero)
         configureUI(formType: type,
                     returnKeyType: returnKeyType,
                     clearButtonMode: clearButtonMode,
-                    font: font)
+                    textColor: textColor,
+                    fontSize: fontSize,
+                    fontWeight: fontWeight)
     }
     
     required init?(coder: NSCoder) {
@@ -104,7 +108,9 @@ extension BasicTextField {
         formType: FormType,
         returnKeyType returnType: UIReturnKeyType,
         clearButtonMode clearMode: UITextField.ViewMode,
-        font txtFont: UIFont
+        textColor txtColor: UIColor,
+        fontSize: CGFloat,
+        fontWeight: UIFont.Weight
     ) {
         var isDarkMode = traitCollection.userInterfaceStyle == .dark
         
@@ -115,7 +121,7 @@ extension BasicTextField {
         returnKeyType = returnType
         clearButtonMode = clearMode
         textColor = isDarkMode ? .white : .black
-        font = txtFont
+        applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
         backgroundColor = .systemBackground
         layer.borderColor = isDarkMode ? darkModeBorderColor : lightModeBorderColor
         layer.borderWidth = 1
