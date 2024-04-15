@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5806472A2BCD147A00FB7310 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580647292BCD147A00FB7310 /* UIImage+Extension.swift */; };
 		584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA3E62BA41484002600F1 /* AppDelegate.swift */; };
 		584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA3E82BA41484002600F1 /* SceneDelegate.swift */; };
 		584FA3F02BA41485002600F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 584FA3EF2BA41485002600F1 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */; };
 		58BAC8992BC5399D00CDEB1F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAC8982BC5399D00CDEB1F /* UITextField+Extension.swift */; };
 		58BAC89B2BC53A4D00CDEB1F /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAC89A2BC53A4D00CDEB1F /* UIButton+Extension.swift */; };
+		58BAC8B02BCCF59800CDEB1F /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAC8AF2BCCF59800CDEB1F /* CloseButton.swift */; };
 		58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBA12BB2B8F5006AC994 /* SignUpViewController.swift */; };
 		58BDFBA42BB2E536006AC994 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBA32BB2E536006AC994 /* SignUpView.swift */; };
 		58BDFBC22BB6A748006AC994 /* OSLog+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBC12BB6A748006AC994 /* OSLog+Extension.swift */; };
@@ -61,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		580647292BCD147A00FB7310 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		584FA3E32BA41484002600F1 /* GIL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GIL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		584FA3E62BA41484002600F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		584FA3E82BA41484002600F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +86,7 @@
 		58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		58BAC8982BC5399D00CDEB1F /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		58BAC89A2BC53A4D00CDEB1F /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		58BAC8AF2BCCF59800CDEB1F /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		58BDFB9F2BB16F93006AC994 /* GIL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GIL.entitlements; sourceTree = "<group>"; };
 		58BDFBA12BB2B8F5006AC994 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		58BDFBA32BB2E536006AC994 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -209,6 +213,7 @@
 			children = (
 				584FA41D2BA82886002600F1 /* BasicTextField.swift */,
 				584FA4212BA84254002600F1 /* BasicButton.swift */,
+				58BAC8AF2BCCF59800CDEB1F /* CloseButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 				58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */,
 				58BAC8982BC5399D00CDEB1F /* UITextField+Extension.swift */,
 				58BAC89A2BC53A4D00CDEB1F /* UIButton+Extension.swift */,
+				580647292BCD147A00FB7310 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -435,10 +441,12 @@
 				58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */,
 				584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */,
 				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
+				58BAC8B02BCCF59800CDEB1F /* CloseButton.swift in Sources */,
 				58BDFBC82BBA8C32006AC994 /* StatusbarManager.swift in Sources */,
 				584FA4222BA84254002600F1 /* BasicButton.swift in Sources */,
 				58BAC89B2BC53A4D00CDEB1F /* UIButton+Extension.swift in Sources */,
 				584FA42A2BA926B3002600F1 /* ViewController+Extension.swift in Sources */,
+				5806472A2BCD147A00FB7310 /* UIImage+Extension.swift in Sources */,
 				58BDFBCA2BBA9B27006AC994 /* SignUpViewModel.swift in Sources */,
 				58BDFBC22BB6A748006AC994 /* OSLog+Extension.swift in Sources */,
 				58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */,

@@ -8,13 +8,7 @@
 import UIKit
 
 final class SignUpView: UIView {
-    let closeButton: UIButton = {
-        let btn = UIButton()
-        btn.setTitle("Close", for: .normal)
-        btn.setTitleColor(.blue, for: .normal)
-        btn.layer.borderWidth = 1
-        return btn
-    }()
+    let closeButton = CloseButton()
     let emailTextField = BasicTextField(type: .email, returnKeyType: .next, clearButtonMode: .whileEditing)
     let nameTextField = BasicTextField(type: .unknown(placeholder: "Name"), returnKeyType: .next, clearButtonMode: .whileEditing)
     let passwordTextField = BasicTextField(type: .password, returnKeyType: .next)
@@ -42,7 +36,7 @@ final class SignUpView: UIView {
 // MARK: - Configure UI
 extension SignUpView {
     func configureUI() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         
         [closeButton, emailTextField, nameTextField, passwordTextField, confirmPasswordTextField, confirmButton].forEach({
             addSubview($0)
@@ -54,6 +48,8 @@ extension SignUpView {
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: topAnchor, constant: StatusBarManager.shared.statusBarHeight + 10),
             closeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            closeButton.widthAnchor.constraint(equalToConstant: 44),
+            closeButton.heightAnchor.constraint(equalToConstant: 44),
             emailTextField.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 40),
             emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
