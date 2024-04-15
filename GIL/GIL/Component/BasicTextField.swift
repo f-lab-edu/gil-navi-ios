@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BasicTextField: UITextField {
+final class BasicTextField: UITextField {
     enum FormType: Equatable {
         case email
         case password

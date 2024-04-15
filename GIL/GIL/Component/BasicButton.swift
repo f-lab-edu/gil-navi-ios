@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BasicButton: UIButton {
+final class BasicButton: UIButton {
     static let enabledBackgroundColor = UIColor.mainGreenColor
     static let disabledBackgroundColor = UIColor.lightGray
     
