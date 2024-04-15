@@ -45,8 +45,8 @@ extension SignUpViewController {
         let closeAction = UIAction { _ in self.closeButtonTapped() }
         signUpView.closeButton.addAction(closeAction, for: .touchUpInside)
         
-        let confirmAction = UIAction { _ in self.confirmButtonTapped() }
-        signUpView.confirmButton.addAction(confirmAction, for: .touchUpInside)
+        let doneAction = UIAction { _ in self.doneButtonTapped() }
+        signUpView.doneButton.addAction(doneAction, for: .touchUpInside)
     }
     
     private func bindTextFields() {
@@ -105,8 +105,8 @@ extension SignUpViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isValid in
                 guard let self else { return }
-                self.signUpView.confirmButton.isEnabled = isValid
-                self.signUpView.confirmButton.backgroundColor = isValid ? BasicButton.enabledBackgroundColor : BasicButton.disabledBackgroundColor
+                self.signUpView.doneButton.isEnabled = isValid
+                self.signUpView.doneButton.backgroundColor = isValid ? BasicButton.enabledBackgroundColor : BasicButton.disabledBackgroundColor
             }
             .store(in: &viewModel.cancellables)
 
@@ -119,13 +119,51 @@ extension SignUpViewController {
         dismiss(animated: true)
     }
     
-    func confirmButtonTapped() {
+    func doneButtonTapped() {
         dismiss(animated: true)
     }
 }
 
 // MARK: - UITextFieldDelegate
 extension SignUpViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        switch textField {
+        case signUpView.emailTextField:
+            showLabel(signUpView.emailLabel, constraint: signUpView.emailLabelHeightConstraint)
+            
+        case signUpView.nameTextField:
+            showLabel(signUpView.nameLabel, constraint: signUpView.nameLabelHeightConstraint)
+            
+        case signUpView.passwordTextField:
+            showLabel(signUpView.passwordLabel, constraint: signUpView.passwordLabelHeightConstraint)
+            
+        case signUpView.confirmPasswordTextField:
+            showLabel(signUpView.confirmPasswordLabel, constraint: signUpView.confirmPasswordLabelHeightConstraint)
+            
+        default: break
+        }
+        
+        view.layoutIfNeeded()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case signUpView.emailTextField:
+            hideLabel(signUpView.emailLabel, constraint: signUpView.emailLabelHeightConstraint)
+            
+        case signUpView.nameTextField:
+            hideLabel(signUpView.nameLabel, constraint: signUpView.nameLabelHeightConstraint)
+            
+        case signUpView.passwordTextField:
+            hideLabel(signUpView.passwordLabel, constraint: signUpView.passwordLabelHeightConstraint)
+            
+        case signUpView.confirmPasswordTextField:
+            hideLabel(signUpView.confirmPasswordLabel, constraint: signUpView.confirmPasswordLabelHeightConstraint)
+            
+        default: break
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case signUpView.emailTextField:
@@ -193,7 +231,21 @@ extension SignUpViewController: UITextFieldDelegate {
             viewModel.confirmPasswordPublisher.send(text)
         }
     }
+    
+    
+    private func showLabel(_ label: UILabel, constraint: NSLayoutConstraint) {
+        UIView.animate(withDuration: 0.3) {
+            label.alpha = 1.0
+            constraint.constant = 16
+            self.view.layoutIfNeeded()
+        }
+    }
 
-    
-    
+    private func hideLabel(_ label: UILabel, constraint: NSLayoutConstraint) {
+        UIView.animate(withDuration: 0.3) {
+            label.alpha = 0
+            constraint.constant = 0
+            self.view.layoutIfNeeded()
+        }
+    }
 }
