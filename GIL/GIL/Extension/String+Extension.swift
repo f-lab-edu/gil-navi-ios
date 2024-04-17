@@ -8,18 +8,6 @@
 import Foundation
 import RegexBuilder
 
-// MARK: - 정규식
-extension String {
-    // 영문자와 숫자만 포함
-    static let alphanumericRegex = "^[A-Za-z0-9]+$"
-    // 최소 하나의 대문자를 포함
-    static let uppercaseLetterRegex = ".*[A-Z]+.*"
-    // 최소 하나의 소문자를 포함
-    static let lowercaseLetterRegex = ".*[a-z]+.*"
-    // 최소 하나의 숫자를 포함
-    static let numberRegex = ".*[0-9]+.*"
-}
-
 // MARK: - 회원가입, 로그인에 필요한 유효성 검사
 extension String {
     
