@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAuth
 
 final class LoginViewController: UIViewController {
     private var viewModel: LoginViewModel
@@ -53,22 +54,21 @@ extension LoginViewController {
         let signUpAction = UIAction { _ in self.signUpButtonTapped() }
         loginView.signUpButton.addAction(signUpAction, for: .touchUpInside)
      
-        let appleLoginAction = UIAction { _ in self.appleLoginButtonTapped() }
+        let appleLoginAction = UIAction { _ in self.viewModel.startSignInWithAppleFlow() }
         loginView.appleLoginButton.addAction(appleLoginAction, for: .touchUpInside)
     }
     
     private func bindPublishers() {
         viewModel.loginPublisher
-            .sink(receiveCompletion: { [weak self] completion in
-                switch completion {
+            .sink { result in
+                switch result {
                 case .finished:
-                    print("Finished")
+                    Auth.auth().signInAnonymously()
                 case .failure(let failure):
-                    print("Failure : \(failure.localizedDescription)")
+                    Log.error("Failure : \(failure.localizedDescription)")
+                    
                 }
-            }, receiveValue: { [weak self] _ in
-                print("로그인 성공 ")
-            })
+            } receiveValue: { _ in }
             .store(in: &viewModel.cancellables)
     }
 }
@@ -87,10 +87,6 @@ extension LoginViewController {
         present(signUpViewController, animated: true)
     }
     
-    func appleLoginButtonTapped() {
-        // 애플 로그인
-        viewModel.didTappedLoginButton()
-    }
 }
 
 // MARK: - UITextFieldDelegate
