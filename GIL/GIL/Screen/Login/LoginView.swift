@@ -11,10 +11,10 @@ import AuthenticationServices
 final class LoginView: UIView {
     let emailTextField = BasicTextField(type: .email, returnKeyType: .next)
     let passwordTextField = BasicTextField(type: .password, returnKeyType: .done)
-    let loginButton = BasicButton(title: "로그인")
+    let loginButton = BasicButton(title: "로그인".localized())
     let signUpButton: UIButton = {
         let button = UIButton()
-        button.setTitle("회원가입", for: .normal)
+        button.setTitle("회원가입".localized(), for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.applyDynamicTypeFont(textStyle: .body, size: 15, weight: .semibold)
         return button
@@ -27,14 +27,14 @@ final class LoginView: UIView {
     }()
     private let signUpLabel: UILabel = {
         let label = UILabel()
-        label.text = "아직 회원이 아니신가요?"
+        label.text = "아직 회원이 아니신가요?".localized()
         label.textColor = .text
         label.applyDynamicTypeFont(textStyle: .body, size: 15, weight: .medium)
         return label
     }()
     let socialLabel: UILabel = {
         let label = UILabel()
-        label.text = "SNS 계정으로 로그인"
+        label.text = "SNS 계정으로 로그인".localized()
         label.backgroundColor = .systemBackground
         label.textColor = .lightGray
         label.applyDynamicTypeFont(textStyle: .footnote, size: 15, weight: .medium)

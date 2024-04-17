@@ -12,6 +12,17 @@ import RegexBuilder
 extension String {
     
     /**
+     주어진 키에 대한 지역화된 문자열을 검색
+     - Parameters:
+        - key: 지역화될 문자열의 키
+        - comment: 문자열에 대한 추가 컨텍스트를 제공할 수 있는 주석
+     - Returns: 키와 연관된 지역화된 문자열 또는 키를 찾지 못한 경우 키 자체
+     */
+    func localized(comment: String = "") -> String {
+        return NSLocalizedString(self, comment: comment)
+    }
+    
+    /**
      주어진 문자열이 유효한 이메일 주소인지 검사
      - Returns: 이메일 주소가 유효한 경우 true, 그렇지 않은 경우 false를 반환
      */
