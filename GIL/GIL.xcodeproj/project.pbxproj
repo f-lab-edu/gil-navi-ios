@@ -38,6 +38,10 @@
 		58BDFBC82BBA8C32006AC994 /* StatusbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBC72BBA8C32006AC994 /* StatusbarManager.swift */; };
 		58BDFBCA2BBA9B27006AC994 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBC92BBA9B27006AC994 /* SignUpViewModel.swift */; };
 		58BDFBCC2BBAA78F006AC994 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBCB2BBAA78F006AC994 /* String+Extension.swift */; };
+		58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */; };
+		58BDFBD32BBE6ED2006AC994 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBD22BBE6ED2006AC994 /* HomeViewModel.swift */; };
+		58BDFBD52BBE889D006AC994 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 58BDFBD42BBE889D006AC994 /* FirebaseAuth */; };
+		58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +95,9 @@
 		58BDFBC72BBA8C32006AC994 /* StatusbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusbarManager.swift; sourceTree = "<group>"; };
 		58BDFBC92BBA9B27006AC994 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		58BDFBCB2BBAA78F006AC994 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		58BDFBD22BBE6ED2006AC994 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +110,7 @@
 				584FA43F2BAD5607002600F1 /* FirebaseCrashlytics in Frameworks */,
 				584FA4392BAD5607002600F1 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				584FA43D2BAD5607002600F1 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				58BDFBD52BBE889D006AC994 /* FirebaseAuth in Frameworks */,
 				58BDFBC52BB6AFFB006AC994 /* OSLog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,6 +192,7 @@
 		584FA4192BA7F5E1002600F1 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				58BDFBCF2BBE5B43006AC994 /* Home */,
 				58BDFBA02BB2B865006AC994 /* SignUp */,
 				584FA41F2BA82CE3002600F1 /* Login */,
 			);
@@ -249,6 +258,16 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		58BDFBCF2BBE5B43006AC994 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */,
+				58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */,
+				58BDFBD22BBE6ED2006AC994 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -272,6 +291,7 @@
 				584FA43A2BAD5607002600F1 /* FirebaseAnalyticsSwift */,
 				584FA43C2BAD5607002600F1 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				584FA43E2BAD5607002600F1 /* FirebaseCrashlytics */,
+				58BDFBD42BBE889D006AC994 /* FirebaseAuth */,
 			);
 			productName = GIL;
 			productReference = 584FA3E32BA41484002600F1 /* GIL.app */;
@@ -419,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				584FA41B2BA7F606002600F1 /* LoginViewController.swift in Sources */,
+				58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */,
 				584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */,
 				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
 				58BDFBC82BBA8C32006AC994 /* StatusbarManager.swift in Sources */,
@@ -430,6 +451,8 @@
 				58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */,
 				584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */,
 				584FA41E2BA82886002600F1 /* BasicTextField.swift in Sources */,
+				58BDFBD32BBE6ED2006AC994 /* HomeViewModel.swift in Sources */,
+				58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */,
 				58BDFBA42BB2E536006AC994 /* SignUpView.swift in Sources */,
 				584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */,
 				584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */,
@@ -841,6 +864,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 584FA4352BAD5607002600F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		58BDFBD42BBE889D006AC994 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 584FA4352BAD5607002600F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

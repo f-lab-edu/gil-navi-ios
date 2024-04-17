@@ -42,7 +42,6 @@ final class SignUpView: UIView {
 // MARK: - Configure UI
 extension SignUpView {
     func configureUI() {
-        backgroundColor = .white
         
         [closeButton, emailTextField, nameTextField, passwordTextField, confirmPasswordTextField, confirmButton].forEach({
             addSubview($0)
