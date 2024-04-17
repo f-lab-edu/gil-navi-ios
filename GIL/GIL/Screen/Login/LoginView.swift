@@ -28,33 +28,31 @@ final class LoginView: UIView {
     private let signUpLabel: UILabel = {
         let label = UILabel()
         label.text = "아직 회원이 아니신가요?"
-        label.textColor = .black
+        label.textColor = .text
         label.applyDynamicTypeFont(textStyle: .body, size: 15, weight: .medium)
         return label
     }()
     let socialLabel: UILabel = {
         let label = UILabel()
         label.text = "SNS 계정으로 로그인"
-        label.backgroundColor = .white
+        label.backgroundColor = .systemBackground
         label.textColor = .lightGray
         label.applyDynamicTypeFont(textStyle: .footnote, size: 15, weight: .medium)
         return label
     }()
     let appleLoginButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "logo-apple-white"), for: .normal)
-        button.setImage(UIImage(named: "logo-apple-white"), for: .highlighted)
+        button.setBackgroundImage(UIImage(named: "logo-apple"), for: .normal)
+        button.setBackgroundImage(UIImage(named: "logo-apple"), for: .highlighted)
         button.clipsToBounds = true
-        button.layer.cornerRadius = 55/2
-        button.backgroundColor = .black
+        button.layer.cornerRadius = 25
         return button
     }()
     let border: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .borderGrayColor
+        label.backgroundColor = .borderGray
         return label
     }()
-    
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -70,6 +68,7 @@ final class LoginView: UIView {
     override func updateConstraints() {
         setConstraints()
         super.updateConstraints()
+
     }
 }
 
@@ -111,9 +110,8 @@ extension LoginView {
             socialLabel.centerYAnchor.constraint(equalTo: border.centerYAnchor),
             appleLoginButton.topAnchor.constraint(equalTo: border.bottomAnchor, constant: 20),
             appleLoginButton.centerXAnchor.constraint(equalTo: border.centerXAnchor),
-            appleLoginButton.widthAnchor.constraint(equalToConstant: 55),
-            appleLoginButton.heightAnchor.constraint(equalToConstant: 55)
-            
+            appleLoginButton.widthAnchor.constraint(equalToConstant: 50),
+            appleLoginButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }
