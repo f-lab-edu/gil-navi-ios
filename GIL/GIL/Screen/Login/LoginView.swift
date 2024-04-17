@@ -28,7 +28,7 @@ final class LoginView: UIView {
     private let signUpLabel: UILabel = {
         let label = UILabel()
         label.text = "아직 회원이 아니신가요?"
-        label.textColor = .textColor
+        label.textColor = .text
         label.applyDynamicTypeFont(textStyle: .body, size: 15, weight: .medium)
         return label
     }()
@@ -50,7 +50,7 @@ final class LoginView: UIView {
     }()
     let border: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .borderGrayColor
+        label.backgroundColor = .borderGray
         return label
     }()
     

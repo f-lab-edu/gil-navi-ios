@@ -47,7 +47,7 @@ class BasicTextField: UITextField {
     }
     
     private let padding: UIEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
-    static let validBorderColor = UIColor.mainGreenColor?.cgColor
+    static let validBorderColor = UIColor.mainGreen.cgColor
     static let invalidBorderColor = UIColor.red.cgColor
     
     // MARK: - Initialization
@@ -106,7 +106,7 @@ extension BasicTextField {
         isSecureTextEntry = formType == .password
         returnKeyType = returnType
         clearButtonMode = clearMode
-        textColor = .textColor
+        textColor = .text
         applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
         backgroundColor = .systemBackground
         layer.borderWidth = 1
@@ -115,13 +115,13 @@ extension BasicTextField {
         autocapitalizationType = .none
         configurePlaceholderAndBorder()
     }
-    
+
     private func configurePlaceholderAndBorder() {
-        layer.borderColor = UIColor.borderGrayColor?.cgColor
+        layer.borderColor = UIColor.borderGray.cgColor
         if let placeholder = placeholder {
             attributedPlaceholder = NSAttributedString(
                 string: placeholder,
-                attributes: [.foregroundColor: UIColor.placeholderColor ?? .darkGray]
+                attributes: [.foregroundColor: UIColor.placeholder]
             )
         }
     }
