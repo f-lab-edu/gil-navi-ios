@@ -17,7 +17,7 @@ final class SignUpView: UIView {
     let passwordTextField = BasicTextField(type: .password, returnKeyType: .next)
     let confirmPasswordLabel = UILabel()
     let confirmPasswordTextField = BasicTextField(type: .password, returnKeyType: .done)
-    let doneButton = BasicButton(title: "완료")
+    let doneButton = BasicButton(title: "완료".localized())
     
     var emailLabelHeightConstraint: NSLayoutConstraint = .init()
     var nameLabelHeightConstraint: NSLayoutConstraint = .init()
@@ -116,7 +116,7 @@ extension SignUpView {
     private func configureLabel(_ label: UILabel, text: String) {
         label.text = text
         label.applyDynamicTypeFont(textStyle: .subheadline, size: 13, weight: .medium)
-        label.textColor = .mainGreenColor
+        label.textColor = .mainGreen
         label.alpha = 0
     }
 }

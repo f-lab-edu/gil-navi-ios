@@ -16,7 +16,7 @@ final class BasicTextField: UITextField {
         var contentType: UITextContentType {
             switch self {
             case .email:
-                return .emailAddress
+                return .emailAddress 
             case .password:
                 return .password
             case .unknown:
@@ -47,8 +47,7 @@ final class BasicTextField: UITextField {
     }
     
     private let padding: UIEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
-    static let defaultBorderColor = UIColor.lightGray.cgColor
-    static let validBorderColor = UIColor.mainGreenColor?.cgColor
+    static let validBorderColor = UIColor.mainGreen.cgColor
     static let invalidBorderColor = UIColor.red.cgColor
     
     // MARK: - Initialization
@@ -82,11 +81,18 @@ final class BasicTextField: UITextField {
         return bounds.inset(by: padding)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            configurePlaceholderAndBorder()
+        }
+    }
 }
 
 // MARK: - Configure UI
 extension BasicTextField {
-    func configureUI(
+    private func configureUI(
         formType: FormType,
         returnKeyType returnType: UIReturnKeyType,
         clearButtonMode clearMode: UITextField.ViewMode,
@@ -100,13 +106,23 @@ extension BasicTextField {
         isSecureTextEntry = formType == .password
         returnKeyType = returnType
         clearButtonMode = clearMode
-        textColor = txtColor
+        textColor = .text
         applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
-        backgroundColor = .white
-        layer.borderColor = BasicTextField.defaultBorderColor
+        backgroundColor = .systemBackground
         layer.borderWidth = 1
         layer.cornerRadius = 6
         autocorrectionType = .no
         autocapitalizationType = .none
+        configurePlaceholderAndBorder()
+    }
+
+    private func configurePlaceholderAndBorder() {
+        layer.borderColor = UIColor.borderGray.cgColor
+        if let placeholder = placeholder {
+            attributedPlaceholder = NSAttributedString(
+                string: placeholder,
+                attributes: [.foregroundColor: UIColor.placeholder]
+            )
+        }
     }
 }

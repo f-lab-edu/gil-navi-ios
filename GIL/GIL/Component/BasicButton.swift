@@ -8,7 +8,7 @@
 import UIKit
 
 final class BasicButton: UIButton {
-    static let enabledBackgroundColor = UIColor.mainGreenColor
+    static let enabledBackgroundColor = UIColor.mainGreen
     static let disabledBackgroundColor = UIColor.lightGray
     
     // MARK: - Initialization

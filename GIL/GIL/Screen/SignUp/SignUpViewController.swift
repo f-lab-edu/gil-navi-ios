@@ -61,11 +61,7 @@ extension SignUpViewController {
             .dropFirst()
             .sink { [weak self] email in
                 guard let self else { return }
-                if email.isEmpty {
-                    self.signUpView.emailTextField.layer.borderColor = BasicTextField.defaultBorderColor
-                } else {
-                    self.signUpView.emailTextField.layer.borderColor = email.isValidEmail() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
-                }
+                self.signUpView.emailTextField.layer.borderColor = email.isValidEmail() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
             }
             .store(in: &viewModel.cancellables)
         
@@ -73,7 +69,7 @@ extension SignUpViewController {
             .dropFirst()
             .sink(receiveValue: { [weak self] name in
                 guard let self else { return }
-                self.signUpView.nameTextField.layer.borderColor = !name.isEmpty ? BasicTextField.validBorderColor : BasicTextField.defaultBorderColor
+                self.signUpView.nameTextField.layer.borderColor = !name.isEmpty ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
             })
             .store(in: &viewModel.cancellables)
         
@@ -81,11 +77,7 @@ extension SignUpViewController {
             .dropFirst()
             .sink(receiveValue: { [weak self] password in
                 guard let self else { return }
-                if password.isEmpty {
-                    self.signUpView.passwordTextField.layer.borderColor = BasicTextField.defaultBorderColor
-                } else {
-                    self.signUpView.passwordTextField.layer.borderColor = password.isValidPassword() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
-                }
+                self.signUpView.passwordTextField.layer.borderColor = password.isValidPassword() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
             })
             .store(in: &viewModel.cancellables)
         
@@ -93,11 +85,7 @@ extension SignUpViewController {
             .dropFirst()
             .sink(receiveValue: { [weak self] password in
                 guard let self else { return }
-                if password.isEmpty {
-                    self.signUpView.confirmPasswordTextField.layer.borderColor = BasicTextField.defaultBorderColor
-                } else {
-                    self.signUpView.confirmPasswordTextField.layer.borderColor = (password == viewModel.passwordPublisher.value) ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
-                }
+                self.signUpView.confirmPasswordTextField.layer.borderColor = (password == viewModel.passwordPublisher.value) ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
             })
             .store(in: &viewModel.cancellables)
         
