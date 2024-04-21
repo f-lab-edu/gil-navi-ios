@@ -11,13 +11,14 @@ final class BasicTextField: UITextField {
     enum FormType: Equatable {
         case email
         case password
+        case verifyPassword
         case unknown(placeholder: String)
         
         var contentType: UITextContentType {
             switch self {
             case .email:
                 return .emailAddress 
-            case .password:
+            case .password, .verifyPassword:
                 return .password
             case .unknown:
                 return .init(rawValue: "unknown")
@@ -37,9 +38,11 @@ final class BasicTextField: UITextField {
         var placeholder: String {
             switch self {
             case .email:
-                return "Email"
+                return "이메일"
             case .password:
-                return "Password"
+                return "비밀번호"
+            case .verifyPassword:
+                return "비밀번호 확인"
             case .unknown(let placeholder):
                 return placeholder
             }
@@ -102,8 +105,8 @@ extension BasicTextField {
     ) {
         keyboardType = formType.keyboardType
         textContentType = formType.contentType
-        placeholder = formType.placeholder
-        isSecureTextEntry = formType == .password
+        placeholder = formType.placeholder.localized()
+        isSecureTextEntry = (formType == .password) || (formType == .verifyPassword)
         returnKeyType = returnType
         clearButtonMode = clearMode
         textColor = .text
