@@ -14,7 +14,8 @@ class SignUpViewModel {
     var passwordPublisher = CurrentValueSubject<String, Never>("")
     var verifyPasswordPublisher = CurrentValueSubject<String, Never>("")
     var isFormValidPublisher = CurrentValueSubject<Bool, Never>(false)
-    
+    var passwordValidationPublisher = PassthroughSubject<[Bool], Never>()
+
     var cancellables = Set<AnyCancellable>()
     
     init() {
@@ -24,20 +25,18 @@ class SignUpViewModel {
     private func setupFormValidation() {
         Publishers.CombineLatest4(emailPublisher, namePublisher, passwordPublisher, verifyPasswordPublisher)
             .map { email, name, password, verifyPassword in
-                return email.isValidEmail() &&
-                       !name.isEmpty &&
-                       password.isValidPassword() &&
-                       verifyPassword == password
+                email.isValidEmail() &&
+                !name.isEmpty &&
+                password.isValidPassword() &&
+                verifyPassword == password
             }
             .subscribe(isFormValidPublisher)
             .store(in: &cancellables)
+        
+        passwordPublisher
+            .map { $0.validatePassword() }
+            .subscribe(passwordValidationPublisher)
+            .store(in: &cancellables)
     }
 
-    
-    func validateAlphaNumericString(inputString: String) -> Bool {
-        let regex = "^[A-Za-z0-9]+$"
-        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: inputString)
-    }
-
-    
 }

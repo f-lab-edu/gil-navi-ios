@@ -19,6 +19,18 @@ final class SignUpView: UIView {
     let verifyPasswordTextField = BasicTextField(type: .verifyPassword, returnKeyType: .done)
     let doneButton = BasicButton(title: "완료")
     
+    private let checkPasswordStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 5
+        return stack
+    }()
+    
+    let checkPasswordLabel_01 = BasicLabel(text: "· 10글자 이상", fontSize: 11)
+    let checkPasswordLabel_02 = BasicLabel(text: "· 대문자 포함", fontSize: 11)
+    let checkPasswordLabel_03 = BasicLabel(text: "· 숫자 포함", fontSize: 11)
+    let checkPasswordLabel_04 = BasicLabel(text: "· 특수 문자 포함 !@#$%^&*()-_=+[{]}\\|;:'\",<.>/?", fontSize: 11)
+    
     var emailLabelHeightConstraint: NSLayoutConstraint = .init()
     var nameLabelHeightConstraint: NSLayoutConstraint = .init()
     var passwordLabelHeightConstraint: NSLayoutConstraint = .init()
@@ -52,9 +64,13 @@ extension SignUpView {
         configureLabel(passwordLabel, text: "비밀번호")
         configureLabel(verifyPasswordLabel, text: "비밀번호 확인")
         
-        [closeButton, emailLabel, emailTextField, nameLabel, nameTextField, passwordLabel, passwordTextField, verifyPasswordLabel, verifyPasswordTextField, doneButton].forEach ({
+        [closeButton, emailLabel, emailTextField, nameLabel, nameTextField, passwordLabel, passwordTextField, verifyPasswordLabel, verifyPasswordTextField, doneButton, checkPasswordStackView].forEach ({
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
+        })
+        
+        [checkPasswordLabel_01, checkPasswordLabel_02, checkPasswordLabel_03, checkPasswordLabel_04].forEach({
+            checkPasswordStackView.addArrangedSubview($0)
         })
     }
     
@@ -70,7 +86,7 @@ extension SignUpView {
             closeButton.widthAnchor.constraint(equalToConstant: 44),
             closeButton.heightAnchor.constraint(equalToConstant: 44),
             
-            emailLabel.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 40),
+            emailLabel.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 15),
             emailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             emailLabelHeightConstraint,
             
@@ -106,7 +122,11 @@ extension SignUpView {
             verifyPasswordTextField.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
             verifyPasswordTextField.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor),
             
-            doneButton.topAnchor.constraint(equalTo: verifyPasswordTextField.bottomAnchor, constant: 30),
+            checkPasswordStackView.topAnchor.constraint(equalTo: verifyPasswordTextField.bottomAnchor, constant: 15),
+            checkPasswordStackView.leadingAnchor.constraint(equalTo: verifyPasswordTextField.leadingAnchor, constant: 10),
+            checkPasswordStackView.trailingAnchor.constraint(equalTo: verifyPasswordTextField.trailingAnchor, constant: -10),
+            
+            doneButton.topAnchor.constraint(equalTo: checkPasswordStackView.bottomAnchor, constant: 30),
             doneButton.leadingAnchor.constraint(equalTo: verifyPasswordTextField.leadingAnchor),
             doneButton.trailingAnchor.constraint(equalTo: verifyPasswordTextField.trailingAnchor),
             doneButton.heightAnchor.constraint(equalTo: verifyPasswordTextField.heightAnchor)

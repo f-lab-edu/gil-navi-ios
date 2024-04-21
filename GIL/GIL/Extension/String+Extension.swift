@@ -60,26 +60,15 @@ extension String {
     
     /**
      비밀번호 유효성 검사
-     - Returns: 비밀번호 유효성 검사 결과. 다음 조건을 모두 만족해야 `true`반환
-     - 최소 10자 이상
-     - 적어도 하나의 대문자를 포함
-     - 적어도 하나의 숫자를 포함
-     - 특수 문자 포함 ( !@#$%^&*()-_=+[{]}\\|;:'\",<.>/? )
+     - Returns: 각 유효성 검사 결과를 Bool 배열로 반환합니다.
+       - [0]: 최소 10자 이상
+       - [1]: 적어도 하나의 대문자를 포함
+       - [2]: 적어도 하나의 숫자를 포함
+       - [3]: 특수 문자 포함 (!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?)
+       - 모든 조건을 만족하면 `true` 반환, 하나라도 실패하면 `false` 반환
      */
-    func isValidPassword() -> Bool {
-        let specialCharacters = CharacterClass.anyOf("!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?")
-
-        guard self.count >= 10 else {
-            return false
-        }
-        
-        let digitPattern = Regex {
-            OneOrMore(CharacterClass.digit)
-        }
-
-        let specialCharPattern = Regex {
-            OneOrMore(specialCharacters)
-        }
+    func validatePassword() -> [Bool] {
+        let minLengthRequirement = self.count >= 10
         
         let uppercasePattern = Regex {
             OneOrMore {
@@ -89,11 +78,25 @@ extension String {
             }
         }
         
+        let digitPattern = Regex { OneOrMore(CharacterClass.digit) }
+
+        let specialCharacters = CharacterClass.anyOf("!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?")
+        let specialCharPattern = Regex { OneOrMore(specialCharacters) }
         
+        let hasUppercase = self.contains(uppercasePattern)
         let hasDigit = self.contains(digitPattern)
         let hasSpecialCharacter = self.contains(specialCharPattern)
-        let hasUppercase = self.contains(uppercasePattern)
         
-        return hasDigit && hasUppercase && hasSpecialCharacter
+        let results = [minLengthRequirement, hasUppercase, hasDigit, hasSpecialCharacter]
+        return results
+    }
+    
+    /**
+     비밀번호 유효성을 전체적으로 검증
+     - Returns: 모든 조건을 만족하면 `true`, 그렇지 않으면 `false`
+     */
+    func isValidPassword() -> Bool {
+        let results = self.validatePassword()
+        return results.allSatisfy { $0 }
     }
 }

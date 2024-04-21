@@ -81,6 +81,15 @@ extension SignUpViewController {
             })
             .store(in: &viewModel.cancellables)
         
+        viewModel.passwordValidationPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] validations in
+                guard let self else { return }
+                self.updatePasswordValidationLabels(validations: validations)
+            })
+            .store(in: &viewModel.cancellables)
+        
+        
         viewModel.verifyPasswordPublisher
             .dropFirst()
             .sink(receiveValue: { [weak self] password in
@@ -101,7 +110,7 @@ extension SignUpViewController {
     }
 }
 
-// MARK: - Action
+// MARK: - Actions
 extension SignUpViewController {
     func closeButtonTapped() {
         dismiss(animated: true)
@@ -109,6 +118,39 @@ extension SignUpViewController {
     
     func doneButtonTapped() {
         dismiss(animated: true)
+    }
+}
+
+// MARK: - UI Updates
+extension SignUpViewController {
+    private func updatePasswordValidationLabels(validations: [Bool]) {
+        let labels = [
+            signUpView.checkPasswordLabel_01,
+            signUpView.checkPasswordLabel_02,
+            signUpView.checkPasswordLabel_03,
+            signUpView.checkPasswordLabel_04
+        ]
+
+        for (index, label) in labels.enumerated() {
+            let isValid = index < validations.count ? validations[index] : false
+            label.textColor = isValid ? .mainGreen : .text
+        }
+    }
+    
+    private func showLabel(_ label: UILabel, constraint: NSLayoutConstraint) {
+        UIView.animate(withDuration: 0.3) {
+            label.alpha = 1.0
+            constraint.constant = 16
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    private func hideLabel(_ label: UILabel, constraint: NSLayoutConstraint) {
+        UIView.animate(withDuration: 0.3) {
+            label.alpha = 0
+            constraint.constant = 0
+            self.view.layoutIfNeeded()
+        }
     }
 }
 
@@ -190,18 +232,7 @@ extension SignUpViewController: UITextFieldDelegate {
             
         case signUpView.passwordTextField,
             signUpView.verifyPasswordTextField:
-            
-            if string.isEmpty { // 백스페이스 허용
-                updatePasswordPublisher(textField: textField, text: newText)
-                return true
-            }
-            
-            let isValid = viewModel.validateAlphaNumericString(inputString: string)
-            if isValid {
-                updatePasswordPublisher(textField: textField, text: newText)
-            }
- 
-            return isValid
+            updatePasswordPublisher(textField: textField, text: newText)
         
         default: break
         }
@@ -217,23 +248,6 @@ extension SignUpViewController: UITextFieldDelegate {
             viewModel.passwordPublisher.send(text)
         } else if textField == signUpView.verifyPasswordTextField {
             viewModel.verifyPasswordPublisher.send(text)
-        }
-    }
-    
-    
-    private func showLabel(_ label: UILabel, constraint: NSLayoutConstraint) {
-        UIView.animate(withDuration: 0.3) {
-            label.alpha = 1.0
-            constraint.constant = 16
-            self.view.layoutIfNeeded()
-        }
-    }
-
-    private func hideLabel(_ label: UILabel, constraint: NSLayoutConstraint) {
-        UIView.animate(withDuration: 0.3) {
-            label.alpha = 0
-            constraint.constant = 0
-            self.view.layoutIfNeeded()
         }
     }
 }
