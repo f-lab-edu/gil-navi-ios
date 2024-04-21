@@ -53,7 +53,7 @@ extension SignUpViewController {
         signUpView.emailTextField.delegate = self
         signUpView.nameTextField.delegate = self
         signUpView.passwordTextField.delegate = self
-        signUpView.confirmPasswordTextField.delegate = self
+        signUpView.verifyPasswordTextField.delegate = self
     }
     
     private func bindPublishers() {
@@ -81,11 +81,11 @@ extension SignUpViewController {
             })
             .store(in: &viewModel.cancellables)
         
-        viewModel.confirmPasswordPublisher
+        viewModel.verifyPasswordPublisher
             .dropFirst()
             .sink(receiveValue: { [weak self] password in
                 guard let self else { return }
-                self.signUpView.confirmPasswordTextField.layer.borderColor = (password == viewModel.passwordPublisher.value) ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
+                self.signUpView.verifyPasswordTextField.layer.borderColor = (password == viewModel.passwordPublisher.value) ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
             })
             .store(in: &viewModel.cancellables)
         
@@ -125,8 +125,8 @@ extension SignUpViewController: UITextFieldDelegate {
         case signUpView.passwordTextField:
             showLabel(signUpView.passwordLabel, constraint: signUpView.passwordLabelHeightConstraint)
             
-        case signUpView.confirmPasswordTextField:
-            showLabel(signUpView.confirmPasswordLabel, constraint: signUpView.confirmPasswordLabelHeightConstraint)
+        case signUpView.verifyPasswordTextField:
+            showLabel(signUpView.verifyPasswordLabel, constraint: signUpView.verifyPasswordLabelHeightConstraint)
             
         default: break
         }
@@ -145,8 +145,8 @@ extension SignUpViewController: UITextFieldDelegate {
         case signUpView.passwordTextField:
             hideLabel(signUpView.passwordLabel, constraint: signUpView.passwordLabelHeightConstraint)
             
-        case signUpView.confirmPasswordTextField:
-            hideLabel(signUpView.confirmPasswordLabel, constraint: signUpView.confirmPasswordLabelHeightConstraint)
+        case signUpView.verifyPasswordTextField:
+            hideLabel(signUpView.verifyPasswordLabel, constraint: signUpView.verifyPasswordLabelHeightConstraint)
             
         default: break
         }
@@ -161,9 +161,9 @@ extension SignUpViewController: UITextFieldDelegate {
             signUpView.passwordTextField.becomeFirstResponder()
             
         case signUpView.passwordTextField:
-            signUpView.confirmPasswordTextField.becomeFirstResponder()
+            signUpView.verifyPasswordTextField.becomeFirstResponder()
             
-        case signUpView.confirmPasswordTextField:
+        case signUpView.verifyPasswordTextField:
             view.endEditing(true)
             
         default: break
@@ -189,7 +189,7 @@ extension SignUpViewController: UITextFieldDelegate {
             viewModel.namePublisher.send(newText)
             
         case signUpView.passwordTextField,
-            signUpView.confirmPasswordTextField:
+            signUpView.verifyPasswordTextField:
             
             if string.isEmpty { // 백스페이스 허용
                 updatePasswordPublisher(textField: textField, text: newText)
@@ -215,8 +215,8 @@ extension SignUpViewController: UITextFieldDelegate {
     ) {
         if textField == signUpView.passwordTextField {
             viewModel.passwordPublisher.send(text)
-        } else if textField == signUpView.confirmPasswordTextField {
-            viewModel.confirmPasswordPublisher.send(text)
+        } else if textField == signUpView.verifyPasswordTextField {
+            viewModel.verifyPasswordPublisher.send(text)
         }
     }
     

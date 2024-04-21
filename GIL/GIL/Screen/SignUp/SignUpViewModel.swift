@@ -12,7 +12,7 @@ class SignUpViewModel {
     var emailPublisher = CurrentValueSubject<String, Never>("")
     var namePublisher = CurrentValueSubject<String, Never>("")
     var passwordPublisher = CurrentValueSubject<String, Never>("")
-    var confirmPasswordPublisher = CurrentValueSubject<String, Never>("")
+    var verifyPasswordPublisher = CurrentValueSubject<String, Never>("")
     var isFormValidPublisher = CurrentValueSubject<Bool, Never>(false)
     
     var cancellables = Set<AnyCancellable>()
@@ -22,12 +22,12 @@ class SignUpViewModel {
     }
     
     private func setupFormValidation() {
-        Publishers.CombineLatest4(emailPublisher, namePublisher, passwordPublisher, confirmPasswordPublisher)
-            .map { email, name, password, confirmPassword in
+        Publishers.CombineLatest4(emailPublisher, namePublisher, passwordPublisher, verifyPasswordPublisher)
+            .map { email, name, password, verifyPassword in
                 return email.isValidEmail() &&
                        !name.isEmpty &&
                        password.isValidPassword() &&
-                       confirmPassword == password
+                       verifyPassword == password
             }
             .subscribe(isFormValidPublisher)
             .store(in: &cancellables)

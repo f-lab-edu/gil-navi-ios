@@ -12,17 +12,17 @@ final class SignUpView: UIView {
     let emailLabel = UILabel()
     let emailTextField = BasicTextField(type: .email, returnKeyType: .next, clearButtonMode: .whileEditing)
     let nameLabel = UILabel()
-    let nameTextField = BasicTextField(type: .unknown(placeholder: "Name"), returnKeyType: .next, clearButtonMode: .whileEditing)
+    let nameTextField = BasicTextField(type: .unknown(placeholder: "이름"), returnKeyType: .next, clearButtonMode: .whileEditing)
     let passwordLabel = UILabel()
     let passwordTextField = BasicTextField(type: .password, returnKeyType: .next)
-    let confirmPasswordLabel = UILabel()
-    let confirmPasswordTextField = BasicTextField(type: .password, returnKeyType: .done)
-    let doneButton = BasicButton(title: "완료".localized())
+    let verifyPasswordLabel = UILabel()
+    let verifyPasswordTextField = BasicTextField(type: .verifyPassword, returnKeyType: .done)
+    let doneButton = BasicButton(title: "완료")
     
     var emailLabelHeightConstraint: NSLayoutConstraint = .init()
     var nameLabelHeightConstraint: NSLayoutConstraint = .init()
     var passwordLabelHeightConstraint: NSLayoutConstraint = .init()
-    var confirmPasswordLabelHeightConstraint: NSLayoutConstraint = .init()
+    var verifyPasswordLabelHeightConstraint: NSLayoutConstraint = .init()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -50,9 +50,9 @@ extension SignUpView {
         configureLabel(emailLabel, text: "이메일")
         configureLabel(nameLabel, text: "이름")
         configureLabel(passwordLabel, text: "비밀번호")
-        configureLabel(confirmPasswordLabel, text: "비밀번호 재확인")
+        configureLabel(verifyPasswordLabel, text: "비밀번호 확인")
         
-        [closeButton, emailLabel, emailTextField, nameLabel, nameTextField, passwordLabel, passwordTextField, confirmPasswordLabel, confirmPasswordTextField, doneButton].forEach ({
+        [closeButton, emailLabel, emailTextField, nameLabel, nameTextField, passwordLabel, passwordTextField, verifyPasswordLabel, verifyPasswordTextField, doneButton].forEach ({
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         })
@@ -62,7 +62,7 @@ extension SignUpView {
         emailLabelHeightConstraint = emailLabel.heightAnchor.constraint(equalToConstant: 0)
         nameLabelHeightConstraint = nameLabel.heightAnchor.constraint(equalToConstant: 0)
         passwordLabelHeightConstraint = passwordLabel.heightAnchor.constraint(equalToConstant: 0)
-        confirmPasswordLabelHeightConstraint = confirmPasswordLabel.heightAnchor.constraint(equalToConstant: 0)
+        verifyPasswordLabelHeightConstraint = verifyPasswordLabel.heightAnchor.constraint(equalToConstant: 0)
         
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: topAnchor, constant: StatusBarManager.shared.statusBarHeight + 10),
@@ -97,24 +97,24 @@ extension SignUpView {
             passwordTextField.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
             passwordTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
             
-            confirmPasswordLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10),
-            confirmPasswordLabel.leadingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
-            confirmPasswordLabelHeightConstraint,
+            verifyPasswordLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10),
+            verifyPasswordLabel.leadingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
+            verifyPasswordLabelHeightConstraint,
             
-            confirmPasswordTextField.topAnchor.constraint(equalTo: confirmPasswordLabel.bottomAnchor, constant: 2),
-            confirmPasswordTextField.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor),
-            confirmPasswordTextField.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
-            confirmPasswordTextField.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor),
+            verifyPasswordTextField.topAnchor.constraint(equalTo: verifyPasswordLabel.bottomAnchor, constant: 2),
+            verifyPasswordTextField.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor),
+            verifyPasswordTextField.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
+            verifyPasswordTextField.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor),
             
-            doneButton.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 30),
-            doneButton.leadingAnchor.constraint(equalTo: confirmPasswordTextField.leadingAnchor),
-            doneButton.trailingAnchor.constraint(equalTo: confirmPasswordTextField.trailingAnchor),
-            doneButton.heightAnchor.constraint(equalTo: confirmPasswordTextField.heightAnchor)
+            doneButton.topAnchor.constraint(equalTo: verifyPasswordTextField.bottomAnchor, constant: 30),
+            doneButton.leadingAnchor.constraint(equalTo: verifyPasswordTextField.leadingAnchor),
+            doneButton.trailingAnchor.constraint(equalTo: verifyPasswordTextField.trailingAnchor),
+            doneButton.heightAnchor.constraint(equalTo: verifyPasswordTextField.heightAnchor)
         ])
     }
     
     private func configureLabel(_ label: UILabel, text: String) {
-        label.text = text
+        label.text = text.localized()
         label.applyDynamicTypeFont(textStyle: .subheadline, size: 13, weight: .medium)
         label.textColor = .mainGreen
         label.alpha = 0
