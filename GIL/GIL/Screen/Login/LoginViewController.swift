@@ -60,13 +60,16 @@ extension LoginViewController {
     
     private func bindPublishers() {
         viewModel.loginPublisher
-            .sink { result in
+            .sink { [weak self] result in
+                guard let self else { return }
                 switch result {
                 case .finished:
                     Auth.auth().signInAnonymously()
                 case .failure(let failure):
-                    Log.error("Failure : \(failure.localizedDescription)")
-                    
+                    Log.error("로그인 실패", failure)
+                    self.viewModel.showAlert(title: "로그인 실패",
+                                             message: failure.localizedDescription,
+                                             viewController: self)
                 }
             } receiveValue: { _ in }
             .store(in: &viewModel.cancellables)
