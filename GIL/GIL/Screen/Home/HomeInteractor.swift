@@ -1,13 +1,19 @@
 //
-//  HomeViewModel.swift
+//  HomeInteractor.swift
 //  GIL
 //
-//  Created by 송우진 on 4/4/24.
+//  Created by 송우진 on 4/23/24.
 //
 
 import FirebaseAuth
 
-class HomeViewModel {
+protocol HomeBusinessLogic {
+    func signOut()
+}
+
+final class HomeInteractor: HomeBusinessLogic {
+    var presenter: HomePresentationLogic?
+    
     func signOut() {
         do {
             try Auth.auth().signOut()

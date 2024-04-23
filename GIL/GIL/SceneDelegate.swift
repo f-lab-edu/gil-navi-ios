@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     @objc private func updateRootViewControllerBasedOnAuthenticationStatus() {
         window?.rootViewController = Auth.auth().currentUser != nil ?
-            UINavigationController(rootViewController: HomeViewController(viewModel: HomeViewModel())) :
+            UINavigationController(rootViewController: HomeViewController()) :
             UINavigationController(rootViewController: LoginViewController(viewModel: LoginViewModel()))
     }
 }
