@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5806472A2BCD147A00FB7310 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580647292BCD147A00FB7310 /* UIImage+Extension.swift */; };
 		58368EFA2BD51957009E008C /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EF92BD51957009E008C /* BasicLabel.swift */; };
+		58368EFE2BD75E9C009E008C /* FirebaseAuth+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */; };
+		58368F012BD7617D009E008C /* FirebaseAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F002BD7617D009E008C /* FirebaseAuthError.swift */; };
 		584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA3E62BA41484002600F1 /* AppDelegate.swift */; };
 		584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA3E82BA41484002600F1 /* SceneDelegate.swift */; };
 		584FA3F02BA41485002600F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 584FA3EF2BA41485002600F1 /* Assets.xcassets */; };
@@ -67,6 +69,8 @@
 /* Begin PBXFileReference section */
 		580647292BCD147A00FB7310 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		58368EF92BD51957009E008C /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
+		58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Extension.swift"; sourceTree = "<group>"; };
+		58368F002BD7617D009E008C /* FirebaseAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthError.swift; sourceTree = "<group>"; };
 		584FA3E32BA41484002600F1 /* GIL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GIL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		584FA3E62BA41484002600F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		584FA3E82BA41484002600F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +142,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58368EFF2BD76162009E008C /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				58368F002BD7617D009E008C /* FirebaseAuthError.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		584FA3DA2BA41483002600F1 = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +178,7 @@
 				584FA4192BA7F5E1002600F1 /* Screen */,
 				584FA4202BA82D26002600F1 /* Component */,
 				584FA4262BA84CF5002600F1 /* Extension */,
+				58368EFF2BD76162009E008C /* Enum */,
 				58BDFBC62BBA8C21006AC994 /* Utilities */,
 				584FA3E62BA41484002600F1 /* AppDelegate.swift */,
 				584FA3E82BA41484002600F1 /* SceneDelegate.swift */,
@@ -237,6 +250,7 @@
 				58BAC8982BC5399D00CDEB1F /* UITextField+Extension.swift */,
 				58BAC89A2BC53A4D00CDEB1F /* UIButton+Extension.swift */,
 				580647292BCD147A00FB7310 /* UIImage+Extension.swift */,
+				58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -454,6 +468,7 @@
 				58BAC8B02BCCF59800CDEB1F /* CloseButton.swift in Sources */,
 				58BDFBC82BBA8C32006AC994 /* StatusbarManager.swift in Sources */,
 				584FA4222BA84254002600F1 /* BasicButton.swift in Sources */,
+				58368F012BD7617D009E008C /* FirebaseAuthError.swift in Sources */,
 				58BAC89B2BC53A4D00CDEB1F /* UIButton+Extension.swift in Sources */,
 				584FA42A2BA926B3002600F1 /* ViewController+Extension.swift in Sources */,
 				5806472A2BCD147A00FB7310 /* UIImage+Extension.swift in Sources */,
@@ -463,6 +478,7 @@
 				58368EFA2BD51957009E008C /* BasicLabel.swift in Sources */,
 				584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */,
 				584FA41E2BA82886002600F1 /* BasicTextField.swift in Sources */,
+				58368EFE2BD75E9C009E008C /* FirebaseAuth+Extension.swift in Sources */,
 				58BDFBD32BBE6ED2006AC994 /* HomeViewModel.swift in Sources */,
 				58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */,
 				58BDFBA42BB2E536006AC994 /* SignUpView.swift in Sources */,
