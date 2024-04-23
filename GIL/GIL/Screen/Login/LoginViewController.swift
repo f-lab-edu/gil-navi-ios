@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import FirebaseAuth
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: BaseViewController {
     private var viewModel: LoginViewModel
     private var loginView = LoginView()
 

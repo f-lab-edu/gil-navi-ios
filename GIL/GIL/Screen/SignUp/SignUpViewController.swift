@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class SignUpViewController: UIViewController {
+final class SignUpViewController: BaseViewController {
     private var viewModel: SignUpViewModel
     var signUpView = SignUpView()
     
