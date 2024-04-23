@@ -16,7 +16,7 @@ extension Auth {
     /// - Parameters:
     ///   - email: 사용자의 이메일 주소
     ///   - password: 사용자의 비밀번호
-    /// - Returns: 비동기적으로 `AuthDataResult`를 반환
+    /// - Returns: 비동기적으로 `AuthDataResult`를 반환합니다.
     func createUserAsync(withEmail email: String,
                          password: String
     ) async throws -> AuthDataResult {
