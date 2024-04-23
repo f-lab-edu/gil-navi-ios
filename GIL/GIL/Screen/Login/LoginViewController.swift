@@ -65,9 +65,15 @@ extension LoginViewController {
                 switch result {
                 case .finished:
                     Auth.auth().signInAnonymously()
-                case .failure(let failure):
-                    Log.error("로그인 실패", failure)
-                    self.showAlert(title: "로그인 실패", message: failure.localizedDescription)
+                case .failure(let error):
+                    Log.error("로그인 실패", error)
+                    var errorMessage = "로그인 중 예상치 못한 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
+                    
+                    if let loginError = error as? LoginViewModel.LoginError,
+                       let errorDesc = loginError.errorDescription {
+                        errorMessage = errorDesc
+                    }
+                    self.showAlert(title: "로그인 실패", message: errorMessage)
                 }
             } receiveValue: { _ in }
             .store(in: &viewModel.cancellables)

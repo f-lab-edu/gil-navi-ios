@@ -24,7 +24,7 @@ protocol LoginViewModelIO: LoginViewModelInput & LoginViewModelOutput { }
 
 
 class LoginViewModel: NSObject, LoginViewModelIO {
-    fileprivate enum LoginError: Error {
+    enum LoginError: Error {
         case randomBytesGenerationFailed(String)
         case appleIDCredentialRetrievalFailed
         case invalidNonceOrIDToken
