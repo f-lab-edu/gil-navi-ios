@@ -67,9 +67,7 @@ extension LoginViewController {
                     Auth.auth().signInAnonymously()
                 case .failure(let failure):
                     Log.error("로그인 실패", failure)
-                    self.viewModel.showAlert(title: "로그인 실패",
-                                             message: failure.localizedDescription,
-                                             viewController: self)
+                    self.showAlert(title: "로그인 실패", message: failure.localizedDescription)
                 }
             } receiveValue: { _ in }
             .store(in: &viewModel.cancellables)
@@ -89,7 +87,15 @@ extension LoginViewController {
         signUpViewController.modalPresentationStyle = .fullScreen
         present(signUpViewController, animated: true)
     }
-    
+}
+
+// MARK: - UI Handling
+extension LoginViewController {
+    func showAlert(title: String,
+                   message: String = ""
+    ) {
+        viewModel.alertService.showAlert(title: title, message: message, on: self)
+    }
 }
 
 // MARK: - UITextFieldDelegate

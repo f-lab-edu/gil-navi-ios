@@ -31,7 +31,7 @@ class LoginViewModel: NSObject, LoginViewModelIO {
         case firebaseAuthenticationFailed
     }
     
-    private let alertService = AlertService()
+    let alertService = AlertService()
     var loginPublisher = PassthroughSubject<Void, Error>()
     var cancellables = Set<AnyCancellable>()
     
@@ -55,15 +55,6 @@ class LoginViewModel: NSObject, LoginViewModelIO {
         }
         
     }
-    
-    func showAlert(title: String,
-                   message: String = "",
-                   viewController: UIViewController) {
-        alertService.showAlert(title: title,
-                               message: message,
-                               on: viewController)
-    }
-    
 }
 
 // MARK: - LoginError
