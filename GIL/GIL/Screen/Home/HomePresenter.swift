@@ -7,14 +7,13 @@
 import UIKit
 
 protocol HomePresentationLogic {
-    func handleLogoutRequest()
+    func presentSearchScreen()
 }
 
 final class HomePresenter: HomePresentationLogic {
     weak var viewController: HomeViewController?
-    var interactor: HomeBusinessLogic?
-
-    func handleLogoutRequest() {
-        interactor?.signOut()
+    
+    func presentSearchScreen() {
+        viewController?.displaySearchScreen()
     }
 }
