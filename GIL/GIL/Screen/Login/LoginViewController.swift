@@ -60,13 +60,20 @@ extension LoginViewController {
     
     private func bindPublishers() {
         viewModel.loginPublisher
-            .sink { result in
+            .sink { [weak self] result in
+                guard let self else { return }
                 switch result {
                 case .finished:
                     Auth.auth().signInAnonymously()
-                case .failure(let failure):
-                    Log.error("Failure : \(failure.localizedDescription)")
+                case .failure(let error):
+                    Log.error("로그인 실패", error)
+                    var errorMessage = "로그인 중 예상치 못한 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
                     
+                    if let loginError = error as? LoginViewModel.LoginError,
+                       let errorDesc = loginError.errorDescription {
+                        errorMessage = errorDesc
+                    }
+                    self.showAlert(title: "로그인 실패", message: errorMessage)
                 }
             } receiveValue: { _ in }
             .store(in: &viewModel.cancellables)
@@ -86,7 +93,15 @@ extension LoginViewController {
         signUpViewController.modalPresentationStyle = .fullScreen
         present(signUpViewController, animated: true)
     }
-    
+}
+
+// MARK: - UI Handling
+extension LoginViewController {
+    func showAlert(title: String,
+                   message: String = ""
+    ) {
+        viewModel.alertService.showAlert(title: title, message: message, on: self)
+    }
 }
 
 // MARK: - UITextFieldDelegate
