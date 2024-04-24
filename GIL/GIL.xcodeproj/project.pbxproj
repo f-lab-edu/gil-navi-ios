@@ -13,6 +13,7 @@
 		58368F012BD7617D009E008C /* FirebaseAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F002BD7617D009E008C /* FirebaseAuthError.swift */; };
 		58368F032BD80472009E008C /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F022BD80472009E008C /* HomeInteractor.swift */; };
 		58368F052BD8047E009E008C /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F042BD8047E009E008C /* HomePresenter.swift */; };
+		58368F0B2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F0A2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift */; };
 		58368F102BD83490009E008C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F0F2BD83490009E008C /* BaseViewController.swift */; };
 		584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA3E62BA41484002600F1 /* AppDelegate.swift */; };
 		584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA3E82BA41484002600F1 /* SceneDelegate.swift */; };
@@ -73,6 +74,7 @@
 		58368F002BD7617D009E008C /* FirebaseAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthError.swift; sourceTree = "<group>"; };
 		58368F022BD80472009E008C /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		58368F042BD8047E009E008C /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		58368F0A2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationBarHideable.swift"; sourceTree = "<group>"; };
 		58368F0F2BD83490009E008C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		584FA3E32BA41484002600F1 /* GIL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GIL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		584FA3E62BA41484002600F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				58BAC89A2BC53A4D00CDEB1F /* UIButton+Extension.swift */,
 				580647292BCD147A00FB7310 /* UIImage+Extension.swift */,
 				58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */,
+				58368F0A2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift */,
 				58368F0F2BD83490009E008C /* BaseViewController.swift */,
 			);
 			path = Extension;
@@ -484,6 +487,7 @@
 				58BDFBA42BB2E536006AC994 /* SignUpView.swift in Sources */,
 				584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */,
 				584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */,
+				58368F0B2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift in Sources */,
 				58BDFBCC2BBAA78F006AC994 /* String+Extension.swift in Sources */,
 				58BAC8992BC5399D00CDEB1F /* UITextField+Extension.swift in Sources */,
 				584FA44A2BB15D51002600F1 /* LoginViewModel.swift in Sources */,
