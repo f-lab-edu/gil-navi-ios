@@ -11,6 +11,7 @@
 		58368EFA2BD51957009E008C /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EF92BD51957009E008C /* BasicLabel.swift */; };
 		58368EFE2BD75E9C009E008C /* FirebaseAuth+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */; };
 		58368F012BD7617D009E008C /* FirebaseAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F002BD7617D009E008C /* FirebaseAuthError.swift */; };
+		58368EFC2BD536B8009E008C /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFB2BD536B8009E008C /* AlertService.swift */; };
 		584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA3E62BA41484002600F1 /* AppDelegate.swift */; };
 		584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA3E82BA41484002600F1 /* SceneDelegate.swift */; };
 		584FA3F02BA41485002600F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 584FA3EF2BA41485002600F1 /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 		58368EF92BD51957009E008C /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
 		58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Extension.swift"; sourceTree = "<group>"; };
 		58368F002BD7617D009E008C /* FirebaseAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthError.swift; sourceTree = "<group>"; };
+		58368EFB2BD536B8009E008C /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		584FA3E32BA41484002600F1 /* GIL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GIL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		584FA3E62BA41484002600F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		584FA3E82BA41484002600F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				58BDFBC72BBA8C32006AC994 /* StatusbarManager.swift */,
+				58368EFB2BD536B8009E008C /* AlertService.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58368EFC2BD536B8009E008C /* AlertService.swift in Sources */,
 				584FA41B2BA7F606002600F1 /* LoginViewController.swift in Sources */,
 				58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */,
 				584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */,

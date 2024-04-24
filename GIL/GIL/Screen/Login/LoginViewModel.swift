@@ -12,7 +12,7 @@ import OSLog
 import CryptoKit
 import FirebaseAuth
 
-protocol LoginViewModelIntput {
+protocol LoginViewModelInput {
     func startSignInWithAppleFlow()
 }
 
@@ -20,7 +20,7 @@ protocol LoginViewModelOutput {
     var loginPublisher: PassthroughSubject<Void, Error> { get set }
 }
 
-protocol LoginViewModelIO: LoginViewModelIntput & LoginViewModelOutput { }
+protocol LoginViewModelIO: LoginViewModelInput & LoginViewModelOutput { }
 
 
 class LoginViewModel: NSObject, LoginViewModelIO {
@@ -31,6 +31,7 @@ class LoginViewModel: NSObject, LoginViewModelIO {
         case firebaseAuthenticationFailed
     }
     
+    let alertService = AlertService()
     var loginPublisher = PassthroughSubject<Void, Error>()
     var cancellables = Set<AnyCancellable>()
     
@@ -53,6 +54,22 @@ class LoginViewModel: NSObject, LoginViewModelIO {
             loginPublisher.send(completion: .failure(error))
         }
         
+    }
+}
+
+// MARK: - LoginError
+extension LoginViewModel.LoginError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .randomBytesGenerationFailed(let message):
+            return "난수 생성 실패: \(message)"
+        case .appleIDCredentialRetrievalFailed:
+            return "Apple ID 자격 증명을 가져오는 데 실패했습니다."
+        case .invalidNonceOrIDToken:
+            return "Nonce 또는 ID 토큰이 유효하지 않습니다."
+        case .firebaseAuthenticationFailed:
+            return "Firebase 인증에 실패했습니다."
+        }
     }
 }
 
