@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BasicButton: UIButton {
+final class BasicButton: UIButton {
     static let enabledBackgroundColor = UIColor.mainGreen
     static let disabledBackgroundColor = UIColor.lightGray
     
@@ -43,7 +43,7 @@ extension BasicButton {
         fontWeight: UIFont.Weight,
         backgroundColor bgColor: UIColor?
     ) {
-        setTitle(title, for: .normal)
+        setTitle(title.localized(), for: .normal)
         setTitleColor(titleColor, for: .normal)
         applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
         backgroundColor = bgColor

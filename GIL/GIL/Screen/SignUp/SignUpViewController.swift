@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class SignUpViewController: UIViewController {
+final class SignUpViewController: UIViewController {
     private var viewModel: SignUpViewModel
     var signUpView = SignUpView()
     
@@ -38,82 +38,217 @@ extension SignUpViewController {
     func setupBindings() {
         bindButtons()
         bindTextFields()
-        bindPublishers()
+        bindValidationUpdates()
+        bindFormCompletion()
     }
     
     private func bindButtons() {
         let closeAction = UIAction { _ in self.closeButtonTapped() }
         signUpView.closeButton.addAction(closeAction, for: .touchUpInside)
         
-        let confirmAction = UIAction { _ in self.confirmButtonTapped() }
-        signUpView.confirmButton.addAction(confirmAction, for: .touchUpInside)
+        let doneAction = UIAction { _ in self.doneButtonTapped() }
+        signUpView.doneButton.addAction(doneAction, for: .touchUpInside)
     }
     
     private func bindTextFields() {
         signUpView.emailTextField.delegate = self
         signUpView.nameTextField.delegate = self
         signUpView.passwordTextField.delegate = self
-        signUpView.confirmPasswordTextField.delegate = self
+        signUpView.verifyPasswordTextField.delegate = self
     }
     
-    private func bindPublishers() {
+    private func bindFormCompletion() {
+        viewModel.createUserPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { result in
+                switch result {
+                case .finished: Log.network("회원가입 성공")
+                case .failure(let error):
+                    switch error {
+                    case let signUpError as SignUpViewModel.SignUpError:
+                        if let errorDesc = signUpError.errorDescription {
+                            self.showAlert(title: "회원 정보가 부족합니다.", message: errorDesc)
+                        }
+
+                    case let authError as FirebaseAuthError:
+                        if let errorDesc = authError.errorDescription {
+                            self.showAlert(title: "회원가입에 실패했습니다.\n다시 시도 부탁드립니다.", message: errorDesc)
+                        }
+
+                    default: break
+                    }
+                }
+            } receiveValue: { _ in }
+            .store(in: &viewModel.cancellables)
+    }
+    
+    private func bindValidationUpdates() {
+        bindEmailValidation()
+        bindNameValidation()
+        bindPasswordValidation()
+        bindFormValidation()
+    }
+    
+    private func bindEmailValidation() {
         viewModel.emailPublisher
             .dropFirst()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] email in
                 guard let self else { return }
-                self.signUpView.emailTextField.layer.borderColor = email.isValidEmail() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
+                self.updateTextFieldBorderColor(textField: self.signUpView.emailTextField, isValid: email.isValidEmail())
             }
             .store(in: &viewModel.cancellables)
-        
+    }
+    
+    private func bindNameValidation() {
         viewModel.namePublisher
             .dropFirst()
-            .sink(receiveValue: { [weak self] name in
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] name in
                 guard let self else { return }
-                self.signUpView.nameTextField.layer.borderColor = !name.isEmpty ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
-            })
+                self.updateTextFieldBorderColor(textField: self.signUpView.nameTextField, isValid: !name.isEmpty)
+            }
             .store(in: &viewModel.cancellables)
-        
+    }
+    
+    private func bindPasswordValidation() {
         viewModel.passwordPublisher
             .dropFirst()
-            .sink(receiveValue: { [weak self] password in
+            .map { password -> (validations: [Bool], isValid: Bool) in
+                let validations = password.validatePassword()
+                let isValid = validations.allSatisfy { $0 }
+                return (validations, isValid)
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
                 guard let self else { return }
-                self.signUpView.passwordTextField.layer.borderColor = password.isValidPassword() ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
-            })
+                self.updateTextFieldBorderColor(textField: self.signUpView.passwordTextField, isValid: result.isValid)
+                
+                /// 비밀번호 유효성 레이블 업데이트
+                self.updatePasswordValidationLabels(validations: result.validations)
+            }
             .store(in: &viewModel.cancellables)
-        
-        viewModel.confirmPasswordPublisher
+
+        viewModel.passwordMatchPublisher
             .dropFirst()
-            .sink(receiveValue: { [weak self] password in
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isMatch in
                 guard let self else { return }
-                self.signUpView.confirmPasswordTextField.layer.borderColor = (password == viewModel.passwordPublisher.value) ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
-            })
+                self.updateTextFieldBorderColor(textField: self.signUpView.verifyPasswordTextField, isValid: isMatch)
+            }
             .store(in: &viewModel.cancellables)
-        
+    }
+
+    private func bindFormValidation() {
         viewModel.isFormValidPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isValid in
                 guard let self else { return }
-                self.signUpView.confirmButton.isEnabled = isValid
-                self.signUpView.confirmButton.backgroundColor = isValid ? BasicButton.enabledBackgroundColor : BasicButton.disabledBackgroundColor
+                self.signUpView.doneButton.backgroundColor = isValid ? BasicButton.enabledBackgroundColor : BasicButton.disabledBackgroundColor
             }
             .store(in: &viewModel.cancellables)
-
     }
+    
 }
 
-// MARK: - Action
+// MARK: - Actions
 extension SignUpViewController {
     func closeButtonTapped() {
         dismiss(animated: true)
     }
     
-    func confirmButtonTapped() {
-        dismiss(animated: true)
+    func doneButtonTapped() {
+        Task {
+            await viewModel.createUser()
+        }
+    }
+}
+
+// MARK: - UI Handling
+extension SignUpViewController {
+    func showAlert(
+        title: String,
+        message: String = ""
+    ) {
+        viewModel.alertService.showAlert(title: title, message: message, on: self)
+    }
+}
+
+// MARK: - UI Updates
+extension SignUpViewController {
+    private func updateTextFieldBorderColor(
+        textField: UITextField,
+        isValid: Bool
+    ) {
+        let color = isValid ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
+        textField.layer.borderColor = color
+    }
+    
+    private func updatePasswordValidationLabels(validations: [Bool]) {
+        let labels = [
+            signUpView.checkPasswordLabel_01,
+            signUpView.checkPasswordLabel_02,
+            signUpView.checkPasswordLabel_03,
+            signUpView.checkPasswordLabel_04
+        ]
+
+        for (index, label) in labels.enumerated() {
+            let isValid = (index < validations.count) ? validations[index] : false
+            label.textColor = isValid ? .mainGreen : .text
+        }
+    }
+    
+    private func animateLabelVisibility(
+        _ label: UILabel,
+        shouldShow: Bool,
+        constraint: NSLayoutConstraint
+    ) {
+        UIView.animate(withDuration: 0.3) {
+            label.alpha = shouldShow ? 1.0 : 0
+            constraint.constant = shouldShow ? 16 : 0
+            self.view.layoutIfNeeded()
+        }
     }
 }
 
 // MARK: - UITextFieldDelegate
 extension SignUpViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        switch textField {
+        case signUpView.emailTextField:
+            animateLabelVisibility(signUpView.emailLabel, shouldShow: true, constraint: signUpView.emailLabelHeightConstraint)
+            
+        case signUpView.nameTextField:
+            animateLabelVisibility(signUpView.nameLabel, shouldShow: true, constraint: signUpView.nameLabelHeightConstraint)
+            
+        case signUpView.passwordTextField:
+            animateLabelVisibility(signUpView.passwordLabel, shouldShow: true, constraint: signUpView.passwordLabelHeightConstraint)
+            
+        case signUpView.verifyPasswordTextField:
+            animateLabelVisibility(signUpView.verifyPasswordLabel, shouldShow: true, constraint: signUpView.verifyPasswordLabelHeightConstraint)
+            
+        default: break
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case signUpView.emailTextField:
+            animateLabelVisibility(signUpView.emailLabel, shouldShow: false, constraint: signUpView.emailLabelHeightConstraint)
+            
+        case signUpView.nameTextField:
+            animateLabelVisibility(signUpView.nameLabel, shouldShow: false, constraint: signUpView.nameLabelHeightConstraint)
+            
+        case signUpView.passwordTextField:
+            animateLabelVisibility(signUpView.passwordLabel, shouldShow: false, constraint: signUpView.passwordLabelHeightConstraint)
+            
+        case signUpView.verifyPasswordTextField:
+            animateLabelVisibility(signUpView.verifyPasswordLabel, shouldShow: false, constraint: signUpView.verifyPasswordLabelHeightConstraint)
+            
+        default: break
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case signUpView.emailTextField:
@@ -123,9 +258,9 @@ extension SignUpViewController: UITextFieldDelegate {
             signUpView.passwordTextField.becomeFirstResponder()
             
         case signUpView.passwordTextField:
-            signUpView.confirmPasswordTextField.becomeFirstResponder()
+            signUpView.verifyPasswordTextField.becomeFirstResponder()
             
-        case signUpView.confirmPasswordTextField:
+        case signUpView.verifyPasswordTextField:
             view.endEditing(true)
             
         default: break
@@ -151,19 +286,8 @@ extension SignUpViewController: UITextFieldDelegate {
             viewModel.namePublisher.send(newText)
             
         case signUpView.passwordTextField,
-            signUpView.confirmPasswordTextField:
-            
-            if string.isEmpty { // 백스페이스 허용
-                updatePasswordPublisher(textField: textField, text: newText)
-                return true
-            }
-            
-            let isValid = viewModel.validateAlphaNumericString(inputString: string)
-            if isValid {
-                updatePasswordPublisher(textField: textField, text: newText)
-            }
- 
-            return isValid
+            signUpView.verifyPasswordTextField:
+            updatePasswordPublisher(textField: textField, text: newText)
         
         default: break
         }
@@ -177,11 +301,8 @@ extension SignUpViewController: UITextFieldDelegate {
     ) {
         if textField == signUpView.passwordTextField {
             viewModel.passwordPublisher.send(text)
-        } else if textField == signUpView.confirmPasswordTextField {
-            viewModel.confirmPasswordPublisher.send(text)
+        } else if textField == signUpView.verifyPasswordTextField {
+            viewModel.verifyPasswordPublisher.send(text)
         }
     }
-
-    
-    
 }
