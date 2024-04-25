@@ -62,20 +62,20 @@ extension SignUpViewController {
             .receive(on: DispatchQueue.main)
             .sink { result in
                 switch result {
-                case .finished:
-                    Log.network("회원가입 성공")
-                    
+                case .finished: Log.network("회원가입 성공")
                 case .failure(let error):
-                    // TODO: AlertService 적용 필요
-                    if let signUpError = error as? SignUpViewModel.SignUpError,
-                       let errorDesc = signUpError.errorDescription
-                    {
-                        Log.error("회원 정보 부족 : \(errorDesc)")
-                        
-                    } else if let authError = error as? FirebaseAuthError,
-                              let errorDesc = authError.errorDescription
-                    {
-                        Log.error("회원가입 실패 : \(errorDesc)")
+                    switch error {
+                    case let signUpError as SignUpViewModel.SignUpError:
+                        if let errorDesc = signUpError.errorDescription {
+                            self.showAlert(title: "회원 정보가 부족합니다.", message: errorDesc)
+                        }
+
+                    case let authError as FirebaseAuthError:
+                        if let errorDesc = authError.errorDescription {
+                            self.showAlert(title: "회원가입에 실패했습니다.\n다시 시도 부탁드립니다.", message: errorDesc)
+                        }
+
+                    default: break
                     }
                 }
             } receiveValue: { _ in }
@@ -164,9 +164,22 @@ extension SignUpViewController {
     }
 }
 
+// MARK: - UI Handling
+extension SignUpViewController {
+    func showAlert(
+        title: String,
+        message: String = ""
+    ) {
+        viewModel.alertService.showAlert(title: title, message: message, on: self)
+    }
+}
+
 // MARK: - UI Updates
 extension SignUpViewController {
-    private func updateTextFieldBorderColor(textField: UITextField, isValid: Bool) {
+    private func updateTextFieldBorderColor(
+        textField: UITextField,
+        isValid: Bool
+    ) {
         let color = isValid ? BasicTextField.validBorderColor : BasicTextField.invalidBorderColor
         textField.layer.borderColor = color
     }
@@ -180,14 +193,15 @@ extension SignUpViewController {
         ]
 
         for (index, label) in labels.enumerated() {
-            let isValid = index < validations.count ? validations[index] : false
+            let isValid = (index < validations.count) ? validations[index] : false
             label.textColor = isValid ? .mainGreen : .text
         }
     }
     
-    private func animateLabelVisibility(_ label: UILabel,
-                                        shouldShow: Bool,
-                                        constraint: NSLayoutConstraint
+    private func animateLabelVisibility(
+        _ label: UILabel,
+        shouldShow: Bool,
+        constraint: NSLayoutConstraint
     ) {
         UIView.animate(withDuration: 0.3) {
             label.alpha = shouldShow ? 1.0 : 0

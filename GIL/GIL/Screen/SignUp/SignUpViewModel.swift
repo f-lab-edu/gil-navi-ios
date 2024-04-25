@@ -39,6 +39,7 @@ class SignUpViewModel: SignUpViewModelInput, SignUpViewModelOutput {
     var passwordMatchPublisher = CurrentValueSubject<Bool, Never>(false)
     var createUserPublisher = PassthroughSubject<Void, Error>()
     
+    let alertService = AlertService()
     var cancellables = Set<AnyCancellable>()
     
     init() {
