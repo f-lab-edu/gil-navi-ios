@@ -81,7 +81,7 @@ extension SignUpView {
         verifyPasswordLabelHeightConstraint = verifyPasswordLabel.heightAnchor.constraint(equalToConstant: 0)
         
         NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: topAnchor, constant: StatusBarManager.shared.statusBarHeight + 10),
+            closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
             closeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             closeButton.widthAnchor.constraint(equalToConstant: 44),
             closeButton.heightAnchor.constraint(equalToConstant: 44),

@@ -116,6 +116,29 @@
         }
       }
     },
+    "어디로 갈까요?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Where to?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "どこへ？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "어디로 갈까요?"
+          }
+        }
+      }
+    },
     "완료" : {
       "extractionState" : "manual",
       "localizations" : {
