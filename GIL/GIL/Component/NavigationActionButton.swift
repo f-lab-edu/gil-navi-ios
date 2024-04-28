@@ -1,5 +1,5 @@
 //
-//  CloseButton.swift
+//  NavigationActionButton.swift
 //  GIL
 //
 //  Created by 송우진 on 4/15/24.
@@ -7,10 +7,18 @@
 
 import UIKit
 
-final class CloseButton: UIButton {
+final class NavigationActionButton: UIButton {
 
+    enum ButtonType {
+        case close
+        case back
+    }
+    
+    var btnType: ButtonType = .close
+    
     // MARK: - Initialization
-    init() {
+    init(type: ButtonType = .close) {
+        btnType = type
         super.init(frame: .zero)
         configureImage()
     }
@@ -29,11 +37,25 @@ final class CloseButton: UIButton {
 }
 
 // MARK: - Configure
-extension CloseButton {
+extension NavigationActionButton {
     private func configureImage() {
         let tintColor: UIColor = (traitCollection.userInterfaceStyle == .dark) ? .white : .black
-        let originalImage = UIImage(systemName: "xmark")
-        if let resizedImage = originalImage?.resized(toWidth: 25) {
+        
+        var systemName: String
+        var iconWidth: CGFloat
+        
+        switch btnType {
+        case .close:
+            iconWidth = 25
+            systemName = "xmark"
+        case .back:
+            iconWidth = 17
+            systemName = "chevron.backward"
+        }
+        
+        let originalImage = UIImage(systemName: systemName)
+        
+        if let resizedImage = originalImage?.resized(toWidth: iconWidth) {
             setImage(resizedImage.withTintColor(tintColor), for: .normal)
         } else {
             setImage(originalImage?.withTintColor(tintColor), for: .normal)

@@ -8,7 +8,7 @@
 import UIKit
 
 final class SignUpView: UIView {
-    let closeButton = CloseButton()
+    let closeButton = NavigationActionButton()
     let emailLabel = UILabel()
     let emailTextField = BasicTextField(type: .email, returnKeyType: .next, clearButtonMode: .whileEditing)
     let nameLabel = UILabel()

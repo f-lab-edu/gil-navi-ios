@@ -106,7 +106,7 @@
 		58BAC8A82BC7C3EA00CDEB1F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		58BAC8AC2BC7C79200CDEB1F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		58BAC8AE2BC7C79C00CDEB1F /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ko; path = ko.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		58BAC8AF2BCCF59800CDEB1F /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		58BAC8AF2BCCF59800CDEB1F /* NavigationActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationActionButton.swift; sourceTree = "<group>"; };
 		58BDFB9F2BB16F93006AC994 /* GIL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GIL.entitlements; sourceTree = "<group>"; };
 		58BDFBA12BB2B8F5006AC994 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		58BDFBA32BB2E536006AC994 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -256,9 +256,10 @@
 		584FA4202BA82D26002600F1 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				58368F0F2BD83490009E008C /* BaseViewController.swift */,
 				584FA41D2BA82886002600F1 /* BasicTextField.swift */,
 				584FA4212BA84254002600F1 /* BasicButton.swift */,
-				58BAC8AF2BCCF59800CDEB1F /* CloseButton.swift */,
+				58BAC8AF2BCCF59800CDEB1F /* NavigationActionButton.swift */,
 				58368EF92BD51957009E008C /* BasicLabel.swift */,
 			);
 			path = Component;
@@ -276,7 +277,6 @@
 				580647292BCD147A00FB7310 /* UIImage+Extension.swift */,
 				58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */,
 				58368F0A2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift */,
-				58368F0F2BD83490009E008C /* BaseViewController.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -498,7 +498,7 @@
 				584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */,
 				58368F122BD8B7D5009E008C /* HomeSearchBarView.swift in Sources */,
 				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
-				58BAC8B02BCCF59800CDEB1F /* CloseButton.swift in Sources */,
+				58BAC8B02BCCF59800CDEB1F /* NavigationActionButton.swift in Sources */,
 				584FA4222BA84254002600F1 /* BasicButton.swift in Sources */,
 				58368F102BD83490009E008C /* BaseViewController.swift in Sources */,
 				58368F012BD7617D009E008C /* FirebaseAuthError.swift in Sources */,
