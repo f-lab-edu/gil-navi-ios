@@ -61,8 +61,7 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
 // MARK: - HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
     func displaySearchScreen() {
-        let searchDetailVC = UIViewController()
-        searchDetailVC.view.backgroundColor = .systemPink
+        let searchDetailVC = PlaceSearchViewController(viewModel: PlaceSearchViewModel())
         navigationController?.pushViewController(searchDetailVC, animated: true)
     }
 }
