@@ -16,6 +16,7 @@ class LocationService: NSObject {
     weak var delegate: LocationServiceDelegate?
     private let locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()
+    var currentLocation: CLLocation?
     
     // MARK: - Initialization
     override init() {
@@ -37,6 +38,16 @@ extension LocationService {
     func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
     }
+    
+    /// 내 위치와 주어진 위치 사이의 거리를 계산합니다.
+    /// - Parameters:
+    ///   - coordinate: 거리를 계산할 대상 위치의 좌표
+    /// - Returns: 두 위치 사이의 거리를 미터 단위로 반환. 위치 정보가 없는 경우 nil 반환.
+    func distance(to coordinate: CLLocationCoordinate2D) -> Double? {
+        guard let currentLocation = self.currentLocation else { return nil }
+        let targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        return currentLocation.distance(from: targetLocation)
+    }
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -47,6 +58,7 @@ extension LocationService: CLLocationManagerDelegate {
         didUpdateLocations locations: [CLLocation]
     ) {
         if let location = locations.first {
+            currentLocation = location
             fetchAddress(for: location)
         }
     }
