@@ -20,15 +20,10 @@ extension UIView {
     ) {
         let border = CALayer()
         border.backgroundColor = color.cgColor
-        border.name = position.rawValue
-        
+
         switch position {
         case .top: border.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: height)
         case .bottom: border.frame = CGRect(x: 0, y: frame.size.height - height, width: frame.size.width, height: height)
-        }
-        
-        if let existingBorder = layer.sublayers?.first(where: { $0.name == position.rawValue }) {
-            existingBorder.removeFromSuperlayer()
         }
         
         layer.addSublayer(border)

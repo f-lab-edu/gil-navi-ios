@@ -117,7 +117,6 @@ extension PlaceSearchViewController: UISearchBarDelegate {
     }
 }
 
-
 // MARK: - Collection View Setup and Layout
 extension PlaceSearchViewController {
     private func setupCollectionView() {

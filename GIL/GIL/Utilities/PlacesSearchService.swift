@@ -25,13 +25,12 @@ class PlacesSearchService {
 
         let search = MKLocalSearch(request: request)
         let response = try await search.start()
-        
-        let filteredItems = response.mapItems.filter { item in
-            if let itemLocation = item.placemark.location {
+
+        return response.mapItems.filter({
+            if let itemLocation = $0.placemark.location {
                 return location.distance(from: itemLocation) <= regionRadius
             }
             return false
-        }
-        return filteredItems
+        })
     }
 }
