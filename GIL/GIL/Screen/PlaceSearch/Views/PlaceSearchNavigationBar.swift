@@ -16,7 +16,7 @@ final class PlaceSearchNavigationBar: UIView {
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureUI()
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -30,8 +30,9 @@ final class PlaceSearchNavigationBar: UIView {
     }
 }
 
+// MARK: - Setup UI
 extension PlaceSearchNavigationBar {
-    private func configureUI() {
+    private func setupUI() {
         setupSearchBar()
 
         [backButton, myLocationLabel, addressLabel, searchBar].forEach({
@@ -67,7 +68,6 @@ extension PlaceSearchNavigationBar {
             searchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             searchBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             searchBar.heightAnchor.constraint(equalToConstant: 40)
-            
         ])
     }
 }

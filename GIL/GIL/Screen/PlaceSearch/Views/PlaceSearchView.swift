@@ -9,11 +9,19 @@ import UIKit
 
 final class PlaceSearchView: UIView {
     let navigationBar = PlaceSearchNavigationBar()
+    lazy var searchResultsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .systemBackground
+        collectionView.register(PlaceSearchCollectionViewCell.self, forCellWithReuseIdentifier: PlaceSearchCollectionViewCell.reuseIdentifier)
+        return collectionView
+    }()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureUI()
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -27,12 +35,12 @@ final class PlaceSearchView: UIView {
     }
 }
 
-// MARK: - Configure UI
+// MARK: - Setup UI
 extension PlaceSearchView {
-    func configureUI() {
+    func setupUI() {
         backgroundColor = .systemBackground
 
-        [navigationBar].forEach({
+        [navigationBar, searchResultsCollectionView].forEach({
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         })
@@ -43,7 +51,12 @@ extension PlaceSearchView {
             navigationBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             navigationBar.leadingAnchor.constraint(equalTo: leadingAnchor),
             navigationBar.trailingAnchor.constraint(equalTo: trailingAnchor),
-            navigationBar.heightAnchor.constraint(equalToConstant: 80)
+            navigationBar.heightAnchor.constraint(equalToConstant: 80),
+            
+            searchResultsCollectionView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
+            searchResultsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            searchResultsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            searchResultsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
