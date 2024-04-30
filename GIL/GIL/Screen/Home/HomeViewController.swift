@@ -9,6 +9,7 @@ import UIKit
 
 protocol HomeDisplayLogic {
     func displaySearchScreen()
+    func displayFetchedData(_ data: [PlaceData])
 }
 
 final class HomeViewController: BaseViewController, NavigationBarHideable {
@@ -50,6 +51,7 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar(animated: false)
+        interactor.fetchPlaceData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,6 +62,15 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
 
 // MARK: - HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
+    func displayFetchedData(_ data: [PlaceData]) {
+        data.forEach {
+            Log.info("Place", [
+                $0.saveDate,
+                $0.place
+            ])
+        }
+    }
+    
     func displaySearchScreen() {
         let searchDetailVC = PlaceSearchViewController(viewModel: PlaceSearchViewModel())
         navigationController?.pushViewController(searchDetailVC, animated: true)

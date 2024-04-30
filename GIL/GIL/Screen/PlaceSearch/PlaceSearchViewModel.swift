@@ -44,4 +44,15 @@ class PlaceSearchViewModel {
         let data = PlaceData(saveDate: Date(), place: place)
         placeContainer?.mainContext.insert(data)
     }
+    
+    @MainActor 
+    func loadUsers() {
+        let descriptor = FetchDescriptor<PlaceData>(sortBy: [SortDescriptor(\.saveDate)])
+        let places = (try? placeContainer?.mainContext.fetch(descriptor)) ?? []
+
+        places.forEach {
+            Log.info("\($0.saveDate) / (\($0.place)")
+        }
+    }
+
 }
