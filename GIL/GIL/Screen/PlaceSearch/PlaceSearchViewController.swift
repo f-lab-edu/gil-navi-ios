@@ -14,9 +14,9 @@ final class PlaceSearchViewController: BaseViewController, NavigationBarHideable
         case main
     }
     
-    private var viewModel: PlaceSearchViewModel
+    var viewModel: PlaceSearchViewModel
+    var placeSearchView = PlaceSearchView()
     private var dataSource: UICollectionViewDiffableDataSource<Section, Place>!
-    private var placeSearchView = PlaceSearchView()
     
     // MARK: - Initialization
     init(viewModel: PlaceSearchViewModel) {
@@ -36,7 +36,6 @@ final class PlaceSearchViewController: BaseViewController, NavigationBarHideable
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
-        setupLocationService()
         setupCollectionView()
         configureDataSource()
     }
@@ -59,11 +58,23 @@ extension PlaceSearchViewController {
     }
 }
 
+// MARK: - UI Updates
+extension PlaceSearchViewController {
+    private func applySnapshot(with items: [Place]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Place>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(items, toSection: .main)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
 // MARK: - Binding
 extension PlaceSearchViewController {
     private func setupBindings() {
         bindButtons()
         bindSearchBar()
+        bindCollectionView()
+        bindLocationService()
         bindSearchMapItems()
     }
     
@@ -76,6 +87,14 @@ extension PlaceSearchViewController {
         placeSearchView.navigationBar.searchBar.delegate = self
     }
     
+    private func bindCollectionView() {
+        placeSearchView.searchResultsCollectionView.delegate = self
+    }
+    
+    private func bindLocationService() {
+        viewModel.locationService.delegate = self
+    }
+    
     private func bindSearchMapItems() {
         viewModel.$mapItems
             .receive(on: DispatchQueue.main)
@@ -84,36 +103,6 @@ extension PlaceSearchViewController {
                 self.applySnapshot(with: mapItems)
             }
             .store(in: &viewModel.cancellables)
-    }
-}
-
-// MARK: - Location Service Setup
-extension PlaceSearchViewController {
-    private func setupLocationService() {
-        viewModel.locationService.delegate = self
-        viewModel.locationService.requestLocation()
-    }
-}
-
-// MARK: - LocationServiceDelegate
-extension PlaceSearchViewController: LocationServiceDelegate {
-    func didFetchAddress(_ address: String) {
-        viewModel.locationService.stopUpdatingLocation()
-        placeSearchView.navigationBar.addressLabel.text = address
-    }
-    
-    func didFailWithError(_ error: Error) {
-        Log.error("LocationService Error: \(error.localizedDescription)", error)
-    }
-}
-
-// MARK: - UISearchBarDelegate
-extension PlaceSearchViewController: UISearchBarDelegate {
-    func searchBar(
-        _ searchBar: UISearchBar,
-        textDidChange searchText: String
-    ) {
-        viewModel.searchPlace(searchText)
     }
 }
 
@@ -144,13 +133,6 @@ extension PlaceSearchViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, Place>(collectionView: placeSearchView.searchResultsCollectionView) { (collectionView, indexPath, place) -> UICollectionViewCell? in
             self.configurePlaceSearcCell(for: collectionView, at: indexPath, item: place)
         }
-    }
-    
-    private func applySnapshot(with items: [Place]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Place>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(items, toSection: .main)
-        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     private func configurePlaceSearcCell(

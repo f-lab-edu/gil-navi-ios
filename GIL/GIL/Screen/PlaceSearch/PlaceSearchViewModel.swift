@@ -16,6 +16,10 @@ class PlaceSearchViewModel {
     
     var cancellables: Set<AnyCancellable> = []
     
+    init() {
+        locationService.requestLocation()
+    }
+    
     func searchPlace(_ query: String) {
         guard let location = locationService.currentLocation else { return }
         Task {
