@@ -44,7 +44,7 @@ extension LocationService {
     ///   - coordinate: 거리를 계산할 대상 위치의 좌표
     /// - Returns: 두 위치 사이의 거리를 미터 단위로 반환. 위치 정보가 없는 경우 nil 반환.
     func distance(to coordinate: CLLocationCoordinate2D) -> Double? {
-        guard let currentLocation = self.currentLocation else { return nil }
+        guard let currentLocation = currentLocation else { return nil }
         let targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         return currentLocation.distance(from: targetLocation)
     }
@@ -91,11 +91,15 @@ extension LocationService {
     
     /// Placemark에서 얻은 데이터를 기반으로 주소를 형식에 맞게 구성합니다.
     private func formatAddress(for placemark: CLPlacemark) -> String {
-        let locale = Locale.current.language.languageCode?.identifier
-        switch locale {
-        case "ja": return formatJapaneseAddress(for: placemark)
-        case "en": return formatEnglishAddress(for: placemark)
-        default: return formatKoreanAddress(for: placemark)
+        guard let locale = Locale.current.language.languageCode?.identifier else {
+            return formatKoreanAddress(for: placemark)
+        }
+
+        let languageCode = LanguageCode(rawValue: locale) ?? .Korean
+        switch languageCode {
+        case .Japanese: return formatJapaneseAddress(for: placemark)
+        case .English: return formatEnglishAddress(for: placemark)
+        case .Korean: return formatKoreanAddress(for: placemark)
         }
     }
     
