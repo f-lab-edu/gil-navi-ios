@@ -78,9 +78,9 @@ extension PlaceSearchCollectionViewCell {
     func updateContent(with item: Place) {
         nameLabel.text = item.name
         
-        if let distance = item.distance {
-            let formattedDistance = formatDistance(distance)
-            addressLabel.text = "\(formattedDistance) · \(item.address ?? "")"
+        if item.distance > 0 {
+            let formattedDistance = formatDistance(item.distance)
+            addressLabel.text = "\(formattedDistance) · \(item.address)"
         } else {
             addressLabel.text = item.address
         }

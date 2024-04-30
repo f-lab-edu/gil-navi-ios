@@ -13,6 +13,6 @@ extension PlaceSearchViewController: UICollectionViewDelegate {
         didSelectItemAt indexPath: IndexPath
     ) {
         let place = viewModel.mapItems[indexPath.row]
-        viewModel.saveData(data: place)
+        viewModel.storePlace(place)
     }
 }

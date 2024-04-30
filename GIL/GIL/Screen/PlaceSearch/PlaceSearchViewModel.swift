@@ -7,10 +7,12 @@
 
 import MapKit
 import Combine
+import SwiftData
 
 class PlaceSearchViewModel {
     let locationService = LocationService()
     let placesSearchService = PlacesSearchService()
+    var placeContainer: ModelContainer?
     
     @Published var mapItems: [Place] = []
     
@@ -18,6 +20,7 @@ class PlaceSearchViewModel {
     
     init() {
         locationService.requestLocation()
+        placeContainer = try? ModelContainer(for: PlaceData.self)
     }
     
     func searchPlace(_ query: String) {
@@ -27,12 +30,18 @@ class PlaceSearchViewModel {
                 let mapItems = try await placesSearchService.searchPlacesNearby(location: location, query: query, regionRadius: 5000)
                 await MainActor.run {
                     self.mapItems = mapItems
-                        .map({ Place(from: $0, distance: locationService.distance(to: $0.placemark.coordinate)) })
-                        .sorted(by: { $0.distance ?? 0.0 < $1.distance ?? 0.0 })
+                        .map({ Place(mapItem: $0, distance: locationService.distance(to: $0.placemark.coordinate) ?? 0) })
+                        .sorted(by: { $0.distance < $1.distance })
                 }
             } catch {
                 Log.error(#function, error)
             }
         }
+    }
+    
+    @MainActor 
+    func storePlace(_ place: Place) {
+        let data = PlaceData(saveDate: Date(), place: place)
+        placeContainer?.mainContext.insert(data)
     }
 }
