@@ -9,13 +9,7 @@ import UIKit
 
 class PlaceSearchCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "PlaceSearchCell"
-    private let mappinIcon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "mappin.and.ellipse")
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .mainGreen
-        return imageView
-    }()
+    private let mappinIcon = MappinImageView(iconType: .outline)
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical

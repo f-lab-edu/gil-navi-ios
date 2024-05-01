@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5806472A2BCD147A00FB7310 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580647292BCD147A00FB7310 /* UIImage+Extension.swift */; };
+		5810DE202BE1F78400180BFB /* MappinImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE1F2BE1F78400180BFB /* MappinImageView.swift */; };
 		58368EFA2BD51957009E008C /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EF92BD51957009E008C /* BasicLabel.swift */; };
 		58368EFC2BD536B8009E008C /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFB2BD536B8009E008C /* AlertService.swift */; };
 		58368EFE2BD75E9C009E008C /* FirebaseAuth+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */; };
@@ -86,6 +87,7 @@
 
 /* Begin PBXFileReference section */
 		580647292BCD147A00FB7310 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		5810DE1F2BE1F78400180BFB /* MappinImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappinImageView.swift; sourceTree = "<group>"; };
 		58368EF92BD51957009E008C /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
 		58368EFB2BD536B8009E008C /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Extension.swift"; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				584FA4212BA84254002600F1 /* BasicButton.swift */,
 				58BAC8AF2BCCF59800CDEB1F /* NavigationActionButton.swift */,
 				58368EF92BD51957009E008C /* BasicLabel.swift */,
+				5810DE1F2BE1F78400180BFB /* MappinImageView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				58368F012BD7617D009E008C /* FirebaseAuthError.swift in Sources */,
 				58BAC89B2BC53A4D00CDEB1F /* UIButton+Extension.swift in Sources */,
 				5806472A2BCD147A00FB7310 /* UIImage+Extension.swift in Sources */,
+				5810DE202BE1F78400180BFB /* MappinImageView.swift in Sources */,
 				58BDFBCA2BBA9B27006AC994 /* SignUpViewModel.swift in Sources */,
 				58BDFBC22BB6A748006AC994 /* OSLog+Extension.swift in Sources */,
 				58368F1A2BDE424A009E008C /* PlaceSearchView.swift in Sources */,
