@@ -14,8 +14,8 @@ final class HomeView: UIView {
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "NormalCell")
         collectionView.register(HomeSearchCollectionViewCell.self, forCellWithReuseIdentifier: HomeSearchCollectionViewCell.reuseIdentifier)
+        collectionView.register(HomeRecentSearchPlaceCollectionViewCell.self, forCellWithReuseIdentifier: HomeRecentSearchPlaceCollectionViewCell.reuseIdentifier)
         return collectionView
     }()
     

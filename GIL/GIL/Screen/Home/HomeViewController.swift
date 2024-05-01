@@ -19,12 +19,14 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
     
     enum Item: Hashable {
         case search
-        case normal
+        case recentSearchPlace([PlaceData])
     }
     
     private var interactor: HomeBusinessLogic
     private var homeView = HomeView()
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
+    
+    private var recentSearchCount = 0 // 최근 검색 개수를 추적하는 변수
     
     // MARK: - Initialization
     init(interactor: HomeBusinessLogic) {
@@ -60,15 +62,33 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
     }
 }
 
+// MARK: - UI Updates
+extension HomeViewController {
+    private func updateSnapshot(with data: [PlaceData]) {
+        recentSearchCount = data.count
+        
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .main).filter {
+            if case .recentSearchPlace = $0 { return true }
+            return false
+        })
+        let newItems = [Item.recentSearchPlace(data)]
+        snapshot.appendItems(newItems, toSection: .main)
+        dataSource.apply(snapshot, animatingDifferences: true)
+        
+        resetLayout()
+    }
+    
+    private func resetLayout() {
+        let newLayout = createLayout()
+        homeView.mainCollectionView.setCollectionViewLayout(newLayout, animated: false)
+    }
+}
+
 // MARK: - HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
     func displayFetchedData(_ data: [PlaceData]) {
-        data.forEach {
-            Log.info("Place", [
-                $0.saveDate,
-                $0.place
-            ])
-        }
+        updateSnapshot(with: data)
     }
     
     func displaySearchScreen() {
@@ -84,28 +104,30 @@ extension HomeViewController {
     }
 
     private func createLayout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { sectionIndex, _ in
+        return UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             let section = Section.allCases[sectionIndex]
-
             switch section {
-            case .main: return NSCollectionLayoutSection(group: self.createMainGroup())
+            case .main: return self.createMainSection()
             }
         }
     }
     
-    private func createMainGroup() -> NSCollectionLayoutGroup {
-        let searchItemHeight: CGFloat = 80
-        let searchItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(searchItemHeight))
+    private func createMainSection() -> NSCollectionLayoutSection {
+        let searchItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(80))
         let searchItem = NSCollectionLayoutItem(layoutSize: searchItemSize)
-
-        let normalItemHeight: CGFloat = 400
-        let normalItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(normalItemHeight))
-        let normalItem = NSCollectionLayoutItem(layoutSize: normalItemSize)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(searchItemHeight + normalItemHeight))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [searchItem, normalItem])
-        return group
+        
+        let recentSearchItemHeight = CGFloat(50 * recentSearchCount)
+        let recentSearchItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(recentSearchItemHeight))
+        let recentSearchItem = NSCollectionLayoutItem(layoutSize: recentSearchItemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(230))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [searchItem, recentSearchItem])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 10
+        return section
     }
+    
 }
 
 // MARK: - Collection View Data Source Configuration
@@ -114,38 +136,37 @@ extension HomeViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: homeView.mainCollectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             switch item {
             case .search: return self.configureSearchCell(for: collectionView, at: indexPath)
-            default: return self.configureNormalCell(for: collectionView, at: indexPath)
+            case let .recentSearchPlace(placeData): return self.configureRecentSearchPlaceCell(for: collectionView, at: indexPath, with: placeData)
             }
         }
 
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.main])
-        snapshot.appendItems([.search, .normal], toSection: .main)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        snapshot.appendItems([.search], toSection: .main)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     private func configureSearchCell(
         for collectionView: UICollectionView,
         at indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeSearchCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeSearchCollectionViewCell else {
-            return configureNormalCell(for: collectionView, at: indexPath)
-        }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeSearchCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeSearchCollectionViewCell else { return UICollectionViewCell() }
         
         cell.onSearchBarTapped = { [weak self] in
             guard let self else { return }
             self.interactor.performSearch()
         }
-        
         return cell
     }
 
-    private func configureNormalCell(
+    private func configureRecentSearchPlaceCell(
         for collectionView: UICollectionView,
-        at indexPath: IndexPath
+        at indexPath: IndexPath,
+        with data: [PlaceData]
     ) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NormalCell", for: indexPath)
-        cell.backgroundColor = .gray
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRecentSearchPlaceCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeRecentSearchPlaceCollectionViewCell else { return UICollectionViewCell() }
+        
+        cell.configure(with: data)
         return cell
     }
 }

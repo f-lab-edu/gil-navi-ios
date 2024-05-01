@@ -47,6 +47,7 @@
 		586F03122BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03112BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift */; };
 		586F03142BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03132BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift */; };
 		586F03162BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03152BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift */; };
+		586F03182BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */; };
 		58A6808E2BDE7C02004E6706 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A6808D2BDE7C02004E6706 /* LocationService.swift */; };
 		58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */; };
 		58BAC8992BC5399D00CDEB1F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAC8982BC5399D00CDEB1F /* UITextField+Extension.swift */; };
@@ -124,6 +125,7 @@
 		586F03112BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+LocationService.swift"; sourceTree = "<group>"; };
 		586F03132BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+SearchBar.swift"; sourceTree = "<group>"; };
 		586F03152BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+UICollectionView.swift"; sourceTree = "<group>"; };
+		586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRecentSearchPlaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		58A6808D2BDE7C02004E6706 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		58BAC8982BC5399D00CDEB1F /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				58368F0C2BD828C6009E008C /* HomeSearchCollectionViewCell.swift */,
+				586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				586F030C2BE0C4A2008660A0 /* LanguageCode.swift in Sources */,
 				58BDFBCC2BBAA78F006AC994 /* String+Extension.swift in Sources */,
 				58BAC8992BC5399D00CDEB1F /* UITextField+Extension.swift in Sources */,
+				586F03182BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift in Sources */,
 				584FA44A2BB15D51002600F1 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
