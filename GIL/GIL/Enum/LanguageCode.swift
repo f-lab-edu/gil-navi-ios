@@ -12,7 +12,7 @@ import Foundation
 /// - English: 영어 코드
 /// - Japanese: 일본어 코드
 enum LanguageCode: String {
-    case Korean = "ko"
-    case English = "en"
-    case Japanese = "ja"
+    case korean = "ko"
+    case english = "en"
+    case japanese = "ja"
 }
