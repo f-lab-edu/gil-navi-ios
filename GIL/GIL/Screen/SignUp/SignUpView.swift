@@ -17,7 +17,7 @@ final class SignUpView: UIView {
     let passwordTextField = BasicTextField(type: .password, returnKeyType: .next)
     let verifyPasswordLabel = UILabel()
     let verifyPasswordTextField = BasicTextField(type: .verifyPassword, returnKeyType: .done)
-    let doneButton = BasicButton(title: "완료")
+    let doneButton = InteractiveButton(title: "완료", titleColor: .white, fontSize: 18, fontWeight: .bold)
     
     private let checkPasswordStackView: UIStackView = {
         let stack = UIStackView()

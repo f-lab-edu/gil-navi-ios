@@ -17,6 +17,7 @@
 		5810DE2F2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE2E2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift */; };
 		5810DE312BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE302BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift */; };
 		5810DE332BE2013D00180BFB /* PlaceSearchViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE322BE2013D00180BFB /* PlaceSearchViewController+Actions.swift */; };
+		5810DE482BE36A5700180BFB /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE472BE36A5700180BFB /* BaseButton.swift */; };
 		58368EFA2BD51957009E008C /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EF92BD51957009E008C /* BasicLabel.swift */; };
 		58368EFC2BD536B8009E008C /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFB2BD536B8009E008C /* AlertService.swift */; };
 		58368EFE2BD75E9C009E008C /* FirebaseAuth+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */; };
@@ -40,7 +41,7 @@
 		584FA40A2BA41485002600F1 /* GILUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4092BA41485002600F1 /* GILUITestsLaunchTests.swift */; };
 		584FA41B2BA7F606002600F1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA41A2BA7F606002600F1 /* LoginViewController.swift */; };
 		584FA41E2BA82886002600F1 /* BasicTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA41D2BA82886002600F1 /* BasicTextField.swift */; };
-		584FA4222BA84254002600F1 /* BasicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4212BA84254002600F1 /* BasicButton.swift */; };
+		584FA4222BA84254002600F1 /* InteractiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4212BA84254002600F1 /* InteractiveButton.swift */; };
 		584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4272BA84D00002600F1 /* UIColor+Extension.swift */; };
 		584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA42F2BABC0EE002600F1 /* LoginView.swift */; };
 		584FA4372BAD5607002600F1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 584FA4362BAD5607002600F1 /* FirebaseAnalytics */; };
@@ -105,6 +106,7 @@
 		5810DE2E2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+BindigSetup.swift"; sourceTree = "<group>"; };
 		5810DE302BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+UIUpdates.swift"; sourceTree = "<group>"; };
 		5810DE322BE2013D00180BFB /* PlaceSearchViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+Actions.swift"; sourceTree = "<group>"; };
+		5810DE472BE36A5700180BFB /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		58368EF92BD51957009E008C /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
 		58368EFB2BD536B8009E008C /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Extension.swift"; sourceTree = "<group>"; };
@@ -131,7 +133,7 @@
 		584FA4092BA41485002600F1 /* GILUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GILUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		584FA41A2BA7F606002600F1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		584FA41D2BA82886002600F1 /* BasicTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTextField.swift; sourceTree = "<group>"; };
-		584FA4212BA84254002600F1 /* BasicButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
+		584FA4212BA84254002600F1 /* InteractiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveButton.swift; sourceTree = "<group>"; };
 		584FA4272BA84D00002600F1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		584FA42F2BABC0EE002600F1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		584FA4442BAD6068002600F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -355,10 +357,11 @@
 			children = (
 				58368F0F2BD83490009E008C /* BaseViewController.swift */,
 				584FA41D2BA82886002600F1 /* BasicTextField.swift */,
-				584FA4212BA84254002600F1 /* BasicButton.swift */,
+				584FA4212BA84254002600F1 /* InteractiveButton.swift */,
 				58BAC8AF2BCCF59800CDEB1F /* NavigationActionButton.swift */,
 				58368EF92BD51957009E008C /* BasicLabel.swift */,
 				5810DE1F2BE1F78400180BFB /* MappinImageView.swift */,
+				5810DE472BE36A5700180BFB /* BaseButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -635,13 +638,14 @@
 				58368F162BDE41FC009E008C /* PlaceSearchViewController.swift in Sources */,
 				58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */,
 				584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */,
+				5810DE482BE36A5700180BFB /* BaseButton.swift in Sources */,
 				58A6808E2BDE7C02004E6706 /* LocationService.swift in Sources */,
 				58368F122BD8B7D5009E008C /* HomeSearchBarView.swift in Sources */,
 				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
 				58BAC8B02BCCF59800CDEB1F /* NavigationActionButton.swift in Sources */,
 				586F03162BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift in Sources */,
 				58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */,
-				584FA4222BA84254002600F1 /* BasicButton.swift in Sources */,
+				584FA4222BA84254002600F1 /* InteractiveButton.swift in Sources */,
 				58DE930D2BDF94B600C97575 /* PlaceModel.swift in Sources */,
 				58368F102BD83490009E008C /* BaseViewController.swift in Sources */,
 				58368F012BD7617D009E008C /* FirebaseAuthError.swift in Sources */,

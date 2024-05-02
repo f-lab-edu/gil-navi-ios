@@ -53,6 +53,8 @@ final class LoginView: UIView {
         label.backgroundColor = .borderGray
         return label
     }()
+    let signUpButton = BaseButton(title: "회원가입", titleColor: .red, fontWeight: .semibold)
+    let appleLoginButton = BaseButton(bgNormal: UIImage(named: "logo-apple"), bgHighlighted: UIImage(named: "logo-apple"))
     
     // MARK: - Initialization
     override init(frame: CGRect) {
