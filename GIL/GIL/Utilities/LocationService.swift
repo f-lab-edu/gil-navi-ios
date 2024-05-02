@@ -24,10 +24,8 @@ class LocationService: NSObject {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest // 매우 높은 정확도
     }
-}
-
-// MARK: - Location Management
-extension LocationService {
+    
+    // MARK: - Location Management
     /// 위치 서비스 사용 권한을 요청하고 위치 업데이트를 시작합니다.
     func requestLocation() {
         locationManager.requestWhenInUseAuthorization()
@@ -47,6 +45,22 @@ extension LocationService {
         guard let currentLocation = currentLocation else { return nil }
         let targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         return currentLocation.distance(from: targetLocation)
+    }
+    
+    // MARK: - Address Fetching
+    /// 결과 주소를 가져옵니다.
+    func fetchAddress(for location: CLLocation) {
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            if let error = error {
+                self.delegate?.didFailWithError(error)
+                return
+            }
+            
+            if let placemark = placemarks?.first {
+                let formattedAddress = self.formatAddress(for: placemark)
+                self.delegate?.didFetchAddress(formattedAddress)
+            }
+        }
     }
 }
 
@@ -72,23 +86,7 @@ extension LocationService: CLLocationManagerDelegate {
     }
 }
 
-// MARK: - Address Fetching
 extension LocationService {
-    /// 결과 주소를 가져옵니다.
-    private func fetchAddress(for location: CLLocation) {
-        geocoder.reverseGeocodeLocation(location) { placemarks, error in
-            if let error = error {
-                self.delegate?.didFailWithError(error)
-                return
-            }
-            
-            if let placemark = placemarks?.first {
-                let formattedAddress = self.formatAddress(for: placemark)
-                self.delegate?.didFetchAddress(formattedAddress)
-            }
-        }
-    }
-    
     /// Placemark에서 얻은 데이터를 기반으로 주소를 형식에 맞게 구성합니다.
     private func formatAddress(for placemark: CLPlacemark) -> String {
         guard let locale = Locale.current.language.languageCode?.identifier else {
