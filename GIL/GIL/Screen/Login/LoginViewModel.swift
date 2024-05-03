@@ -24,35 +24,37 @@ protocol LoginViewModelIO: LoginViewModelInput & LoginViewModelOutput { }
 
 class LoginViewModel: NSObject, LoginViewModelIO {
     enum LoginError: Error {
-        case randomBytesGenerationFailed(String)
         case appleIDCredentialRetrievalFailed
         case invalidNonceOrIDToken
-        case firebaseAuthenticationFailed
+        
+        var errorDescription: String {
+            switch self {
+            case .appleIDCredentialRetrievalFailed:
+                return "Apple ID 자격 증명을 가져오는 데 실패했습니다."
+            case .invalidNonceOrIDToken:
+                return "Nonce 또는 ID 토큰이 유효하지 않습니다."
+            }
+        }
     }
     
-    let alertService = AlertService()
     var loginPublisher = PassthroughSubject<Void, Error>()
     var cancellables = Set<AnyCancellable>()
-    
     private var currentNonce: String?
     
     func startSignInWithAppleFlow() {
         do {
-            let nonce = try randomNonceString()
+            let nonce = try CryptoUtils.randomNonceString()
             currentNonce = nonce
             let appleProvider = ASAuthorizationAppleIDProvider()
             let request = appleProvider.createRequest()
             request.requestedScopes = [.fullName, .email]
-            request.nonce = sha256(nonce)
-            
+            request.nonce = CryptoUtils.sha256(nonce)
             let controller = ASAuthorizationController(authorizationRequests: [request])
             controller.delegate = self
             controller.performRequests()
-            
         } catch {
             loginPublisher.send(completion: .failure(error))
         }
-        
     }
     
     private func performAppleLogin(authorization: ASAuthorization) {
@@ -104,47 +106,5 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
         didCompleteWithError error: Error
     ) {
         loginPublisher.send(completion: .failure(error))
-    }
-}
-
-// MARK: - Apple Login
-extension LoginViewModel {
-
-    private func randomNonceString(length: Int = 32) throws -> String {
-      precondition(length > 0)
-      var randomBytes = [UInt8](repeating: 0, count: length)
-      let errorCode = SecRandomCopyBytes(kSecRandomDefault, randomBytes.count, &randomBytes)
-      if errorCode != errSecSuccess {
-          throw LoginError.randomBytesGenerationFailed("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-      }
-
-      let charset: [Character] =
-        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-
-      let nonce = randomBytes.map { byte in
-        // Pick a random character from the set, wrapping around if needed.
-        charset[Int(byte) % charset.count]
-      }
-
-      return String(nonce)
-    }
-
-    private func sha256(_ input: String) -> String {
-      let inputData = Data(input.utf8)
-      let hashedData = SHA256.hash(data: inputData)
-      let hashString = hashedData.compactMap {
-        String(format: "%02x", $0)
-      }.joined()
-
-      return hashString
-// MARK: - LoginError
-extension LoginViewModel.LoginError {
-    var errorDescription: String {
-        switch self {
-        case .appleIDCredentialRetrievalFailed:
-            return "Apple ID 자격 증명을 가져오는 데 실패했습니다."
-        case .invalidNonceOrIDToken:
-            return "Nonce 또는 ID 토큰이 유효하지 않습니다."
-        }
     }
 }
