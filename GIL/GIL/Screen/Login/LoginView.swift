@@ -14,6 +14,8 @@ final class LoginView: UIView {
     let emailTextField = BasicTextField(type: .email, returnKeyType: .next)
     let passwordTextField = BasicTextField(type: .password, returnKeyType: .done)
     let loginButton = InteractiveButton(title: "로그인", titleColor: .white, fontSize: 18, fontWeight: .bold)
+    let signUpLabel = BasicLabel(text: "아직 회원이 아니신가요?", fontSize: 15)
+    let socialLabel = BasicLabel(text: "SNS 계정으로 로그인", textColor: .grayLabel, fontType: .footnote, fontSize: 15)
     let signUpButton = BaseButton(title: "회원가입", titleColor: .red, fontWeight: .semibold)
     let appleLoginButton = BaseButton(bgNormal: UIImage(named: "logo-apple"), bgHighlighted: UIImage(named: "logo-apple"))
     

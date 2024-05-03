@@ -12,6 +12,7 @@ final class BasicLabel: UILabel {
     init(
         text: String,
         textColor: UIColor = .text,
+        fontType: UIFont.TextStyle = .body,
         fontSize: CGFloat = 14,
         fontWeight: UIFont.Weight = .medium,
         numberOfLines: Int = 1
@@ -19,6 +20,7 @@ final class BasicLabel: UILabel {
         super.init(frame: .zero)
         configureUI(text: text,
                     textColor: textColor,
+                    fontType: fontType,
                     fontSize: fontSize,
                     fontWeight: fontWeight,
                     numberOfLines: numberOfLines)
@@ -34,6 +36,7 @@ extension BasicLabel {
     func configureUI(
         text txt: String,
         textColor txtColor: UIColor,
+        fontType: UIFont.TextStyle,
         fontSize: CGFloat,
         fontWeight: UIFont.Weight,
         numberOfLines lines: Int
@@ -41,6 +44,6 @@ extension BasicLabel {
         text = txt.localized()
         textColor = txtColor
         numberOfLines = lines
-        applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
+        applyDynamicTypeFont(textStyle: fontType, size: fontSize, weight: fontWeight)
     }
 }
