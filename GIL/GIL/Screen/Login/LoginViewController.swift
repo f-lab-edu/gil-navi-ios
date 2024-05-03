@@ -64,15 +64,11 @@ extension LoginViewController {
                 guard let self else { return }
                 switch result {
                 case .finished:
+                    Log.network("Apple Login Success")
                     Auth.auth().signInAnonymously()
                 case .failure(let error):
-                    Log.error("로그인 실패", error)
-                    var errorMessage = "로그인 중 예상치 못한 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
-                    
-                    if let loginError = error as? LoginViewModel.LoginError,
-                       let errorDesc = loginError.errorDescription {
-                        errorMessage = errorDesc
-                    }
+                    Log.error("Apple Login Failure", error)
+                    let errorMessage = viewModel.errorMessage(for: error)
                     self.showAlert(title: "로그인 실패", message: errorMessage)
                 }
             } receiveValue: { _ in }
@@ -97,10 +93,11 @@ extension LoginViewController {
 
 // MARK: - UI Handling
 extension LoginViewController {
-    func showAlert(title: String,
-                   message: String = ""
+    func showAlert(
+        title: String,
+        message: String = ""
     ) {
-        viewModel.alertService.showAlert(title: title, message: message, on: self)
+        AlertService.showAlert(title: title, message: message, on: self)
     }
 }
 

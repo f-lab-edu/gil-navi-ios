@@ -60,23 +60,13 @@ extension SignUpViewController {
     private func bindFormCompletion() {
         viewModel.createUserPublisher
             .receive(on: DispatchQueue.main)
-            .sink { result in
+            .sink { [weak self] result in
+                guard let self else { return }
                 switch result {
                 case .finished: Log.network("회원가입 성공")
                 case .failure(let error):
-                    switch error {
-                    case let signUpError as SignUpViewModel.SignUpError:
-                        if let errorDesc = signUpError.errorDescription {
-                            self.showAlert(title: "회원 정보가 부족합니다.", message: errorDesc)
-                        }
-
-                    case let authError as FirebaseAuthError:
-                        if let errorDesc = authError.errorDescription {
-                            self.showAlert(title: "회원가입에 실패했습니다.\n다시 시도 부탁드립니다.", message: errorDesc)
-                        }
-
-                    default: break
-                    }
+                    let message = viewModel.errorMessage(for: error)
+                    AlertService.showAlert(title: "회원가입 실패", message: message, on: self)
                 }
             } receiveValue: { _ in }
             .store(in: &viewModel.cancellables)
@@ -123,7 +113,6 @@ extension SignUpViewController {
             .sink { [weak self] result in
                 guard let self else { return }
                 self.updateTextFieldBorderColor(textField: self.signUpView.passwordTextField, isValid: result.isValid)
-                
                 /// 비밀번호 유효성 레이블 업데이트
                 self.updatePasswordValidationLabels(validations: result.validations)
             }
@@ -161,16 +150,6 @@ extension SignUpViewController {
         Task {
             await viewModel.createUser()
         }
-    }
-}
-
-// MARK: - UI Handling
-extension SignUpViewController {
-    func showAlert(
-        title: String,
-        message: String = ""
-    ) {
-        viewModel.alertService.showAlert(title: title, message: message, on: self)
     }
 }
 

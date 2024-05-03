@@ -39,7 +39,6 @@ class SignUpViewModel: SignUpViewModelInput, SignUpViewModelOutput {
     var passwordMatchPublisher = CurrentValueSubject<Bool, Never>(false)
     var createUserPublisher = PassthroughSubject<Void, Error>()
     
-    let alertService = AlertService()
     var cancellables = Set<AnyCancellable>()
     
     init() {
@@ -83,12 +82,23 @@ class SignUpViewModel: SignUpViewModelInput, SignUpViewModelOutput {
         guard passwordPublisher.value.isValidPassword() else { throw SignUpError.passwordNotStrongEnough }
         guard passwordPublisher.value == verifyPasswordPublisher.value else { throw SignUpError.passwordsDoNotMatch }
     }
+    
+    func errorMessage(for error: Error) -> String {
+        switch error {
+        case let signUpError as SignUpError:
+            return signUpError.errorDescription
+        case let authError as FirebaseAuthError:
+            return authError.errorDescription
+        default:
+            return "예상치 못한 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
+        }
+    }
 
 }
 
 // MARK: - SignUpError
 extension SignUpViewModel.SignUpError {
-    var errorDescription: String? {
+    var errorDescription: String {
         switch self {
         case .invalidEmail:
             return "입력하신 이메일이 유효하지 않습니다. 올바른 이메일 주소를 입력해 주세요."

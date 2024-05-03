@@ -69,6 +69,15 @@ extension LoginViewModel.LoginError: LocalizedError {
             return "Nonce 또는 ID 토큰이 유효하지 않습니다."
         case .firebaseAuthenticationFailed:
             return "Firebase 인증에 실패했습니다."
+    func errorMessage(for error: Error) -> String {
+        if let loginError = error as? LoginError {
+            return loginError.errorDescription
+        } else if let firebaseAuthError = error as? FirebaseAuthError {
+            return firebaseAuthError.errorDescription
+        } else if let cryptoUtilsError = error as? CryptoUtilsError {
+            return cryptoUtilsError.localizedDescription
+        } else {
+            return "로그인 중 예상치 못한 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
         }
     }
 }
@@ -152,7 +161,14 @@ extension LoginViewModel {
       }.joined()
 
       return hashString
+// MARK: - LoginError
+extension LoginViewModel.LoginError {
+    var errorDescription: String {
+        switch self {
+        case .appleIDCredentialRetrievalFailed:
+            return "Apple ID 자격 증명을 가져오는 데 실패했습니다."
+        case .invalidNonceOrIDToken:
+            return "Nonce 또는 ID 토큰이 유효하지 않습니다."
+        }
     }
 }
-
-

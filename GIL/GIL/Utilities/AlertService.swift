@@ -7,11 +7,12 @@
 
 import UIKit
 
-class AlertService {
-    func showAlert(title: String,
-                   message: String,
-                   on viewController: UIViewController,
-                   actions: [UIAlertAction]? = nil
+enum AlertService {
+    static func showAlert(
+        title: String,
+        message: String,
+        on viewController: UIViewController,
+        actions: [UIAlertAction]? = nil
     ) {
         Task {
             let alertController = await UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -29,12 +30,13 @@ class AlertService {
         }
     }
     
-    func okAction(title: String = "확인") -> UIAlertAction {
+    static func okAction(title: String = "확인".localized()) -> UIAlertAction {
         UIAlertAction(title: title, style: .default, handler: nil)
     }
     
-    func cancelAction(title: String = "취소",
-                      handler: ((UIAlertAction) -> Void)? = nil
+    static func cancelAction(
+        title: String = "취소".localized(),
+        handler: ((UIAlertAction) -> Void)? = nil
     ) -> UIAlertAction {
         UIAlertAction(title: title, style: .cancel, handler: handler)
     }
