@@ -19,7 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        registerAuthStateDidChangeEvent()
+        FirebaseAuthService.registerAuthStateDidChangeHandler()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateRootViewControllerBasedOnAuthenticationStatus), name: FirebaseAuthService.authStateDidChangeNotification, object: nil)
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.backgroundColor = .systemBackground
@@ -29,17 +30,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         updateRootViewControllerBasedOnAuthenticationStatus()
     }
     
-    private func registerAuthStateDidChangeEvent() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(updateRootViewControllerBasedOnAuthenticationStatus),
-                                               name: .AuthStateDidChange,
-                                               object: nil)
-    }
-    
     @objc private func updateRootViewControllerBasedOnAuthenticationStatus() {
         let homeViewController = HomeViewController()
         let loginViewController = LoginViewController(viewModel: LoginViewModel())
-        window?.rootViewController = (Auth.auth().currentUser != nil) ? UINavigationController(rootViewController: homeViewController) : UINavigationController(rootViewController: loginViewController)
+        window?.rootViewController = UINavigationController(rootViewController: (Auth.auth().currentUser != nil) ? homeViewController : loginViewController)
     }
 }
 

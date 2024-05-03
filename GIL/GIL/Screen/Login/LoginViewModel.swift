@@ -22,7 +22,6 @@ protocol LoginViewModelOutput {
 
 protocol LoginViewModelIO: LoginViewModelInput & LoginViewModelOutput { }
 
-
 class LoginViewModel: NSObject, LoginViewModelIO {
     enum LoginError: Error {
         case randomBytesGenerationFailed(String)
@@ -55,20 +54,29 @@ class LoginViewModel: NSObject, LoginViewModelIO {
         }
         
     }
-}
-
-// MARK: - LoginError
-extension LoginViewModel.LoginError: LocalizedError {
-    var errorDescription: String? {
-        switch self {
-        case .randomBytesGenerationFailed(let message):
-            return "난수 생성 실패: \(message)"
-        case .appleIDCredentialRetrievalFailed:
-            return "Apple ID 자격 증명을 가져오는 데 실패했습니다."
-        case .invalidNonceOrIDToken:
-            return "Nonce 또는 ID 토큰이 유효하지 않습니다."
-        case .firebaseAuthenticationFailed:
-            return "Firebase 인증에 실패했습니다."
+    
+    private func performAppleLogin(authorization: ASAuthorization) {
+        Task {
+            do {
+                guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { throw LoginError.appleIDCredentialRetrievalFailed }
+                
+                guard let nonce = currentNonce,
+                      let appleIDToken = appleIDCredential.identityToken,
+                      let idTokenString = String(data: appleIDToken, encoding: .utf8)
+                else { throw LoginError.invalidNonceOrIDToken }
+                
+                let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: appleIDCredential.fullName)
+                
+                switch await FirebaseAuthService.signIn(with: credential) {
+                case .success(_): loginPublisher.send(completion: .finished)
+                case .failure(let error): throw error
+                }
+            } catch {
+                loginPublisher.send(completion: .failure(error))
+            }
+        }
+    }
+    
     func errorMessage(for error: Error) -> String {
         if let loginError = error as? LoginError {
             return loginError.errorDescription
@@ -88,39 +96,7 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
         controller: ASAuthorizationController,
         didCompleteWithAuthorization authorization: ASAuthorization
     ) {
-        
-        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            loginPublisher.send(completion: .failure(LoginError.appleIDCredentialRetrievalFailed))
-            return
-        }
-        
-        guard let nonce = currentNonce,
-              let appleIDToken = appleIDCredential.identityToken,
-              let idTokenString = String(data: appleIDToken, encoding: .utf8)
-        else {
-            loginPublisher.send(completion: .failure(LoginError.invalidNonceOrIDToken))
-            return
-        }
-        
-        let credential = OAuthProvider.appleCredential(withIDToken: idTokenString,
-                                                       rawNonce: nonce,
-                                                       fullName: appleIDCredential.fullName)
-        
-        
-        Auth.auth().signIn(with: credential) { result, error in
-            if let error = error {
-                self.loginPublisher.send(completion: .failure(error))
-                return
-            }
-            
-            guard result != nil else {
-                self.loginPublisher.send(completion: .failure(LoginError.firebaseAuthenticationFailed))
-                return
-            }
-
-            self.loginPublisher.send(completion: .finished)
-        }
-        
+        performAppleLogin(authorization: authorization)
     }
 
     func authorizationController(
