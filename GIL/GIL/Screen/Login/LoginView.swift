@@ -9,57 +9,18 @@ import UIKit
 import AuthenticationServices
 
 final class LoginView: UIView {
+    private let formStackView = BaseStackView(axis: .vertical, spacing: 10)
+    private let singUpStackView = BaseStackView(axis: .horizontal, distribution: .fill, spacing: 3)
     let emailTextField = BasicTextField(type: .email, returnKeyType: .next)
     let passwordTextField = BasicTextField(type: .password, returnKeyType: .done)
-    let loginButton = BasicButton(title: "로그인".localized())
-    let signUpButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("회원가입".localized(), for: .normal)
-        button.setTitleColor(.red, for: .normal)
-        button.applyDynamicTypeFont(textStyle: .body, size: 15, weight: .semibold)
-        return button
-    }()
-    private let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 3
-        return stack
-    }()
-    private let signUpLabel: UILabel = {
-        let label = UILabel()
-        label.text = "아직 회원이 아니신가요?".localized()
-        label.textColor = .text
-        label.applyDynamicTypeFont(textStyle: .body, size: 15, weight: .medium)
-        return label
-    }()
-    let socialLabel: UILabel = {
-        let label = UILabel()
-        label.text = "SNS 계정으로 로그인".localized()
-        label.backgroundColor = .systemBackground
-        label.textColor = .lightGray
-        label.applyDynamicTypeFont(textStyle: .footnote, size: 15, weight: .medium)
-        return label
-    }()
-    let appleLoginButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "logo-apple"), for: .normal)
-        button.setBackgroundImage(UIImage(named: "logo-apple"), for: .highlighted)
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 25
-        return button
-    }()
-    let border: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .borderGray
-        return label
-    }()
+    let loginButton = InteractiveButton(title: "로그인", titleColor: .white, fontSize: 18, fontWeight: .bold)
     let signUpButton = BaseButton(title: "회원가입", titleColor: .red, fontWeight: .semibold)
     let appleLoginButton = BaseButton(bgNormal: UIImage(named: "logo-apple"), bgHighlighted: UIImage(named: "logo-apple"))
     
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureUI()
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
