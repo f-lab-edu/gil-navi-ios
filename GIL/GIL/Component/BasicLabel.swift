@@ -13,13 +13,15 @@ final class BasicLabel: UILabel {
         text: String,
         textColor: UIColor = .text,
         fontSize: CGFloat = 14,
-        fontWeight: UIFont.Weight = .medium
+        fontWeight: UIFont.Weight = .medium,
+        numberOfLines: Int = 1
     ) {
         super.init(frame: .zero)
         configureUI(text: text,
                     textColor: textColor,
                     fontSize: fontSize,
-                    fontWeight: fontWeight)
+                    fontWeight: fontWeight,
+                    numberOfLines: numberOfLines)
     }
     
     required init?(coder: NSCoder) {
@@ -33,10 +35,12 @@ extension BasicLabel {
         text txt: String,
         textColor txtColor: UIColor,
         fontSize: CGFloat,
-        fontWeight: UIFont.Weight
+        fontWeight: UIFont.Weight,
+        numberOfLines lines: Int
     ) {
         text = txt.localized()
         textColor = txtColor
-        applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)   
+        numberOfLines = lines
+        applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
     }
 }
