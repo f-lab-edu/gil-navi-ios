@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		5806472A2BCD147A00FB7310 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580647292BCD147A00FB7310 /* UIImage+Extension.swift */; };
+		5810DE202BE1F78400180BFB /* MappinImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE1F2BE1F78400180BFB /* MappinImageView.swift */; };
+		5810DE232BE1FD3900180BFB /* HomeViewController+CollectionViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE222BE1FD3900180BFB /* HomeViewController+CollectionViewSetup.swift */; };
+		5810DE252BE1FE1300180BFB /* HomeViewController+DataSourceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE242BE1FE1300180BFB /* HomeViewController+DataSourceConfiguration.swift */; };
+		5810DE272BE1FF3A00180BFB /* HomeViewController+UIUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE262BE1FF3A00180BFB /* HomeViewController+UIUpdates.swift */; };
+		5810DE2B2BE2001600180BFB /* PlaceSearchViewController+CollectionViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE2A2BE2001600180BFB /* PlaceSearchViewController+CollectionViewSetup.swift */; };
+		5810DE2D2BE2006600180BFB /* PlaceSearchViewController+DataSourceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE2C2BE2006600180BFB /* PlaceSearchViewController+DataSourceConfiguration.swift */; };
+		5810DE2F2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE2E2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift */; };
+		5810DE312BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE302BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift */; };
+		5810DE332BE2013D00180BFB /* PlaceSearchViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE322BE2013D00180BFB /* PlaceSearchViewController+Actions.swift */; };
+		583210B82BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583210B72BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift */; };
 		58368EFA2BD51957009E008C /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EF92BD51957009E008C /* BasicLabel.swift */; };
 		58368EFC2BD536B8009E008C /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFB2BD536B8009E008C /* AlertService.swift */; };
 		58368EFE2BD75E9C009E008C /* FirebaseAuth+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */; };
@@ -42,6 +52,11 @@
 		584FA4452BAD6068002600F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 584FA4442BAD6068002600F1 /* GoogleService-Info.plist */; };
 		584FA44A2BB15D51002600F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4492BB15D51002600F1 /* LoginViewModel.swift */; };
 		586F030C2BE0C4A2008660A0 /* LanguageCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030B2BE0C4A1008660A0 /* LanguageCode.swift */; };
+		586F030F2BE0D050008660A0 /* PlaceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030E2BE0D050008660A0 /* PlaceData.swift */; };
+		586F03122BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03112BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift */; };
+		586F03142BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03132BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift */; };
+		586F03162BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03152BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift */; };
+		586F03182BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */; };
 		58A6808E2BDE7C02004E6706 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A6808D2BDE7C02004E6706 /* LocationService.swift */; };
 		58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */; };
 		58BAC8992BC5399D00CDEB1F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAC8982BC5399D00CDEB1F /* UITextField+Extension.swift */; };
@@ -82,6 +97,16 @@
 
 /* Begin PBXFileReference section */
 		580647292BCD147A00FB7310 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		5810DE1F2BE1F78400180BFB /* MappinImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappinImageView.swift; sourceTree = "<group>"; };
+		5810DE222BE1FD3900180BFB /* HomeViewController+CollectionViewSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+CollectionViewSetup.swift"; sourceTree = "<group>"; };
+		5810DE242BE1FE1300180BFB /* HomeViewController+DataSourceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+DataSourceConfiguration.swift"; sourceTree = "<group>"; };
+		5810DE262BE1FF3A00180BFB /* HomeViewController+UIUpdates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+UIUpdates.swift"; sourceTree = "<group>"; };
+		5810DE2A2BE2001600180BFB /* PlaceSearchViewController+CollectionViewSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+CollectionViewSetup.swift"; sourceTree = "<group>"; };
+		5810DE2C2BE2006600180BFB /* PlaceSearchViewController+DataSourceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+DataSourceConfiguration.swift"; sourceTree = "<group>"; };
+		5810DE2E2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+BindigSetup.swift"; sourceTree = "<group>"; };
+		5810DE302BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+UIUpdates.swift"; sourceTree = "<group>"; };
+		5810DE322BE2013D00180BFB /* PlaceSearchViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+Actions.swift"; sourceTree = "<group>"; };
+		583210B72BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellProtocol.swift; sourceTree = "<group>"; };
 		58368EF92BD51957009E008C /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
 		58368EFB2BD536B8009E008C /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Extension.swift"; sourceTree = "<group>"; };
@@ -114,6 +139,11 @@
 		584FA4442BAD6068002600F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		584FA4492BB15D51002600F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		586F030B2BE0C4A1008660A0 /* LanguageCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCode.swift; sourceTree = "<group>"; };
+		586F030E2BE0D050008660A0 /* PlaceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceData.swift; sourceTree = "<group>"; };
+		586F03112BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+LocationService.swift"; sourceTree = "<group>"; };
+		586F03132BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+SearchBar.swift"; sourceTree = "<group>"; };
+		586F03152BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+UICollectionView.swift"; sourceTree = "<group>"; };
+		586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRecentSearchPlaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		58A6808D2BDE7C02004E6706 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		58BAC8982BC5399D00CDEB1F /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
@@ -170,6 +200,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5810DE212BE1FD0700180BFB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5810DE222BE1FD3900180BFB /* HomeViewController+CollectionViewSetup.swift */,
+				5810DE242BE1FE1300180BFB /* HomeViewController+DataSourceConfiguration.swift */,
+				5810DE262BE1FF3A00180BFB /* HomeViewController+UIUpdates.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		5810DE292BE1FFEC00180BFB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5810DE2A2BE2001600180BFB /* PlaceSearchViewController+CollectionViewSetup.swift */,
+				5810DE2C2BE2006600180BFB /* PlaceSearchViewController+DataSourceConfiguration.swift */,
+				5810DE2E2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift */,
+				5810DE302BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift */,
+				5810DE322BE2013D00180BFB /* PlaceSearchViewController+Actions.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		583210B62BE69EA800D9DCA1 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				583210B72BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		58368EFF2BD76162009E008C /* Enum */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				58368F0C2BD828C6009E008C /* HomeSearchCollectionViewCell.swift */,
+				586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -201,6 +262,8 @@
 			children = (
 				58368F1B2BDE4650009E008C /* Views */,
 				58DE93072BDF841300C97575 /* Cells */,
+				5810DE292BE1FFEC00180BFB /* Extension */,
+				586F03102BE0FC24008660A0 /* Delegate */,
 				58368F152BDE41FC009E008C /* PlaceSearchViewController.swift */,
 				58368F172BDE4243009E008C /* PlaceSearchViewModel.swift */,
 			);
@@ -243,8 +306,10 @@
 				58BDFB9F2BB16F93006AC994 /* GIL.entitlements */,
 				584FA4192BA7F5E1002600F1 /* Screen */,
 				58DE930B2BDF948100C97575 /* Model */,
+				586F030D2BE0D03D008660A0 /* SwiftData */,
 				584FA4202BA82D26002600F1 /* Component */,
 				584FA4262BA84CF5002600F1 /* Extension */,
+				583210B62BE69EA800D9DCA1 /* Protocol */,
 				58368EFF2BD76162009E008C /* Enum */,
 				58BDFBC62BBA8C21006AC994 /* Utilities */,
 				584FA3E62BA41484002600F1 /* AppDelegate.swift */,
@@ -304,6 +369,7 @@
 				584FA4212BA84254002600F1 /* BasicButton.swift */,
 				58BAC8AF2BCCF59800CDEB1F /* NavigationActionButton.swift */,
 				58368EF92BD51957009E008C /* BasicLabel.swift */,
+				5810DE1F2BE1F78400180BFB /* MappinImageView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -323,6 +389,24 @@
 				58DE930E2BDFA23200C97575 /* UIView+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		586F030D2BE0D03D008660A0 /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				586F030E2BE0D050008660A0 /* PlaceData.swift */,
+			);
+			path = SwiftData;
+			sourceTree = "<group>";
+		};
+		586F03102BE0FC24008660A0 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				586F03112BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift */,
+				586F03132BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift */,
+				586F03152BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		58BDFBA02BB2B865006AC994 /* SignUp */ = {
@@ -358,6 +442,7 @@
 			children = (
 				58368F132BD8C1C2009E008C /* Views */,
 				58368F0E2BD828CA009E008C /* Cells */,
+				5810DE212BE1FD0700180BFB /* Extension */,
 				58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */,
 				58368F022BD80472009E008C /* HomeInteractor.swift */,
 				58368F042BD8047E009E008C /* HomePresenter.swift */,
@@ -551,10 +636,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5810DE232BE1FD3900180BFB /* HomeViewController+CollectionViewSetup.swift in Sources */,
+				586F030F2BE0D050008660A0 /* PlaceData.swift in Sources */,
 				58368EFC2BD536B8009E008C /* AlertService.swift in Sources */,
 				584FA41B2BA7F606002600F1 /* LoginViewController.swift in Sources */,
 				58368F032BD80472009E008C /* HomeInteractor.swift in Sources */,
 				58368F052BD8047E009E008C /* HomePresenter.swift in Sources */,
+				586F03122BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift in Sources */,
 				58368F162BDE41FC009E008C /* PlaceSearchViewController.swift in Sources */,
 				58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */,
 				584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */,
@@ -562,6 +650,7 @@
 				58368F122BD8B7D5009E008C /* HomeSearchBarView.swift in Sources */,
 				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
 				58BAC8B02BCCF59800CDEB1F /* NavigationActionButton.swift in Sources */,
+				586F03162BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift in Sources */,
 				58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */,
 				584FA4222BA84254002600F1 /* BasicButton.swift in Sources */,
 				58DE930D2BDF94B600C97575 /* PlaceModel.swift in Sources */,
@@ -569,20 +658,27 @@
 				58368F012BD7617D009E008C /* FirebaseAuthError.swift in Sources */,
 				58BAC89B2BC53A4D00CDEB1F /* UIButton+Extension.swift in Sources */,
 				5806472A2BCD147A00FB7310 /* UIImage+Extension.swift in Sources */,
+				5810DE202BE1F78400180BFB /* MappinImageView.swift in Sources */,
 				58BDFBCA2BBA9B27006AC994 /* SignUpViewModel.swift in Sources */,
 				58BDFBC22BB6A748006AC994 /* OSLog+Extension.swift in Sources */,
 				58368F1A2BDE424A009E008C /* PlaceSearchView.swift in Sources */,
 				58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */,
 				58368EFA2BD51957009E008C /* BasicLabel.swift in Sources */,
 				584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */,
+				5810DE2D2BE2006600180BFB /* PlaceSearchViewController+DataSourceConfiguration.swift in Sources */,
 				58368F1D2BDE4AD2009E008C /* PlaceSearchNavigationBar.swift in Sources */,
 				584FA41E2BA82886002600F1 /* BasicTextField.swift in Sources */,
+				5810DE332BE2013D00180BFB /* PlaceSearchViewController+Actions.swift in Sources */,
 				58DE93092BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift in Sources */,
 				58DE930F2BDFA23200C97575 /* UIView+Extension.swift in Sources */,
+				5810DE252BE1FE1300180BFB /* HomeViewController+DataSourceConfiguration.swift in Sources */,
 				58368EFE2BD75E9C009E008C /* FirebaseAuth+Extension.swift in Sources */,
+				586F03142BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift in Sources */,
 				58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */,
 				58BDFBA42BB2E536006AC994 /* SignUpView.swift in Sources */,
 				584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */,
+				5810DE2B2BE2001600180BFB /* PlaceSearchViewController+CollectionViewSetup.swift in Sources */,
+				5810DE2F2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift in Sources */,
 				584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */,
 				58368F0D2BD828C6009E008C /* HomeSearchCollectionViewCell.swift in Sources */,
 				58368F0B2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift in Sources */,
@@ -590,7 +686,11 @@
 				586F030C2BE0C4A2008660A0 /* LanguageCode.swift in Sources */,
 				58BDFBCC2BBAA78F006AC994 /* String+Extension.swift in Sources */,
 				58BAC8992BC5399D00CDEB1F /* UITextField+Extension.swift in Sources */,
+				5810DE312BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift in Sources */,
+				586F03182BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift in Sources */,
+				583210B82BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift in Sources */,
 				584FA44A2BB15D51002600F1 /* LoginViewModel.swift in Sources */,
+				5810DE272BE1FF3A00180BFB /* HomeViewController+UIUpdates.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,7 +793,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -751,7 +851,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -777,6 +877,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -810,6 +911,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -836,7 +938,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = woojin.GILTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -860,7 +962,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = woojin.GILTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -883,6 +985,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = woojin.GILUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -905,6 +1008,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = woojin.GILUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

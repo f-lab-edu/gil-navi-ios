@@ -7,15 +7,9 @@
 
 import UIKit
 
-class PlaceSearchCollectionViewCell: UICollectionViewCell {
-    static let reuseIdentifier = "PlaceSearchCell"
-    private let mappinIcon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "mappin.and.ellipse")
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .mainGreen
-        return imageView
-    }()
+class PlaceSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
+    static let reuseIdentifier: String = "PlaceSearchCell"
+    private let mappinIcon = MappinImageView(iconType: .outline)
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -78,9 +72,9 @@ extension PlaceSearchCollectionViewCell {
     func updateContent(with item: Place) {
         nameLabel.text = item.name
         
-        if let distance = item.distance {
-            let formattedDistance = formatDistance(distance)
-            addressLabel.text = "\(formattedDistance) · \(item.address ?? "")"
+        if item.distance > 0 {
+            let formattedDistance = formatDistance(item.distance)
+            addressLabel.text = "\(formattedDistance) · \(item.address)"
         } else {
             addressLabel.text = item.address
         }
