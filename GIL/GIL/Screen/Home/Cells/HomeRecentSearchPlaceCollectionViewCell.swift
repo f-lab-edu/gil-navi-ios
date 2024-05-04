@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeRecentSearchPlaceCollectionViewCell: UICollectionViewCell {
+class HomeRecentSearchPlaceCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
     static let reuseIdentifier = "HomeRecentSearchPlaceCell"
     private var buttons: [UIButton] = []
     
