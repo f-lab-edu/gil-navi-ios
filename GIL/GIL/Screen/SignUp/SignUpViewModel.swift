@@ -55,7 +55,6 @@ class SignUpViewModel: SignUpViewModelInput, SignUpViewModelOutput {
             }
             .assign(to: \.value, on: isFormValidPublisher)
             .store(in: &cancellables)
-        
     }
     
     private func bindPasswordMatch() {
@@ -84,12 +83,8 @@ class SignUpViewModel: SignUpViewModelInput, SignUpViewModelOutput {
     
     func errorMessage(for error: Error) -> String {
         switch error {
-        case let signUpError as SignUpError:
-            return signUpError.errorDescription
-        case let authError as FirebaseAuthError:
-            return authError.errorDescription
-        default:
-            return "예상치 못한 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
+        case let signUpError as SignUpError: return signUpError.errorDescription
+        default: return error.localizedDescription
         }
     }
 

@@ -8,8 +8,6 @@
 import Foundation
 import Combine
 import AuthenticationServices
-import OSLog
-import CryptoKit
 import FirebaseAuth
 
 protocol LoginViewModelInput {
@@ -65,9 +63,10 @@ final class LoginViewModel: NSObject, LoginViewModelIO {
         password: String
     ) {
         Task {
-            switch await FirebaseAuthManager.signIn(with: email, password: password) {
-            case .success(_): Log.network("Email Login Success")
-            case .failure(let error): loginPublisher.send(completion: .failure(error))
+            do {
+                let _ = try await FirebaseAuthManager.signInAsync(with: email, password: password)
+            } catch {
+                loginPublisher.send(completion: .failure(error))
             }
         }
     }
@@ -83,11 +82,7 @@ final class LoginViewModel: NSObject, LoginViewModelIO {
                 else { throw LoginError.invalidNonceOrIDToken }
                 
                 let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: appleIDCredential.fullName)
-                
-                switch await FirebaseAuthManager.signIn(with: credential) {
-                case .success(_): loginPublisher.send(completion: .finished)
-                case .failure(let error): throw error
-                }
+                let _ = try await FirebaseAuthManager.signInAsync(with: credential)
             } catch {
                 loginPublisher.send(completion: .failure(error))
             }
@@ -95,14 +90,10 @@ final class LoginViewModel: NSObject, LoginViewModelIO {
     }
     
     func errorMessage(for error: Error) -> String {
-        if let loginError = error as? LoginError {
-            return loginError.errorDescription
-        } else if let firebaseAuthError = error as? FirebaseAuthError {
-            return firebaseAuthError.errorDescription
-        } else if let cryptoUtilsError = error as? CryptoUtilsError {
-            return cryptoUtilsError.localizedDescription
-        } else {
-            return "로그인 중 예상치 못한 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
+        switch error {
+        case let loginError as LoginError: return loginError.errorDescription
+        case let cryptoUtilsError as CryptoUtilsError: return cryptoUtilsError.localizedDescription
+        default: return error.localizedDescription
         }
     }
 }
