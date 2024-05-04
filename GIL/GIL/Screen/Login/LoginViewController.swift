@@ -37,37 +37,31 @@ final class LoginViewController: BaseViewController {
 // MARK: - Binding
 extension LoginViewController {
     func setupBindings() {
-        bindTextFields()
-        bindButtons()
-        bindPublishers()
+        setupBindTextFields()
+        setupBindButtons()
+        subscribeToPublishers()
     }
     
-    private func bindTextFields() {
+    private func setupBindTextFields() {
         loginView.emailTextField.delegate = self
         loginView.passwordTextField.delegate = self
     }
     
-    private func bindButtons() {
-        let loginAction = UIAction { _ in self.loginButtonTapped() }
-        loginView.loginButton.addAction(loginAction, for: .touchUpInside)
-        
-        let signUpAction = UIAction { _ in self.signUpButtonTapped() }
-        loginView.signUpButton.addAction(signUpAction, for: .touchUpInside)
-     
-        let appleLoginAction = UIAction { _ in self.viewModel.startSignInWithAppleFlow() }
-        loginView.appleLoginButton.addAction(appleLoginAction, for: .touchUpInside)
+    private func setupBindButtons() {
+        loginView.loginButton.addAction(UIAction { _ in self.loginButtonTapped()}, for: .touchUpInside)
+        loginView.signUpButton.addAction(UIAction { _ in self.signUpButtonTapped()}, for: .touchUpInside)
+        loginView.appleLoginButton.addAction(UIAction { _ in self.viewModel.startSignInWithAppleFlow()}, for: .touchUpInside)
     }
     
-    private func bindPublishers() {
+    private func subscribeToPublishers() {
         viewModel.loginPublisher
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {
                 case .finished: FirebaseAuthManager.signInAnonymously()
                 case .failure(let error):
-                    Log.error("Apple Login Failure", error)
                     let errorMessage = viewModel.errorMessage(for: error)
-                    self.showAlert(title: "로그인 실패", message: errorMessage)
+                    AlertService.showAlert(title: "로그인 실패", message: errorMessage, on: self)
                 }
             } receiveValue: { _ in }
             .store(in: &viewModel.cancellables)
@@ -93,20 +87,9 @@ extension LoginViewController {
     }
     
     func signUpButtonTapped() {
-        // 회원가입
         let signUpViewController = SignUpViewController(viewModel: SignUpViewModel())
         signUpViewController.modalPresentationStyle = .fullScreen
         present(signUpViewController, animated: true)
-    }
-}
-
-// MARK: - UI Handling
-extension LoginViewController {
-    func showAlert(
-        title: String,
-        message: String = ""
-    ) {
-        AlertService.showAlert(title: title, message: message, on: self)
     }
 }
 
