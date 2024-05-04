@@ -1,5 +1,5 @@
 //
-//  BasicTextField.swift
+//  FormTextField.swift
 //  GIL
 //
 //  Created by 송우진 on 3/18/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BasicTextField: UITextField {
+final class FormTextField: UITextField {
     enum FormType: Equatable {
         case email
         case password
@@ -16,35 +16,25 @@ final class BasicTextField: UITextField {
         
         var contentType: UITextContentType {
             switch self {
-            case .email:
-                return .emailAddress 
-            case .password, .verifyPassword:
-                return .password
-            case .unknown:
-                return .init(rawValue: "unknown")
+            case .email: return .emailAddress
+            case .password, .verifyPassword: return .password
+            case .unknown: return .init(rawValue: "unknown")
             }
         }
         
         var keyboardType: UIKeyboardType {
             switch self {
-            case .email:
-                return .emailAddress
-            default:
-                return .default
-                
+            case .email: return .emailAddress
+            default: return .default
             }
         }
         
         var placeholder: String {
             switch self {
-            case .email:
-                return "이메일"
-            case .password:
-                return "비밀번호"
-            case .verifyPassword:
-                return "비밀번호 확인"
-            case .unknown(let placeholder):
-                return placeholder
+            case .email: return "이메일"
+            case .password: return "비밀번호"
+            case .verifyPassword: return "비밀번호 확인"
+            case .unknown(let placeholder): return placeholder
             }
         }
     }
@@ -58,17 +48,12 @@ final class BasicTextField: UITextField {
         type: FormType,
         returnKeyType: UIReturnKeyType = .default,
         clearButtonMode: UITextField.ViewMode = .never,
-        textColor: UIColor = .black,
+        textColor: UIColor = .text,
         fontSize: CGFloat = 10,
         fontWeight: UIFont.Weight = .medium
     ) {
         super.init(frame: .zero)
-        configureUI(formType: type,
-                    returnKeyType: returnKeyType,
-                    clearButtonMode: clearButtonMode,
-                    textColor: textColor,
-                    fontSize: fontSize,
-                    fontWeight: fontWeight)
+        configureUI(formType: type, returnKeyType: returnKeyType, clearButtonMode: clearButtonMode, textColor: textColor, fontSize: fontSize, fontWeight: fontWeight)
     }
     
     required init?(coder: NSCoder) {
@@ -77,24 +62,30 @@ final class BasicTextField: UITextField {
     
     // MARK: - Override
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: padding)
+        bounds.inset(by: padding)
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: padding)
+        bounds.inset(by: padding)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             configurePlaceholderAndBorder()
         }
     }
 }
 
+// MARK: - UI Update
+extension FormTextField {
+    func updateBorderColor(_ isValid: Bool) {
+        let color = isValid ? FormTextField.validBorderColor : FormTextField.invalidBorderColor
+        layer.borderColor = color
+    }
+}
+
 // MARK: - Configure UI
-extension BasicTextField {
+extension FormTextField {
     private func configureUI(
         formType: FormType,
         returnKeyType returnType: UIReturnKeyType,
@@ -109,7 +100,7 @@ extension BasicTextField {
         isSecureTextEntry = (formType == .password) || (formType == .verifyPassword)
         returnKeyType = returnType
         clearButtonMode = clearMode
-        textColor = .text
+        textColor = txtColor
         applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
         backgroundColor = .systemBackground
         layer.borderWidth = 1

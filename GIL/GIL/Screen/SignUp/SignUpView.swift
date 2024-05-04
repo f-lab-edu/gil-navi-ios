@@ -8,33 +8,26 @@
 import UIKit
 
 final class SignUpView: UIView {
+    private let checkPasswordStackView = BaseStackView(spacing: 5)
     let closeButton = NavigationActionButton()
-    let emailLabel = UILabel()
-    let emailTextField = BasicTextField(type: .email, returnKeyType: .next, clearButtonMode: .whileEditing)
-    let nameLabel = UILabel()
-    let nameTextField = BasicTextField(type: .unknown(placeholder: "이름"), returnKeyType: .next, clearButtonMode: .whileEditing)
-    let passwordLabel = UILabel()
-    let passwordTextField = BasicTextField(type: .password, returnKeyType: .next)
-    let verifyPasswordLabel = UILabel()
-    let verifyPasswordTextField = BasicTextField(type: .verifyPassword, returnKeyType: .done)
+    let emailLabel = BaseLabel(text: "이메일", textColor: .mainGreen, fontType: .subheadline)
+    let nameLabel = BaseLabel(text: "이름", textColor: .mainGreen, fontType: .subheadline)
+    let passwordLabel = BaseLabel(text: "비밀번호", textColor: .mainGreen, fontType: .subheadline)
+    let verifyPasswordLabel = BaseLabel(text: "비밀번호 확인", textColor: .mainGreen, fontType: .subheadline)
+    let emailTextField = FormTextField(type: .email, returnKeyType: .next, clearButtonMode: .whileEditing)
+    let nameTextField = FormTextField(type: .unknown(placeholder: "이름"), returnKeyType: .next, clearButtonMode: .whileEditing)
+    let passwordTextField = FormTextField(type: .password, returnKeyType: .next)
+    let verifyPasswordTextField = FormTextField(type: .verifyPassword, returnKeyType: .done)
     let doneButton = InteractiveButton(title: "완료", titleColor: .white, fontSize: 18, fontWeight: .bold)
+    let checkPasswordLabel_01 = BaseLabel(text: "· 10글자 이상", fontSize: 11)
+    let checkPasswordLabel_02 = BaseLabel(text: "· 대문자 포함", fontSize: 11)
+    let checkPasswordLabel_03 = BaseLabel(text: "· 숫자 포함", fontSize: 11)
+    let checkPasswordLabel_04 = BaseLabel(text: "· 특수 문자 포함 !@#$%^&*()-_=+[{]}\\|;:'\",<.>/?", fontSize: 11)
     
-    private let checkPasswordStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 5
-        return stack
-    }()
-    
-    let checkPasswordLabel_01 = BasicLabel(text: "· 10글자 이상", fontSize: 11)
-    let checkPasswordLabel_02 = BasicLabel(text: "· 대문자 포함", fontSize: 11)
-    let checkPasswordLabel_03 = BasicLabel(text: "· 숫자 포함", fontSize: 11)
-    let checkPasswordLabel_04 = BasicLabel(text: "· 특수 문자 포함 !@#$%^&*()-_=+[{]}\\|;:'\",<.>/?", fontSize: 11)
-    
-    var emailLabelHeightConstraint: NSLayoutConstraint = .init()
-    var nameLabelHeightConstraint: NSLayoutConstraint = .init()
-    var passwordLabelHeightConstraint: NSLayoutConstraint = .init()
-    var verifyPasswordLabelHeightConstraint: NSLayoutConstraint = .init()
+    lazy var emailLabelHeightConstraint: NSLayoutConstraint = emailLabel.heightAnchor.constraint(equalToConstant: 0)
+    lazy var nameLabelHeightConstraint: NSLayoutConstraint = nameLabel.heightAnchor.constraint(equalToConstant: 0)
+    lazy var passwordLabelHeightConstraint: NSLayoutConstraint = passwordLabel.heightAnchor.constraint(equalToConstant: 0)
+    lazy var verifyPasswordLabelHeightConstraint: NSLayoutConstraint = verifyPasswordLabel.heightAnchor.constraint(equalToConstant: 0)
     
     // MARK: - Initialization
     override init(frame: CGRect) {

@@ -21,7 +21,7 @@
 		5810DE482BE36A5700180BFB /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE472BE36A5700180BFB /* BaseButton.swift */; };
 		5810DE4A2BE37C9400180BFB /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE492BE37C9400180BFB /* FirebaseAuthManager.swift */; };
 		5810DE4C2BE3890200180BFB /* CryptoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE4B2BE3890200180BFB /* CryptoUtils.swift */; };
-		58368EFA2BD51957009E008C /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EF92BD51957009E008C /* BasicLabel.swift */; };
+		58368EFA2BD51957009E008C /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EF92BD51957009E008C /* BaseLabel.swift */; };
 		58368EFC2BD536B8009E008C /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFB2BD536B8009E008C /* AlertService.swift */; };
 		58368F032BD80472009E008C /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F022BD80472009E008C /* HomeInteractor.swift */; };
 		58368F052BD8047E009E008C /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F042BD8047E009E008C /* HomePresenter.swift */; };
@@ -41,7 +41,7 @@
 		584FA4082BA41485002600F1 /* GILUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4072BA41485002600F1 /* GILUITests.swift */; };
 		584FA40A2BA41485002600F1 /* GILUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4092BA41485002600F1 /* GILUITestsLaunchTests.swift */; };
 		584FA41B2BA7F606002600F1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA41A2BA7F606002600F1 /* LoginViewController.swift */; };
-		584FA41E2BA82886002600F1 /* BasicTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA41D2BA82886002600F1 /* BasicTextField.swift */; };
+		584FA41E2BA82886002600F1 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA41D2BA82886002600F1 /* FormTextField.swift */; };
 		584FA4222BA84254002600F1 /* InteractiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4212BA84254002600F1 /* InteractiveButton.swift */; };
 		584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4272BA84D00002600F1 /* UIColor+Extension.swift */; };
 		584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA42F2BABC0EE002600F1 /* LoginView.swift */; };
@@ -111,7 +111,7 @@
 		5810DE472BE36A5700180BFB /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		5810DE492BE37C9400180BFB /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		5810DE4B2BE3890200180BFB /* CryptoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtils.swift; sourceTree = "<group>"; };
-		58368EF92BD51957009E008C /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
+		58368EF92BD51957009E008C /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
 		58368EFB2BD536B8009E008C /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		58368F022BD80472009E008C /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		58368F042BD8047E009E008C /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 		584FA4072BA41485002600F1 /* GILUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GILUITests.swift; sourceTree = "<group>"; };
 		584FA4092BA41485002600F1 /* GILUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GILUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		584FA41A2BA7F606002600F1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		584FA41D2BA82886002600F1 /* BasicTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTextField.swift; sourceTree = "<group>"; };
+		584FA41D2BA82886002600F1 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		584FA4212BA84254002600F1 /* InteractiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveButton.swift; sourceTree = "<group>"; };
 		584FA4272BA84D00002600F1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		584FA42F2BABC0EE002600F1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -357,13 +357,13 @@
 			isa = PBXGroup;
 			children = (
 				58368F0F2BD83490009E008C /* BaseViewController.swift */,
-				584FA41D2BA82886002600F1 /* BasicTextField.swift */,
+				584FA41D2BA82886002600F1 /* FormTextField.swift */,
 				584FA4212BA84254002600F1 /* InteractiveButton.swift */,
 				58BAC8AF2BCCF59800CDEB1F /* NavigationActionButton.swift */,
-				58368EF92BD51957009E008C /* BasicLabel.swift */,
 				5810DE1F2BE1F78400180BFB /* MappinImageView.swift */,
 				5810DE452BE35D4600180BFB /* BaseStackView.swift */,
 				5810DE472BE36A5700180BFB /* BaseButton.swift */,
+				58368EF92BD51957009E008C /* BaseLabel.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -660,11 +660,11 @@
 				58BDFBC22BB6A748006AC994 /* OSLog+Extension.swift in Sources */,
 				58368F1A2BDE424A009E008C /* PlaceSearchView.swift in Sources */,
 				58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */,
-				58368EFA2BD51957009E008C /* BasicLabel.swift in Sources */,
+				58368EFA2BD51957009E008C /* BaseLabel.swift in Sources */,
 				584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */,
 				5810DE2D2BE2006600180BFB /* PlaceSearchViewController+DataSourceConfiguration.swift in Sources */,
 				58368F1D2BDE4AD2009E008C /* PlaceSearchNavigationBar.swift in Sources */,
-				584FA41E2BA82886002600F1 /* BasicTextField.swift in Sources */,
+				584FA41E2BA82886002600F1 /* FormTextField.swift in Sources */,
 				5810DE332BE2013D00180BFB /* PlaceSearchViewController+Actions.swift in Sources */,
 				58DE93092BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift in Sources */,
 				58DE930F2BDFA23200C97575 /* UIView+Extension.swift in Sources */,

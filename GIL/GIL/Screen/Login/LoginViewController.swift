@@ -34,9 +34,9 @@ final class LoginViewController: BaseViewController {
     }
 }
 
-// MARK: - Binding
+// MARK: - Setup Binding
 extension LoginViewController {
-    func setupBindings() {
+    private func setupBindings() {
         setupBindTextFields()
         setupBindButtons()
         subscribeToPublishers()
@@ -55,6 +55,7 @@ extension LoginViewController {
     
     private func subscribeToPublishers() {
         viewModel.loginPublisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {

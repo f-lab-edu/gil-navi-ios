@@ -33,3 +33,13 @@ final class InteractiveButton: BaseButton {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+// MARK: - UI Update
+extension InteractiveButton {
+    func updateBackgroundColor(_ isValid: Bool) {
+        switch isValid {
+        case true: backgroundColor = InteractiveButton.disabledBackgroundColor
+        case false: backgroundColor = InteractiveButton.enabledBackgroundColor
+        }
+    }
+}
