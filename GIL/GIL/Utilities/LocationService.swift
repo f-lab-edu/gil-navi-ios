@@ -93,11 +93,11 @@ extension LocationService {
             return formatKoreanAddress(for: placemark)
         }
 
-        let languageCode = LanguageCode(rawValue: locale) ?? .Korean
+        let languageCode = LanguageCode(rawValue: locale) ?? .korean
         switch languageCode {
-        case .Japanese: return formatJapaneseAddress(for: placemark)
-        case .English: return formatEnglishAddress(for: placemark)
-        case .Korean: return formatKoreanAddress(for: placemark)
+        case .japanese: return formatJapaneseAddress(for: placemark)
+        case .english: return formatEnglishAddress(for: placemark)
+        case .korean: return formatKoreanAddress(for: placemark)
         }
     }
     

@@ -22,6 +22,7 @@
 		5810DE3A2BE215FF00180BFB /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE392BE215FF00180BFB /* LocationServiceTests.swift */; };
 		5810DE3C2BE2199400180BFB /* PlaceSearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE3B2BE2199400180BFB /* PlaceSearchServiceTests.swift */; };
 		5810DE422BE29BAD00180BFB /* MockLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE412BE29BAD00180BFB /* MockLocationService.swift */; };
+		583210B82BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583210B72BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift */; };
 		58368EFA2BD51957009E008C /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EF92BD51957009E008C /* BasicLabel.swift */; };
 		58368EFC2BD536B8009E008C /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFB2BD536B8009E008C /* AlertService.swift */; };
 		58368EFE2BD75E9C009E008C /* FirebaseAuth+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */; };
@@ -115,6 +116,7 @@
 		5810DE392BE215FF00180BFB /* LocationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceTests.swift; sourceTree = "<group>"; };
 		5810DE3B2BE2199400180BFB /* PlaceSearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchServiceTests.swift; sourceTree = "<group>"; };
 		5810DE412BE29BAD00180BFB /* MockLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationService.swift; sourceTree = "<group>"; };
+		583210B72BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellProtocol.swift; sourceTree = "<group>"; };
 		58368EF92BD51957009E008C /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
 		58368EFB2BD536B8009E008C /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		58368EFD2BD75E9C009E008C /* FirebaseAuth+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Extension.swift"; sourceTree = "<group>"; };
@@ -230,6 +232,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		583210B62BE69EA800D9DCA1 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				583210B72BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		58368EFF2BD76162009E008C /* Enum */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +319,7 @@
 				586F030D2BE0D03D008660A0 /* SwiftData */,
 				584FA4202BA82D26002600F1 /* Component */,
 				584FA4262BA84CF5002600F1 /* Extension */,
+				583210B62BE69EA800D9DCA1 /* Protocol */,
 				58368EFF2BD76162009E008C /* Enum */,
 				58BDFBC62BBA8C21006AC994 /* Utilities */,
 				584FA3E62BA41484002600F1 /* AppDelegate.swift */,
@@ -692,6 +703,7 @@
 				58BAC8992BC5399D00CDEB1F /* UITextField+Extension.swift in Sources */,
 				5810DE312BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift in Sources */,
 				586F03182BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift in Sources */,
+				583210B82BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift in Sources */,
 				584FA44A2BB15D51002600F1 /* LoginViewModel.swift in Sources */,
 				5810DE272BE1FF3A00180BFB /* HomeViewController+UIUpdates.swift in Sources */,
 			);

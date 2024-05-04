@@ -29,9 +29,15 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
     var recentSearchCount = 0 // 최근 검색 개수를 추적하는 변수
     
     // MARK: - Initialization
-    init(interactor: HomeBusinessLogic) {
+    init() {
+        let presenter = HomePresenter()
+        let interactor = HomeInteractor()
+        interactor.presenter = presenter
         self.interactor = interactor
+        
         super.init(nibName: nil, bundle: nil)
+        
+        presenter.viewController = self
     }
     
     required init?(coder: NSCoder) {

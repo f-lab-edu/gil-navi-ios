@@ -7,8 +7,8 @@
 
 import UIKit
 
-class PlaceSearchCollectionViewCell: UICollectionViewCell {
-    static let reuseIdentifier = "PlaceSearchCell"
+class PlaceSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
+    static let reuseIdentifier: String = "PlaceSearchCell"
     private let mappinIcon = MappinImageView(iconType: .outline)
     private let stackView: UIStackView = {
         let stack = UIStackView()
