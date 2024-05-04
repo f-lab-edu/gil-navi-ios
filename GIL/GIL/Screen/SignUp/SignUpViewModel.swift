@@ -22,7 +22,7 @@ protocol SignUpViewModelOutput {
     var createUserPublisher: PassthroughSubject<Void, Error> { get }
 }
 
-class SignUpViewModel: SignUpViewModelInput, SignUpViewModelOutput {
+final class SignUpViewModel: SignUpViewModelInput, SignUpViewModelOutput {
     enum SignUpError: Error {
         case invalidEmail
         case nameRequired
@@ -65,12 +65,14 @@ class SignUpViewModel: SignUpViewModelInput, SignUpViewModelOutput {
             .store(in: &cancellables)
     }
     
-    func createUser() async {
-        do {
-            try validateInputs()
-            let _ = try await FirebaseAuthManager.createUserAsync(with: emailPublisher.value, password: verifyPasswordPublisher.value)
-        } catch {
-            createUserPublisher.send(completion: .failure(error))
+    func createUser() {
+        Task {
+            do {
+                try validateInputs()
+                let _ = try await FirebaseAuthManager.createUserAsync(with: emailPublisher.value, password: verifyPasswordPublisher.value)
+            } catch {
+                createUserPublisher.send(completion: .failure(error))
+            }
         }
     }
     
@@ -94,14 +96,10 @@ class SignUpViewModel: SignUpViewModelInput, SignUpViewModelOutput {
 extension SignUpViewModel.SignUpError {
     var errorDescription: String {
         switch self {
-        case .invalidEmail:
-            return "입력하신 이메일이 유효하지 않습니다. 올바른 이메일 주소를 입력해 주세요."
-        case .nameRequired:
-            return "이름을 입력해주세요."
-        case .passwordNotStrongEnough:
-            return "비밀번호가 충분히 강력하지 않습니다. 비밀번호는 최소 10자 이상이어야 하며, 숫자, 대문자, 특수 문자를 포함해야 합니다."
-        case .passwordsDoNotMatch:
-            return "입력한 비밀번호가 일치하지 않습니다. 비밀번호를 다시 확인해 주세요."
+        case .invalidEmail: return "입력하신 이메일이 유효하지 않습니다. 올바른 이메일 주소를 입력해 주세요."
+        case .nameRequired: return "이름을 입력해주세요."
+        case .passwordNotStrongEnough: return "비밀번호가 충분히 강력하지 않습니다. 비밀번호는 최소 10자 이상이어야 하며, 숫자, 대문자, 특수 문자를 포함해야 합니다."
+        case .passwordsDoNotMatch: return "입력한 비밀번호가 일치하지 않습니다. 비밀번호를 다시 확인해 주세요."
         }
     }
 }

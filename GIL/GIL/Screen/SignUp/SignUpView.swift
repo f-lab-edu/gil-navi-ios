@@ -38,13 +38,30 @@ final class SignUpView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Drawing Cycle
-    override func updateConstraints() {
-        super.updateConstraints()
-        makeConstraints()
-    }
+}
 
+// MARK: - UI Updates
+extension SignUpView {
+    func animateLabelVisibility(
+        _ label: UILabel,
+        shouldShow: Bool,
+        constraint: NSLayoutConstraint
+    ) {
+        UIView.animate(withDuration: 0.3) {
+            label.alpha = shouldShow ? 1.0 : 0
+            constraint.constant = shouldShow ? 16 : 0
+            self.setupComponents()
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func updatePasswordValidationLabels(_ validations: [Bool]) {
+        let labels = [ checkPasswordLabel_01, checkPasswordLabel_02, checkPasswordLabel_03, checkPasswordLabel_04]
+        for (index, label) in labels.enumerated() {
+            let isValid = (index < validations.count) ? validations[index] : false
+            label.textColor = isValid ? .mainGreen : .text
+        }
+    }
 }
 
 // MARK: - Configure UI
