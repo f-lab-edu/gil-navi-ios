@@ -63,9 +63,7 @@ extension LoginViewController {
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {
-                case .finished:
-                    Log.network("Apple Login Success")
-                    Auth.auth().signInAnonymously()
+                case .finished: FirebaseAuthManager.signInAnonymously()
                 case .failure(let error):
                     Log.error("Apple Login Failure", error)
                     let errorMessage = viewModel.errorMessage(for: error)
@@ -79,8 +77,19 @@ extension LoginViewController {
 // MARK: - Actions
 extension LoginViewController {
     func loginButtonTapped() {
-        // 로그인
-        view.endEditing(true)
+        guard let email = loginView.emailTextField.text,
+              !email.isEmpty
+        else {
+            loginView.emailTextField.becomeFirstResponder()
+            return
+        }
+        guard let password = loginView.passwordTextField.text,
+              !password.isEmpty
+        else {
+            loginView.passwordTextField.becomeFirstResponder()
+            return
+        }
+        viewModel.signInWithEmail(email: email, password: password)
     }
     
     func signUpButtonTapped() {
@@ -105,15 +114,10 @@ extension LoginViewController {
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
-        case loginView.emailTextField:
-            loginView.passwordTextField.becomeFirstResponder()
-            
-        case loginView.passwordTextField:
-            loginButtonTapped()
-            
+        case loginView.emailTextField: loginView.passwordTextField.becomeFirstResponder()
+        case loginView.passwordTextField: loginButtonTapped()
         default: break
         }
         return true
     }
-
 }

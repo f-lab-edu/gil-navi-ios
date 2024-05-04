@@ -7,7 +7,6 @@
 
 import Combine
 import Foundation
-import FirebaseAuth
 
 protocol SignUpViewModelInput {
     var emailPublisher: CurrentValueSubject<String, Never> { get }
@@ -70,7 +69,7 @@ class SignUpViewModel: SignUpViewModelInput, SignUpViewModelOutput {
     func createUser() async {
         do {
             try validateInputs()
-            let _ = try await Auth.auth().createUserAsync(withEmail: emailPublisher.value, password: verifyPasswordPublisher.value)
+            let _ = try await FirebaseAuthManager.createUserAsync(with: emailPublisher.value, password: verifyPasswordPublisher.value)
         } catch {
             createUserPublisher.send(completion: .failure(error))
         }

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -19,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        FirebaseAuthService.registerAuthStateDidChangeHandler()
-        NotificationCenter.default.addObserver(self, selector: #selector(updateRootViewControllerBasedOnAuthenticationStatus), name: FirebaseAuthService.authStateDidChangeNotification, object: nil)
+        FirebaseAuthManager.registerAuthStateDidChangeHandler()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateRootViewControllerBasedOnAuthenticationStatus), name: FirebaseAuthManager.authStateDidChangeNotification, object: nil)
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.backgroundColor = .systemBackground
@@ -33,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     @objc private func updateRootViewControllerBasedOnAuthenticationStatus() {
         let homeViewController = HomeViewController()
         let loginViewController = LoginViewController(viewModel: LoginViewModel())
-        window?.rootViewController = UINavigationController(rootViewController: (Auth.auth().currentUser != nil) ? homeViewController : loginViewController)
+        window?.rootViewController = UINavigationController(rootViewController: (FirebaseAuthManager.currentUser != nil) ? homeViewController : loginViewController)
     }
 }
 

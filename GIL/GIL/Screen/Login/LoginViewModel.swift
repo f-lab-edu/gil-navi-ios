@@ -14,6 +14,7 @@ import FirebaseAuth
 
 protocol LoginViewModelInput {
     func startSignInWithAppleFlow()
+    func signInWithEmail(email: String, password: String)
 }
 
 protocol LoginViewModelOutput {
@@ -22,7 +23,7 @@ protocol LoginViewModelOutput {
 
 protocol LoginViewModelIO: LoginViewModelInput & LoginViewModelOutput { }
 
-class LoginViewModel: NSObject, LoginViewModelIO {
+final class LoginViewModel: NSObject, LoginViewModelIO {
     enum LoginError: Error {
         case appleIDCredentialRetrievalFailed
         case invalidNonceOrIDToken
@@ -38,7 +39,9 @@ class LoginViewModel: NSObject, LoginViewModelIO {
     }
     
     var loginPublisher = PassthroughSubject<Void, Error>()
+    var isFormValidPublisher = CurrentValueSubject<Bool, Never>(false)
     var cancellables = Set<AnyCancellable>()
+    
     private var currentNonce: String?
     
     func startSignInWithAppleFlow() {
@@ -57,6 +60,18 @@ class LoginViewModel: NSObject, LoginViewModelIO {
         }
     }
     
+    func signInWithEmail(
+        email: String,
+        password: String
+    ) {
+        Task {
+            switch await FirebaseAuthManager.signIn(with: email, password: password) {
+            case .success(_): Log.network("Email Login Success")
+            case .failure(let error): loginPublisher.send(completion: .failure(error))
+            }
+        }
+    }
+    
     private func performAppleLogin(authorization: ASAuthorization) {
         Task {
             do {
@@ -69,7 +84,7 @@ class LoginViewModel: NSObject, LoginViewModelIO {
                 
                 let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: appleIDCredential.fullName)
                 
-                switch await FirebaseAuthService.signIn(with: credential) {
+                switch await FirebaseAuthManager.signIn(with: credential) {
                 case .success(_): loginPublisher.send(completion: .finished)
                 case .failure(let error): throw error
                 }
