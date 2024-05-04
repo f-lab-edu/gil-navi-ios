@@ -71,7 +71,7 @@ class SignUpViewModel: SignUpViewModelInput, SignUpViewModelOutput {
     func createUser() async {
         do {
             try validateInputs()
-            let _ = try await Auth.auth().createUserAsync(withEmail: emailPublisher.value, password: verifyPasswordPublisher.value)
+            let _ = try await Auth.auth().createUserAsync(withEmail: emailPublisher.value, pwd: verifyPasswordPublisher.value)
         } catch {
             createUserPublisher.send(completion: .failure(error))
         }

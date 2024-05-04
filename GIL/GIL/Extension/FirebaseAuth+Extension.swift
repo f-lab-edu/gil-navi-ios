@@ -19,7 +19,7 @@ extension Auth {
     /// - Returns: 비동기적으로 `AuthDataResult`를 반환합니다.
     func createUserAsync(
         withEmail email: String,
-        password: String
+        pwd password: String
     ) async throws -> AuthDataResult {
         try await withCheckedThrowingContinuation { continuation in
             self.createUser(withEmail: email, password: password) { result, error in
