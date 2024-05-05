@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AuthenticationServices
 
 final class LoginView: UIView {
     private let formStackView = BaseStackView(axis: .vertical, spacing: 10)
@@ -28,55 +27,62 @@ final class LoginView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Drawing Cycle
-    override func updateConstraints() {
-        setConstraints()
-        super.updateConstraints()
 
-    }
 }
 
-// MARK: - Configure UI
+// MARK: - Setup UI
 extension LoginView {
-    func configureUI() {
-        [emailTextField, passwordTextField, loginButton, stackView, border, socialLabel, appleLoginButton].forEach({
-            addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        })
-        
-        [signUpLabel, signUpButton].forEach({
-            stackView.addArrangedSubview($0)
-        })
-        
+    private func setupUI() {
+        addSubviews()
+        setupComponents()
     }
     
-    func setConstraints() {
-        NSLayoutConstraint.activate([
-            emailTextField.topAnchor.constraint(equalTo: topAnchor, constant: 120),
-            emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            emailTextField.heightAnchor.constraint(equalToConstant: 55),
-            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10),
-            passwordTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
-            passwordTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
-            passwordTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
-            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30),
-            loginButton.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor),
-            loginButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
-            loginButton.heightAnchor.constraint(equalToConstant: 60),
-            stackView.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 40),
-            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            border.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -120),
-            border.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            border.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            border.heightAnchor.constraint(equalToConstant: 1),
-            socialLabel.centerXAnchor.constraint(equalTo: border.centerXAnchor),
-            socialLabel.centerYAnchor.constraint(equalTo: border.centerYAnchor),
-            appleLoginButton.topAnchor.constraint(equalTo: border.bottomAnchor, constant: 20),
-            appleLoginButton.centerXAnchor.constraint(equalTo: border.centerXAnchor),
-            appleLoginButton.widthAnchor.constraint(equalToConstant: 50),
-            appleLoginButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
+    private func addSubviews() {
+        [formStackView, loginButton, singUpStackView, socialLabel, appleLoginButton].forEach({ addSubview($0) })
+        [emailTextField, passwordTextField].forEach({ formStackView.addArrangedSubview($0) })
+        [signUpLabel, signUpButton].forEach({ singUpStackView.addArrangedSubview($0) })
+    }
+    
+    private func setupComponents() {
+        setupFormStackView()
+        setupLoginButton()
+        setupSingUpStackView()
+        setupSocialLabel()
+        setupAppleLoginButton()
+    }
+    
+    private func setupFormStackView() {
+        formStackView
+            .top(equalTo: topAnchor, constant: 120)
+            .left(equalTo: leadingAnchor, constant: 16)
+            .right(equalTo: trailingAnchor, constant: -16)
+            .height(120)
+    }
+    
+    private func setupLoginButton() {
+        loginButton
+            .top(equalTo: formStackView.bottomAnchor, constant: 30)
+            .applyConstraints(to: formStackView, attributes: [.leading, .trailing])
+            .height(60)
+    }
+    
+    private func setupSingUpStackView() {
+        singUpStackView
+            .top(equalTo: loginButton.bottomAnchor, constant: 40)
+            .centerX(equalTo: centerXAnchor)
+    }
+    
+    private func setupSocialLabel() {
+        socialLabel
+            .centerX(equalTo: centerXAnchor)
+            .bottom(equalTo: bottomAnchor, constant: -120)
+    }
+    
+    private func setupAppleLoginButton() {
+        appleLoginButton.layer.cornerRadius = 25
+        appleLoginButton
+            .top(equalTo: socialLabel.bottomAnchor, constant: 20)
+            .centerX(equalTo: socialLabel.centerXAnchor)
+            .size(CGSize(width: 50, height: 50))
     }
 }
