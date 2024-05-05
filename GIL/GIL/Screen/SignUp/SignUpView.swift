@@ -32,7 +32,7 @@ final class SignUpView: UIView {
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureUI()
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -64,89 +64,88 @@ extension SignUpView {
     }
 }
 
-// MARK: - Configure UI
+// MARK: - Setup UI
 extension SignUpView {
-    func configureUI() {
+    private func setupUI() {
         backgroundColor = .systemBackground
-        
-        configureLabel(emailLabel, text: "이메일")
-        configureLabel(nameLabel, text: "이름")
-        configureLabel(passwordLabel, text: "비밀번호")
-        configureLabel(verifyPasswordLabel, text: "비밀번호 확인")
-        
-        [closeButton, emailLabel, emailTextField, nameLabel, nameTextField, passwordLabel, passwordTextField, verifyPasswordLabel, verifyPasswordTextField, doneButton, checkPasswordStackView].forEach ({
-            addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        })
-        
-        [checkPasswordLabel_01, checkPasswordLabel_02, checkPasswordLabel_03, checkPasswordLabel_04].forEach({
-            checkPasswordStackView.addArrangedSubview($0)
-        })
+        addSubviews()
+        setupComponents()
     }
     
-    func makeConstraints() {
-        emailLabelHeightConstraint = emailLabel.heightAnchor.constraint(equalToConstant: 0)
-        nameLabelHeightConstraint = nameLabel.heightAnchor.constraint(equalToConstant: 0)
-        passwordLabelHeightConstraint = passwordLabel.heightAnchor.constraint(equalToConstant: 0)
-        verifyPasswordLabelHeightConstraint = verifyPasswordLabel.heightAnchor.constraint(equalToConstant: 0)
-        
-        NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-            closeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            closeButton.widthAnchor.constraint(equalToConstant: 44),
-            closeButton.heightAnchor.constraint(equalToConstant: 44),
-            
-            emailLabel.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 15),
-            emailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            emailLabelHeightConstraint,
-            
-            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 2),
-            emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            emailTextField.heightAnchor.constraint(equalToConstant: 60),
-            
-            nameLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10),
-            nameLabel.leadingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
-            nameLabelHeightConstraint,
-            
-            nameTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 2),
-            nameTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
-            nameTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
-            nameTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
-            
-            passwordLabel.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10),
-            passwordLabel.leadingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
-            passwordLabelHeightConstraint,
-            
-            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 2),
-            passwordTextField.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor),
-            passwordTextField.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
-            passwordTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
-            
-            verifyPasswordLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10),
-            verifyPasswordLabel.leadingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
-            verifyPasswordLabelHeightConstraint,
-            
-            verifyPasswordTextField.topAnchor.constraint(equalTo: verifyPasswordLabel.bottomAnchor, constant: 2),
-            verifyPasswordTextField.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor),
-            verifyPasswordTextField.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
-            verifyPasswordTextField.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor),
-            
-            checkPasswordStackView.topAnchor.constraint(equalTo: verifyPasswordTextField.bottomAnchor, constant: 15),
-            checkPasswordStackView.leadingAnchor.constraint(equalTo: verifyPasswordTextField.leadingAnchor, constant: 10),
-            checkPasswordStackView.trailingAnchor.constraint(equalTo: verifyPasswordTextField.trailingAnchor, constant: -10),
-            
-            doneButton.topAnchor.constraint(equalTo: checkPasswordStackView.bottomAnchor, constant: 30),
-            doneButton.leadingAnchor.constraint(equalTo: verifyPasswordTextField.leadingAnchor),
-            doneButton.trailingAnchor.constraint(equalTo: verifyPasswordTextField.trailingAnchor),
-            doneButton.heightAnchor.constraint(equalTo: verifyPasswordTextField.heightAnchor)
-        ])
+    private func addSubviews() {
+        [closeButton, emailLabel, emailTextField, nameLabel, nameTextField, passwordLabel, passwordTextField, verifyPasswordLabel, verifyPasswordTextField, doneButton, checkPasswordStackView].forEach ({ addSubview($0) })
+        [checkPasswordLabel_01, checkPasswordLabel_02, checkPasswordLabel_03, checkPasswordLabel_04].forEach({ checkPasswordStackView.addArrangedSubview($0) })
     }
     
-    private func configureLabel(_ label: UILabel, text: String) {
-        label.text = text.localized()
-        label.applyDynamicTypeFont(textStyle: .subheadline, size: 13, weight: .medium)
-        label.textColor = .mainGreen
-        label.alpha = 0
+    private func setupComponents() {
+        setupCloseButton()
+        setupEmail()
+        setupName()
+        setupPassword()
+        setupVerifyPassword()
+        setupCheckPasswordStackView()
+        setupDoneButton()
+    }
+    
+    private func setupCloseButton() {
+        closeButton
+            .top(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10)
+            .left(equalTo: leadingAnchor, constant: 10)
+            .size(CGSize(width: 44, height: 44))
+    }
+    
+    private func setupEmail() {
+        emailLabel
+            .top(equalTo: closeButton.bottomAnchor, constant: 15)
+            .left(equalTo: leadingAnchor, constant: 20)
+            .height(emailLabelHeightConstraint.constant)
+        emailTextField
+            .top(equalTo: emailLabel.bottomAnchor, constant: 2)
+            .left(equalTo: leadingAnchor, constant: 16)
+            .right(equalTo: trailingAnchor, constant: -16)
+            .height(60)
+    }
+    
+    private func setupName() {
+        nameLabel
+            .top(equalTo: emailTextField.bottomAnchor, constant: 10)
+            .applyConstraints(to: emailLabel, attributes: [.leading])
+            .height(nameLabelHeightConstraint.constant)
+        nameTextField
+            .top(equalTo: nameLabel.bottomAnchor, constant: 2)
+            .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
+    }
+    
+    private func setupPassword() {
+        passwordLabel
+            .top(equalTo: nameTextField.bottomAnchor, constant: 10)
+            .applyConstraints(to: emailLabel, attributes: [.leading])
+            .height(passwordLabelHeightConstraint.constant)
+        passwordTextField
+            .top(equalTo: passwordLabel.bottomAnchor, constant: 2)
+            .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
+    }
+    
+    private func setupVerifyPassword() {
+        verifyPasswordLabel
+            .top(equalTo: passwordTextField.bottomAnchor, constant: 10)
+            .applyConstraints(to: emailLabel, attributes: [.leading])
+            .height(verifyPasswordLabelHeightConstraint.constant)
+        verifyPasswordTextField
+            .top(equalTo: verifyPasswordLabel.bottomAnchor, constant: 2)
+            .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
+    }
+    
+    private func setupCheckPasswordStackView() {
+        checkPasswordStackView
+            .top(equalTo: verifyPasswordTextField.bottomAnchor, constant: 15)
+            .left(equalTo: verifyPasswordTextField.leadingAnchor, constant: 10)
+            .right(equalTo: verifyPasswordTextField.trailingAnchor, constant: -10)
+    }
+    
+    private func setupDoneButton() {
+        doneButton
+            .top(equalTo: checkPasswordStackView.bottomAnchor, constant: 30)
+            .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
     }
 }
