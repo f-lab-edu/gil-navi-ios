@@ -18,7 +18,6 @@
 		5810DE312BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE302BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift */; };
 		5810DE332BE2013D00180BFB /* PlaceSearchViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE322BE2013D00180BFB /* PlaceSearchViewController+Actions.swift */; };
 		5810DE352BE2070800180BFB /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE342BE2070800180BFB /* StringExtensionTests.swift */; };
-		5810DE382BE20C7100180BFB /* AuthExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE372BE20C7100180BFB /* AuthExtensionTests.swift */; };
 		5810DE3A2BE215FF00180BFB /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE392BE215FF00180BFB /* LocationServiceTests.swift */; };
 		5810DE3C2BE2199400180BFB /* PlaceSearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE3B2BE2199400180BFB /* PlaceSearchServiceTests.swift */; };
 		5810DE422BE29BAD00180BFB /* MockLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE412BE29BAD00180BFB /* MockLocationService.swift */; };
@@ -112,7 +111,6 @@
 		5810DE302BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+UIUpdates.swift"; sourceTree = "<group>"; };
 		5810DE322BE2013D00180BFB /* PlaceSearchViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+Actions.swift"; sourceTree = "<group>"; };
 		5810DE342BE2070800180BFB /* StringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
-		5810DE372BE20C7100180BFB /* AuthExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthExtensionTests.swift; sourceTree = "<group>"; };
 		5810DE392BE215FF00180BFB /* LocationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceTests.swift; sourceTree = "<group>"; };
 		5810DE3B2BE2199400180BFB /* PlaceSearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchServiceTests.swift; sourceTree = "<group>"; };
 		5810DE412BE29BAD00180BFB /* MockLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationService.swift; sourceTree = "<group>"; };
@@ -338,7 +336,6 @@
 			children = (
 				584FA3FD2BA41485002600F1 /* GILTests.swift */,
 				5810DE342BE2070800180BFB /* StringExtensionTests.swift */,
-				5810DE372BE20C7100180BFB /* AuthExtensionTests.swift */,
 				5810DE392BE215FF00180BFB /* LocationServiceTests.swift */,
 				5810DE3B2BE2199400180BFB /* PlaceSearchServiceTests.swift */,
 				5810DE412BE29BAD00180BFB /* MockLocationService.swift */,
@@ -716,7 +713,6 @@
 				5810DE422BE29BAD00180BFB /* MockLocationService.swift in Sources */,
 				5810DE3C2BE2199400180BFB /* PlaceSearchServiceTests.swift in Sources */,
 				5810DE352BE2070800180BFB /* StringExtensionTests.swift in Sources */,
-				5810DE382BE20C7100180BFB /* AuthExtensionTests.swift in Sources */,
 				5810DE3A2BE215FF00180BFB /* LocationServiceTests.swift in Sources */,
 				584FA3FE2BA41485002600F1 /* GILTests.swift in Sources */,
 			);

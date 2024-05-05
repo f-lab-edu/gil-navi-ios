@@ -18,12 +18,10 @@ final class StringExtensionTests: XCTestCase {
     }
 
     func test_비밀번호유효성검사() {
-        let password = "A1!a2b3c4d5e"
-        let results = password.validatePassword()
+        let results = "A1!a2b3c4d5e".validatePassword()
         XCTAssertEqual(results, [true, true, true, true], "비밀번호가 모든 기준을 충족해야 합니다")
         
-        let weakPassword = "abc"
-        let weakResults = weakPassword.validatePassword()
+        let weakResults = "abc".validatePassword()
         XCTAssertEqual(weakResults, [false, false, false, false], "비밀번호가 모든 조건을 충족하지 않아야 합니다")
     }
 
