@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MappinImageView: UIImageView {
+final class MappinImageView: BaseImageView {
     enum IconType {
         case filled
         case outline
@@ -25,23 +25,11 @@ final class MappinImageView: UIImageView {
         iconType: IconType,
         tintColor: UIColor = .mainGreen
     ) {
-        super.init(frame: .zero)
-        setupIcon(iconType: iconType, tintColor: tintColor)
+        let image = UIImage(systemName: iconType.imageName)
+        super.init(image: image, contentMode: .scaleAspectFit, tintColor: tintColor)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-// MARK: - Setup UI
-extension MappinImageView {
-    func setupIcon(
-        iconType: IconType,
-        tintColor color: UIColor
-    ) {
-        contentMode = .scaleAspectFit
-        tintColor = color
-        image = UIImage(systemName: iconType.imageName)
     }
 }

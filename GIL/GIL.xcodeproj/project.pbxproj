@@ -24,6 +24,7 @@
 		583210B52BE6610300D9DCA1 /* signUpCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583210B42BE6610300D9DCA1 /* signUpCollectionViewHandler.swift */; };
 		583210B82BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583210B72BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift */; };
 		583210BA2BE76DAA00D9DCA1 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583210B92BE76DAA00D9DCA1 /* BaseLabel.swift */; };
+		583210BC2BE8F24200D9DCA1 /* BaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583210BB2BE8F24200D9DCA1 /* BaseImageView.swift */; };
 		58368EFC2BD536B8009E008C /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFB2BD536B8009E008C /* AlertService.swift */; };
 		58368F032BD80472009E008C /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F022BD80472009E008C /* HomeInteractor.swift */; };
 		58368F052BD8047E009E008C /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F042BD8047E009E008C /* HomePresenter.swift */; };
@@ -116,6 +117,7 @@
 		583210B42BE6610300D9DCA1 /* signUpCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpCollectionViewHandler.swift; sourceTree = "<group>"; };
 		583210B72BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellProtocol.swift; sourceTree = "<group>"; };
 		583210B92BE76DAA00D9DCA1 /* BaseLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
+		583210BB2BE8F24200D9DCA1 /* BaseImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImageView.swift; sourceTree = "<group>"; };
 		58368EFB2BD536B8009E008C /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		58368F022BD80472009E008C /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		58368F042BD8047E009E008C /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				5810DE452BE35D4600180BFB /* BaseStackView.swift */,
 				5810DE472BE36A5700180BFB /* BaseButton.swift */,
 				583210B92BE76DAA00D9DCA1 /* BaseLabel.swift */,
+				583210BB2BE8F24200D9DCA1 /* BaseImageView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
 				58BAC8B02BCCF59800CDEB1F /* NavigationActionButton.swift in Sources */,
 				586F03162BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift in Sources */,
+				583210BC2BE8F24200D9DCA1 /* BaseImageView.swift in Sources */,
 				58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */,
 				584FA4222BA84254002600F1 /* InteractiveButton.swift in Sources */,
 				58DE930D2BDF94B600C97575 /* PlaceModel.swift in Sources */,
