@@ -1,5 +1,5 @@
 //
-//  SignUpCollectionViewHandler.swift
+//  SignUpTextFieldHandler.swift
 //  GIL
 //
 //  Created by 송우진 on 5/4/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SignUpCollectionViewHandler: NSObject, UITextFieldDelegate {
+final class SignUpTextFieldHandler: NSObject, UITextFieldDelegate {
     private weak var viewModel: SignUpViewModel?
     private weak var signUpView: SignUpView?
     
