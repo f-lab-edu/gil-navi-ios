@@ -8,79 +8,58 @@
 import UIKit
 
 final class HomeSearchBarView: UIView {
-    private let searchIconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "magnifyingglass")
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-
-    let searchLabel: UILabel = {
-        let label = UILabel()
-        label.text = "어디로 갈까요?".localized()
-        label.textColor = .placeholder
-        label.applyDynamicTypeFont(textStyle: .body, size: 15, weight: .regular)
-        return label
-    }()
-
-    private let favoriteButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "heart"), for: .normal)
-        return button
-    }()
+    private let searchIconImageView = BaseImageView(image: UIImage(systemName: "magnifyingglass"), contentMode: .scaleAspectFit, tintColor: .placeholder)
+    private let searchLabel = BaseLabel(text: "어디로 갈까요?", textColor: .placeholder, fontWeight: .regular)
 
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureUI()
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-    }
-    
-    // MARK: - Drawing Cycle
-    override func updateConstraints() {
-        setConstraints()
-        super.updateConstraints()
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
-// MARK: - Configure UI
+// MARK: - Setup UI
 extension HomeSearchBarView {
-    func configureUI() {
-        layer.cornerRadius = 3
+    private func setupUI() {
+        setupView()
+        addSubviews()
+        setupComponents()
+    }
+    
+    private func setupView() {
         backgroundColor = .white
-        
+        layer.cornerRadius = 3
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 1)
         layer.shadowRadius = 3
         layer.shadowOpacity = 0.2
         clipsToBounds = false
-        
-        [searchIconImageView, searchLabel, favoriteButton].forEach({
-            addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        })
     }
     
-    func setConstraints() {
-        NSLayoutConstraint.activate([
-            searchIconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            searchIconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            searchIconImageView.widthAnchor.constraint(equalToConstant: 24),
-            searchIconImageView.heightAnchor.constraint(equalToConstant: 24),
-            
-            searchLabel.leadingAnchor.constraint(equalTo: searchIconImageView.trailingAnchor, constant: 8),
-            searchLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -8),
-            searchLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            searchLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            
-            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            favoriteButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 24),
-            favoriteButton.heightAnchor.constraint(equalToConstant: 24)
-        ])
+    private func addSubviews() {
+        [searchIconImageView, searchLabel].forEach({ addSubview($0) })
+    }
+
+    private func setupComponents() {
+        setupSearchIconImageView()
+        setupSearchLabel()
+    }
+    
+    private func setupSearchIconImageView() {
+        searchIconImageView
+            .left(equalTo: leadingAnchor, constant: 8)
+            .centerY(equalTo: centerYAnchor)
+            .size(CGSize(width: 24, height: 24))
+    }
+    
+    private func setupSearchLabel() {
+        searchLabel
+            .left(equalTo: searchIconImageView.trailingAnchor, constant: 8)
+            .right(equalTo: trailingAnchor, constant: -8)
+            .centerY(equalTo: searchIconImageView.centerYAnchor)
     }
 }
