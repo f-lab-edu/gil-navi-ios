@@ -60,21 +60,8 @@ extension PlaceSearchCollectionViewCell {
 // MARK: - Update Content
 extension PlaceSearchCollectionViewCell {
     func updateContent(with item: Place) {
+        let viewModel = PlaceSearchViewModel()
         nameLabel.text = item.name
-        
-        if item.distance > 0 {
-            let formattedDistance = formatDistance(item.distance)
-            addressLabel.text = "\(formattedDistance) · \(item.address)"
-        } else {
-            addressLabel.text = item.address
-        }
-    }
-
-    private func formatDistance(_ distance: Double) -> String {
-        if distance < 1000 {
-            return "\(Int(distance))m"
-        } else {
-            return String(format: "%.2fkm", distance / 1000)
-        }
+        addressLabel.text = viewModel.getAddressForPlace(item)
     }
 }
