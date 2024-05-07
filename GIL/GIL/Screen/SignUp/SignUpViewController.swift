@@ -11,13 +11,13 @@ import Combine
 final class SignUpViewController: BaseViewController {
     private var viewModel: SignUpViewModel
     private var signUpView = SignUpView()
-    private var signUpCollectionViewHandler: SignUpCollectionViewHandler?
+    private var signUpTextFieldHandler: SignUpTextFieldHandler?
     
     // MARK: - Initialization
     init(viewModel: SignUpViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        signUpCollectionViewHandler = SignUpCollectionViewHandler(viewModel: viewModel, view: signUpView)
+        signUpTextFieldHandler = SignUpTextFieldHandler(viewModel: viewModel, view: signUpView)
     }
     
     required init?(coder: NSCoder) {
