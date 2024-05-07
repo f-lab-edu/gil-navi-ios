@@ -39,10 +39,10 @@ final class SignUpCollectionViewHandler: NSObject, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         guard let signUpView = signUpView else { return }
         switch textField {
-        case signUpView.emailTextField: signUpView.animateLabelVisibility(signUpView.emailLabel, shouldShow: true, constraint: signUpView.emailLabelHeightConstraint)
-        case signUpView.nameTextField: signUpView.animateLabelVisibility(signUpView.nameLabel, shouldShow: true, constraint: signUpView.nameLabelHeightConstraint)
-        case signUpView.passwordTextField: signUpView.animateLabelVisibility(signUpView.passwordLabel, shouldShow: true, constraint: signUpView.passwordLabelHeightConstraint)
-        case signUpView.verifyPasswordTextField: signUpView.animateLabelVisibility(signUpView.verifyPasswordLabel, shouldShow: true, constraint: signUpView.verifyPasswordLabelHeightConstraint)
+        case signUpView.emailTextField: signUpView.animateLabelVisibility(signUpView.emailLabel, shouldShow: true)
+        case signUpView.nameTextField: signUpView.animateLabelVisibility(signUpView.nameLabel, shouldShow: true)
+        case signUpView.passwordTextField: signUpView.animateLabelVisibility(signUpView.passwordLabel, shouldShow: true)
+        case signUpView.verifyPasswordTextField: signUpView.animateLabelVisibility(signUpView.verifyPasswordLabel, shouldShow: true)
         default: break
         }
     }
@@ -50,10 +50,10 @@ final class SignUpCollectionViewHandler: NSObject, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let signUpView = signUpView else { return }
         switch textField {
-        case signUpView.emailTextField: signUpView.animateLabelVisibility(signUpView.emailLabel, shouldShow: false, constraint: signUpView.emailLabelHeightConstraint)
-        case signUpView.nameTextField: signUpView.animateLabelVisibility(signUpView.nameLabel, shouldShow: false, constraint: signUpView.nameLabelHeightConstraint)
-        case signUpView.passwordTextField: signUpView.animateLabelVisibility(signUpView.passwordLabel, shouldShow: false, constraint: signUpView.passwordLabelHeightConstraint)
-        case signUpView.verifyPasswordTextField: signUpView.animateLabelVisibility(signUpView.verifyPasswordLabel, shouldShow: false, constraint: signUpView.verifyPasswordLabelHeightConstraint)
+        case signUpView.emailTextField: signUpView.animateLabelVisibility(signUpView.emailLabel, shouldShow: false)
+        case signUpView.nameTextField: signUpView.animateLabelVisibility(signUpView.nameLabel, shouldShow: false)
+        case signUpView.passwordTextField: signUpView.animateLabelVisibility(signUpView.passwordLabel, shouldShow: false)
+        case signUpView.verifyPasswordTextField: signUpView.animateLabelVisibility(signUpView.verifyPasswordLabel, shouldShow: false)
         default: break
         }
     }
