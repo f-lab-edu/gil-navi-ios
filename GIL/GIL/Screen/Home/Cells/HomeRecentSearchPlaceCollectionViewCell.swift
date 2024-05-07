@@ -26,7 +26,15 @@ final class HomeRecentSearchPlaceCollectionViewCell: UICollectionViewCell, Colle
 // MARK: - Setup UI
 extension HomeRecentSearchPlaceCollectionViewCell {
     private func setupUI() {
+        addSubviews()
+        setupSearchBarView()
+    }
+    
+    private func addSubviews() {
         contentView.addSubview(stackView)
+    }
+    
+    private func setupSearchBarView() {
         stackView.applyConstraints(to: contentView, attributes: [.top, .bottom, .leading, .trailing])
     }
 }
@@ -43,7 +51,6 @@ extension HomeRecentSearchPlaceCollectionViewCell {
             stackView.removeArrangedSubview($0)
             $0.removeFromSuperview()
         }
-        
         buttons.forEach { $0.removeFromSuperview() }
         buttons.removeAll()
     }
@@ -97,5 +104,14 @@ extension HomeRecentSearchPlaceCollectionViewCell {
             .left(equalTo: button.leadingAnchor, constant: 20)
             .right(equalTo: button.trailingAnchor, constant: -20)
             .height(1)
+    }
+}
+
+// MARK: - Cell Layout
+extension HomeRecentSearchPlaceCollectionViewCell {
+    static func layoutItem(count recentSearchCount: Int) -> NSCollectionLayoutItem {
+        let recentSearchItemHeight = CGFloat(50 * recentSearchCount)
+        let recentSearchItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(recentSearchItemHeight))
+        return NSCollectionLayoutItem(layoutSize: recentSearchItemSize)
     }
 }

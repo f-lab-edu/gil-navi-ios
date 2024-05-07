@@ -34,7 +34,7 @@ extension HomeSearchCollectionViewCell {
 
 // MARK: - Gestures
 extension HomeSearchCollectionViewCell {
-    @objc func searchBarTapped() {
+    @objc private func searchBarTapped() {
         onSearchBarTapped?()
     }
 }
@@ -56,5 +56,13 @@ extension HomeSearchCollectionViewCell {
             .left(equalTo: contentView.leadingAnchor, constant: 10)
             .right(equalTo: contentView.trailingAnchor, constant: -10)
             .height(50)
+    }
+}
+
+// MARK: - Cell Layout
+extension HomeSearchCollectionViewCell {
+    static func layoutItem() -> NSCollectionLayoutItem {
+        let searchItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(80))
+        return NSCollectionLayoutItem(layoutSize: searchItemSize)
     }
 }
