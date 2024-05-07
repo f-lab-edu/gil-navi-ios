@@ -57,10 +57,16 @@ extension LocationService: CLLocationManagerDelegate {
         _ manager: CLLocationManager,
         didUpdateLocations locations: [CLLocation]
     ) {
+        #if RELEASE
         if let location = locations.first {
             currentLocation = location
             fetchAddress(for: location)
         }
+        #else
+        let location = CLLocation(latitude: 34.0522, longitude: -118.2437)
+        currentLocation = location
+        fetchAddress(for: location)
+        #endif   
     }
     
     /// 위치 업데이트 실패 시 호출됩니다.
