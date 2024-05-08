@@ -46,11 +46,12 @@ class PlaceSearchViewModel {
     }
     
     func getAddressForPlace(_ place: Place) -> String {
+        guard let address = place.placemarkData.address else { return "" }
         if place.distance > 0 {
             let formattedDistance = place.formattedDistanceString()
-            return "\(formattedDistance) · \(place.address)"
+            return "\(formattedDistance) · \(address)"
         } else {
-            return place.address
+            return address
         }
     }
 }

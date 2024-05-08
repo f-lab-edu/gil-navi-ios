@@ -9,18 +9,37 @@ import MapKit
 
 struct Place: Hashable, Codable {
     let name: String
-    let address: String
     let category: String
     let distance: Double
+    let placemarkData: PlacemarkData
+    
+    struct PlacemarkData: Hashable, Codable {
+        let coordinate: Coordinate
+        let address: String?
+        let locality: String?
+        let postalCode: String?
+        
+        init(placemark: MKPlacemark) {
+            self.coordinate = Coordinate(latitude: placemark.coordinate.latitude, longitude: placemark.coordinate.longitude)
+            self.address = placemark.title
+            self.locality = placemark.locality
+            self.postalCode = placemark.postalCode
+        }
+        
+        struct Coordinate: Codable, Hashable {
+            let latitude: Double
+            let longitude: Double
+        }
+    }
     
     init(
         mapItem: MKMapItem,
         distance: Double = 0.0
     ) {
         self.name = mapItem.name ?? ""
-        self.address = mapItem.placemark.title ?? ""
         self.category = mapItem.pointOfInterestCategory?.rawValue ?? ""
         self.distance = distance
+        self.placemarkData = PlacemarkData(placemark: mapItem.placemark)
     }
     
     func formattedDistanceString() -> String {
