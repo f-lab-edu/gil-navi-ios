@@ -7,6 +7,10 @@
 
 import MapKit
 
+protocol PlacesSearchServiceProtocol {
+    func searchPlacesNearby(location: CLLocation, query: String, regionRadius: CLLocationDistance) async throws -> [MKMapItem]
+}
+
 class PlacesSearchService {
     /// 주어진 좌표와 쿼리를 사용하여 주변 장소를 검색합니다.
     /// - Parameters:

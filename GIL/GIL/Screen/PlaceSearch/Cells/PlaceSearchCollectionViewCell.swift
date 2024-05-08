@@ -16,8 +16,8 @@ class PlaceSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellPro
         stack.spacing = 5
         return stack
     }()
-    let nameLabel = BasicLabel(text: "", fontSize: 15, fontWeight: .bold)
-    let addressLabel = BasicLabel(text: "", textColor: .grayLabel, fontSize: 13, fontWeight: .medium, numberOfLines: 0)
+    let nameLabel = BaseLabel(text: "", fontSize: 15, fontWeight: .bold)
+    let addressLabel = BaseLabel(text: "", textColor: .grayLabel, fontSize: 13, fontWeight: .medium, numberOfLines: 0)
     
     // MARK: - Initialization
     override init(frame: CGRect) {

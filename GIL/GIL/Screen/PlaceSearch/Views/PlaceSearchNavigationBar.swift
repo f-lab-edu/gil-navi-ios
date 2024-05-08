@@ -9,8 +9,8 @@ import UIKit
 
 final class PlaceSearchNavigationBar: UIView {
     let backButton = NavigationActionButton(type: .back)
-    let myLocationLabel = BasicLabel(text: "내 위치".localized(), fontSize: 11, fontWeight: .regular)
-    let addressLabel = BasicLabel(text: "", textColor: .blackLabel, fontSize: 13, fontWeight: .bold)
+    let myLocationLabel = BaseLabel(text: "내 위치".localized(), fontSize: 11, fontWeight: .regular)
+    let addressLabel = BaseLabel(text: "", textColor: .blackLabel, fontSize: 13, fontWeight: .bold)
     let searchBar = UISearchBar()
     
     // MARK: - Initialization

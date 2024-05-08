@@ -8,33 +8,26 @@
 import UIKit
 
 final class SignUpView: UIView {
+    private let checkPasswordStackView = BaseStackView(spacing: 5)
     let closeButton = NavigationActionButton()
-    let emailLabel = UILabel()
-    let emailTextField = BasicTextField(type: .email, returnKeyType: .next, clearButtonMode: .whileEditing)
-    let nameLabel = UILabel()
-    let nameTextField = BasicTextField(type: .unknown(placeholder: "이름"), returnKeyType: .next, clearButtonMode: .whileEditing)
-    let passwordLabel = UILabel()
-    let passwordTextField = BasicTextField(type: .password, returnKeyType: .next)
-    let verifyPasswordLabel = UILabel()
-    let verifyPasswordTextField = BasicTextField(type: .verifyPassword, returnKeyType: .done)
-    let doneButton = BasicButton(title: "완료")
+    let emailLabel = BaseLabel(text: "이메일", textColor: .mainGreen, fontType: .subheadline)
+    let nameLabel = BaseLabel(text: "이름", textColor: .mainGreen, fontType: .subheadline)
+    let passwordLabel = BaseLabel(text: "비밀번호", textColor: .mainGreen, fontType: .subheadline)
+    let verifyPasswordLabel = BaseLabel(text: "비밀번호 확인", textColor: .mainGreen, fontType: .subheadline)
+    let emailTextField = FormTextField(type: .email, returnKeyType: .next, clearButtonMode: .whileEditing)
+    let nameTextField = FormTextField(type: .unknown(placeholder: "이름"), returnKeyType: .next, clearButtonMode: .whileEditing)
+    let passwordTextField = FormTextField(type: .password, returnKeyType: .next)
+    let verifyPasswordTextField = FormTextField(type: .verifyPassword, returnKeyType: .done)
+    let doneButton = InteractiveButton(title: "완료", titleColor: .white, fontSize: 18, fontWeight: .bold)
+    let checkPasswordLabel_01 = BaseLabel(text: "· 10글자 이상", fontSize: 11)
+    let checkPasswordLabel_02 = BaseLabel(text: "· 대문자 포함", fontSize: 11)
+    let checkPasswordLabel_03 = BaseLabel(text: "· 숫자 포함", fontSize: 11)
+    let checkPasswordLabel_04 = BaseLabel(text: "· 특수 문자 포함 !@#$%^&*()-_=+[{]}\\|;:'\",<.>/?", fontSize: 11)
     
-    private let checkPasswordStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 5
-        return stack
-    }()
-    
-    let checkPasswordLabel_01 = BasicLabel(text: "· 10글자 이상", fontSize: 11)
-    let checkPasswordLabel_02 = BasicLabel(text: "· 대문자 포함", fontSize: 11)
-    let checkPasswordLabel_03 = BasicLabel(text: "· 숫자 포함", fontSize: 11)
-    let checkPasswordLabel_04 = BasicLabel(text: "· 특수 문자 포함 !@#$%^&*()-_=+[{]}\\|;:'\",<.>/?", fontSize: 11)
-    
-    var emailLabelHeightConstraint: NSLayoutConstraint = .init()
-    var nameLabelHeightConstraint: NSLayoutConstraint = .init()
-    var passwordLabelHeightConstraint: NSLayoutConstraint = .init()
-    var verifyPasswordLabelHeightConstraint: NSLayoutConstraint = .init()
+    lazy var emailLabelHeightConstraint: NSLayoutConstraint = emailLabel.heightAnchor.constraint(equalToConstant: 0)
+    lazy var nameLabelHeightConstraint: NSLayoutConstraint = nameLabel.heightAnchor.constraint(equalToConstant: 0)
+    lazy var passwordLabelHeightConstraint: NSLayoutConstraint = passwordLabel.heightAnchor.constraint(equalToConstant: 0)
+    lazy var verifyPasswordLabelHeightConstraint: NSLayoutConstraint = verifyPasswordLabel.heightAnchor.constraint(equalToConstant: 0)
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -45,13 +38,30 @@ final class SignUpView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Drawing Cycle
-    override func updateConstraints() {
-        super.updateConstraints()
-        makeConstraints()
-    }
+}
 
+// MARK: - UI Updates
+extension SignUpView {
+    func animateLabelVisibility(
+        _ label: UILabel,
+        shouldShow: Bool,
+        constraint: NSLayoutConstraint
+    ) {
+        UIView.animate(withDuration: 0.3) {
+            label.alpha = shouldShow ? 1.0 : 0
+            constraint.constant = shouldShow ? 16 : 0
+            self.setupComponents()
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func updatePasswordValidationLabels(_ validations: [Bool]) {
+        let labels = [ checkPasswordLabel_01, checkPasswordLabel_02, checkPasswordLabel_03, checkPasswordLabel_04]
+        for (index, label) in labels.enumerated() {
+            let isValid = (index < validations.count) ? validations[index] : false
+            label.textColor = isValid ? .mainGreen : .text
+        }
+    }
 }
 
 // MARK: - Configure UI

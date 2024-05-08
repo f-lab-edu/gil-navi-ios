@@ -57,8 +57,8 @@ extension HomeRecentSearchPlaceCollectionViewCell {
         button.backgroundColor = .systemBackground
         
         let iconImageView = MappinImageView(iconType: .filled)
-        let nameLabel = BasicLabel(text: place.place.name, fontSize: 15, fontWeight: .bold)
-        let addressLabel = BasicLabel(text: place.place.address, fontSize: 13, fontWeight: .medium)
+        let nameLabel = BaseLabel(text: place.place.name, fontSize: 15, fontWeight: .bold)
+        let addressLabel = BaseLabel(text: place.place.address, fontSize: 13, fontWeight: .medium)
         
         [iconImageView, nameLabel, addressLabel].forEach({
             button.addSubview($0)
