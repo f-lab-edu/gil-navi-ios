@@ -87,9 +87,9 @@ extension HomeCollectionViewHandler {
     private func configureSearchCell(
         for collectionView: UICollectionView,
         at indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeSearchCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeSearchCollectionViewCell else { return UICollectionViewCell() }
-        cell.onSearchBarTapped = { [weak self] in
+    ) -> UICollectionViewCell? {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeSearchCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeSearchCollectionViewCell
+        cell?.onSearchBarTapped = { [weak self] in
             guard let self else { return }
             self.interactor.performSearch()
         }
@@ -100,9 +100,9 @@ extension HomeCollectionViewHandler {
         for collectionView: UICollectionView,
         at indexPath: IndexPath,
         with data: [PlaceData]
-    ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRecentSearchPlaceCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeRecentSearchPlaceCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(with: data)
+    ) -> UICollectionViewCell? {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRecentSearchPlaceCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeRecentSearchPlaceCollectionViewCell
+        cell?.configure(with: data)
         return cell
     }
 }
