@@ -95,9 +95,9 @@ extension PlaceSearchViewController: UISearchBarDelegate {
 
 // MARK: - LocationServiceDelegate
 extension PlaceSearchViewController: LocationServiceDelegate {
-    func didFetchAddress(_ address: String) {
+    func didFetchPlacemark(_ placemark: PlacemarkModel) {
         viewModel.locationService.stopUpdatingLocation()
-        placeSearchView.navigationBar.addressLabel.text = address
+        placeSearchView.navigationBar.addressLabel.text = placemark.address ?? ""
     }
     
     func didFailWithError(_ error: Error) {
