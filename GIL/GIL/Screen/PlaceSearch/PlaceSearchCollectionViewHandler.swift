@@ -30,7 +30,7 @@ final class PlaceSearchCollectionViewHandler: NSObject, UICollectionViewDelegate
 
 // MARK: - DataSource Updates
 extension PlaceSearchCollectionViewHandler {
-    func applySnapshot(with items: [Place]) {
+    func applySnapshot(with items: [PlaceModel]) {
         var snapshot = dataSource.snapshot()
         snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .main))
         snapshot.appendItems(items, toSection: .main)
@@ -66,10 +66,10 @@ extension PlaceSearchCollectionViewHandler {
     }
     
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Place>(collectionView: placeSearchView.searchResultsCollectionView) { (collectionView, indexPath, place) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, PlaceModel>(collectionView: placeSearchView.searchResultsCollectionView) { (collectionView, indexPath, place) -> UICollectionViewCell? in
             self.configurePlaceSearcCell(for: collectionView, at: indexPath, item: place)
         }
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Place>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, PlaceModel>()
         snapshot.appendSections([.main])
         snapshot.appendItems([], toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: false)
@@ -81,7 +81,7 @@ extension PlaceSearchCollectionViewHandler {
     private func configurePlaceSearcCell(
         for collectionView: UICollectionView,
         at indexPath: IndexPath,
-        item: Place
+        item: PlaceModel
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceSearchCollectionViewCell.reuseIdentifier, for: indexPath) as? PlaceSearchCollectionViewCell else { return UICollectionViewCell() }
         cell.updateContent(with: item)

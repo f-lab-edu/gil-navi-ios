@@ -71,7 +71,7 @@ extension HomeRecentSearchPlaceCollectionViewCell {
         
         let iconImageView = MappinImageView(iconType: .filled)
         let nameLabel = BaseLabel(text: place.place.name, fontSize: 15, fontWeight: .bold)
-        let addressLabel = BaseLabel(text: place.place.placemarkData.address ?? "", fontSize: 13, fontWeight: .medium)
+        let addressLabel = BaseLabel(text: place.place.placemark.address ?? "", fontSize: 13, fontWeight: .medium)
         let border = UIView()
         border.backgroundColor = .lightGrayBorder
     

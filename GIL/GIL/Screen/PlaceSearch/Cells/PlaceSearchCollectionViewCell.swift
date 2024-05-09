@@ -59,7 +59,7 @@ extension PlaceSearchCollectionViewCell {
 
 // MARK: - Update Content
 extension PlaceSearchCollectionViewCell {
-    func updateContent(with item: Place) {
+    func updateContent(with item: PlaceModel) {
         let viewModel = PlaceSearchViewModel()
         nameLabel.text = item.name
         addressLabel.text = viewModel.getAddressForPlace(item)

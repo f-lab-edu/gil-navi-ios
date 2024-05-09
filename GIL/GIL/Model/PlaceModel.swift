@@ -7,42 +7,40 @@
 
 import MapKit
 
-struct Place: Hashable, Codable {
+struct PlaceModel: Hashable, Codable {
     let name: String
-    let category: String
-    let distance: Double
-    let placemarkData: PlacemarkData
+    let phoneNumber: String?
+    let url: URL?
+    let category: String?
+    var distance: Double?
+    var formattedDistance: String?
+    let placemark: PlacemarkModel
     
-    struct PlacemarkData: Hashable, Codable {
-        let coordinate: Coordinate
-        let address: String?
-        let locality: String?
-        let postalCode: String?
-        
-        init(placemark: MKPlacemark) {
-            self.coordinate = Coordinate(latitude: placemark.coordinate.latitude, longitude: placemark.coordinate.longitude)
-            self.address = placemark.title
-            self.locality = placemark.locality
-            self.postalCode = placemark.postalCode
-        }
-        
-        struct Coordinate: Codable, Hashable {
-            let latitude: Double
-            let longitude: Double
-        }
-    }
-    
+    // MARK: - Initialization
     init(
         mapItem: MKMapItem,
-        distance: Double = 0.0
+        distance: Double?
     ) {
         self.name = mapItem.name ?? ""
-        self.category = mapItem.pointOfInterestCategory?.rawValue ?? ""
+        self.phoneNumber = mapItem.phoneNumber
+        self.url = mapItem.url
+        self.category = mapItem.pointOfInterestCategory?.rawValue
         self.distance = distance
-        self.placemarkData = PlacemarkData(placemark: mapItem.placemark)
+        self.placemark = PlacemarkModel(mkPlacemark: mapItem.placemark)
+        self.formattedDistance = formattedDistanceString()
+        Log.info("PlaceModel", [
+            "name":self.name,
+            "phoneNumber":self.phoneNumber ?? "",
+            "url": self.url?.absoluteString ?? "",
+            "category": self.category ?? "",
+            "distance" : self.formattedDistance
+        ])
     }
     
-    func formattedDistanceString() -> String {
+    /// 거리를 문자열 형식으로 반환합니다.
+    /// - Returns: 1000미터 미만인 경우 미터(m) 단위로, 그 이상인 경우 킬로미터(km) 단위로 반환됩니다. distance가 비어 있으면 nil을 반환합니다.
+    private func formattedDistanceString() -> String? {
+        guard let distance = distance else { return nil }
         if distance < 1000 {
             return "\(Int(distance))m"
         } else {

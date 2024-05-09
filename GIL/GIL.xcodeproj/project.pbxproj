@@ -13,6 +13,7 @@
 		5810DE482BE36A5700180BFB /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE472BE36A5700180BFB /* BaseButton.swift */; };
 		5810DE4A2BE37C9400180BFB /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE492BE37C9400180BFB /* FirebaseAuthManager.swift */; };
 		5810DE4C2BE3890200180BFB /* CryptoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE4B2BE3890200180BFB /* CryptoUtils.swift */; };
+		581F796D2BEC9A98001F81A0 /* PlacemarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581F796C2BEC9A98001F81A0 /* PlacemarkModel.swift */; };
 		583210B52BE6610300D9DCA1 /* SignUpTextFieldHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583210B42BE6610300D9DCA1 /* SignUpTextFieldHandler.swift */; };
 		5810DE352BE2070800180BFB /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE342BE2070800180BFB /* StringExtensionTests.swift */; };
 		5810DE3A2BE215FF00180BFB /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE392BE215FF00180BFB /* LocationServiceTests.swift */; };
@@ -101,6 +102,7 @@
 		5810DE472BE36A5700180BFB /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		5810DE492BE37C9400180BFB /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		5810DE4B2BE3890200180BFB /* CryptoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtils.swift; sourceTree = "<group>"; };
+		581F796C2BEC9A98001F81A0 /* PlacemarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkModel.swift; sourceTree = "<group>"; };
 		583210B42BE6610300D9DCA1 /* SignUpTextFieldHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextFieldHandler.swift; sourceTree = "<group>"; };
 		5810DE342BE2070800180BFB /* StringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
 		5810DE392BE215FF00180BFB /* LocationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceTests.swift; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				58DE930C2BDF94B600C97575 /* PlaceModel.swift */,
+				581F796C2BEC9A98001F81A0 /* PlacemarkModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -650,6 +653,7 @@
 				584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */,
 				584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */,
 				58368F0D2BD828C6009E008C /* HomeSearchCollectionViewCell.swift in Sources */,
+				581F796D2BEC9A98001F81A0 /* PlacemarkModel.swift in Sources */,
 				58368F0B2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift in Sources */,
 				58368F182BDE4243009E008C /* PlaceSearchViewModel.swift in Sources */,
 				5810DE462BE35D4600180BFB /* BaseStackView.swift in Sources */,
