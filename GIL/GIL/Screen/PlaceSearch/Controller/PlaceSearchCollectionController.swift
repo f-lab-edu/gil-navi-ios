@@ -1,5 +1,5 @@
 //
-//  PlaceSearchCollectionViewHandler.swift
+//  PlaceSearchCollectionController.swift
 //  GIL
 //
 //  Created by 송우진 on 5/7/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PlaceSearchCollectionViewHandler: NSObject, UICollectionViewDelegate {
+final class PlaceSearchCollectionController: NSObject, UICollectionViewDelegate {
     private enum Section: CaseIterable {
         case main
     }
@@ -29,7 +29,7 @@ final class PlaceSearchCollectionViewHandler: NSObject, UICollectionViewDelegate
 }
 
 // MARK: - DataSource Updates
-extension PlaceSearchCollectionViewHandler {
+extension PlaceSearchCollectionController {
     func applySnapshot(with items: [Place]) {
         var snapshot = dataSource.snapshot()
         snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .main))
@@ -39,7 +39,7 @@ extension PlaceSearchCollectionViewHandler {
 }
 
 // MARK: - UICollectionViewDelegate
-extension PlaceSearchCollectionViewHandler {
+extension PlaceSearchCollectionController {
     func collectionView(
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
@@ -50,7 +50,7 @@ extension PlaceSearchCollectionViewHandler {
 }
 
 // MARK: - Setup and Configuration
-extension PlaceSearchCollectionViewHandler {
+extension PlaceSearchCollectionController {
     private func setupCollectionView() {
         placeSearchView.searchResultsCollectionView.delegate = self
         placeSearchView.searchResultsCollectionView.collectionViewLayout = createLayout()
@@ -77,14 +77,14 @@ extension PlaceSearchCollectionViewHandler {
 }
 
 // MARK: - Cell Configuration
-extension PlaceSearchCollectionViewHandler {
+extension PlaceSearchCollectionController {
     private func configurePlaceSearcCell(
         for collectionView: UICollectionView,
         at indexPath: IndexPath,
         item: Place
-    ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceSearchCollectionViewCell.reuseIdentifier, for: indexPath) as? PlaceSearchCollectionViewCell else { return UICollectionViewCell() }
-        cell.updateContent(with: item)
+    ) -> UICollectionViewCell? {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceSearchCollectionViewCell.reuseIdentifier, for: indexPath) as? PlaceSearchCollectionViewCell
+        cell?.updateContent(with: item)
         return cell
     }
 }

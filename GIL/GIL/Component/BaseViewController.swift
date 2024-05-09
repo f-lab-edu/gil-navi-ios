@@ -27,7 +27,7 @@ extension BaseViewController {
 
 // MARK: - UI Handling
 extension BaseViewController {
-    @objc private func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 }
