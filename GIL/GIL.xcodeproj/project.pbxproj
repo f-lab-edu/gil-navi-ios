@@ -628,6 +628,7 @@
 				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
 				58BAC8B02BCCF59800CDEB1F /* NavigationActionButton.swift in Sources */,
 				583210BC2BE8F24200D9DCA1 /* BaseImageView.swift in Sources */,
+				581F79752BEE212D001F81A0 /* MabController.swift in Sources */,
 				58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */,
 				584FA4222BA84254002600F1 /* InteractiveButton.swift in Sources */,
 				58DE930D2BDF94B600C97575 /* PlaceModel.swift in Sources */,
