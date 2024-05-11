@@ -62,7 +62,7 @@ extension LoginViewController {
                 case .finished: FirebaseAuthManager.signInAnonymously()
                 case .failure(let error):
                     let errorMessage = viewModel.errorMessage(for: error)
-                    AlertService.showAlert(title: "로그인 실패", message: errorMessage, on: self)
+                    AlertService.showAlert(title: "로그인 실패", message: errorMessage)
                 }
             } receiveValue: { _ in }
             .store(in: &viewModel.cancellables)

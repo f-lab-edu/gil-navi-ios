@@ -65,7 +65,7 @@ extension SignUpViewController {
                 case .finished: Log.network("회원가입 성공")
                 case .failure(let error):
                     let message = viewModel.errorMessage(for: error)
-                    AlertService.showAlert(title: "회원가입 실패", message: message, on: self)
+                    AlertService.showAlert(title: "회원가입 실패", message: message)
                 }
             } receiveValue: { _ in }
             .store(in: &viewModel.cancellables)
