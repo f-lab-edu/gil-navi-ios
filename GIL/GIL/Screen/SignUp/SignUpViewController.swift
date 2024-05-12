@@ -126,7 +126,7 @@ extension SignUpViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isValid in
                 guard let self else { return }
-                signUpView.doneButton.updateBackgroundColor(isValid)
+                signUpView.doneButton.isEnabled = isValid
             }
             .store(in: &viewModel.cancellables)
     }

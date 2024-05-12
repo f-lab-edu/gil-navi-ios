@@ -20,7 +20,7 @@ final class SignUpView: UIView {
     let nameTextField = FormTextField(type: .unknown(placeholder: "이름"), returnKeyType: .next, clearButtonMode: .whileEditing)
     let passwordTextField = FormTextField(type: .password, returnKeyType: .next)
     let verifyPasswordTextField = FormTextField(type: .verifyPassword, returnKeyType: .done)
-    let doneButton = InteractiveButton(title: "완료", titleColor: .white, fontSize: 18, fontWeight: .bold)
+    let doneButton = UIButton()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -157,6 +157,7 @@ extension SignUpView {
     }
     
     private func setupDoneButton() {
+        doneButton.applySubmitStyle(title: "완료")
         doneButton
             .top(equalTo: checkPasswordStackView.bottomAnchor, constant: 30)
             .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])

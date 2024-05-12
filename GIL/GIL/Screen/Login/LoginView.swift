@@ -12,11 +12,11 @@ final class LoginView: UIView {
     private let singUpStackView = BaseStackView(axis: .horizontal, distribution: .fill, spacing: 3)
     let emailTextField = FormTextField(type: .email, returnKeyType: .next)
     let passwordTextField = FormTextField(type: .password, returnKeyType: .done)
-    let loginButton = InteractiveButton(title: "로그인", titleColor: .white, fontSize: 18, fontWeight: .bold)
+    let loginButton = UIButton()
     let signUpLabel = BaseLabel(text: "아직 회원이 아니신가요?", fontSize: 15)
     let socialLabel = BaseLabel(text: "SNS 계정으로 로그인", textColor: .grayLabel, fontType: .footnote, fontSize: 15)
-    let signUpButton = BaseButton(title: "회원가입", titleColor: .red, fontWeight: .semibold)
-    let appleLoginButton = BaseButton(bgNormal: UIImage(named: "logo-apple"), bgHighlighted: UIImage(named: "logo-apple"))
+    let signUpButton = UIButton()
+    let appleLoginButton = UIButton()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -60,6 +60,7 @@ extension LoginView {
     }
     
     private func setupLoginButton() {
+        loginButton.applySubmitStyle(title: "로그인")
         loginButton
             .top(equalTo: formStackView.bottomAnchor, constant: 30)
             .applyConstraints(to: formStackView, attributes: [.leading, .trailing])
@@ -67,6 +68,10 @@ extension LoginView {
     }
     
     private func setupSingUpStackView() {
+        signUpButton
+            .setTitle(title: "회원가입", state: .normal)
+            .setTitleColor(color: .red, state: .normal)
+            .setFont(textStyle: .body, size: 15, weight: .semibold)
         singUpStackView
             .top(equalTo: loginButton.bottomAnchor, constant: 40)
             .centerX(equalTo: centerXAnchor)
@@ -79,7 +84,9 @@ extension LoginView {
     }
     
     private func setupAppleLoginButton() {
-        appleLoginButton.layer.cornerRadius = 25
+        appleLoginButton
+            .setLayer(cornerRadius: 25)
+            .setBackgroundImage(image: UIImage(named: "logo-apple"), state: .normal)
         appleLoginButton
             .top(equalTo: socialLabel.bottomAnchor, constant: 20)
             .centerX(equalTo: socialLabel.centerXAnchor)
