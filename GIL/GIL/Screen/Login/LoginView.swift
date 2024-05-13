@@ -14,7 +14,7 @@ final class LoginView: UIView {
     let passwordTextField = FormTextField(type: .password, returnKeyType: .done)
     let loginButton = UIButton()
     let signUpLabel = BaseLabel(text: "아직 회원이 아니신가요?", fontSize: 15)
-    let socialLabel = BaseLabel(text: "SNS 계정으로 로그인", textColor: .grayLabel, fontType: .footnote, fontSize: 15)
+    let socialLabel = BaseLabel(text: "SNS 계정으로 로그인", textColor: .lightGray, fontType: .footnote, fontSize: 15)
     let signUpButton = UIButton()
     let appleLoginButton = UIButton()
     

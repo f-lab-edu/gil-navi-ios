@@ -73,7 +73,7 @@ extension HomeRecentSearchPlaceCollectionViewCell {
         let nameLabel = BaseLabel(text: place.place.name, fontSize: 15, fontWeight: .bold)
         let addressLabel = BaseLabel(text: place.place.placemark.address ?? "", fontSize: 13, fontWeight: .medium)
         let border = UIView()
-        border.backgroundColor = .lightGrayBorder
+        border.backgroundColor = .lightGray
     
         [iconImageView, nameLabel, addressLabel, border].forEach({ button.addSubview($0) })
         setupButtonLayout(button: button, icon: iconImageView, name: nameLabel, address: addressLabel, border: border)

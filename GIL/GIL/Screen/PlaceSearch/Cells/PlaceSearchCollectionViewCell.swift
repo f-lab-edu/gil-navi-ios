@@ -12,7 +12,7 @@ class PlaceSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellPro
     private let mappinIcon = MappinImageView(iconType: .outline)
     private let stackView = BaseStackView(distribution: .equalCentering,spacing: 5)
     private let nameLabel = BaseLabel(text: "", fontSize: 15, fontWeight: .bold)
-    private let addressLabel = BaseLabel(text: "", textColor: .grayLabel, fontSize: 13, fontWeight: .medium, numberOfLines: 0)
+    private let addressLabel = BaseLabel(text: "", textColor: .lightGray, fontSize: 13, fontWeight: .medium, numberOfLines: 0)
     
     // MARK: - Initialization
     override init(frame: CGRect) {

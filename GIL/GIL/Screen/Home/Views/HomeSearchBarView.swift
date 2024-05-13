@@ -8,8 +8,8 @@
 import UIKit
 
 final class HomeSearchBarView: UIView {
-    private let searchIconImageView = BaseImageView(image: UIImage(systemName: "magnifyingglass"), contentMode: .scaleAspectFit, tintColor: .placeholder)
-    private let searchLabel = BaseLabel(text: "어디로 갈까요?", textColor: .placeholder, fontWeight: .regular)
+    private let searchIconImageView = BaseImageView(image: UIImage(systemName: "magnifyingglass"), contentMode: .scaleAspectFit, tintColor: .mainPlaceholder)
+    private let searchLabel = BaseLabel(text: "어디로 갈까요?", textColor: .mainPlaceholder, fontWeight: .regular)
 
     // MARK: - Initialization
     override init(frame: CGRect) {

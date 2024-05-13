@@ -11,7 +11,7 @@ final class BaseLabel: UILabel {
     // MARK: - Initialization
     init(
         text: String,
-        textColor: UIColor = .text,
+        textColor: UIColor = .mainText,
         fontType: UIFont.TextStyle = .body,
         fontSize: CGFloat = 14,
         fontWeight: UIFont.Weight = .medium,

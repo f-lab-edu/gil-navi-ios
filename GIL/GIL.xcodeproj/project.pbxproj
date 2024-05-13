@@ -41,7 +41,6 @@
 		584FA40A2BA41485002600F1 /* GILUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4092BA41485002600F1 /* GILUITestsLaunchTests.swift */; };
 		584FA41B2BA7F606002600F1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA41A2BA7F606002600F1 /* LoginViewController.swift */; };
 		584FA41E2BA82886002600F1 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA41D2BA82886002600F1 /* FormTextField.swift */; };
-		584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4272BA84D00002600F1 /* UIColor+Extension.swift */; };
 		584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA42F2BABC0EE002600F1 /* LoginView.swift */; };
 		584FA4372BAD5607002600F1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 584FA4362BAD5607002600F1 /* FirebaseAnalytics */; };
 		584FA4392BAD5607002600F1 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 584FA4382BAD5607002600F1 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -131,7 +130,6 @@
 		584FA4092BA41485002600F1 /* GILUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GILUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		584FA41A2BA7F606002600F1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		584FA41D2BA82886002600F1 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
-		584FA4272BA84D00002600F1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		584FA42F2BABC0EE002600F1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		584FA4442BAD6068002600F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		584FA4492BB15D51002600F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -354,7 +352,6 @@
 		584FA4262BA84CF5002600F1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				584FA4272BA84D00002600F1 /* UIColor+Extension.swift */,
 				58BDFBC12BB6A748006AC994 /* OSLog+Extension.swift */,
 				58BDFBCB2BBAA78F006AC994 /* String+Extension.swift */,
 				58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */,
@@ -614,7 +611,6 @@
 				58368F052BD8047E009E008C /* HomePresenter.swift in Sources */,
 				58368F162BDE41FC009E008C /* PlaceSearchViewController.swift in Sources */,
 				58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */,
-				584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */,
 				5810DE4C2BE3890200180BFB /* CryptoUtils.swift in Sources */,
 				58A6808E2BDE7C02004E6706 /* LocationService.swift in Sources */,
 				58368F122BD8B7D5009E008C /* HomeSearchBarView.swift in Sources */,

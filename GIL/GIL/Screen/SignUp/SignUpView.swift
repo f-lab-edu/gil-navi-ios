@@ -63,7 +63,7 @@ extension SignUpView {
     func updatePasswordValidationLabels(_ validations: [Bool]) {
         for (index, label) in checkPasswordLabels.enumerated() {
             let isValid = (index < validations.count) ? validations[index] : false
-            label.textColor = isValid ? .mainGreen : .text
+            label.textColor = isValid ? .mainGreen : .mainText
         }
     }
     

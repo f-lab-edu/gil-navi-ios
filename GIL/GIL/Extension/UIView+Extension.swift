@@ -15,7 +15,7 @@ extension UIView {
     ///   - height: 테두리의 두께
     func addBorder(
         at position: BorderPosition,
-        color: UIColor = .lightGrayBorder,
+        color: UIColor = .lightGray,
         height: CGFloat = 1
     ) {
         let border = CALayer()
