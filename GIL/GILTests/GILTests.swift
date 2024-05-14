@@ -31,7 +31,7 @@ final class GILTests: XCTestCase {
         signUpViewModel.emailPublisher.send("woojin@gmail.com")
         signUpViewModel.namePublisher.send("woojin")
         signUpViewModel.passwordPublisher.send("Woojin1900")
-        signUpViewModel.confirmPasswordPublisher.send("Woojin1900")
+        signUpViewModel.verifyPasswordPublisher.send("Woojin1900")
         
         let expectation = XCTestExpectation(description: "Wait for validation")
         DispatchQueue.main.async {
@@ -40,7 +40,7 @@ final class GILTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
 
         // 확인 버튼이 활성화되어야 함
-        XCTAssertTrue(signUpVC.signUpView.confirmButton.isEnabled)
+        XCTAssertTrue(signUpVC.signUpView.doneButton.isEnabled)
     }
 
 
