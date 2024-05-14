@@ -101,7 +101,7 @@ extension FormTextField {
         returnKeyType = returnType
         clearButtonMode = clearMode
         textColor = txtColor
-        applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
+        setFont(textStyle: .body, size: fontSize, weight: fontWeight)
         backgroundColor = .systemBackground
         layer.borderWidth = 1
         layer.cornerRadius = 6

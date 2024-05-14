@@ -42,6 +42,6 @@ final class BaseLabel: UILabel {
         text = txt.localized()
         textColor = txtColor
         numberOfLines = lines
-        applyDynamicTypeFont(textStyle: fontType, size: fontSize, weight: fontWeight)
+        setFont(textStyle: fontType, size: fontSize, weight: fontWeight)
     }
 }

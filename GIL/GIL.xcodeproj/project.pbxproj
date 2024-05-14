@@ -24,7 +24,6 @@
 		58368EFC2BD536B8009E008C /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368EFB2BD536B8009E008C /* AlertService.swift */; };
 		58368F032BD80472009E008C /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F022BD80472009E008C /* HomeInteractor.swift */; };
 		58368F052BD8047E009E008C /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F042BD8047E009E008C /* HomePresenter.swift */; };
-		58368F0B2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F0A2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift */; };
 		58368F0D2BD828C6009E008C /* HomeSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F0C2BD828C6009E008C /* HomeSearchCollectionViewCell.swift */; };
 		58368F102BD83490009E008C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F0F2BD83490009E008C /* BaseViewController.swift */; };
 		58368F122BD8B7D5009E008C /* HomeSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58368F112BD8B7D5009E008C /* HomeSearchBarView.swift */; };
@@ -59,7 +58,7 @@
 		58BAC8AD2BC7C79200CDEB1F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 58BAC8AC2BC7C79200CDEB1F /* Localizable.xcstrings */; };
 		58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBA12BB2B8F5006AC994 /* SignUpViewController.swift */; };
 		58BDFBA42BB2E536006AC994 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBA32BB2E536006AC994 /* SignUpView.swift */; };
-		58BDFBC22BB6A748006AC994 /* OSLog+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBC12BB6A748006AC994 /* OSLog+Extension.swift */; };
+		58BDFBC22BB6A748006AC994 /* OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBC12BB6A748006AC994 /* OSLog.swift */; };
 		58BDFBC52BB6AFFB006AC994 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BDFBC42BB6AFFB006AC994 /* OSLog.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		58BDFBCA2BBA9B27006AC994 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBC92BBA9B27006AC994 /* SignUpViewModel.swift */; };
 		58BDFBCC2BBAA78F006AC994 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBCB2BBAA78F006AC994 /* String+Extension.swift */; };
@@ -109,7 +108,6 @@
 		58368EFB2BD536B8009E008C /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		58368F022BD80472009E008C /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		58368F042BD8047E009E008C /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
-		58368F0A2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationBarHideable.swift"; sourceTree = "<group>"; };
 		58368F0C2BD828C6009E008C /* HomeSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		58368F0F2BD83490009E008C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		58368F112BD8B7D5009E008C /* HomeSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchBarView.swift; sourceTree = "<group>"; };
@@ -146,12 +144,14 @@
 		58BDFB9F2BB16F93006AC994 /* GIL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GIL.entitlements; sourceTree = "<group>"; };
 		58BDFBA12BB2B8F5006AC994 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		58BDFBA32BB2E536006AC994 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		58BDFBC12BB6A748006AC994 /* OSLog+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extension.swift"; sourceTree = "<group>"; };
+		58BDFBC12BB6A748006AC994 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
 		58BDFBC42BB6AFFB006AC994 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
 		58BDFBC92BBA9B27006AC994 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		58BDFBCB2BBAA78F006AC994 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		58C1DE7E2BF2130C00B169CF /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		58C1DE842BF327C400B169CF /* NavigationBarHideable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarHideable.swift; sourceTree = "<group>"; };
 		58CC1AA22BE9EC4A0004FEAE /* HomeCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewHandler.swift; sourceTree = "<group>"; };
 		58CC1AA72BEA143F0004FEAE /* PlaceSearchCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCollectionViewHandler.swift; sourceTree = "<group>"; };
 		58DE93052BDF79C600C97575 /* PlacesSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchService.swift; sourceTree = "<group>"; };
@@ -196,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				583210B72BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift */,
+				58C1DE842BF327C400B169CF /* NavigationBarHideable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -204,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				586F030B2BE0C4A1008660A0 /* LanguageCode.swift */,
+				580477012BF1B92A0093019C /* NavigationButtonType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -349,14 +351,13 @@
 		584FA4262BA84CF5002600F1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				58BDFBC12BB6A748006AC994 /* OSLog+Extension.swift */,
 				58BDFBCB2BBAA78F006AC994 /* String+Extension.swift */,
 				58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */,
 				58BAC8982BC5399D00CDEB1F /* UITextField+Extension.swift */,
 				58BAC89A2BC53A4D00CDEB1F /* UIButton+Extension.swift */,
 				580647292BCD147A00FB7310 /* UIImage+Extension.swift */,
-				58368F0A2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift */,
 				58DE930E2BDFA23200C97575 /* UIView+Extension.swift */,
+				58C1DE7E2BF2130C00B169CF /* UIStackView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -391,6 +392,7 @@
 		58BDFBC62BBA8C21006AC994 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				58BDFBC12BB6A748006AC994 /* OSLog.swift */,
 				5810DE4B2BE3890200180BFB /* CryptoUtils.swift */,
 				58368EFB2BD536B8009E008C /* AlertService.swift */,
 				58A6808D2BDE7C02004E6706 /* LocationService.swift */,
@@ -623,9 +625,10 @@
 				5806472A2BCD147A00FB7310 /* UIImage+Extension.swift in Sources */,
 				5810DE202BE1F78400180BFB /* MappinImageView.swift in Sources */,
 				58BDFBCA2BBA9B27006AC994 /* SignUpViewModel.swift in Sources */,
-				58BDFBC22BB6A748006AC994 /* OSLog+Extension.swift in Sources */,
+				58BDFBC22BB6A748006AC994 /* OSLog.swift in Sources */,
 				58368F1A2BDE424A009E008C /* PlaceSearchView.swift in Sources */,
 				58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */,
+				58C1DE852BF327C400B169CF /* NavigationBarHideable.swift in Sources */,
 				584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */,
 				58CC1AA82BEA143F0004FEAE /* PlaceSearchCollectionViewHandler.swift in Sources */,
 				58368F1D2BDE4AD2009E008C /* PlaceSearchNavigationBar.swift in Sources */,
@@ -639,9 +642,10 @@
 				584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */,
 				58368F0D2BD828C6009E008C /* HomeSearchCollectionViewCell.swift in Sources */,
 				581F796D2BEC9A98001F81A0 /* PlacemarkModel.swift in Sources */,
-				58368F0B2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift in Sources */,
+				58C1DE7F2BF2130C00B169CF /* UIStackView+Extension.swift in Sources */,
 				58368F182BDE4243009E008C /* PlaceSearchViewModel.swift in Sources */,
 				5810DE462BE35D4600180BFB /* BaseStackView.swift in Sources */,
+				580477022BF1B92A0093019C /* NavigationButtonType.swift in Sources */,
 				586F030C2BE0C4A2008660A0 /* LanguageCode.swift in Sources */,
 				58BDFBCC2BBAA78F006AC994 /* String+Extension.swift in Sources */,
 				58BAC8992BC5399D00CDEB1F /* UITextField+Extension.swift in Sources */,

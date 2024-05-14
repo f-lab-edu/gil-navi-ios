@@ -28,7 +28,7 @@ class PlaceSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellPro
 // MARK: - Setup UI
 extension PlaceSearchCollectionViewCell {
     private func setupUI() {
-        contentView.addBorder(at: .bottom)
+        contentView.applyBorder(at: .bottom)
         addSubviews()
         setupComponents()
     }
