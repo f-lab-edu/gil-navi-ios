@@ -32,7 +32,7 @@ final class RouteMapViewController: BaseViewController, NavigationBarHideable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
-        presentMapHalfSheet()
+        presentRouteFinderPageSheet()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +64,7 @@ extension RouteMapViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    func presentMapHalfSheet() {
+    func presentRouteFinderPageSheet() {
         present(routeFinderPageSheet, animated: true, completion: nil)
     }
 }
@@ -82,7 +82,6 @@ extension RouteMapViewController: RouteFinderPageSheetDelegate {
             do {
                 let routes = try await viewModel.setupMapAndFindRoutes(transportType: transportType)
                 viewModel.routeManager?.addRoutesPolyline(routes)
-                viewModel.routeManager?.selectedRoute = routes.first
                 routeFinderPageSheet.updateRoutes(routes)
             } catch {
                 Log.error("길 찾기 실패", [

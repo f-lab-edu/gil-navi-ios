@@ -37,6 +37,6 @@ final class RouteMapViewModel {
         let region = routeManager.fetchCoordinateRegion(from: departureCoordinate, to: destinationCoordinate)
         routeManager.setRegion(region)
         
-        return try await routeManager.findRoute(from: departureCoordinate, to: destinationCoordinate, transportType: transportType.mkTransportType).map({ RouteModel(route: $0) })
+        return try await routeManager.findRoute(from: departureCoordinate, to: destinationCoordinate, transportType: transportType)
     }
 }
