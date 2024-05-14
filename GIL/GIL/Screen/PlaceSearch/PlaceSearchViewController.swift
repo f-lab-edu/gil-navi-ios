@@ -16,7 +16,7 @@ final class PlaceSearchViewController: BaseViewController, NavigationBarHideable
     init(viewModel: PlaceSearchViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        placeSearchCollectionViewHandler = PlaceSearchCollectionViewHandler(viewModel: viewModel, placeSearchView: placeSearchView)
+        placeSearchCollectionViewHandler = PlaceSearchCollectionViewHandler(viewModel: viewModel, placeSearchView: placeSearchView, viewController: self)
     }
     
     required init?(coder: NSCoder) {
@@ -36,6 +36,7 @@ final class PlaceSearchViewController: BaseViewController, NavigationBarHideable
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar(animated: false)
+        viewModel.locationService.requestLocation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

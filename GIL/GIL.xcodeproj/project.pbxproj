@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		580477022BF1B92A0093019C /* NavigationButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580477012BF1B92A0093019C /* NavigationButtonType.swift */; };
 		5806472A2BCD147A00FB7310 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580647292BCD147A00FB7310 /* UIImage+Extension.swift */; };
 		5810DE202BE1F78400180BFB /* MappinImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE1F2BE1F78400180BFB /* MappinImageView.swift */; };
+		5810DE352BE2070800180BFB /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE342BE2070800180BFB /* StringExtensionTests.swift */; };
+		5810DE3A2BE215FF00180BFB /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE392BE215FF00180BFB /* LocationServiceTests.swift */; };
+		5810DE3C2BE2199400180BFB /* PlaceSearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE3B2BE2199400180BFB /* PlaceSearchServiceTests.swift */; };
+		5810DE422BE29BAD00180BFB /* MockLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE412BE29BAD00180BFB /* MockLocationService.swift */; };
 		5810DE462BE35D4600180BFB /* BaseStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE452BE35D4600180BFB /* BaseStackView.swift */; };
 		5810DE4A2BE37C9400180BFB /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE492BE37C9400180BFB /* FirebaseAuthManager.swift */; };
 		5810DE4C2BE3890200180BFB /* CryptoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE4B2BE3890200180BFB /* CryptoUtils.swift */; };
@@ -65,8 +70,15 @@
 		58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */; };
 		58BDFBD52BBE889D006AC994 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 58BDFBD42BBE889D006AC994 /* FirebaseAuth */; };
 		58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */; };
+		58C1DE7F2BF2130C00B169CF /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C1DE7E2BF2130C00B169CF /* UIStackView+Extension.swift */; };
+		58C1DE852BF327C400B169CF /* NavigationBarHideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C1DE842BF327C400B169CF /* NavigationBarHideable.swift */; };
+		58C1DE872BF3382400B169CF /* CLLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C1DE862BF3382400B169CF /* CLLocationModel.swift */; };
+		58C1DE892BF3386500B169CF /* CoordinateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C1DE882BF3386500B169CF /* CoordinateModel.swift */; };
 		58CC1AA32BE9EC4A0004FEAE /* HomeCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1AA22BE9EC4A0004FEAE /* HomeCollectionViewHandler.swift */; };
 		58CC1AA82BEA143F0004FEAE /* PlaceSearchCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1AA72BEA143F0004FEAE /* PlaceSearchCollectionViewHandler.swift */; };
+		58CC1B012BEB0E720004FEAE /* RouteMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1B002BEB0E720004FEAE /* RouteMapViewController.swift */; };
+		58CC1B032BEB0F450004FEAE /* RouteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1B022BEB0F450004FEAE /* RouteMapView.swift */; };
+		58CC1B062BEB165E0004FEAE /* RouteMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1B052BEB165E0004FEAE /* RouteMapViewModel.swift */; };
 		58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93052BDF79C600C97575 /* PlacesSearchService.swift */; };
 		58DE93092BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93082BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift */; };
 		58DE930D2BDF94B600C97575 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE930C2BDF94B600C97575 /* PlaceModel.swift */; };
@@ -152,8 +164,13 @@
 		58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		58C1DE7E2BF2130C00B169CF /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		58C1DE842BF327C400B169CF /* NavigationBarHideable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarHideable.swift; sourceTree = "<group>"; };
+		58C1DE862BF3382400B169CF /* CLLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationModel.swift; sourceTree = "<group>"; };
+		58C1DE882BF3386500B169CF /* CoordinateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateModel.swift; sourceTree = "<group>"; };
 		58CC1AA22BE9EC4A0004FEAE /* HomeCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewHandler.swift; sourceTree = "<group>"; };
 		58CC1AA72BEA143F0004FEAE /* PlaceSearchCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCollectionViewHandler.swift; sourceTree = "<group>"; };
+		58CC1B002BEB0E720004FEAE /* RouteMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapViewController.swift; sourceTree = "<group>"; };
+		58CC1B022BEB0F450004FEAE /* RouteMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapView.swift; sourceTree = "<group>"; };
+		58CC1B052BEB165E0004FEAE /* RouteMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapViewModel.swift; sourceTree = "<group>"; };
 		58DE93052BDF79C600C97575 /* PlacesSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchService.swift; sourceTree = "<group>"; };
 		58DE93082BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		58DE930C2BDF94B600C97575 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
@@ -317,6 +334,7 @@
 		584FA4192BA7F5E1002600F1 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				58CC1AFF2BEB0C0D0004FEAE /* RouteMap */,
 				58368F142BDE41EB009E008C /* PlaceSearch */,
 				58BDFBCF2BBE5B43006AC994 /* Home */,
 				58BDFBA02BB2B865006AC994 /* SignUp */,
@@ -415,6 +433,24 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		58CC1AFF2BEB0C0D0004FEAE /* RouteMap */ = {
+			isa = PBXGroup;
+			children = (
+				581F796B2BEC96F4001F81A0 /* View */,
+				58CC1B042BEB164D0004FEAE /* ViewModel */,
+				58CC1B002BEB0E720004FEAE /* RouteMapViewController.swift */,
+			);
+			path = RouteMap;
+			sourceTree = "<group>";
+		};
+		58CC1B042BEB164D0004FEAE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				58CC1B052BEB165E0004FEAE /* RouteMapViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		58DE93072BDF841300C97575 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,6 +464,9 @@
 			children = (
 				58DE930C2BDF94B600C97575 /* PlaceModel.swift */,
 				581F796C2BEC9A98001F81A0 /* PlacemarkModel.swift */,
+				5804770B2BF1C46A0093019C /* RouteModel.swift */,
+				58C1DE862BF3382400B169CF /* CLLocationModel.swift */,
+				58C1DE882BF3386500B169CF /* CoordinateModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -613,9 +652,12 @@
 				5810DE4C2BE3890200180BFB /* CryptoUtils.swift in Sources */,
 				58A6808E2BDE7C02004E6706 /* LocationService.swift in Sources */,
 				58368F122BD8B7D5009E008C /* HomeSearchBarView.swift in Sources */,
+				58CC1B032BEB0F450004FEAE /* RouteMapView.swift in Sources */,
 				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
+				58C1DE872BF3382400B169CF /* CLLocationModel.swift in Sources */,
 				583210BC2BE8F24200D9DCA1 /* BaseImageView.swift in Sources */,
-				581F79752BEE212D001F81A0 /* MabController.swift in Sources */,
+				58CC1B012BEB0E720004FEAE /* RouteMapViewController.swift in Sources */,
+				581F79752BEE212D001F81A0 /* RouteManager.swift in Sources */,
 				58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */,
 				58DE930D2BDF94B600C97575 /* PlaceModel.swift in Sources */,
 				58368F102BD83490009E008C /* BaseViewController.swift in Sources */,
@@ -634,6 +676,7 @@
 				58368F1D2BDE4AD2009E008C /* PlaceSearchNavigationBar.swift in Sources */,
 				584FA41E2BA82886002600F1 /* FormTextField.swift in Sources */,
 				58DE93092BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift in Sources */,
+				58C1DE892BF3386500B169CF /* CoordinateModel.swift in Sources */,
 				58DE930F2BDFA23200C97575 /* UIView+Extension.swift in Sources */,
 				583210BA2BE76DAA00D9DCA1 /* BaseLabel.swift in Sources */,
 				58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */,
@@ -643,6 +686,7 @@
 				58368F0D2BD828C6009E008C /* HomeSearchCollectionViewCell.swift in Sources */,
 				581F796D2BEC9A98001F81A0 /* PlacemarkModel.swift in Sources */,
 				58C1DE7F2BF2130C00B169CF /* UIStackView+Extension.swift in Sources */,
+				58CC1B062BEB165E0004FEAE /* RouteMapViewModel.swift in Sources */,
 				58368F182BDE4243009E008C /* PlaceSearchViewModel.swift in Sources */,
 				5810DE462BE35D4600180BFB /* BaseStackView.swift in Sources */,
 				580477022BF1B92A0093019C /* NavigationButtonType.swift in Sources */,

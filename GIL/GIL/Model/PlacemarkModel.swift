@@ -8,40 +8,35 @@
 import MapKit
 
 struct PlacemarkModel: Hashable, Codable {
-    let coordinate: Coordinate
+    let coordinate: CoordinateModel
     var address: String?
     var areasOfInterest: [String]?
-    
-    struct Coordinate: Codable, Hashable {
-        let latitude: Double?
-        let longitude: Double?
-    }
     
     // MARK: - Initialization
     
     /// `CLPlacemark` 객체를 사용하여 `PlacemarkModel`의 새 인스턴스를 초기화합니다.
     /// - Parameter clPlacemark: `CLPlacemark` 객체
     init(clPlacemark: CLPlacemark) {
-        self.coordinate = Coordinate(latitude: clPlacemark.location?.coordinate.latitude, longitude: clPlacemark.location?.coordinate.longitude)
-        self.address = formatAddress(for: clPlacemark)
-        self.areasOfInterest = clPlacemark.areasOfInterest
+        coordinate = CoordinateModel(latitude: clPlacemark.location?.coordinate.latitude, longitude: clPlacemark.location?.coordinate.longitude)
+        address = formatAddress(for: clPlacemark)
+        areasOfInterest = clPlacemark.areasOfInterest
         Log.info("CL_PlacemarkModel", [
-            "coordinate":self.coordinate,
-            "address":self.address ?? "",
-            "areasOfInterest": self.areasOfInterest ?? []
+            "coordinate": coordinate,
+            "address": address ?? "",
+            "areasOfInterest": areasOfInterest ?? []
         ])
     }
     
     /// `MKPlacemark` 객체를 사용하여 `PlacemarkModel`의 새 인스턴스를 초기화합니다.
     /// - Parameter mkPlacemark: `MKPlacemark` 객체
     init(mkPlacemark: MKPlacemark) {
-        self.coordinate = Coordinate(latitude: mkPlacemark.coordinate.latitude, longitude: mkPlacemark.coordinate.longitude)
-        self.address = formatAddress(for: mkPlacemark)
-        self.areasOfInterest = mkPlacemark.areasOfInterest
+        coordinate = CoordinateModel(latitude: mkPlacemark.coordinate.latitude, longitude: mkPlacemark.coordinate.longitude)
+        address = formatAddress(for: mkPlacemark)
+        areasOfInterest = mkPlacemark.areasOfInterest
         Log.info("MK_PlacemarkModel", [
-            "coordinate":self.coordinate,
-            "address":self.address ?? "",
-            "areasOfInterest": self.areasOfInterest ?? []
+            "coordinate": coordinate,
+            "address": address ?? "",
+            "areasOfInterest": areasOfInterest ?? []
         ])
     }
 }

@@ -13,15 +13,18 @@ final class PlaceSearchCollectionViewHandler: NSObject, UICollectionViewDelegate
     }
     private var viewModel: PlaceSearchViewModel
     private var placeSearchView: PlaceSearchView
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Place>!
+    private var viewController: PlaceSearchViewController
+    private var dataSource: UICollectionViewDiffableDataSource<Section, PlaceModel>!
     
     // MARK: - Initialization
     init(
         viewModel: PlaceSearchViewModel,
-        placeSearchView: PlaceSearchView
+        placeSearchView: PlaceSearchView,
+        viewController: PlaceSearchViewController
     ) {
         self.viewModel = viewModel
         self.placeSearchView = placeSearchView
+        self.viewController = viewController
         super.init()
         setupCollectionView()
         configureDataSource()
@@ -44,8 +47,14 @@ extension PlaceSearchCollectionViewHandler {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let place = viewModel.mapItems[indexPath.row]
-        viewModel.storePlace(place)
+        let destination = viewModel.mapItems[indexPath.row]
+        viewModel.storePlace(destination)
+        
+        guard let currentLocation = viewModel.locationService.currentLocation else { return }
+        
+        let viewModel = RouteMapViewModel(currentCLLocation: currentLocation, destination: destination)
+        let vc = RouteMapViewController(viewModel: viewModel)
+        viewController.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

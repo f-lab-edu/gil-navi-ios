@@ -5,7 +5,7 @@
 //  Created by 송우진 on 4/28/24.
 //
 
-import MapKit
+import UIKit
 import Combine
 import SwiftData
 
@@ -19,7 +19,6 @@ class PlaceSearchViewModel {
     var cancellables: Set<AnyCancellable> = []
     
     init() {
-        locationService.requestLocation()
         placeContainer = try? ModelContainer(for: PlaceData.self)
     }
     
@@ -30,7 +29,7 @@ class PlaceSearchViewModel {
                 let mapItems = try await placesSearchService.searchPlacesNearby(location: location, query: query, regionRadius: 5000)
                 await MainActor.run {
                     self.mapItems = mapItems
-                        .map({ PlaceModel(mapItem: $0, distance: locationService.distance(to: $0.placemark.coordinate) ?? 0) })
+                        .map({ PlaceModel(mapItem: $0, distance: location.distance(to: $0.placemark.coordinate) ?? 0) })
                         .sorted(by: { $0.distance ?? 0 < $1.distance ?? 0 })
                 }
             } catch {
