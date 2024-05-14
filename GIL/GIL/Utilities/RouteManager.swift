@@ -147,7 +147,6 @@ extension RouteManager {
         transportType: Transport
     ) async throws -> [RouteModel] {
         mapView.overlays.forEach { mapView.removeOverlay($0) }
-        
         let departurePlacemark = MKPlacemark(coordinate: departure)
         let destinationPlacemark = MKPlacemark(coordinate: destination)
         let directionRequest = MKDirections.Request()
@@ -156,11 +155,6 @@ extension RouteManager {
         directionRequest.transportType = transportType.mkTransportType
         directionRequest.requestsAlternateRoutes = true
         let directions = MKDirections(request: directionRequest)
-        do {
-            let response = try await directions.calculate()
-            return response.routes.map({ RouteModel($0) })
-        } catch {
-            throw error
-        }
+        return try await directions.calculate().routes.map({ RouteModel($0) })
     }
 }
