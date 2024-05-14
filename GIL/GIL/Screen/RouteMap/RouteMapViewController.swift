@@ -54,7 +54,7 @@ extension RouteMapViewController {
     }
     
     private func bindButtons() {
-        routeMapView.backButton.addAction(UIAction { _ in self.popViewController()}, for: .touchUpInside)
+        routeMapView.backButton.addAction(UIAction { [weak self] _ in self?.popViewController()}, for: .touchUpInside)
     }
 }
 

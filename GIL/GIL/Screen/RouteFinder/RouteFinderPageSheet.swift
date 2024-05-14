@@ -73,8 +73,8 @@ extension RouteFinderPageSheet {
     }
     
     private func bindButtons() {
-        routeFinderView.transportButtons.forEach { button in
-            let action = UIAction { _ in self.transportButtonTapped(button) }
+        routeFinderView.transportButtons.forEach { [weak self] button in
+            let action = UIAction { [weak self] _ in self?.transportButtonTapped(button) }
             button.addAction(action, for: .touchUpInside)
         }
     }

@@ -75,7 +75,7 @@ extension HomeRecentSearchPlaceCollectionViewCell {
 extension HomeRecentSearchPlaceCollectionViewCell {
     private func createButton(for place: PlaceData) -> UIButton {
         let button = UIButton().setBackgroundColor(.systemBackground)
-        button.addAction(UIAction { _ in self.placeButtonTapped(data: place)}, for: .touchUpInside)
+        button.addAction(UIAction { [weak self] _ in self?.placeButtonTapped(data: place)}, for: .touchUpInside)
         
         let iconImageView = MappinImageView(iconType: .filled)
         let nameLabel = BaseLabel(text: place.place.name, fontSize: 15, fontWeight: .bold)

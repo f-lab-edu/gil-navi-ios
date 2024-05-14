@@ -43,8 +43,8 @@ extension SignUpViewController {
     }
     
     private func setupBindButtons() {
-        signUpView.closeButton.addAction(UIAction { _ in self.closeButtonTapped()}, for: .touchUpInside)
-        signUpView.doneButton.addAction(UIAction { _ in self.viewModel.createUser()}, for: .touchUpInside)
+        signUpView.closeButton.addAction(UIAction { [weak self] _ in self?.closeButtonTapped()}, for: .touchUpInside)
+        signUpView.doneButton.addAction(UIAction { [weak self] _ in self?.viewModel.createUser()}, for: .touchUpInside)
     }
     
     private func subscribeToPublishers() {
