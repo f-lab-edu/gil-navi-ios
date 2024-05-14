@@ -11,6 +11,7 @@ final class HomeRecentSearchPlaceCollectionViewCell: UICollectionViewCell, Colle
     static let reuseIdentifier = "HomeRecentSearchPlaceCell"
     private let stackView = BaseStackView(spacing: 10)
     private var buttons: [UIButton] = []
+    var onplaceButtonTapped: ((PlaceData) -> Void)?
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -36,6 +37,13 @@ extension HomeRecentSearchPlaceCollectionViewCell {
     
     private func setupSearchBarView() {
         stackView.applyConstraints(to: contentView, attributes: [.top, .bottom, .leading, .trailing])
+    }
+}
+
+// MARK: - Action
+extension HomeRecentSearchPlaceCollectionViewCell {
+    func placeButtonTapped(data: PlaceData) {
+        onplaceButtonTapped?(data)
     }
 }
 
@@ -66,14 +74,13 @@ extension HomeRecentSearchPlaceCollectionViewCell {
 // MARK: - Button Creation and Layout
 extension HomeRecentSearchPlaceCollectionViewCell {
     private func createButton(for place: PlaceData) -> UIButton {
-        let button = UIButton()
-        button.backgroundColor = .systemBackground
+        let button = UIButton().setBackgroundColor(.systemBackground)
+        button.addAction(UIAction { _ in self.placeButtonTapped(data: place)}, for: .touchUpInside)
         
         let iconImageView = MappinImageView(iconType: .filled)
         let nameLabel = BaseLabel(text: place.place.name, fontSize: 15, fontWeight: .bold)
         let addressLabel = BaseLabel(text: place.place.placemark.address ?? "", fontSize: 13, fontWeight: .medium)
-        let border = UIView()
-        border.backgroundColor = .lightGray
+        let border = UIView().setBackgroundColor(.lightGray)
     
         [iconImageView, nameLabel, addressLabel, border].forEach({ button.addSubview($0) })
         setupButtonLayout(button: button, icon: iconImageView, name: nameLabel, address: addressLabel, border: border)

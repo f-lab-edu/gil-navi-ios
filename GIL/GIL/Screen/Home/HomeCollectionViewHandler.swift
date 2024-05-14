@@ -108,6 +108,10 @@ extension HomeCollectionViewHandler {
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRecentSearchPlaceCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeRecentSearchPlaceCollectionViewCell else { return UICollectionViewCell() }
         cell.configure(with: data)
+        cell.onplaceButtonTapped = { [weak self] place in
+            guard let self else { return }
+            interactor.navigateToRouteMap(with: place)
+        }
         return cell
     }
 }
