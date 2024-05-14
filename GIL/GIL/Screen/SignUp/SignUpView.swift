@@ -11,7 +11,7 @@ final class SignUpView: UIView {
     private let checkPasswordStackView = BaseStackView(spacing: 5)
     private let checkPasswordLabels: [UILabel]
     private var labelConstraints: [UILabel : NSLayoutConstraint]
-    let closeButton = NavigationActionButton()
+    let closeButton = UIButton()
     let emailLabel = BaseLabel(text: "이메일", textColor: .mainGreen, fontType: .subheadline)
     let nameLabel = BaseLabel(text: "이름", textColor: .mainGreen, fontType: .subheadline)
     let passwordLabel = BaseLabel(text: "비밀번호", textColor: .mainGreen, fontType: .subheadline)
@@ -98,6 +98,7 @@ extension SignUpView {
     
     private func setupCloseButton() {
         closeButton
+            .configureNavigationStyle(type: .close)
             .top(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10)
             .left(equalTo: leadingAnchor, constant: 10)
             .size(CGSize(width: 44, height: 44))
@@ -157,8 +158,8 @@ extension SignUpView {
     }
     
     private func setupDoneButton() {
-        doneButton.applySubmitStyle(title: "완료")
         doneButton
+            .configureSubmitStyle(title: "완료")
             .top(equalTo: checkPasswordStackView.bottomAnchor, constant: 30)
             .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
     }

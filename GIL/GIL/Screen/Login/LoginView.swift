@@ -60,8 +60,8 @@ extension LoginView {
     }
     
     private func setupLoginButton() {
-        loginButton.applySubmitStyle(title: "로그인")
         loginButton
+            .configureSubmitStyle(title: "로그인")
             .top(equalTo: formStackView.bottomAnchor, constant: 30)
             .applyConstraints(to: formStackView, attributes: [.leading, .trailing])
             .height(60)

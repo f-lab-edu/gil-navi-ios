@@ -9,7 +9,7 @@ import UIKit
 
 final class PlaceSearchNavigationBar: UIView {
     private let myLocationLabel = BaseLabel(text: "내 위치".localized(), fontSize: 11, fontWeight: .regular)
-    let backButton = NavigationActionButton(type: .back)
+    let backButton = UIButton()
     let addressLabel = BaseLabel(text: "", textColor: .lightBlackDarkWhite, fontSize: 13, fontWeight: .bold)
     let searchBar = UISearchBar()
     
@@ -45,6 +45,7 @@ extension PlaceSearchNavigationBar {
     
     private func setupBackButton() {
         backButton
+            .configureNavigationStyle(type: .back)
             .top(equalTo: topAnchor)
             .left(equalTo: leadingAnchor, constant: 11)
             .size(CGSize(width: 36, height: 30))
