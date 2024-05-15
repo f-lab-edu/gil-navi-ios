@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "53C05A5C-5C8E-4063-9B16-8C496F9D09A3",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:GIL.xcodeproj",
+        "identifier" : "584FA3F82BA41485002600F1",
+        "name" : "GILTests"
+      }
+    }
+  ],
+  "version" : 1
+}
