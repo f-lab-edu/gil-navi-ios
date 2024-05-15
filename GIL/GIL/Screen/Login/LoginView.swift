@@ -44,14 +44,16 @@ extension LoginView {
     }
     
     private func setupComponents() {
-        setupFormStackView()
+        setupForm()
         setupLoginButton()
         setupSingUpStackView()
         setupSocialLabel()
         setupAppleLoginButton()
     }
     
-    private func setupFormStackView() {
+    private func setupForm() {
+        emailTextField.setupAccessibility(label: "이메일 입력 필드", hint: "이메일을 입력하세요")
+        passwordTextField.setupAccessibility(label: "비밀번호 입력 필드", hint: "비밀번호를 입력하세요")
         formStackView
             .top(equalTo: topAnchor, constant: 120)
             .left(equalTo: leadingAnchor, constant: 16)
@@ -61,6 +63,7 @@ extension LoginView {
     
     private func setupLoginButton() {
         loginButton
+            .setupAccessibility(label: "로그인 버튼", hint: "로그인하려면 눌러주세요", traits: .button)
             .configureSubmitStyle(title: "로그인")
             .top(equalTo: formStackView.bottomAnchor, constant: 30)
             .applyConstraints(to: formStackView, attributes: [.leading, .trailing])
@@ -68,7 +71,9 @@ extension LoginView {
     }
     
     private func setupSingUpStackView() {
+        signUpLabel.setupAccessibility(label: "아직 회원이 아니신가요?")
         signUpButton
+            .setupAccessibility(label: "회원가입 버튼", hint: "회원가입하려면 눌러주세요", traits: .button)
             .setTitle(title: "회원가입", state: .normal)
             .setTitleColor(color: .red, state: .normal)
             .setFont(textStyle: .body, size: 15, weight: .semibold)
@@ -79,17 +84,37 @@ extension LoginView {
     
     private func setupSocialLabel() {
         socialLabel
+            .setupAccessibility(label: "SNS 계정으로 로그인 안내")
             .centerX(equalTo: centerXAnchor)
             .bottom(equalTo: bottomAnchor, constant: -120)
     }
     
     private func setupAppleLoginButton() {
         appleLoginButton
+            .setupAccessibility(label: "Apple 로그인 버튼", hint: "Apple 계정으로 로그인하려면 눌러주세요", traits: .button)
             .setLayer(cornerRadius: 25)
             .setBackgroundImage(image: UIImage(named: "logo-apple"), state: .normal)
-        appleLoginButton
             .top(equalTo: socialLabel.bottomAnchor, constant: 20)
             .centerX(equalTo: socialLabel.centerXAnchor)
             .size(CGSize(width: 50, height: 50))
+    }
+}
+
+// MARK: - Accessibility
+private extension UIView {
+    @discardableResult
+    func setupAccessibility(
+        label: String,
+        hint: String? = nil,
+        traits: UIAccessibilityTraits? = nil
+    ) -> Self {
+        setAccessibilityLabel(label)
+        if let hint = hint {
+            setAccessibilityHint(hint)
+        }
+        if let traits = traits{
+            setAccessibilityTraits(traits)
+        }
+        return self
     }
 }
