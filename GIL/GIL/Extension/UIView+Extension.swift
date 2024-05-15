@@ -102,14 +102,6 @@ extension UIView {
         return self
     }
     
-    /// 식별자를 설정합니다
-    /// - Parameter identifier: 접근성 식별자
-    @discardableResult
-    func setAccessibilityIdentifier(_ identifier: String) -> Self {
-        accessibilityIdentifier = identifier
-        return self
-    }
-    
     /// 뷰의 그림자 속성(색상, 오프셋, 반경, 불투명도, 경로)을 설정합니다
     /// - Parameters:
     ///   - color: 그림자의 색상, 기본값은 nil
