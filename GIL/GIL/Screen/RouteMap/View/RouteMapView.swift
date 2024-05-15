@@ -45,11 +45,14 @@ extension RouteMapView {
     }
     
     private func setupMapView() {
-        mapView.applyConstraints(to: self, attributes: [.top, .bottom, .leading, .trailing])
+        mapView
+            .setIsAccessibilityElement(false)
+            .applyConstraints(to: self, attributes: [.top, .bottom, .leading, .trailing])
     }
     
     private func setupBackButton() {
         backButton
+            .setAccessibility(label: "뒤로가기 버튼", hint: "경로 지도 화면을 닫으려면 두 번 탭하세요", traits: .button)
             .configureNavigationStyle(type: .back)
             .setBackgroundColor(.white, for: .normal)
             .setShadow(color: .black, offset: CGSize(width: 0, height: 1), radius: 3, opacity: 1)
