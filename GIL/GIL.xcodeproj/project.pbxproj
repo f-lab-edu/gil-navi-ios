@@ -82,6 +82,8 @@
 		58CC1B012BEB0E720004FEAE /* RouteMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1B002BEB0E720004FEAE /* RouteMapViewController.swift */; };
 		58CC1B032BEB0F450004FEAE /* RouteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1B022BEB0F450004FEAE /* RouteMapView.swift */; };
 		58CC1B062BEB165E0004FEAE /* RouteMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1B052BEB165E0004FEAE /* RouteMapViewModel.swift */; };
+		58DA598C2BF4C2FA0039630D /* MockClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DA598B2BF4C2FA0039630D /* MockClass.swift */; };
+		58DA598E2BF4C39B0039630D /* PlaceSearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DA598D2BF4C39B0039630D /* PlaceSearchViewModelTests.swift */; };
 		58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93052BDF79C600C97575 /* PlacesSearchService.swift */; };
 		58DE93092BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93082BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift */; };
 		58DE930D2BDF94B600C97575 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE930C2BDF94B600C97575 /* PlaceModel.swift */; };
@@ -183,6 +185,8 @@
 		58CC1B022BEB0F450004FEAE /* RouteMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapView.swift; sourceTree = "<group>"; };
 		58CC1B052BEB165E0004FEAE /* RouteMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapViewModel.swift; sourceTree = "<group>"; };
 		58DA59832BF4B1C50039630D /* Release.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Release.xctestplan; sourceTree = SOURCE_ROOT; };
+		58DA598B2BF4C2FA0039630D /* MockClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClass.swift; sourceTree = "<group>"; };
+		58DA598D2BF4C39B0039630D /* PlaceSearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchViewModelTests.swift; sourceTree = "<group>"; };
 		58DE93052BDF79C600C97575 /* PlacesSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchService.swift; sourceTree = "<group>"; };
 		58DE93082BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		58DE930C2BDF94B600C97575 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 			isa = PBXGroup;
 			children = (
 				58DA59832BF4B1C50039630D /* Release.xctestplan */,
+				58DA598B2BF4C2FA0039630D /* MockClass.swift */,
+				58DA598D2BF4C39B0039630D /* PlaceSearchViewModelTests.swift */,
 			);
 			path = GILTests;
 			sourceTree = "<group>";
@@ -618,6 +624,7 @@
 					};
 					584FA3F82BA41485002600F1 = {
 						CreatedOnToolsVersion = 15.2;
+						LastSwiftMigration = 1520;
 						TestTargetID = 584FA3E22BA41484002600F1;
 					};
 					584FA4022BA41485002600F1 = {
@@ -781,6 +788,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58DA598E2BF4C39B0039630D /* PlaceSearchViewModelTests.swift in Sources */,
+				58DA598C2BF4C2FA0039630D /* MockClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -925,6 +934,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E98D6ZNGDP;
@@ -1072,6 +1082,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E98D6ZNGDP;
@@ -1218,6 +1229,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E98D6ZNGDP;
