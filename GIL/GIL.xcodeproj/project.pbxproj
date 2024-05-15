@@ -61,6 +61,7 @@
 		586F030F2BE0D050008660A0 /* PlaceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030E2BE0D050008660A0 /* PlaceData.swift */; };
 		586F03182BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */; };
 		587DB20C2BF460610097119C /* UIView+AccessibilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587DB20B2BF460610097119C /* UIView+AccessibilityExtension.swift */; };
+		587DB2102BF4751B0097119C /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587DB20F2BF4751B0097119C /* UIImageView+Extension.swift */; };
 		58A6808E2BDE7C02004E6706 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A6808D2BDE7C02004E6706 /* LocationService.swift */; };
 		58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */; };
 		58BAC8992BC5399D00CDEB1F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAC8982BC5399D00CDEB1F /* UITextField+Extension.swift */; };
@@ -162,6 +163,7 @@
 		586F030E2BE0D050008660A0 /* PlaceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceData.swift; sourceTree = "<group>"; };
 		586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRecentSearchPlaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		587DB20B2BF460610097119C /* UIView+AccessibilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AccessibilityExtension.swift"; sourceTree = "<group>"; };
+		587DB20F2BF4751B0097119C /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		58A6808D2BDE7C02004E6706 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		58BAC8982BC5399D00CDEB1F /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 				58C1DE7C2BF2110300B169CF /* TimeInterval+Extension.swift */,
 				58C1DE7E2BF2130C00B169CF /* UIStackView+Extension.swift */,
 				587DB20B2BF460610097119C /* UIView+AccessibilityExtension.swift */,
+				587DB20F2BF4751B0097119C /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
 				581F797A2BEF32B3001F81A0 /* RouteFinderView.swift in Sources */,
 				58C1DE872BF3382400B169CF /* CLLocationModel.swift in Sources */,
+				587DB2102BF4751B0097119C /* UIImageView+Extension.swift in Sources */,
 				583210BC2BE8F24200D9DCA1 /* BaseImageView.swift in Sources */,
 				58CC1B012BEB0E720004FEAE /* RouteMapViewController.swift in Sources */,
 				581F79752BEE212D001F81A0 /* RouteManager.swift in Sources */,
