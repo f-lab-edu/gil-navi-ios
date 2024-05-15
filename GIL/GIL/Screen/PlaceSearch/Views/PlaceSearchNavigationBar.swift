@@ -84,6 +84,13 @@ extension PlaceSearchNavigationBar {
 extension PlaceSearchNavigationBar {
     func updateAddress(_ address: String) {
         addressLabel.text = address
+        
+    }
+}
+
+// MARK: - Accessibility
+extension PlaceSearchNavigationBar {
+    func postAccessibilityUpdateAddress(_ address: String) {
         UIAccessibility.post(notification: .announcement, argument: "현재 위치가 \(address)로 변경되었습니다")
     }
 }

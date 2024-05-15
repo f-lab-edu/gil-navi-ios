@@ -63,12 +63,14 @@ extension RouteCollectionViewCell {
     
     private func setupExpectedTimeLabel() {
         expectedTimeLabel
+            .setAccessibilityHint("목적지까지 걸리는 시간입니다. 해당 경로를 선택하려면 두 번 탭하세요")
             .setTextColor(textColor: .lightBlackDarkWhite)
             .setFont(textStyle: .body, size: 20, weight: .bold)
     }
     
     private func setupDistanceLabel() {
         distanceLabel
+            .setAccessibilityHint("목적지까지의 거리입니다. 해당 경로를 선택하려면 두 번 탭하세요")
             .setTextColor(textColor: .systemGray2)
             .setFont(textStyle: .footnote, size: 14, weight: .medium)
     }
@@ -76,6 +78,7 @@ extension RouteCollectionViewCell {
     private func setupMoveButton() {
         /// - Note: 기능 추가 후 노출
         moveButton
+            .setIsAccessibilityElement(false)
             .setIsHidden(true)
             .setTitle(title: "이동", state: .normal)
             .setTitleColor(color: .white, state: .normal)
