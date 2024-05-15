@@ -48,9 +48,9 @@ extension LoginViewController {
     }
     
     private func setupBindButtons() {
-        loginView.loginButton.addAction(UIAction { _ in self.loginButtonTapped()}, for: .touchUpInside)
-        loginView.signUpButton.addAction(UIAction { _ in self.signUpButtonTapped()}, for: .touchUpInside)
-        loginView.appleLoginButton.addAction(UIAction { _ in self.viewModel.startSignInWithAppleFlow()}, for: .touchUpInside)
+        loginView.loginButton.addAction(UIAction { [weak self] _ in self?.loginButtonTapped()}, for: .touchUpInside)
+        loginView.signUpButton.addAction(UIAction { [weak self] _ in self?.signUpButtonTapped()}, for: .touchUpInside)
+        loginView.appleLoginButton.addAction(UIAction { [weak self] _ in self?.viewModel.startSignInWithAppleFlow()}, for: .touchUpInside)
     }
     
     private func subscribeToPublishers() {

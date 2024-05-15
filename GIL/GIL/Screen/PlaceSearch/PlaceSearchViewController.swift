@@ -62,7 +62,7 @@ extension PlaceSearchViewController {
     }
     
     private func bindButtons() {
-        placeSearchView.navigationBar.backButton.addAction( UIAction { _ in self.backButtonTapped()}, for: .touchUpInside)
+        placeSearchView.navigationBar.backButton.addAction( UIAction { [weak self] _ in self?.backButtonTapped()}, for: .touchUpInside)
     }
     
     private func bindSearchBar() {
