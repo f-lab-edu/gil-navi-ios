@@ -8,6 +8,23 @@
 import UIKit
 
 extension UIView {
+    /// 접근성 레이블, 힌트, 트레이트를 한 번에 설정합니다
+    /// - Parameters:
+    ///   - label: 접근성 레이블 텍스트
+    ///   - hint: 접근성 힌트 텍스트
+    ///   - traits: 접근성 트레이트
+    @discardableResult
+    func setAccessibility(
+        label: String,
+        hint: String? = nil,
+        traits: UIAccessibilityTraits = .none
+    ) -> Self {
+        accessibilityLabel = label
+        accessibilityHint = hint
+        accessibilityTraits = traits
+        return self
+    }
+    
     /// 접근성 레이블을 설정합니다
     /// - Parameter label: VoiceOver가 읽을 텍스트 레이블
     @discardableResult
