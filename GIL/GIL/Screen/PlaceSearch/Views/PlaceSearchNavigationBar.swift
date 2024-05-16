@@ -47,9 +47,11 @@ extension PlaceSearchNavigationBar {
         backButton
             .setAccessibility(label: "뒤로가기 버튼", hint: "장소 검색 화면을 닫으려면 두 번 탭하세요", traits: .button)
             .configureNavigationStyle(type: .back)
-            .top(equalTo: topAnchor)
-            .left(equalTo: leadingAnchor, constant: 11)
-            .size(CGSize(width: 36, height: 30))
+            .makeConstraints({
+                $0.top(equalTo: topAnchor)
+                $0.leading(equalTo: leadingAnchor, constant: 12)
+                $0.size(CGSize(width: 36, height: 30))
+            })
     }
     
     private func setupSearchBar() {
