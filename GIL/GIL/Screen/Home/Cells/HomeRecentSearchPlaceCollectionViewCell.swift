@@ -9,8 +9,7 @@ import UIKit
 
 final class HomeRecentSearchPlaceCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
     static let reuseIdentifier = "HomeRecentSearchPlaceCell"
-    private let stackView = BaseStackView(spacing: 10)
-    private var buttons: [UIButton] = []
+    private let stackView = UIStackView()
     var onplaceButtonTapped: ((PlaceData) -> Void)?
     
     // MARK: - Initialization
@@ -36,7 +35,14 @@ extension HomeRecentSearchPlaceCollectionViewCell {
     }
     
     private func setupSearchBarView() {
-        stackView.applyConstraints(to: contentView, attributes: [.top, .bottom, .leading, .trailing])
+        stackView
+            .setAxis(.vertical)
+            .setSpacing(10)
+            .setDistribution(.fillEqually)
+            .setAlignment(.fill)
+            .makeConstraints({
+                $0.matchParent(contentView, attributes: [.top, .bottom, .leading, .trailing])
+            })
     }
 }
 
@@ -59,59 +65,14 @@ extension HomeRecentSearchPlaceCollectionViewCell {
             stackView.removeArrangedSubview($0)
             $0.removeFromSuperview()
         }
-        buttons.forEach { $0.removeFromSuperview() }
-        buttons.removeAll()
     }
     
     private func configureButtons(with places: [PlaceData]) {
         for place in places {
-            let button = createButton(for: place)
+            let button = RecentSearchPlaceButton(place: place)
+            button.addAction(UIAction { [weak self] _ in self?.placeButtonTapped(data: place)}, for: .touchUpInside)
             stackView.addArrangedSubview(button)
         }
-    }
-}
-
-// MARK: - Button Creation and Layout
-extension HomeRecentSearchPlaceCollectionViewCell {
-    private func createButton(for place: PlaceData) -> UIButton {
-        let iconImageView = MappinImageView(iconType: .filled)
-        let nameLabel = BaseLabel(text: place.place.name, fontSize: 15, fontWeight: .bold)
-        let addressLabel = BaseLabel(text: place.place.placemark.address ?? "", fontSize: 13, fontWeight: .medium)
-        let border = UIView().setBackgroundColor(.lightGray)
-        
-        let button = UIButton()
-            .setBackgroundColor(.systemBackground)
-            .setAccessibility(label: "최근 검색 장소 버튼", hint: "장소 이름은 \(nameLabel.text ?? "알 수 없음") 장소의 주소는 \(addressLabel.text ?? "알 수 없음")입니다. 해당 장소로 길을 찾으려면 두 번 탭하세요", traits: .button)
-        button.addAction(UIAction { [weak self] _ in self?.placeButtonTapped(data: place)}, for: .touchUpInside)
-        [iconImageView, nameLabel, addressLabel, border].forEach({ button.addSubview($0) })
-        setupButtonLayout(button: button, icon: iconImageView, name: nameLabel, address: addressLabel, border: border)
-        return button
-    }
-    
-    private func setupButtonLayout(
-        button: UIButton,
-        icon: UIImageView,
-        name: UILabel,
-        address: UILabel,
-        border: UIView
-    ) {
-        icon
-            .left(equalTo: button.leadingAnchor, constant: 26)
-            .centerY(equalTo: button.centerYAnchor)
-            .size(CGSize(width: 30, height: 30))
-        name
-            .left(equalTo: icon.trailingAnchor, constant: 10)
-            .right(equalTo: button.trailingAnchor, constant: -26)
-            .top(equalTo: button.topAnchor, constant: 10)
-        address
-            .top(equalTo: name.bottomAnchor, constant: 5)
-            .bottom(equalTo: button.bottomAnchor, constant: -10)
-            .applyConstraints(to: name, attributes: [.leading, .trailing])
-        border
-            .bottom(equalTo: button.bottomAnchor)
-            .left(equalTo: button.leadingAnchor, constant: 20)
-            .right(equalTo: button.trailingAnchor, constant: -20)
-            .height(1)
     }
 }
 

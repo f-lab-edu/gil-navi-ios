@@ -51,11 +51,11 @@ extension HomeSearchCollectionViewCell {
     }
     
     private func setupSearchBarView() {
-        searchBarView
-            .centerY(equalTo: contentView.centerYAnchor)
-            .left(equalTo: contentView.leadingAnchor, constant: 10)
-            .right(equalTo: contentView.trailingAnchor, constant: -10)
-            .height(50)
+        searchBarView.makeConstraints({
+            $0.centerY(equalTo: contentView.centerYAnchor)
+            $0.matchParent(contentView, attributes: [.leading, .trailing], insets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+            $0.height(equalToConstant: 50)
+        })
     }
 }
 

@@ -41,6 +41,8 @@ extension HomeView {
     }
     
     private func setupMainCollectionView() {
-        mainCollectionView.applyConstraints(to: self, attributes: [.top, .bottom, .leading, .trailing])
+        mainCollectionView.makeConstraints {
+            $0.matchParent(self, attributes: [.top, .bottom, .leading, .trailing])
+        }
     }
 }

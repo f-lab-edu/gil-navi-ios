@@ -31,13 +31,9 @@ extension HomeSearchBarView {
     }
     
     private func setupView() {
-        backgroundColor = .white
-        layer.cornerRadius = 3
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 1)
-        layer.shadowRadius = 3
-        layer.shadowOpacity = 0.2
-        clipsToBounds = false
+        setBackgroundColor(.white)
+        setLayer(cornerRadius: 3)
+        setShadow(color: .black, offset: CGSize(width: 0, height: 1), radius: 3, opacity: 0.2)
     }
     
     private func addSubviews() {
@@ -54,9 +50,11 @@ extension HomeSearchBarView {
             .setImage(UIImage(systemName: "magnifyingglass"))
             .setTintColor(.mainPlaceholder)
             .setContentMode(.scaleAspectFit)
-            .left(equalTo: leadingAnchor, constant: 8)
-            .centerY(equalTo: centerYAnchor)
-            .size(CGSize(width: 24, height: 24))
+            .makeConstraints({
+                $0.leading(equalTo: leadingAnchor, constant: 8)
+                $0.centerY(equalTo: centerYAnchor)
+                $0.size(CGSize(width: 24, height: 24))
+            })
     }
     
     private func setupSearchLabel() {
@@ -64,8 +62,10 @@ extension HomeSearchBarView {
             .setAccessibility(label: "장소 검색 안내 레이블", hint: "장소 검색 화면으로 이동하려면 두 번 탭하세요")
             .setText(text: "어디로 갈까요?")
             .setFont(textStyle: .body, size: 14, weight: .regular)
-            .left(equalTo: searchIconImageView.trailingAnchor, constant: 8)
-            .right(equalTo: trailingAnchor, constant: -8)
-            .centerY(equalTo: searchIconImageView.centerYAnchor)
+            .makeConstraints({
+                $0.leading(equalTo: searchIconImageView.trailingAnchor, constant: 8)
+                $0.trailing(equalTo: trailingAnchor, constant: 8)
+                $0.centerY(equalTo: searchIconImageView.centerYAnchor)
+            })
     }
 }
