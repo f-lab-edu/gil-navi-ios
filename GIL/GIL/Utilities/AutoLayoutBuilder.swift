@@ -43,7 +43,7 @@ extension UIView {
     }
 }
 
-class AutoLayoutBuilder {
+final class AutoLayoutBuilder {
     private let view: UIView
 
     init(view: UIView) {
