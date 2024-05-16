@@ -87,6 +87,7 @@
 		58CC1B012BEB0E720004FEAE /* RouteMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1B002BEB0E720004FEAE /* RouteMapViewController.swift */; };
 		58CC1B032BEB0F450004FEAE /* RouteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1B022BEB0F450004FEAE /* RouteMapView.swift */; };
 		58CC1B062BEB165E0004FEAE /* RouteMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1B052BEB165E0004FEAE /* RouteMapViewModel.swift */; };
+		58D9468E2BF50698006417AF /* AutoLayoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D9468D2BF50698006417AF /* AutoLayoutBuilder.swift */; };
 		58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93052BDF79C600C97575 /* PlacesSearchService.swift */; };
 		58DE93092BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93082BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift */; };
 		58DE930D2BDF94B600C97575 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE930C2BDF94B600C97575 /* PlaceModel.swift */; };
@@ -192,6 +193,7 @@
 		58CC1B002BEB0E720004FEAE /* RouteMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapViewController.swift; sourceTree = "<group>"; };
 		58CC1B022BEB0F450004FEAE /* RouteMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapView.swift; sourceTree = "<group>"; };
 		58CC1B052BEB165E0004FEAE /* RouteMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapViewModel.swift; sourceTree = "<group>"; };
+		58D9468D2BF50698006417AF /* AutoLayoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLayoutBuilder.swift; sourceTree = "<group>"; };
 		58DE93052BDF79C600C97575 /* PlacesSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchService.swift; sourceTree = "<group>"; };
 		58DE93082BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		58DE930C2BDF94B600C97575 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				58DE93052BDF79C600C97575 /* PlacesSearchService.swift */,
 				5810DE492BE37C9400180BFB /* FirebaseAuthManager.swift */,
 				581F79742BEE212D001F81A0 /* RouteManager.swift */,
+				58D9468D2BF50698006417AF /* AutoLayoutBuilder.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 				58368F1D2BDE4AD2009E008C /* PlaceSearchNavigationBar.swift in Sources */,
 				584FA41E2BA82886002600F1 /* FormTextField.swift in Sources */,
 				58DE93092BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift in Sources */,
+				58D9468E2BF50698006417AF /* AutoLayoutBuilder.swift in Sources */,
 				58C1DE892BF3386500B169CF /* CoordinateModel.swift in Sources */,
 				580477092BF1BF480093019C /* RouteCollectionController.swift in Sources */,
 				58DE930F2BDFA23200C97575 /* UIView+Extension.swift in Sources */,
