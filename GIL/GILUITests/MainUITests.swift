@@ -39,6 +39,7 @@ final class MainUITests: XCTestCase {
         app.buttons["운전"].tap()
         // 2초 동안 대기합니다.
         sleep(2)
+        // "도보" 버튼을 찾아 클릭합니다.
         app.buttons["도보"].tap()
         // 2초 동안 대기합니다.
         sleep(2)

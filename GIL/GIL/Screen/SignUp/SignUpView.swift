@@ -92,7 +92,7 @@ extension SignUpView {
     
     private func setupCloseButton() {
         closeButton
-            .setAccessibilityIdentifier("CloseButton")
+            .setAccessibilityIdentifier("SignUpViewCloseButton")
             .setAccessibility(label: "닫기 버튼", hint: "회원가입 화면을 닫으려면 두 번 탭하세요", traits: .button)
             .configureNavigationStyle(type: .close)
             .top(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10)
@@ -108,7 +108,7 @@ extension SignUpView {
             .left(equalTo: leadingAnchor, constant: 20)
             .height(constraint.constant)
         emailTextField
-            .setAccessibilityIdentifier("EmailTextField")
+            .setAccessibilityIdentifier("SignUpViewEmailTextField")
             .setAccessibility(label: "이메일 입력 필드", hint: "이메일을 입력하세요")
             .top(equalTo: emailLabel.bottomAnchor, constant: 2)
             .left(equalTo: leadingAnchor, constant: 16)
@@ -124,7 +124,7 @@ extension SignUpView {
             .applyConstraints(to: emailLabel, attributes: [.leading])
             .height(constraint.constant)
         nameTextField
-            .setAccessibilityIdentifier("NameTextField")
+            .setAccessibilityIdentifier("SignUpViewNameTextField")
             .setAccessibility(label: "이름 입력 필드", hint: "이름을 입력하세요")
             .top(equalTo: nameLabel.bottomAnchor, constant: 2)
             .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
@@ -138,7 +138,7 @@ extension SignUpView {
             .applyConstraints(to: emailLabel, attributes: [.leading])
             .height(constraint.constant)
         passwordTextField
-            .setAccessibilityIdentifier("PasswordTextField")
+            .setAccessibilityIdentifier("SignUpViewPasswordTextField")
             .setAccessibility(label: "비밀번호 입력 필드", hint: "비밀번호를 입력하세요")
             .top(equalTo: passwordLabel.bottomAnchor, constant: 2)
             .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
@@ -152,7 +152,7 @@ extension SignUpView {
             .applyConstraints(to: emailLabel, attributes: [.leading])
             .height(constraint.constant)
         verifyPasswordTextField
-            .setAccessibilityIdentifier("VerifyPasswordTextField")
+            .setAccessibilityIdentifier("SignUpViewVerifyPasswordTextField")
             .setAccessibility(label: "비밀번호 확인 입력 필드", hint: "비밀번호를 다시 입력하세요")
             .top(equalTo: verifyPasswordLabel.bottomAnchor, constant: 2)
             .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
@@ -167,7 +167,7 @@ extension SignUpView {
     
     private func setupDoneButton() {
         doneButton
-            .setAccessibilityIdentifier("DoneButton")
+            .setAccessibilityIdentifier("SignUpViewDoneButton")
             .setAccessibility(label: "완료 버튼", hint: "회원가입을 완료하려면 두 번 탭하세요", traits: .button)
             .configureSubmitStyle(title: "완료")
             .top(equalTo: checkPasswordStackView.bottomAnchor, constant: 30)
