@@ -40,6 +40,7 @@
 		584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA3E82BA41484002600F1 /* SceneDelegate.swift */; };
 		584FA3F02BA41485002600F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 584FA3EF2BA41485002600F1 /* Assets.xcassets */; };
 		584FA3F32BA41485002600F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 584FA3F12BA41485002600F1 /* LaunchScreen.storyboard */; };
+		584FA4082BA41485002600F1 /* LoginViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4072BA41485002600F1 /* LoginViewUITests.swift */; };
 		584FA41B2BA7F606002600F1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA41A2BA7F606002600F1 /* LoginViewController.swift */; };
 		584FA41E2BA82886002600F1 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA41D2BA82886002600F1 /* FormTextField.swift */; };
 		584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA42F2BABC0EE002600F1 /* LoginView.swift */; };
@@ -142,6 +143,7 @@
 		584FA3F42BA41485002600F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		584FA3F92BA41485002600F1 /* GILTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GILTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		584FA4032BA41485002600F1 /* GILUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GILUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		584FA4072BA41485002600F1 /* LoginViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewUITests.swift; sourceTree = "<group>"; };
 		584FA41A2BA7F606002600F1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		584FA41D2BA82886002600F1 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		584FA42F2BABC0EE002600F1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 		584FA4062BA41485002600F1 /* GILUITests */ = {
 			isa = PBXGroup;
 			children = (
+				584FA4072BA41485002600F1 /* LoginViewUITests.swift */,
 			);
 			path = GILUITests;
 			sourceTree = "<group>";
@@ -791,6 +794,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				584FA4082BA41485002600F1 /* LoginViewUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
