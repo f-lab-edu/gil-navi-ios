@@ -82,6 +82,7 @@
 		58CC1B032BEB0F450004FEAE /* RouteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1B022BEB0F450004FEAE /* RouteMapView.swift */; };
 		58CC1B062BEB165E0004FEAE /* RouteMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1B052BEB165E0004FEAE /* RouteMapViewModel.swift */; };
 		58D946952BF5DDFE006417AF /* SignUpViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946942BF5DDFE006417AF /* SignUpViewUITests.swift */; };
+		58D946972BF5E85C006417AF /* MainUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946962BF5E85C006417AF /* MainUITests.swift */; };
 		58DA598C2BF4C2FA0039630D /* MockClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DA598B2BF4C2FA0039630D /* MockClass.swift */; };
 		58DA598E2BF4C39B0039630D /* PlaceSearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DA598D2BF4C39B0039630D /* PlaceSearchViewModelTests.swift */; };
 		58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93052BDF79C600C97575 /* PlacesSearchService.swift */; };
@@ -184,6 +185,7 @@
 		58CC1B022BEB0F450004FEAE /* RouteMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapView.swift; sourceTree = "<group>"; };
 		58CC1B052BEB165E0004FEAE /* RouteMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapViewModel.swift; sourceTree = "<group>"; };
 		58D946942BF5DDFE006417AF /* SignUpViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewUITests.swift; sourceTree = "<group>"; };
+		58D946962BF5E85C006417AF /* MainUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUITests.swift; sourceTree = "<group>"; };
 		58DA59832BF4B1C50039630D /* Release.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Release.xctestplan; path = GIL/Release.xctestplan; sourceTree = SOURCE_ROOT; };
 		58DA598B2BF4C2FA0039630D /* MockClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClass.swift; sourceTree = "<group>"; };
 		58DA598D2BF4C39B0039630D /* PlaceSearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchViewModelTests.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 			children = (
 				584FA4072BA41485002600F1 /* LoginViewUITests.swift */,
 				58D946942BF5DDFE006417AF /* SignUpViewUITests.swift */,
+				58D946962BF5E85C006417AF /* MainUITests.swift */,
 			);
 			path = GILUITests;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 			files = (
 				58D946952BF5DDFE006417AF /* SignUpViewUITests.swift in Sources */,
 				584FA4082BA41485002600F1 /* LoginViewUITests.swift in Sources */,
+				58D946972BF5E85C006417AF /* MainUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

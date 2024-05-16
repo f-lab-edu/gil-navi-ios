@@ -61,6 +61,7 @@ extension HomeSearchBarView {
     
     private func setupSearchLabel() {
         searchLabel
+            .setAccessibilityIdentifier("HomeSearchBarViewSearchLabel")
             .setAccessibility(label: "장소 검색 안내 레이블", hint: "장소 검색 화면으로 이동하려면 두 번 탭하세요")
             .setText(text: "어디로 갈까요?")
             .setFont(textStyle: .body, size: 14, weight: .regular)

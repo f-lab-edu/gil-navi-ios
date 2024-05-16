@@ -45,6 +45,7 @@ extension PlaceSearchNavigationBar {
     
     private func setupBackButton() {
         backButton
+            .setAccessibilityIdentifier("PlaceSearchNavigationBarBackButton")
             .setAccessibility(label: "뒤로가기 버튼", hint: "장소 검색 화면을 닫으려면 두 번 탭하세요", traits: .button)
             .configureNavigationStyle(type: .back)
             .top(equalTo: topAnchor)
