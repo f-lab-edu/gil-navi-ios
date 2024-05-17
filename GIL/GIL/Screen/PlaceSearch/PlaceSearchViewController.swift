@@ -92,7 +92,7 @@ extension PlaceSearchViewController: UISearchBarDelegate {
             try viewModel.searchPlace(query)
         } catch {
             Log.error(#function, error.localizedDescription)
-            ToastManager.shared.showToast(message: "관련된 장소를 찾을 수 없습니다.")
+            ToastManager.shared.showToast(message: "관련된 장소를 찾을 수 없습니다.", position: .top)
         }
     }
 }
