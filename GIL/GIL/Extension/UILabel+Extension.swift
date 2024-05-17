@@ -48,4 +48,12 @@ extension UILabel {
         adjustsFontForContentSizeCategory = true
         return self
     }
+    
+    /// Label 텍스트 정렬을 설정합니다.
+    /// - Parameter alignment: 정렬 방식
+    @discardableResult
+    func setAlignment(_ alignment: NSTextAlignment) -> Self {
+        textAlignment = alignment
+        return self
+    }
 }
