@@ -44,6 +44,9 @@ extension RecentSearchPlaceButton {
     private func setupButton() {
         [iconImageView, nameLabel, addressLabel, borderView].forEach { addSubview($0) }
         setupIconImageView()
+        setupNameLabel()
+        setupAddressLabel()
+        setupBorderView()
     }
     
     private func setupIconImageView() {
@@ -59,7 +62,7 @@ extension RecentSearchPlaceButton {
             .setText(text: place.place.name)
             .setTextColor(textColor: .mainText)
             .setFont(textStyle: .body, size: 15, weight: .bold)
-            makeConstraints({
+            .makeConstraints({
                 $0.leading(equalTo: iconImageView.trailingAnchor, constant: 10)
                 $0.trailing(equalTo: trailingAnchor, constant: 26)
                 $0.top(equalTo: topAnchor, constant: 10)
