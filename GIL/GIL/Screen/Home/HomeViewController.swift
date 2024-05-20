@@ -53,7 +53,7 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
 // MARK: - HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
     func displayRouteMap(place: PlaceModel) {
-        let viewModel = RouteMapViewModel(currentCLLocation: nil, destination: place)
+        let viewModel = RouteMapViewModel(departureCLLocation: nil, destination: place)
         let vc = RouteMapViewController(viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)
     }

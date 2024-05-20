@@ -91,6 +91,7 @@
 		58D946912BF5B88E006417AF /* RecentSearchPlaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946902BF5B88E006417AF /* RecentSearchPlaceButton.swift */; };
 		58D946A72BF7489F006417AF /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946A62BF7489F006417AF /* ToastManager.swift */; };
 		58D946A92BF74FB7006417AF /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946A82BF74FB7006417AF /* ToastView.swift */; };
+		58D946AE2BFB99F2006417AF /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946AD2BFB99F2006417AF /* AppFlowCoordinator.swift */; };
 		58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93052BDF79C600C97575 /* PlacesSearchService.swift */; };
 		58DE93092BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93082BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift */; };
 		58DE930D2BDF94B600C97575 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE930C2BDF94B600C97575 /* PlaceModel.swift */; };
@@ -200,6 +201,7 @@
 		58D946902BF5B88E006417AF /* RecentSearchPlaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchPlaceButton.swift; sourceTree = "<group>"; };
 		58D946A62BF7489F006417AF /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		58D946A82BF74FB7006417AF /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		58D946AD2BFB99F2006417AF /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		58DE93052BDF79C600C97575 /* PlacesSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchService.swift; sourceTree = "<group>"; };
 		58DE93082BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		58DE930C2BDF94B600C97575 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
@@ -372,7 +374,7 @@
 		584FA3E52BA41484002600F1 /* GIL */ = {
 			isa = PBXGroup;
 			children = (
-				58BDFB9F2BB16F93006AC994 /* GIL.entitlements */,
+				58D946AB2BFB8D25006417AF /* Application */,
 				584FA4192BA7F5E1002600F1 /* Screen */,
 				58DE930B2BDF948100C97575 /* Model */,
 				586F030D2BE0D03D008660A0 /* SwiftData */,
@@ -381,13 +383,7 @@
 				583210B62BE69EA800D9DCA1 /* Protocol */,
 				58368EFF2BD76162009E008C /* Enum */,
 				58BDFBC62BBA8C21006AC994 /* Utilities */,
-				584FA3E62BA41484002600F1 /* AppDelegate.swift */,
-				584FA3E82BA41484002600F1 /* SceneDelegate.swift */,
-				584FA3F12BA41485002600F1 /* LaunchScreen.storyboard */,
-				584FA3EF2BA41485002600F1 /* Assets.xcassets */,
-				58BAC8AC2BC7C79200CDEB1F /* Localizable.xcstrings */,
-				584FA3F42BA41485002600F1 /* Info.plist */,
-				584FA4442BAD6068002600F1 /* GoogleService-Info.plist */,
+				58D946AC2BFB8D54006417AF /* Resources */,
 			);
 			path = GIL;
 			sourceTree = "<group>";
@@ -557,6 +553,29 @@
 				58D946A62BF7489F006417AF /* ToastManager.swift */,
 			);
 			path = Toast;
+			sourceTree = "<group>";
+		};
+		58D946AB2BFB8D25006417AF /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				584FA3E82BA41484002600F1 /* SceneDelegate.swift */,
+				584FA3E62BA41484002600F1 /* AppDelegate.swift */,
+				58D946AD2BFB99F2006417AF /* AppFlowCoordinator.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		58D946AC2BFB8D54006417AF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				58BDFB9F2BB16F93006AC994 /* GIL.entitlements */,
+				584FA4442BAD6068002600F1 /* GoogleService-Info.plist */,
+				58BAC8AC2BC7C79200CDEB1F /* Localizable.xcstrings */,
+				584FA3F42BA41485002600F1 /* Info.plist */,
+				584FA3EF2BA41485002600F1 /* Assets.xcassets */,
+				584FA3F12BA41485002600F1 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		58DE93072BDF841300C97575 /* Cells */ = {
@@ -798,6 +817,7 @@
 				58DE930F2BDFA23200C97575 /* UIView+Extension.swift in Sources */,
 				583210BA2BE76DAA00D9DCA1 /* BaseLabel.swift in Sources */,
 				58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */,
+				58D946AE2BFB99F2006417AF /* AppFlowCoordinator.swift in Sources */,
 				58BDFBA42BB2E536006AC994 /* SignUpView.swift in Sources */,
 				584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */,
 				584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */,
@@ -943,7 +963,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GIL/Info.plist;
+				INFOPLIST_FILE = GIL/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GIL;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1086,7 +1106,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GIL/Info.plist;
+				INFOPLIST_FILE = GIL/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "GIL-Dev";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1230,7 +1250,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GIL/Info.plist;
+				INFOPLIST_FILE = GIL/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "GIL-QA";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

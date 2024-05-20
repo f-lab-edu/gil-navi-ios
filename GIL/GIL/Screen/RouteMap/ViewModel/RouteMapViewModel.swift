@@ -10,19 +10,20 @@ import Foundation
 // MARK: - RouteFinderError
 enum RouteMapError: Error {
     case routeManagerUnavailable
-    case currentLocationEmpty
+    case departureLocationEmpty
 }
 
 final class RouteMapViewModel {
+    let locationService = LocationService()
     var routeManager: RouteManagerProtocol?
-    let currentCLLocation: CLLocationModel?
+    let departureCLLocation: CLLocationModel?
     let destination: PlaceModel
 
     init(
-        currentCLLocation: CLLocationModel?,
+        departureCLLocation: CLLocationModel?,
         destination: PlaceModel
     ) {
-        self.currentCLLocation = currentCLLocation
+        self.departureCLLocation = departureCLLocation
         self.destination = destination
     }
     
@@ -34,11 +35,17 @@ final class RouteMapViewModel {
         let destinationPinAnnotation = routeManager.createPinAnnotation(coordinate: destinationCoordinate, title: destination.name, subtitle: nil)
         routeManager.addAnnotations([destinationPinAnnotation])
         
-        guard let departureCoordinate = currentCLLocation?.coordinate.toCLLocationCoordinate2D() else { throw RouteMapError.currentLocationEmpty }
+        guard let departureCoordinate = departureCLLocation?.coordinate.toCLLocationCoordinate2D() else { throw RouteMapError.departureLocationEmpty }
         
         let region = routeManager.fetchCoordinateRegion(from: departureCoordinate, to: destinationCoordinate)
         routeManager.setRegion(region)
         
         return try await routeManager.findRoute(from: departureCoordinate, to: destinationCoordinate, transportType: transportType)
     }
+    
+//    func setRegion() {
+//        guard let routeManager = routeManager else { return }
+//        let myRegion = routeManager.getRegion()
+//        routeManager.setRegion(myRegion)
+//    }
 }

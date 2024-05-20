@@ -52,7 +52,7 @@ extension PlaceSearchCollectionViewHandler {
         
         guard let currentLocation = viewModel.locationService.currentLocation else { return }
         
-        let viewModel = RouteMapViewModel(currentCLLocation: currentLocation, destination: destination)
+        let viewModel = RouteMapViewModel(departureCLLocation: currentLocation, destination: destination)
         let vc = RouteMapViewController(viewModel: viewModel)
         viewController.navigationController?.pushViewController(vc, animated: true)
     }
