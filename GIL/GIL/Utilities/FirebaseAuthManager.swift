@@ -5,57 +5,114 @@
 //  Created by 송우진 on 5/2/24.
 //
 
-import Foundation
 import FirebaseAuth
+import Combine
+import AuthenticationServices
 
-protocol FirebaseAuthManagerProtocol {
-    static var currentUser: User? { get }
-    static func registerAuthStateDidChangeHandler()
-    static func signInAnonymously()
-    static func createUserAsync(with email: String, password: String) async throws -> AuthDataResult
-    static func signOut() throws
-    static func signInAsync(with email: String, password: String) async throws -> AuthDataResult
-    static func signInAsync(with credential: OAuthCredential) async throws -> AuthDataResult
+protocol FirebaseAuthManaging {
+    var authStateDidChangePublisher: AnyPublisher<User?, Never> { get }
+    func signInAnonymously() -> AnyPublisher<Member?, Error>
+    func signInWithEmail(email: String, password: String) -> AnyPublisher<Member?, Error>
+    func signInWithApple(idTokenString: String, nonce: String, fullName: PersonNameComponents?) -> AnyPublisher<Member?, Error>
+    func createUser(email: String, password: String, name: String) -> AnyPublisher<Member?, Error>
+    func signOut() -> AnyPublisher<Void, Error>
 }
 
-final class FirebaseAuthManager: FirebaseAuthManagerProtocol {
-    static var currentUser: User? {
-        get {
-            Auth.auth().currentUser
+final class FirebaseAuthManager: FirebaseAuthManaging {
+    private var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
+    private let authStatePublisher = PassthroughSubject<User?, Never>()
+    
+    init() {
+        authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener { [weak self] _, user in
+            self?.authStatePublisher.send(user)
         }
     }
-    
-    static let authStateDidChangeNotification = Notification.Name("FirebaseAuthStateDidChangeNotification")
-    
-    static func registerAuthStateDidChangeHandler() {
-        Auth.auth().addStateDidChangeListener { _, user in
-            NotificationCenter.default.post(name: FirebaseAuthManager.authStateDidChangeNotification, object: user)
+
+    deinit {
+        if let handle = authStateDidChangeListenerHandle {
+            Auth.auth().removeStateDidChangeListener(handle)
         }
     }
-    
-    static func signInAnonymously() {
-        Auth.auth().signInAnonymously()
+
+    var authStateDidChangePublisher: AnyPublisher<User?, Never> {
+        authStatePublisher.eraseToAnyPublisher()
     }
     
-    static func signOut() throws {
-        try Auth.auth().signOut()
+    func signInAnonymously() -> AnyPublisher<Member?, Error> {
+        Future { promise in
+            Auth.auth().signInAnonymously { authResult, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    promise(.success(Member(user: authResult?.user)))
+                }
+            }
+        }.eraseToAnyPublisher()
     }
-    
-    static func createUserAsync(
-        with email: String,
+
+    func signInWithEmail(
+        email: String,
         password: String
-    ) async throws -> AuthDataResult {
-        try await Auth.auth().createUser(withEmail: email, password: password)
+    ) -> AnyPublisher<Member?, Error> {
+        Deferred {
+            Future { promise in
+                Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                    if let error = error {
+                        promise(.failure(error))
+                    } else {
+                        promise(.success(Member(user: authResult?.user)))
+                    }
+                }
+            }
+        }.eraseToAnyPublisher()
     }
     
-    static func signInAsync(
-        with email: String,
-        password: String
-    ) async throws -> AuthDataResult {
-        try await Auth.auth().signIn(withEmail: email, password: password)
+    func signInWithApple(
+        idTokenString: String,
+        nonce: String,
+        fullName: PersonNameComponents?
+    ) -> AnyPublisher<Member?, Error> {
+        Future { promise in
+            let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: fullName)
+            Auth.auth().signIn(with: credential) { authResult, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    promise(.success(Member(user: authResult?.user)))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
     }
     
-    static func signInAsync(with credential: OAuthCredential) async throws -> AuthDataResult {
-        try await Auth.auth().signIn(with: credential)
+    func createUser(
+        email: String,
+        password: String,
+        name: String
+    ) -> AnyPublisher<Member?, Error> {
+        Deferred {
+            Future { promise in
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    if let error = error {
+                        promise(.failure(error))
+                    } else {
+                        promise(.success(Member(user: authResult?.user)))
+                    }
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    func signOut() -> AnyPublisher<Void, Error> {
+        Deferred {
+            Future { promise in
+                do {
+                    try Auth.auth().signOut()
+                    promise(.success(()))
+                } catch {
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
     }
 }

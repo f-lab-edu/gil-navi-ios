@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 final class RouteMapViewController: BaseViewController, NavigationBarHideable {
     private var routeMapView = RouteMapView()
@@ -32,7 +33,14 @@ final class RouteMapViewController: BaseViewController, NavigationBarHideable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
-        presentRouteFinderPageSheet()
+        
+        if viewModel.departureCLLocation != nil {
+            presentRouteFinderPageSheet()
+        } else {
+            routeMapView.mapView.delegate = self
+//            viewModel.setRegion()
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,5 +99,13 @@ extension RouteMapViewController: RouteFinderPageSheetDelegate {
                 routeFinderPageSheet.updateRoutes(nil)
             }
         }
+    }
+}
+
+// MARK: - MKMapViewDelegate
+extension RouteMapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        mapView.setRegion(region, animated: true)
     }
 }

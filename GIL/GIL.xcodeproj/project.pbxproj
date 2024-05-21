@@ -92,6 +92,11 @@
 		58D946A72BF7489F006417AF /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946A62BF7489F006417AF /* ToastManager.swift */; };
 		58D946A92BF74FB7006417AF /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946A82BF74FB7006417AF /* ToastView.swift */; };
 		58D946AE2BFB99F2006417AF /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946AD2BFB99F2006417AF /* AppFlowCoordinator.swift */; };
+		58D946B12BFB9E6B006417AF /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946B02BFB9E6B006417AF /* AppDIContainer.swift */; };
+		58D946B82BFBA09B006417AF /* AuthenticationSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946B72BFBA09B006417AF /* AuthenticationSceneDIContainer.swift */; };
+		58D946BC2BFBA6D6006417AF /* AuthenticationFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946BB2BFBA6D6006417AF /* AuthenticationFlowCoordinator.swift */; };
+		58D946CE2BFC2DF2006417AF /* AuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946CD2BFC2DF2006417AF /* AuthenticationUseCase.swift */; };
+		58D946D42BFCAEB7006417AF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D946D32BFCAEB7006417AF /* Member.swift */; };
 		58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93052BDF79C600C97575 /* PlacesSearchService.swift */; };
 		58DE93092BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93082BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift */; };
 		58DE930D2BDF94B600C97575 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE930C2BDF94B600C97575 /* PlaceModel.swift */; };
@@ -202,6 +207,11 @@
 		58D946A62BF7489F006417AF /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		58D946A82BF74FB7006417AF /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		58D946AD2BFB99F2006417AF /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
+		58D946B02BFB9E6B006417AF /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
+		58D946B72BFBA09B006417AF /* AuthenticationSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSceneDIContainer.swift; sourceTree = "<group>"; };
+		58D946BB2BFBA6D6006417AF /* AuthenticationFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationFlowCoordinator.swift; sourceTree = "<group>"; };
+		58D946CD2BFC2DF2006417AF /* AuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUseCase.swift; sourceTree = "<group>"; };
+		58D946D32BFCAEB7006417AF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		58DE93052BDF79C600C97575 /* PlacesSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchService.swift; sourceTree = "<group>"; };
 		58DE93082BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		58DE930C2BDF94B600C97575 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
@@ -375,6 +385,8 @@
 			isa = PBXGroup;
 			children = (
 				58D946AB2BFB8D25006417AF /* Application */,
+				58D946B22BFB9EC7006417AF /* Presentation */,
+				58D946CB2BFC2DCF006417AF /* Domain */,
 				584FA4192BA7F5E1002600F1 /* Screen */,
 				58DE930B2BDF948100C97575 /* Model */,
 				586F030D2BE0D03D008660A0 /* SwiftData */,
@@ -417,19 +429,8 @@
 				58368F142BDE41EB009E008C /* PlaceSearch */,
 				58BDFBCF2BBE5B43006AC994 /* Home */,
 				58BDFBA02BB2B865006AC994 /* SignUp */,
-				584FA41F2BA82CE3002600F1 /* Login */,
 			);
 			path = Screen;
-			sourceTree = "<group>";
-		};
-		584FA41F2BA82CE3002600F1 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				584FA41A2BA7F606002600F1 /* LoginViewController.swift */,
-				584FA42F2BABC0EE002600F1 /* LoginView.swift */,
-				584FA4492BB15D51002600F1 /* LoginViewModel.swift */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		584FA4202BA82D26002600F1 /* Component */ = {
@@ -475,10 +476,6 @@
 		58BDFBA02BB2B865006AC994 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				58BDFBA12BB2B8F5006AC994 /* SignUpViewController.swift */,
-				58BDFBA32BB2E536006AC994 /* SignUpView.swift */,
-				58BDFBC92BBA9B27006AC994 /* SignUpViewModel.swift */,
-				583210B42BE6610300D9DCA1 /* SignUpTextFieldHandler.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -561,6 +558,7 @@
 				584FA3E82BA41484002600F1 /* SceneDelegate.swift */,
 				584FA3E62BA41484002600F1 /* AppDelegate.swift */,
 				58D946AD2BFB99F2006417AF /* AppFlowCoordinator.swift */,
+				58D946AF2BFB9E4E006417AF /* DIContainer */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -576,6 +574,143 @@
 				584FA3F12BA41485002600F1 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		58D946AF2BFB9E4E006417AF /* DIContainer */ = {
+			isa = PBXGroup;
+			children = (
+				58D946B02BFB9E6B006417AF /* AppDIContainer.swift */,
+				58D946B72BFBA09B006417AF /* AuthenticationSceneDIContainer.swift */,
+			);
+			path = DIContainer;
+			sourceTree = "<group>";
+		};
+		58D946B22BFB9EC7006417AF /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				58D946B92BFBA6B9006417AF /* AuthenticationScene */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		58D946B92BFBA6B9006417AF /* AuthenticationScene */ = {
+			isa = PBXGroup;
+			children = (
+				58D946BA2BFBA6C8006417AF /* Flows */,
+				58D946BD2BFBA9EF006417AF /* Login */,
+				58D946C62BFBAF5B006417AF /* SignUp */,
+			);
+			name = AuthenticationScene;
+			sourceTree = "<group>";
+		};
+		58D946BA2BFBA6C8006417AF /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				58D946BB2BFBA6D6006417AF /* AuthenticationFlowCoordinator.swift */,
+			);
+			name = Flows;
+			sourceTree = "<group>";
+		};
+		58D946BD2BFBA9EF006417AF /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				58D946BF2BFBAA19006417AF /* ViewModel */,
+				58D946BE2BFBAA0A006417AF /* View */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		58D946BE2BFBAA0A006417AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				584FA41A2BA7F606002600F1 /* LoginViewController.swift */,
+				58D946C12BFBAA5F006417AF /* LoginView */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		58D946BF2BFBAA19006417AF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				584FA4492BB15D51002600F1 /* LoginViewModel.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		58D946C12BFBAA5F006417AF /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				584FA42F2BABC0EE002600F1 /* LoginView.swift */,
+			);
+			name = LoginView;
+			sourceTree = "<group>";
+		};
+		58D946C62BFBAF5B006417AF /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				58D946C72BFBAF66006417AF /* ViewModel */,
+				58D946C82BFBAF76006417AF /* View */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
+		58D946C72BFBAF66006417AF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				58BDFBC92BBA9B27006AC994 /* SignUpViewModel.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		58D946C82BFBAF76006417AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				58D946C92BFBAF85006417AF /* SignUpView */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		58D946C92BFBAF85006417AF /* SignUpView */ = {
+			isa = PBXGroup;
+			children = (
+				58BDFBA12BB2B8F5006AC994 /* SignUpViewController.swift */,
+				58D946CA2BFBAFBD006417AF /* SignUpViewCoodinator */,
+				58BDFBA32BB2E536006AC994 /* SignUpView.swift */,
+			);
+			name = SignUpView;
+			sourceTree = "<group>";
+		};
+		58D946CA2BFBAFBD006417AF /* SignUpViewCoodinator */ = {
+			isa = PBXGroup;
+			children = (
+				583210B42BE6610300D9DCA1 /* SignUpTextFieldHandler.swift */,
+			);
+			name = SignUpViewCoodinator;
+			sourceTree = "<group>";
+		};
+		58D946CB2BFC2DCF006417AF /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				58D946CF2BFC691F006417AF /* Entities */,
+				58D946CC2BFC2DDE006417AF /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		58D946CC2BFC2DDE006417AF /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				58D946CD2BFC2DF2006417AF /* AuthenticationUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		58D946CF2BFC691F006417AF /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				58D946D32BFCAEB7006417AF /* Member.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		58DE93072BDF841300C97575 /* Cells */ = {
@@ -776,6 +911,7 @@
 				58368F032BD80472009E008C /* HomeInteractor.swift in Sources */,
 				58368F052BD8047E009E008C /* HomePresenter.swift in Sources */,
 				58C1DE7B2BF20E7000B169CF /* Double+Extension.swift in Sources */,
+				58D946B12BFB9E6B006417AF /* AppDIContainer.swift in Sources */,
 				58368F162BDE41FC009E008C /* PlaceSearchViewController.swift in Sources */,
 				58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */,
 				581F79782BEF1D83001F81A0 /* RouteFinderPageSheet.swift in Sources */,
@@ -786,6 +922,7 @@
 				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
 				581F797A2BEF32B3001F81A0 /* RouteFinderView.swift in Sources */,
 				58C1DE872BF3382400B169CF /* CLLocationModel.swift in Sources */,
+				58D946D42BFCAEB7006417AF /* Member.swift in Sources */,
 				587DB2102BF4751B0097119C /* UIImageView+Extension.swift in Sources */,
 				583210BC2BE8F24200D9DCA1 /* BaseImageView.swift in Sources */,
 				58CC1B012BEB0E720004FEAE /* RouteMapViewController.swift in Sources */,
@@ -806,6 +943,8 @@
 				58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */,
 				580477052BF1BC7E0093019C /* RouteCollectionViewCell.swift in Sources */,
 				58C1DE852BF327C400B169CF /* NavigationBarHideable.swift in Sources */,
+				58D946BC2BFBA6D6006417AF /* AuthenticationFlowCoordinator.swift in Sources */,
+				58D946B82BFBA09B006417AF /* AuthenticationSceneDIContainer.swift in Sources */,
 				584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */,
 				58CC1AA82BEA143F0004FEAE /* PlaceSearchCollectionViewHandler.swift in Sources */,
 				58368F1D2BDE4AD2009E008C /* PlaceSearchNavigationBar.swift in Sources */,
@@ -813,6 +952,7 @@
 				58DE93092BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift in Sources */,
 				58D9468E2BF50698006417AF /* AutoLayoutBuilder.swift in Sources */,
 				58C1DE892BF3386500B169CF /* CoordinateModel.swift in Sources */,
+				58D946CE2BFC2DF2006417AF /* AuthenticationUseCase.swift in Sources */,
 				580477092BF1BF480093019C /* RouteCollectionController.swift in Sources */,
 				58DE930F2BDFA23200C97575 /* UIView+Extension.swift in Sources */,
 				583210BA2BE76DAA00D9DCA1 /* BaseLabel.swift in Sources */,
@@ -957,7 +1097,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = GIL/GIL.entitlements;
+				CODE_SIGN_ENTITLEMENTS = GIL/Resources/GIL.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1100,7 +1240,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = GIL/GIL.entitlements;
+				CODE_SIGN_ENTITLEMENTS = GIL/Resources/GIL.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1244,7 +1384,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconQA;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = GIL/GIL.entitlements;
+				CODE_SIGN_ENTITLEMENTS = GIL/Resources/GIL.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

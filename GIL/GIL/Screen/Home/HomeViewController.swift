@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol HomeDisplayLogic {
     func displaySearchScreen()
@@ -63,8 +64,9 @@ extension HomeViewController: HomeDisplayLogic {
     }
     
     func displaySearchScreen() {
-        let searchDetailVC = PlaceSearchViewController(viewModel: PlaceSearchViewModel())
-        navigationController?.pushViewController(searchDetailVC, animated: true)
+        try? Auth.auth().signOut()
+//        let searchDetailVC = PlaceSearchViewController(viewModel: PlaceSearchViewModel())
+//        navigationController?.pushViewController(searchDetailVC, animated: true)
     }
 }
 
