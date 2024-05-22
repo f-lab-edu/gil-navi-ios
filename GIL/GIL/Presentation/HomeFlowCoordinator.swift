@@ -29,7 +29,10 @@ final class HomeFlowCoordinator {
     }
     
     func start() {
-        let actions = HomeActions(showPlaceSearch: showPlaceSearch)
+        let actions = HomeActions(
+            showPlaceSearch: showPlaceSearch,
+            showRouteFinder: showRouteFinder
+        )
         let vc = dependencies.makeHomeViewController(actions: actions)
         let rootVC = UINavigationController(rootViewController: vc)
         navigationController = rootVC
@@ -41,5 +44,14 @@ final class HomeFlowCoordinator {
         let placeSearchSceneDIContainer = appDIContainer.makePlaceSearchDIContainer()
         let flow = placeSearchSceneDIContainer.makePlaceSearchFlowCoordinator(navigationController: navigationController)
         flow.start()
+    }
+    
+    private func showRouteFinder(destinationMapItem: MapItem) {
+        let viewModel = RouteMapViewModel(
+            departureMapLocation: nil,
+            destinationMapItem: destinationMapItem
+        )
+        let vc = RouteMapViewController(viewModel: viewModel)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

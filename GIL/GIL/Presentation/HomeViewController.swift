@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct HomeActions {
     let showPlaceSearch: () -> Void
+    let showRouteFinder: (MapItem) -> Void
 }
 
 protocol HomeDisplayLogic {
@@ -65,9 +66,7 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
 // MARK: - HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
     func displayRouteMap(place: MapItem) {
-        let viewModel = RouteMapViewModel(departureMapLocation: nil, destinationMapItem: place)
-        let vc = RouteMapViewController(viewModel: viewModel)
-        navigationController?.pushViewController(vc, animated: true)
+        actions?.showRouteFinder(place)
     }
     
     func displayFetchedPlaces(_ data: [Place]) {
