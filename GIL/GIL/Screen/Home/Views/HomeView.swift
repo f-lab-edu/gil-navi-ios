@@ -8,7 +8,6 @@
 import UIKit
 
 final class HomeView: UIView {
-    
     lazy var mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -22,35 +21,26 @@ final class HomeView: UIView {
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureUI()
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Drawing Cycle
-    override func updateConstraints() {
-        setConstraints()
-        super.updateConstraints()
-    }
 }
 
-// MARK: - Configure UI
+// MARK: - Setup UI
 extension HomeView {
-    func configureUI() {
-        [mainCollectionView].forEach({
-            addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        })
+    private func setupUI() {
+        addSubviews()
+        setupMainCollectionView()
     }
     
-    func setConstraints() {
-        NSLayoutConstraint.activate([
-            mainCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            mainCollectionView.leftAnchor.constraint(equalTo: leftAnchor),
-            mainCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            mainCollectionView.rightAnchor.constraint(equalTo: rightAnchor)
-        ])
+    private func addSubviews() {
+        addSubview(mainCollectionView)
+    }
+    
+    private func setupMainCollectionView() {
+        mainCollectionView.applyConstraints(to: self, attributes: [.top, .bottom, .leading, .trailing])
     }
 }

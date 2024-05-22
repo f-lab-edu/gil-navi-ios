@@ -7,36 +7,26 @@
 
 import UIKit
 
-class HomeSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
+final class HomeSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
     static let reuseIdentifier = "HomeSearchCell"
-    let searchBarView = HomeSearchBarView()
+    private let searchBarView = HomeSearchBarView()
     var onSearchBarTapped: (() -> Void)?
     
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureUI()
-        setupBindings()
+        setupUI()
+        setupBindTapGesture()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Drawing Cycle
-    override func updateConstraints() {
-        setConstraints()
-        super.updateConstraints()
-    }
 }
 
-// MARK: - Binding
+// MARK: - Setup Binding
 extension HomeSearchCollectionViewCell {
-    func setupBindings() {
-        bindTapGesture()
-    }
-    
-    private func bindTapGesture() {
+    private func setupBindTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(searchBarTapped))
         searchBarView.addGestureRecognizer(tapGesture)
     }
@@ -49,21 +39,22 @@ extension HomeSearchCollectionViewCell {
     }
 }
 
-// MARK: - Configure UI
+// MARK: - Setup UI
 extension HomeSearchCollectionViewCell {
-    func configureUI() {
-        contentView.addSubview(searchBarView)
-        searchBarView.translatesAutoresizingMaskIntoConstraints = false
-        
-        setNeedsUpdateConstraints()
+    private func setupUI() {
+        addSubviews()
+        setupSearchBarView()
     }
     
-    func setConstraints() {
-        NSLayoutConstraint.activate([
-            searchBarView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            searchBarView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            searchBarView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
-            searchBarView.heightAnchor.constraint(equalToConstant: 50)
-        ])
+    private func addSubviews() {
+        contentView.addSubview(searchBarView)
+    }
+    
+    private func setupSearchBarView() {
+        searchBarView
+            .centerY(equalTo: contentView.centerYAnchor)
+            .left(equalTo: contentView.leadingAnchor, constant: 10)
+            .right(equalTo: contentView.trailingAnchor, constant: -10)
+            .height(50)
     }
 }

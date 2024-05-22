@@ -22,4 +22,12 @@ struct Place: Hashable, Codable {
         self.category = mapItem.pointOfInterestCategory?.rawValue ?? ""
         self.distance = distance
     }
+    
+    func formattedDistanceString() -> String {
+        if distance < 1000 {
+            return "\(Int(distance))m"
+        } else {
+            return String(format: "%.2fkm", distance / 1000)
+        }
+    }
 }

@@ -27,36 +27,34 @@ final class PlaceSearchView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Drawing Cycle
-    override func updateConstraints() {
-        setConstraints()
-        super.updateConstraints()
-    }
 }
-
 // MARK: - Setup UI
 extension PlaceSearchView {
-    func setupUI() {
+    private func setupUI() {
         backgroundColor = .systemBackground
-
-        [navigationBar, searchResultsCollectionView].forEach({
-            addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        })
+        addSubviews()
+        setupComponents()
     }
     
-    func setConstraints() {
-        NSLayoutConstraint.activate([
-            navigationBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            navigationBar.leadingAnchor.constraint(equalTo: leadingAnchor),
-            navigationBar.trailingAnchor.constraint(equalTo: trailingAnchor),
-            navigationBar.heightAnchor.constraint(equalToConstant: 80),
-            
-            searchResultsCollectionView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
-            searchResultsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            searchResultsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            searchResultsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+    private func addSubviews() {
+        [navigationBar, searchResultsCollectionView].forEach({ addSubview($0) })
+    }
+    
+    private func setupComponents() {
+        setupNavigationBar()
+        setupCollectionView()
+    }
+    
+    private func setupNavigationBar() {
+        navigationBar
+            .top(equalTo: safeAreaLayoutGuide.topAnchor)
+            .height(80)
+            .applyConstraints(to: self, attributes: [.leading, .trailing])
+    }
+    
+    private func setupCollectionView() {
+        searchResultsCollectionView
+            .top(equalTo: navigationBar.bottomAnchor)
+            .applyConstraints(to: self, attributes: [.leading, .trailing, .bottom])
     }
 }

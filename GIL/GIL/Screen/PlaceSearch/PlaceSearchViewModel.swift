@@ -44,4 +44,13 @@ class PlaceSearchViewModel {
         let data = PlaceData(saveDate: Date(), place: place)
         placeContainer?.mainContext.insert(data)
     }
+    
+    func getAddressForPlace(_ place: Place) -> String {
+        if place.distance > 0 {
+            let formattedDistance = place.formattedDistanceString()
+            return "\(formattedDistance) · \(place.address)"
+        } else {
+            return place.address
+        }
+    }
 }
