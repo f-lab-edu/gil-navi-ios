@@ -35,15 +35,15 @@ final class SignUpViewUITests: XCTestCase {
         // 선택된 텍스트 필드에 이름을 입력합니다.
         app.textFields["SignUpViewNameTextField"].typeText("TEST계정")
         
-        let testPassword = "TestTest9999@@"
+        let testPwd = "TestTest9999@@"
         // "SignUpViewPasswordTextField" 보안 텍스트 필드를 찾아 탭합니다.
         app.secureTextFields["SignUpViewPasswordTextField"].tap()
         // 선택된 보안 텍스트 필드에 비밀번호를 입력합니다.
-        app.secureTextFields["SignUpViewPasswordTextField"].typeText(testPassword)
+        app.secureTextFields["SignUpViewPasswordTextField"].typeText(testPwd)
         // "SignUpViewVerifyPasswordTextField" 보안 텍스트 필드를 찾아 탭합니다.
         app.secureTextFields["SignUpViewVerifyPasswordTextField"].tap()
         // 선택된 보안 텍스트 필드에 비밀번호를 다시 입력합니다.
-        app.secureTextFields["SignUpViewVerifyPasswordTextField"].typeText(testPassword)
+        app.secureTextFields["SignUpViewVerifyPasswordTextField"].typeText(testPwd)
         
         // "SignUpViewDoneButton" 버튼을 찾아 회원가입을 시도하기 위해 탭합니다.
         app.buttons["SignUpViewDoneButton"].tap()
