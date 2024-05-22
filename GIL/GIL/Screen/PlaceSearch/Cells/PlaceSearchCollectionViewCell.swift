@@ -40,11 +40,14 @@ extension PlaceSearchCollectionViewCell {
     
     private func setupComponents() {
         setupMappinIcon()
+        setupNameLabel()
+        setupAddressLabel()
         setupStackView()
     }
     
     private func setupMappinIcon() {
         mappinIcon
+            .setIsAccessibilityElement(false)
             .size(CGSize(width: 30, height: 30))
             .applyConstraints(to: contentView, attributes: [.centerY, .leading])
     }
@@ -54,6 +57,14 @@ extension PlaceSearchCollectionViewCell {
             .centerY(equalTo: mappinIcon.centerYAnchor)
             .left(equalTo: mappinIcon.trailingAnchor, constant: 11)
             .right(equalTo: contentView.trailingAnchor, constant: -11)
+    }
+    
+    private func setupNameLabel() {
+        nameLabel.setAccessibilityHint("해당 장소로 길을 찾으려면 두 번 탭하세요")
+    }
+    
+    private func setupAddressLabel() {
+        addressLabel.setAccessibilityHint("해당 장소로 길을 찾으려면 두 번 탭하세요")
     }
 }
 

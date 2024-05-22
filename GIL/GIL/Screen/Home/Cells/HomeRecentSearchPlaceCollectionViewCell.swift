@@ -74,14 +74,15 @@ extension HomeRecentSearchPlaceCollectionViewCell {
 // MARK: - Button Creation and Layout
 extension HomeRecentSearchPlaceCollectionViewCell {
     private func createButton(for place: PlaceData) -> UIButton {
-        let button = UIButton().setBackgroundColor(.systemBackground)
-        button.addAction(UIAction { [weak self] _ in self?.placeButtonTapped(data: place)}, for: .touchUpInside)
-        
         let iconImageView = MappinImageView(iconType: .filled)
         let nameLabel = BaseLabel(text: place.place.name, fontSize: 15, fontWeight: .bold)
         let addressLabel = BaseLabel(text: place.place.placemark.address ?? "", fontSize: 13, fontWeight: .medium)
         let border = UIView().setBackgroundColor(.lightGray)
-    
+        
+        let button = UIButton()
+            .setBackgroundColor(.systemBackground)
+            .setAccessibility(label: "최근 검색 장소 버튼", hint: "장소 이름은 \(nameLabel.text ?? "알 수 없음") 장소의 주소는 \(addressLabel.text ?? "알 수 없음")입니다. 해당 장소로 길을 찾으려면 두 번 탭하세요", traits: .button)
+        button.addAction(UIAction { [weak self] _ in self?.placeButtonTapped(data: place)}, for: .touchUpInside)
         [iconImageView, nameLabel, addressLabel, border].forEach({ button.addSubview($0) })
         setupButtonLayout(button: button, icon: iconImageView, name: nameLabel, address: addressLabel, border: border)
         return button

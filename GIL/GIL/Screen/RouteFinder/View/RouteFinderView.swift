@@ -51,6 +51,7 @@ extension RouteFinderView {
     
     private func setupTitleLabel() {
         pathTitleLabel
+            .setIsAccessibilityElement(false)
             .setText(text: "경로")
             .setTextColor(textColor: .lightBlackDarkWhite)
             .setFont(textStyle: .title1, size: 24, weight: .bold)
@@ -80,6 +81,7 @@ extension RouteFinderView {
 extension RouteFinderView {
     private func createTransportButton(_ type: Transport) -> UIButton {
         UIButton()
+            .setAccessibility(label: "이동 수단 \(type.rawValue) 버튼", hint: "해당 이동 수단을 선택하려면 두 번 탭하세요", traits: .button)
             .setSysyemImage(name: type.systemImageName)
             .setTintColor(.gray)
             .setBackgroundColor(.systemGray6, for: .normal)

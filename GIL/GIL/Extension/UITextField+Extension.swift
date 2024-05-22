@@ -24,4 +24,12 @@ extension UITextField {
         adjustsFontForContentSizeCategory = true
         return self
     }
+    
+    /// TextField의 border style을 설정합니다
+    /// - Parameter style: 적용할 스타일 (none, line, bezel, roundedRect)
+    @discardableResult
+    func setBorderStyle(style: UITextField.BorderStyle) -> Self {
+        borderStyle = style
+        return self
+    }
 }

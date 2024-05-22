@@ -24,6 +24,7 @@ final class RouteManager: NSObject, MKMapViewDelegate, RouteManagerProtocol {
         didSet {
             Task {
                 await reloadOverlays()
+                postAccessibilitySelectRoute()
             }
         }
     }
@@ -156,5 +157,12 @@ extension RouteManager {
         directionRequest.requestsAlternateRoutes = true
         let directions = MKDirections(request: directionRequest)
         return try await directions.calculate().routes.map({ RouteModel($0) })
+    }
+}
+
+// MARK: - Accessibility
+extension RouteManager {
+    func postAccessibilitySelectRoute() {
+        UIAccessibility.post(notification: .announcement, argument: "선택한 경로로 변경되었습니다")
     }
 }
