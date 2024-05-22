@@ -10,13 +10,13 @@ import UIKit
 final class PlaceSearchViewController: BaseViewController, NavigationBarHideable {
     private var viewModel: PlaceSearchViewModel
     private var placeSearchView = PlaceSearchView()
-    private var placeSearchCollectionViewHandler: PlaceSearchCollectionViewHandler?
+    private var placeSearchCollectionHandler: PlaceSearchCollectionViewHandler?
     
     // MARK: - Initialization
     init(viewModel: PlaceSearchViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        placeSearchCollectionViewHandler = PlaceSearchCollectionViewHandler(viewModel: viewModel, placeSearchView: placeSearchView, viewController: self)
+        placeSearchCollectionHandler = PlaceSearchCollectionViewHandler(viewModel: viewModel, placeSearchView: placeSearchView, viewController: self)
     }
     
     required init?(coder: NSCoder) {
@@ -78,7 +78,7 @@ extension PlaceSearchViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] mapItems in
                 guard let self else { return }
-                self.placeSearchCollectionViewHandler?.applySnapshot(with: mapItems)
+                self.placeSearchCollectionHandler?.applySnapshot(with: mapItems)
             }
             .store(in: &viewModel.cancellables)
     }
@@ -86,11 +86,10 @@ extension PlaceSearchViewController {
 
 // MARK: - UISearchBarDelegate
 extension PlaceSearchViewController: UISearchBarDelegate {
-    func searchBar(
-        _ searchBar: UISearchBar,
-        textDidChange searchText: String
-    ) {
-        viewModel.searchPlace(searchText)
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let query = searchBar.text else { return }
+        dismissKeyboard()
+        viewModel.searchPlace(query)
     }
 }
 
