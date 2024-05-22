@@ -13,20 +13,9 @@ protocol HomeDisplayLogic {
 }
 
 final class HomeViewController: BaseViewController, NavigationBarHideable {
-    enum Section: CaseIterable {
-        case main
-    }
-    
-    enum Item: Hashable {
-        case search
-        case recentSearchPlace([PlaceData])
-    }
-    
-    var interactor: HomeBusinessLogic
-    var homeView = HomeView()
-    var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
-    
-    var recentSearchCount = 0 // 최근 검색 개수를 추적하는 변수
+    private var interactor: HomeBusinessLogic
+    private var homeView = HomeView()
+    private var homeCollectionViewHandler: HomeCollectionViewHandler?
     
     // MARK: - Initialization
     init() {
@@ -34,26 +23,18 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
         let interactor = HomeInteractor()
         interactor.presenter = presenter
         self.interactor = interactor
-        
         super.init(nibName: nil, bundle: nil)
-        
         presenter.viewController = self
+        homeCollectionViewHandler = HomeCollectionViewHandler(interactor: self.interactor, homeView: homeView)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Life Cycle
     override func loadView() {
         view = homeView
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupCollectionView()
-        configureDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,7 +52,7 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
 // MARK: - HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
     func displayFetchedData(_ data: [PlaceData]) {
-        updateSnapshot(with: data)
+        homeCollectionViewHandler?.updateSnapshot(with: data)
     }
     
     func displaySearchScreen() {
@@ -79,3 +60,5 @@ extension HomeViewController: HomeDisplayLogic {
         navigationController?.pushViewController(searchDetailVC, animated: true)
     }
 }
+
+
