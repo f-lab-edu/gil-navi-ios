@@ -1,5 +1,5 @@
 //
-//  CLLocationModel.swift
+//  MapLocation.swift
 //  GIL
 //
 //  Created by 송우진 on 5/14/24.
@@ -7,13 +7,16 @@
 
 import CoreLocation
 
-struct CLLocationModel {
+struct MapLocation {
     let location: CLLocation
-    let coordinate: CoordinateModel
+    let coordinate: Coordinate
     
     init(_ clLocation: CLLocation) {
         location = clLocation
-        coordinate = CoordinateModel(latitude: clLocation.coordinate.latitude, longitude: clLocation.coordinate.longitude)
+        coordinate = Coordinate(
+            latitude: clLocation.coordinate.latitude,
+            longitude: clLocation.coordinate.longitude
+        )
     }
     
     /// 내 위치와 주어진 위치 사이의 거리를 계산합니다

@@ -16,26 +16,26 @@ enum RouteMapError: Error {
 final class RouteMapViewModel {
     let locationService = LocationService()
     var routeManager: RouteManagerProtocol?
-    let departureCLLocation: CLLocationModel?
-    let destination: PlaceModel
+    let departureMapLocation: MapLocation?
+    let destinationMapItem: MapItem
 
     init(
-        departureCLLocation: CLLocationModel?,
-        destination: PlaceModel
+        departureMapLocation: MapLocation?,
+        destinationMapItem: MapItem
     ) {
-        self.departureCLLocation = departureCLLocation
-        self.destination = destination
+        self.departureMapLocation = departureMapLocation
+        self.destinationMapItem = destinationMapItem
     }
     
     @MainActor
-    func setupMapAndFindRoutes(transportType: Transport) async throws -> [RouteModel] {
+    func setupMapAndFindRoutes(transportType: Transport) async throws -> [Route] {
         guard let routeManager = routeManager else { throw RouteMapError.routeManagerUnavailable }
-        let destinationCoordinate = destination.placemark.coordinate.toCLLocationCoordinate2D()
+        let destinationCoordinate = destinationMapItem.placemark.coordinate.toCLLocationCoordinate2D()
         
-        let destinationPinAnnotation = routeManager.createPinAnnotation(coordinate: destinationCoordinate, title: destination.name, subtitle: nil)
+        let destinationPinAnnotation = routeManager.createPinAnnotation(coordinate: destinationCoordinate, title: destinationMapItem.name, subtitle: nil)
         routeManager.addAnnotations([destinationPinAnnotation])
         
-        guard let departureCoordinate = departureCLLocation?.coordinate.toCLLocationCoordinate2D() else { throw RouteMapError.departureLocationEmpty }
+        guard let departureCoordinate = departureMapLocation?.coordinate.toCLLocationCoordinate2D() else { throw RouteMapError.departureLocationEmpty }
         
         let region = routeManager.fetchCoordinateRegion(from: departureCoordinate, to: destinationCoordinate)
         routeManager.setRegion(region)

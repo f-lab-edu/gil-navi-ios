@@ -47,8 +47,8 @@ extension AppFlowCoordinator {
     }
     
     private func showHomeViewController() {
-        let vc = HomeViewController()
-        window.rootViewController = UINavigationController(rootViewController: vc)
-        window.makeKeyAndVisible()
+        let homeSceneDIContainer = appDIContainer.makeHomeDIContainer()
+        let flow = homeSceneDIContainer.makeHomeFlowCoordinator(window: window, appDIContainer: appDIContainer)
+        flow.start()
     }
 }

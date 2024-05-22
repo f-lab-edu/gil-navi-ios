@@ -10,7 +10,7 @@ import UIKit
 // MARK: - RouteFinderPageSheetDelegate
 protocol RouteFinderPageSheetDelegate: AnyObject {
     func requestRouteUpdate(transportType: Transport)
-    func didSelectRoute(route: RouteModel)
+    func didSelectRoute(route: Route)
 }
 
 final class RouteFinderPageSheet: UIViewController {
@@ -44,13 +44,13 @@ final class RouteFinderPageSheet: UIViewController {
 
 // MARK: - UI Updates
 extension RouteFinderPageSheet {
-    func updateRoutes(_ routes: [RouteModel]?) {
+    func updateRoutes(_ routes: [Route]?) {
         guard let routes = routes else { return }
         routeCollectionController?.applySnapshot(with: routes)
         viewModel.selectedRoute = routes.first
     }
     
-    func updateCellLayer(route: RouteModel?) {
+    func updateCellLayer(route: Route?) {
         guard let route = route else { return }
         routeCollectionController?.updateCellLayer(route)
     }

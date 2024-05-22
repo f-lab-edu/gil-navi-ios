@@ -34,7 +34,7 @@ final class RouteMapViewController: BaseViewController, NavigationBarHideable {
         super.viewDidLoad()
         setupBindings()
         
-        if viewModel.departureCLLocation != nil {
+        if viewModel.departureMapLocation != nil {
             presentRouteFinderPageSheet()
         } else {
             routeMapView.mapView.delegate = self
@@ -79,7 +79,7 @@ extension RouteMapViewController {
 
 // MARK: - PathFinderPageSheetDelegate
 extension RouteMapViewController: RouteFinderPageSheetDelegate {
-    func didSelectRoute(route: RouteModel) {
+    func didSelectRoute(route: Route) {
         routeFinderPageSheet.updateCellLayer(route: route)
         routeFinderPageSheet.updateDetent()
         viewModel.routeManager?.selectedRoute = route

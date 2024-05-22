@@ -13,7 +13,7 @@ final class RouteCollectionController: NSObject {
     }
     private var routeFinderView: RouteFinderView
     private var viewModel: RouteFinderViewModel
-    private var dataSource: UICollectionViewDiffableDataSource<Section, RouteModel>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Route>!
     
     // MARK: - Initialization
     init(
@@ -45,7 +45,7 @@ extension RouteCollectionController: UICollectionViewDelegate {
 
 // MARK: - DataSource Updates
 extension RouteCollectionController {
-    func applySnapshot(with items: [RouteModel]) {
+    func applySnapshot(with items: [Route]) {
         var snapshot = dataSource.snapshot()
         snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .main))
         snapshot.appendItems(items, toSection: .main)
@@ -69,10 +69,10 @@ extension RouteCollectionController {
     }
     
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, RouteModel>(collectionView: routeFinderView.routeCollectionView) { (collectionView, indexPath, route) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, Route>(collectionView: routeFinderView.routeCollectionView) { (collectionView, indexPath, route) -> UICollectionViewCell? in
             self.configureRouteCell(for: collectionView, at: indexPath, item: route)
         }
-        var snapshot = NSDiffableDataSourceSnapshot<Section, RouteModel>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Route>()
         snapshot.appendSections([.main])
         snapshot.appendItems([], toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: false)
@@ -84,7 +84,7 @@ extension RouteCollectionController {
     private func configureRouteCell(
         for collectionView: UICollectionView,
         at indexPath: IndexPath,
-        item: RouteModel
+        item: Route
     ) -> UICollectionViewCell? {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RouteCollectionViewCell.reuseIdentifier, for: indexPath) as? RouteCollectionViewCell
         cell?.updateContent(with: item)
@@ -94,7 +94,7 @@ extension RouteCollectionController {
 
 // MARK: - Cell Update
 extension RouteCollectionController {
-    func updateCellLayer(_ route: RouteModel) {
+    func updateCellLayer(_ route: Route) {
         let snapshot = dataSource.snapshot()
         guard snapshot.sectionIdentifiers.contains(.main) else { return }
         let itemsInSection = snapshot.itemIdentifiers(inSection: .main)

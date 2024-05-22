@@ -9,18 +9,18 @@ import MapKit
 
 // MARK: - RouteManagerProtocol
 protocol RouteManagerProtocol {
-    var selectedRoute: RouteModel? { get set }
+    var selectedRoute: Route? { get set }
     func createPinAnnotation(coordinate: CLLocationCoordinate2D, title: String, subtitle: String?) -> MKPointAnnotation
     func addAnnotations(_ annotations: [MKAnnotation])
-    func addRoutesPolyline(_ routes: [RouteModel])
+    func addRoutesPolyline(_ routes: [Route])
     func setRegion(_ region: MKCoordinateRegion)
     func fetchCoordinateRegion(from departureCoordinate: CLLocationCoordinate2D, to destinationCoordinate: CLLocationCoordinate2D) -> MKCoordinateRegion
-    func findRoute(from departure: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, transportType: Transport) async throws -> [RouteModel]
+    func findRoute(from departure: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, transportType: Transport) async throws -> [Route]
 }
 
 final class RouteManager: NSObject, MKMapViewDelegate, RouteManagerProtocol {
     private var mapView: MKMapView
-    var selectedRoute: RouteModel? {
+    var selectedRoute: Route? {
         didSet {
             Task {
                 await reloadOverlays()
@@ -124,7 +124,7 @@ extension RouteManager {
     }
     
     /// 맵뷰에 경로 폴리라인을 추가합니다
-    func addRoutesPolyline(_ routes: [RouteModel]) {
+    func addRoutesPolyline(_ routes: [Route]) {
         let polylines = routes.map({ $0.polyline })
         mapView.addOverlays(polylines, level: .aboveRoads)
     }
@@ -146,7 +146,7 @@ extension RouteManager {
         from departure: CLLocationCoordinate2D,
         to destination: CLLocationCoordinate2D,
         transportType: Transport
-    ) async throws -> [RouteModel] {
+    ) async throws -> [Route] {
         mapView.overlays.forEach { mapView.removeOverlay($0) }
         let departurePlacemark = MKPlacemark(coordinate: departure)
         let destinationPlacemark = MKPlacemark(coordinate: destination)
@@ -156,7 +156,7 @@ extension RouteManager {
         directionRequest.transportType = transportType.mkTransportType
         directionRequest.requestsAlternateRoutes = true
         let directions = MKDirections(request: directionRequest)
-        return try await directions.calculate().routes.map({ RouteModel($0) })
+        return try await directions.calculate().routes.map({ Route($0) })
     }
 }
 

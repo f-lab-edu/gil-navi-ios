@@ -10,7 +10,7 @@ import UIKit
 
 final class RouteFinderViewModel {
     @Published var selectedTransport: Transport?
-    @Published var selectedRoute: RouteModel?
+    @Published var selectedRoute: Route?
     var customDetent: UISheetPresentationController.Detent?
     var cancellables: Set<AnyCancellable> = []
     

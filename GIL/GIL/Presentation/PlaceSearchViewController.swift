@@ -6,17 +6,23 @@
 //
 
 import UIKit
+import Combine
 
 final class PlaceSearchViewController: BaseViewController, NavigationBarHideable {
+    private var cancellables: Set<AnyCancellable> = []
     private var viewModel: PlaceSearchViewModel
-    private var placeSearchView = PlaceSearchView()
     private var placeSearchCollectionViewHandler: PlaceSearchCollectionViewHandler?
+    private let placeSearchView = PlaceSearchView()
     
     // MARK: - Initialization
     init(viewModel: PlaceSearchViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        placeSearchCollectionViewHandler = PlaceSearchCollectionViewHandler(viewModel: viewModel, placeSearchView: placeSearchView, viewController: self)
+        placeSearchCollectionViewHandler = PlaceSearchCollectionViewHandler(
+            viewModel: viewModel,
+            placeSearchView: placeSearchView,
+            viewController: self
+        )
     }
     
     required init?(coder: NSCoder) {
@@ -52,6 +58,18 @@ extension PlaceSearchViewController {
     }
 }
 
+// MARK: - Error
+extension PlaceSearchViewController {
+    private func handleError(_ error: PlaceSearchError) {
+        let message: String
+        switch error {
+        case .locationUnavailable: message = "위치 서비스를 사용할 수 없습니다. 위치 설정을 확인해 주세요."
+        case .searchFailed: message = "장소를 찾지 못했습니다. 네트워크 연결을 확인하거나 다른 검색어를 시도해 보세요."
+        }
+        ToastManager.shared.showToast(message: message, position: .top)
+    }
+}
+
 // MARK: - Setup Binding
 extension PlaceSearchViewController {
     private func setupBindings() {
@@ -74,13 +92,23 @@ extension PlaceSearchViewController {
     }
     
     private func bindSearchMapItems() {
-        viewModel.$mapItems
+        viewModel.mapItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] mapItems in
                 guard let self else { return }
-                self.placeSearchCollectionViewHandler?.applySnapshot(with: mapItems)
+                placeSearchCollectionViewHandler?.applySnapshot(with: mapItems)
             }
-            .store(in: &viewModel.cancellables)
+            .store(in: &cancellables)
+    }
+    
+    private func bindErrors() {
+        viewModel.errors
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] error in
+                guard let self else { return }
+                handleError(error)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -88,23 +116,19 @@ extension PlaceSearchViewController {
 extension PlaceSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else { return }
-        do {
-            try viewModel.searchPlace(query)
-        } catch {
-            Log.error(#function, error.localizedDescription)
-            ToastManager.shared.showToast(message: "관련된 장소를 찾을 수 없습니다.", position: .top)
-        }
+        viewModel.searchPlace(query)
     }
 }
 
 // MARK: - LocationServiceDelegate
 extension PlaceSearchViewController: LocationServiceDelegate {
-    func didFetchPlacemark(_ placemark: PlacemarkModel) {
+    func didFetchPlacemark(_ placemark: Placemark) {
         viewModel.locationService.stopUpdatingLocation()
         placeSearchView.navigationBar.updateAddress(placemark.address ?? "")
     }
     
     func didFailWithError(_ error: Error) {
-        Log.error("LocationService Error: \(error.localizedDescription)", error)
+        Log.error("Error LocationService", error.localizedDescription)
+        viewModel.errors.send(.locationUnavailable)
     }
 }

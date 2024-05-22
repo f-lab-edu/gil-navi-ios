@@ -14,4 +14,12 @@ final class AppDIContainer {
             firebaseAuthManager: firebaseAuthManager
         )
     }
+    
+    func makeHomeDIContainer() -> HomeSceneDIContainer {
+        HomeSceneDIContainer()
+    }
+    
+    func makePlaceSearchDIContainer() -> PlaceSearchSceneDIContainer {
+        PlaceSearchSceneDIContainer()
+    }
 }

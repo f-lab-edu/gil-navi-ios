@@ -8,7 +8,7 @@
 import UIKit
 
 final class HomeSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
-    static let reuseIdentifier = "HomeSearchCell"
+    static let reuseIdentifier = String(describing: HomeSearchCollectionViewCell.self)
     private let searchBarView = HomeSearchBarView()
     var onSearchBarTapped: (() -> Void)?
     

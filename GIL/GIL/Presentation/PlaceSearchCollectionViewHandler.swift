@@ -14,7 +14,7 @@ final class PlaceSearchCollectionViewHandler: NSObject, UICollectionViewDelegate
     private var viewModel: PlaceSearchViewModel
     private var placeSearchView: PlaceSearchView
     private var viewController: PlaceSearchViewController
-    private var dataSource: UICollectionViewDiffableDataSource<Section, PlaceModel>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, MapItem>!
     
     // MARK: - Initialization
     init(
@@ -33,7 +33,7 @@ final class PlaceSearchCollectionViewHandler: NSObject, UICollectionViewDelegate
 
 // MARK: - DataSource Updates
 extension PlaceSearchCollectionViewHandler {
-    func applySnapshot(with items: [PlaceModel]) {
+    func applySnapshot(with items: [MapItem]) {
         var snapshot = dataSource.snapshot()
         snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .main))
         snapshot.appendItems(items, toSection: .main)
@@ -47,14 +47,9 @@ extension PlaceSearchCollectionViewHandler {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let destination = viewModel.mapItems[indexPath.row]
+        let destination = viewModel.mapItems.value[indexPath.row]
         viewModel.storePlace(destination)
-        
-        guard let currentLocation = viewModel.locationService.currentLocation else { return }
-        
-        let viewModel = RouteMapViewModel(departureCLLocation: currentLocation, destination: destination)
-        let vc = RouteMapViewController(viewModel: viewModel)
-        viewController.navigationController?.pushViewController(vc, animated: true)
+        viewModel.showRouteFinder(destination: destination)
     }
 }
 
@@ -75,10 +70,10 @@ extension PlaceSearchCollectionViewHandler {
     }
     
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, PlaceModel>(collectionView: placeSearchView.searchResultsCollectionView) { (collectionView, indexPath, place) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, MapItem>(collectionView: placeSearchView.searchResultsCollectionView) { (collectionView, indexPath, place) -> UICollectionViewCell? in
             self.configurePlaceSearcCell(for: collectionView, at: indexPath, item: place)
         }
-        var snapshot = NSDiffableDataSourceSnapshot<Section, PlaceModel>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, MapItem>()
         snapshot.appendSections([.main])
         snapshot.appendItems([], toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: false)
@@ -90,7 +85,7 @@ extension PlaceSearchCollectionViewHandler {
     private func configurePlaceSearcCell(
         for collectionView: UICollectionView,
         at indexPath: IndexPath,
-        item: PlaceModel
+        item: MapItem
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceSearchCollectionViewCell.reuseIdentifier, for: indexPath) as? PlaceSearchCollectionViewCell else { return UICollectionViewCell() }
         cell.updateContent(with: item)

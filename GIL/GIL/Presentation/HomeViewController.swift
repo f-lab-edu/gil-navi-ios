@@ -8,24 +8,31 @@
 import UIKit
 import FirebaseAuth
 
+struct HomeActions {
+    let showPlaceSearch: () -> Void
+}
+
 protocol HomeDisplayLogic {
     func displaySearchScreen()
-    func displayFetchedData(_ data: [PlaceData])
-    func displayRouteMap(place: PlaceModel)
+    func displayFetchedData(_ data: [Place])
+    func displayRouteMap(place: MapItem)
 }
 
 final class HomeViewController: BaseViewController, NavigationBarHideable {
     private var interactor: HomeBusinessLogic
     private var homeView = HomeView()
     private var homeCollectionViewHandler: HomeCollectionViewHandler?
+    private var actions: HomeActions?
     
     // MARK: - Initialization
-    init() {
+    init(actions: HomeActions? = nil) {
         let presenter = HomePresenter()
         let interactor = HomeInteractor()
         interactor.presenter = presenter
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
+        
+        self.actions = actions
         presenter.viewController = self
         homeCollectionViewHandler = HomeCollectionViewHandler(interactor: self.interactor, homeView: homeView)
     }
@@ -53,20 +60,18 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
 
 // MARK: - HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
-    func displayRouteMap(place: PlaceModel) {
-        let viewModel = RouteMapViewModel(departureCLLocation: nil, destination: place)
+    func displayRouteMap(place: MapItem) {
+        let viewModel = RouteMapViewModel(departureMapLocation: nil, destinationMapItem: place)
         let vc = RouteMapViewController(viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func displayFetchedData(_ data: [PlaceData]) {
+    func displayFetchedData(_ data: [Place]) {
         homeCollectionViewHandler?.updateSnapshot(with: data)
     }
     
     func displaySearchScreen() {
-        try? Auth.auth().signOut()
-//        let searchDetailVC = PlaceSearchViewController(viewModel: PlaceSearchViewModel())
-//        navigationController?.pushViewController(searchDetailVC, animated: true)
+        actions?.showPlaceSearch()
     }
 }
 

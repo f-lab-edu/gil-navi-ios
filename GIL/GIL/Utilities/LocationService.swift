@@ -8,7 +8,7 @@
 import CoreLocation
 
 protocol LocationServiceDelegate: AnyObject {
-    func didFetchPlacemark(_ placemark: PlacemarkModel)
+    func didFetchPlacemark(_ placemark: Placemark)
     func didFailWithError(_ error: Error)
 }
 
@@ -16,7 +16,7 @@ class LocationService: NSObject {
     weak var delegate: LocationServiceDelegate?
     private let locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()
-    var currentLocation: CLLocationModel?
+    var currentLocation: MapLocation?
     
     // MARK: - Initialization
     override init() {
@@ -46,7 +46,7 @@ class LocationService: NSObject {
                 return
             }
             if let placemark = placemarks?.first {
-                let model = PlacemarkModel(clPlacemark: placemark)
+                let model = Placemark(clPlacemark: placemark)
                 self.delegate?.didFetchPlacemark(model)
             }
         }
@@ -61,7 +61,7 @@ extension LocationService: CLLocationManagerDelegate {
         didUpdateLocations locations: [CLLocation]
     ) {
         if let location = locations.first {
-            currentLocation = CLLocationModel(location)
+            currentLocation = MapLocation(location)
             fetchAddress(for: location)
         }
     }

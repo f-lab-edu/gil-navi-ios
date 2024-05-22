@@ -13,7 +13,7 @@ final class HomeCollectionViewHandler: NSObject {
     }
     private enum Item: Hashable {
         case search
-        case recentSearchPlace([PlaceData])
+        case recentSearchPlace([Place])
     }
     private var interactor: HomeBusinessLogic
     private var homeView: HomeView
@@ -68,7 +68,7 @@ extension HomeCollectionViewHandler {
 
 // MARK: - DataSource Updates
 extension HomeCollectionViewHandler {
-    func updateSnapshot(with data: [PlaceData]) {
+    func updateSnapshot(with data: [Place]) {
         recentSearchCount = data.count
         var snapshot = dataSource.snapshot()
         snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .main).filter {
@@ -104,7 +104,7 @@ extension HomeCollectionViewHandler {
     private func configureRecentSearchPlaceCell(
         for collectionView: UICollectionView,
         at indexPath: IndexPath,
-        with data: [PlaceData]
+        with data: [Place]
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRecentSearchPlaceCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeRecentSearchPlaceCollectionViewCell else { return UICollectionViewCell() }
         cell.configure(with: data)

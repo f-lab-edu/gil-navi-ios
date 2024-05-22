@@ -8,9 +8,9 @@
 import UIKit
 
 final class HomeRecentSearchPlaceCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
-    static let reuseIdentifier = "HomeRecentSearchPlaceCell"
+    static let reuseIdentifier = String(describing: HomeRecentSearchPlaceCollectionViewCell.self)
     private let stackView = UIStackView()
-    var onplaceButtonTapped: ((PlaceData) -> Void)?
+    var onplaceButtonTapped: ((Place) -> Void)?
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -48,14 +48,14 @@ extension HomeRecentSearchPlaceCollectionViewCell {
 
 // MARK: - Action
 extension HomeRecentSearchPlaceCollectionViewCell {
-    func placeButtonTapped(data: PlaceData) {
+    func placeButtonTapped(data: Place) {
         onplaceButtonTapped?(data)
     }
 }
 
 // MARK: - Configure Cell
 extension HomeRecentSearchPlaceCollectionViewCell {
-    func configure(with places: [PlaceData]) {
+    func configure(with places: [Place]) {
         cleanup()
         configureButtons(with: places)
     }
@@ -67,7 +67,7 @@ extension HomeRecentSearchPlaceCollectionViewCell {
         }
     }
     
-    private func configureButtons(with places: [PlaceData]) {
+    private func configureButtons(with places: [Place]) {
         for place in places {
             let button = RecentSearchPlaceButton(place: place)
             button.addAction(UIAction { [weak self] _ in self?.placeButtonTapped(data: place)}, for: .touchUpInside)

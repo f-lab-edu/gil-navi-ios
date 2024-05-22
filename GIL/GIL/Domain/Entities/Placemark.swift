@@ -1,5 +1,5 @@
 //
-//  PlacemarkModel.swift
+//  Placemark.swift
 //  GIL
 //
 //  Created by 송우진 on 5/9/24.
@@ -7,8 +7,8 @@
 
 import MapKit
 
-struct PlacemarkModel: Hashable, Codable {
-    let coordinate: CoordinateModel
+struct Placemark: Hashable, Codable {
+    let coordinate: Coordinate
     var address: String?
     var areasOfInterest: [String]?
     
@@ -17,7 +17,10 @@ struct PlacemarkModel: Hashable, Codable {
     /// `CLPlacemark` 객체를 사용하여 `PlacemarkModel`의 새 인스턴스를 초기화합니다.
     /// - Parameter clPlacemark: `CLPlacemark` 객체
     init(clPlacemark: CLPlacemark) {
-        coordinate = CoordinateModel(latitude: clPlacemark.location?.coordinate.latitude, longitude: clPlacemark.location?.coordinate.longitude)
+        coordinate = Coordinate(
+            latitude: clPlacemark.location?.coordinate.latitude,
+            longitude: clPlacemark.location?.coordinate.longitude
+        )
         address = formatAddress(for: clPlacemark)
         areasOfInterest = clPlacemark.areasOfInterest
         Log.info("CL_PlacemarkModel", [
@@ -30,7 +33,10 @@ struct PlacemarkModel: Hashable, Codable {
     /// `MKPlacemark` 객체를 사용하여 `PlacemarkModel`의 새 인스턴스를 초기화합니다.
     /// - Parameter mkPlacemark: `MKPlacemark` 객체
     init(mkPlacemark: MKPlacemark) {
-        coordinate = CoordinateModel(latitude: mkPlacemark.coordinate.latitude, longitude: mkPlacemark.coordinate.longitude)
+        coordinate = Coordinate(
+            latitude: mkPlacemark.coordinate.latitude,
+            longitude: mkPlacemark.coordinate.longitude
+        )
         address = formatAddress(for: mkPlacemark)
         areasOfInterest = mkPlacemark.areasOfInterest
         Log.info("MK_PlacemarkModel", [
@@ -41,7 +47,7 @@ struct PlacemarkModel: Hashable, Codable {
     }
 }
 
-extension PlacemarkModel {
+extension Placemark {
     /// 지정된 `Placemark`에 따라 주소 문자열 반환합니다.
     /// - Parameter placemark: 주소 정보를 제공할 `CLPlacemark` 객체.
     /// - Returns: 현지화된 주소 문자열을 반환합니다. 언어 설정에 따라 주소 형식이 달라질 수 있습니다.

@@ -97,7 +97,7 @@ extension RouteCollectionViewCell {
 
 // MARK: - Update Content
 extension RouteCollectionViewCell {
-    func updateContent(with route: RouteModel) {
+    func updateContent(with route: Route) {
         let formattedTime = route.expectedTravelTime.toHourMinuteFormat()
         expectedTimeLabel.text = formattedTime
         
