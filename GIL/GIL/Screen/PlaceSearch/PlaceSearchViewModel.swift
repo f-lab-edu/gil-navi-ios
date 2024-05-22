@@ -9,10 +9,10 @@ import MapKit
 import Combine
 import SwiftData
 
-final class PlaceSearchViewModel {
-    private let placesSearchService = PlacesSearchService()
-    private var placeContainer: ModelContainer?
+class PlaceSearchViewModel {
     let locationService = LocationService()
+    let placesSearchService = PlacesSearchService()
+    var placeContainer: ModelContainer?
     
     @Published var mapItems: [Place] = []
     
