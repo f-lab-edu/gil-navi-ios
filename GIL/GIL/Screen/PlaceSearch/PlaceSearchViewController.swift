@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import CoreLocation
+import MapKit
 
 final class PlaceSearchViewController: BaseViewController, NavigationBarHideable {
     private var viewModel: PlaceSearchViewModel
