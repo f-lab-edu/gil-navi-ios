@@ -12,7 +12,7 @@ class PlaceSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellPro
     private let mappinIcon = MappinImageView(iconType: .outline)
     private let stackView = BaseStackView(distribution: .equalCentering,spacing: 5)
     private let nameLabel = BaseLabel(text: "", fontSize: 15, fontWeight: .bold)
-    private let addressLabel = BaseLabel(text: "", textColor: .grayLabel, fontSize: 13, fontWeight: .medium, numberOfLines: 0)
+    private let addressLabel = BaseLabel(text: "", textColor: .lightGray, fontSize: 13, fontWeight: .medium, numberOfLines: 0)
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -28,7 +28,7 @@ class PlaceSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellPro
 // MARK: - Setup UI
 extension PlaceSearchCollectionViewCell {
     private func setupUI() {
-        contentView.addBorder(at: .bottom)
+        contentView.applyBorder(at: .bottom)
         addSubviews()
         setupComponents()
     }
@@ -40,11 +40,14 @@ extension PlaceSearchCollectionViewCell {
     
     private func setupComponents() {
         setupMappinIcon()
+        setupNameLabel()
+        setupAddressLabel()
         setupStackView()
     }
     
     private func setupMappinIcon() {
         mappinIcon
+            .setIsAccessibilityElement(false)
             .size(CGSize(width: 30, height: 30))
             .applyConstraints(to: contentView, attributes: [.centerY, .leading])
     }
@@ -55,11 +58,19 @@ extension PlaceSearchCollectionViewCell {
             .left(equalTo: mappinIcon.trailingAnchor, constant: 11)
             .right(equalTo: contentView.trailingAnchor, constant: -11)
     }
+    
+    private func setupNameLabel() {
+        nameLabel.setAccessibilityHint("해당 장소로 길을 찾으려면 두 번 탭하세요")
+    }
+    
+    private func setupAddressLabel() {
+        addressLabel.setAccessibilityHint("해당 장소로 길을 찾으려면 두 번 탭하세요")
+    }
 }
 
 // MARK: - Update Content
 extension PlaceSearchCollectionViewCell {
-    func updateContent(with item: Place) {
+    func updateContent(with item: PlaceModel) {
         let viewModel = PlaceSearchViewModel()
         nameLabel.text = item.name
         addressLabel.text = viewModel.getAddressForPlace(item)

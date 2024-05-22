@@ -48,9 +48,9 @@ extension LoginViewController {
     }
     
     private func setupBindButtons() {
-        loginView.loginButton.addAction(UIAction { _ in self.loginButtonTapped()}, for: .touchUpInside)
-        loginView.signUpButton.addAction(UIAction { _ in self.signUpButtonTapped()}, for: .touchUpInside)
-        loginView.appleLoginButton.addAction(UIAction { _ in self.viewModel.startSignInWithAppleFlow()}, for: .touchUpInside)
+        loginView.loginButton.addAction(UIAction { [weak self] _ in self?.loginButtonTapped()}, for: .touchUpInside)
+        loginView.signUpButton.addAction(UIAction { [weak self] _ in self?.signUpButtonTapped()}, for: .touchUpInside)
+        loginView.appleLoginButton.addAction(UIAction { [weak self] _ in self?.viewModel.startSignInWithAppleFlow()}, for: .touchUpInside)
     }
     
     private func subscribeToPublishers() {
@@ -62,7 +62,7 @@ extension LoginViewController {
                 case .finished: FirebaseAuthManager.signInAnonymously()
                 case .failure(let error):
                     let errorMessage = viewModel.errorMessage(for: error)
-                    AlertService.showAlert(title: "로그인 실패", message: errorMessage, on: self)
+                    AlertService.showAlert(title: "로그인 실패", message: errorMessage)
                 }
             } receiveValue: { _ in }
             .store(in: &viewModel.cancellables)

@@ -9,9 +9,9 @@ import UIKit
 
 final class SignUpView: UIView {
     private let checkPasswordStackView = BaseStackView(spacing: 5)
-    private let checkPasswordLabels: [UILabel]
+    private lazy var checkPasswordLabels: [UILabel] = ["· 10글자 이상", "· 대문자 포함", "· 숫자 포함", "· 특수 문자 포함 !@#$%^&*()-_=+[{]}\\|;:'\",<.>/?"].map({ createCheckPasswordLabel($0) })
     private var labelConstraints: [UILabel : NSLayoutConstraint]
-    let closeButton = NavigationActionButton()
+    let closeButton = UIButton()
     let emailLabel = BaseLabel(text: "이메일", textColor: .mainGreen, fontType: .subheadline)
     let nameLabel = BaseLabel(text: "이름", textColor: .mainGreen, fontType: .subheadline)
     let passwordLabel = BaseLabel(text: "비밀번호", textColor: .mainGreen, fontType: .subheadline)
@@ -20,16 +20,10 @@ final class SignUpView: UIView {
     let nameTextField = FormTextField(type: .unknown(placeholder: "이름"), returnKeyType: .next, clearButtonMode: .whileEditing)
     let passwordTextField = FormTextField(type: .password, returnKeyType: .next)
     let verifyPasswordTextField = FormTextField(type: .verifyPassword, returnKeyType: .done)
-    let doneButton = InteractiveButton(title: "완료", titleColor: .white, fontSize: 18, fontWeight: .bold)
+    let doneButton = UIButton()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
-        checkPasswordLabels = [
-            BaseLabel(text: "· 10글자 이상", fontSize: 11),
-            BaseLabel(text: "· 대문자 포함", fontSize: 11),
-            BaseLabel(text: "· 숫자 포함", fontSize: 11),
-            BaseLabel(text: "· 특수 문자 포함 !@#$%^&*()-_=+[{]}\\|;:'\",<.>/?", fontSize: 11)
-        ]
         labelConstraints = [
             emailLabel : emailLabel.heightAnchor.constraint(equalToConstant: 0),
             nameLabel : nameLabel.heightAnchor.constraint(equalToConstant: 0),
@@ -63,7 +57,7 @@ extension SignUpView {
     func updatePasswordValidationLabels(_ validations: [Bool]) {
         for (index, label) in checkPasswordLabels.enumerated() {
             let isValid = (index < validations.count) ? validations[index] : false
-            label.textColor = isValid ? .mainGreen : .text
+            label.textColor = isValid ? .mainGreen : .mainText
         }
     }
     
@@ -98,6 +92,8 @@ extension SignUpView {
     
     private func setupCloseButton() {
         closeButton
+            .setAccessibility(label: "닫기 버튼", hint: "회원가입 화면을 닫으려면 두 번 탭하세요", traits: .button)
+            .configureNavigationStyle(type: .close)
             .top(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10)
             .left(equalTo: leadingAnchor, constant: 10)
             .size(CGSize(width: 44, height: 44))
@@ -106,10 +102,12 @@ extension SignUpView {
     private func setupEmail() {
         let constraint = getConstraintForLabel(emailLabel)
         emailLabel
+            .setIsAccessibilityElement(false)
             .top(equalTo: closeButton.bottomAnchor, constant: 15)
             .left(equalTo: leadingAnchor, constant: 20)
             .height(constraint.constant)
         emailTextField
+            .setAccessibility(label: "이메일 입력 필드", hint: "이메일을 입력하세요")
             .top(equalTo: emailLabel.bottomAnchor, constant: 2)
             .left(equalTo: leadingAnchor, constant: 16)
             .right(equalTo: trailingAnchor, constant: -16)
@@ -119,10 +117,12 @@ extension SignUpView {
     private func setupName() {
         let constraint = getConstraintForLabel(nameLabel)
         nameLabel
+            .setIsAccessibilityElement(false)
             .top(equalTo: emailTextField.bottomAnchor, constant: 10)
             .applyConstraints(to: emailLabel, attributes: [.leading])
             .height(constraint.constant)
         nameTextField
+            .setAccessibility(label: "이름 입력 필드", hint: "이름을 입력하세요")
             .top(equalTo: nameLabel.bottomAnchor, constant: 2)
             .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
     }
@@ -130,10 +130,12 @@ extension SignUpView {
     private func setupPassword() {
         let constraint = getConstraintForLabel(passwordLabel)
         passwordLabel
+            .setIsAccessibilityElement(false)
             .top(equalTo: nameTextField.bottomAnchor, constant: 10)
             .applyConstraints(to: emailLabel, attributes: [.leading])
             .height(constraint.constant)
         passwordTextField
+            .setAccessibility(label: "비밀번호 입력 필드", hint: "비밀번호를 입력하세요")
             .top(equalTo: passwordLabel.bottomAnchor, constant: 2)
             .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
     }
@@ -141,10 +143,12 @@ extension SignUpView {
     private func setupVerifyPassword() {
         let constraint = getConstraintForLabel(verifyPasswordLabel)
         verifyPasswordLabel
+            .setIsAccessibilityElement(false)
             .top(equalTo: passwordTextField.bottomAnchor, constant: 10)
             .applyConstraints(to: emailLabel, attributes: [.leading])
             .height(constraint.constant)
         verifyPasswordTextField
+            .setAccessibility(label: "비밀번호 확인 입력 필드", hint: "비밀번호를 다시 입력하세요")
             .top(equalTo: verifyPasswordLabel.bottomAnchor, constant: 2)
             .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
     }
@@ -158,7 +162,20 @@ extension SignUpView {
     
     private func setupDoneButton() {
         doneButton
+            .setAccessibility(label: "완료 버튼", hint: "회원가입을 완료하려면 두 번 탭하세요", traits: .button)
+            .configureSubmitStyle(title: "완료")
             .top(equalTo: checkPasswordStackView.bottomAnchor, constant: 30)
             .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
+    }
+}
+
+// MARK: - Create
+extension SignUpView {
+    private func createCheckPasswordLabel(_ text: String) -> UILabel {
+        UILabel()
+            .setAccessibility(label: text, hint: "비밀번호 조건입니다")
+            .setText(text: text)
+            .setTextColor(textColor: .mainText)
+            .setFont(textStyle: .footnote, size: 11, weight: .medium)
     }
 }

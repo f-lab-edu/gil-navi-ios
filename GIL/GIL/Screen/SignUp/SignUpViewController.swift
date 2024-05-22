@@ -43,8 +43,8 @@ extension SignUpViewController {
     }
     
     private func setupBindButtons() {
-        signUpView.closeButton.addAction(UIAction { _ in self.closeButtonTapped()}, for: .touchUpInside)
-        signUpView.doneButton.addAction(UIAction { _ in self.viewModel.createUser()}, for: .touchUpInside)
+        signUpView.closeButton.addAction(UIAction { [weak self] _ in self?.closeButtonTapped()}, for: .touchUpInside)
+        signUpView.doneButton.addAction(UIAction { [weak self] _ in self?.viewModel.createUser()}, for: .touchUpInside)
     }
     
     private func subscribeToPublishers() {
@@ -65,7 +65,7 @@ extension SignUpViewController {
                 case .finished: Log.network("회원가입 성공")
                 case .failure(let error):
                     let message = viewModel.errorMessage(for: error)
-                    AlertService.showAlert(title: "회원가입 실패", message: message, on: self)
+                    AlertService.showAlert(title: "회원가입 실패", message: message)
                 }
             } receiveValue: { _ in }
             .store(in: &viewModel.cancellables)
@@ -126,7 +126,7 @@ extension SignUpViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isValid in
                 guard let self else { return }
-                signUpView.doneButton.updateBackgroundColor(isValid)
+                signUpView.doneButton.isEnabled = isValid
             }
             .store(in: &viewModel.cancellables)
     }

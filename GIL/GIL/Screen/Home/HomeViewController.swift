@@ -10,6 +10,7 @@ import UIKit
 protocol HomeDisplayLogic {
     func displaySearchScreen()
     func displayFetchedData(_ data: [PlaceData])
+    func displayRouteMap(place: PlaceModel)
 }
 
 final class HomeViewController: BaseViewController, NavigationBarHideable {
@@ -51,6 +52,12 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
 
 // MARK: - HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
+    func displayRouteMap(place: PlaceModel) {
+        let viewModel = RouteMapViewModel(currentCLLocation: nil, destination: place)
+        let vc = RouteMapViewController(viewModel: viewModel)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func displayFetchedData(_ data: [PlaceData]) {
         homeCollectionViewHandler?.updateSnapshot(with: data)
     }

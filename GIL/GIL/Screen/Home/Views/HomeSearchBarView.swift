@@ -8,8 +8,8 @@
 import UIKit
 
 final class HomeSearchBarView: UIView {
-    private let searchIconImageView = BaseImageView(image: UIImage(systemName: "magnifyingglass"), contentMode: .scaleAspectFit, tintColor: .placeholder)
-    private let searchLabel = BaseLabel(text: "어디로 갈까요?", textColor: .placeholder, fontWeight: .regular)
+    private let searchIconImageView = UIImageView()
+    private let searchLabel = UILabel()
 
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -51,6 +51,9 @@ extension HomeSearchBarView {
     
     private func setupSearchIconImageView() {
         searchIconImageView
+            .setImage(UIImage(systemName: "magnifyingglass"))
+            .setTintColor(.mainPlaceholder)
+            .setContentMode(.scaleAspectFit)
             .left(equalTo: leadingAnchor, constant: 8)
             .centerY(equalTo: centerYAnchor)
             .size(CGSize(width: 24, height: 24))
@@ -58,6 +61,9 @@ extension HomeSearchBarView {
     
     private func setupSearchLabel() {
         searchLabel
+            .setAccessibility(label: "장소 검색 안내 레이블", hint: "장소 검색 화면으로 이동하려면 두 번 탭하세요")
+            .setText(text: "어디로 갈까요?")
+            .setFont(textStyle: .body, size: 14, weight: .regular)
             .left(equalTo: searchIconImageView.trailingAnchor, constant: 8)
             .right(equalTo: trailingAnchor, constant: -8)
             .centerY(equalTo: searchIconImageView.centerYAnchor)

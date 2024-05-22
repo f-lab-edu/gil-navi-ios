@@ -11,11 +11,11 @@ import SwiftData
 @Model
 final class PlaceData {
     var saveDate: Date
-    var place: Place
+    var place: PlaceModel
     
     init(
         saveDate: Date,
-        place: Place
+        place: PlaceModel
     ) {
         self.saveDate = saveDate
         self.place = place

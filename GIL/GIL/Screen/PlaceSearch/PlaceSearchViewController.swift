@@ -10,13 +10,13 @@ import UIKit
 final class PlaceSearchViewController: BaseViewController, NavigationBarHideable {
     private var viewModel: PlaceSearchViewModel
     private var placeSearchView = PlaceSearchView()
-    private var placeSearchCollectionController: PlaceSearchCollectionController?
+    private var placeSearchCollectionHandler: PlaceSearchCollectionViewHandler?
     
     // MARK: - Initialization
     init(viewModel: PlaceSearchViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        placeSearchCollectionController = PlaceSearchCollectionController(viewModel: viewModel, placeSearchView: placeSearchView)
+        placeSearchCollectionHandler = PlaceSearchCollectionViewHandler(viewModel: viewModel, placeSearchView: placeSearchView, viewController: self)
     }
     
     required init?(coder: NSCoder) {
@@ -36,6 +36,7 @@ final class PlaceSearchViewController: BaseViewController, NavigationBarHideable
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar(animated: false)
+        viewModel.locationService.requestLocation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -61,7 +62,7 @@ extension PlaceSearchViewController {
     }
     
     private func bindButtons() {
-        placeSearchView.navigationBar.backButton.addAction( UIAction { _ in self.backButtonTapped()}, for: .touchUpInside)
+        placeSearchView.navigationBar.backButton.addAction( UIAction { [weak self] _ in self?.backButtonTapped()}, for: .touchUpInside)
     }
     
     private func bindSearchBar() {
@@ -77,7 +78,7 @@ extension PlaceSearchViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] mapItems in
                 guard let self else { return }
-                self.placeSearchCollectionController?.applySnapshot(with: mapItems)
+                self.placeSearchCollectionHandler?.applySnapshot(with: mapItems)
             }
             .store(in: &viewModel.cancellables)
     }
@@ -94,9 +95,9 @@ extension PlaceSearchViewController: UISearchBarDelegate {
 
 // MARK: - LocationServiceDelegate
 extension PlaceSearchViewController: LocationServiceDelegate {
-    func didFetchAddress(_ address: String) {
+    func didFetchPlacemark(_ placemark: PlacemarkModel) {
         viewModel.locationService.stopUpdatingLocation()
-        placeSearchView.navigationBar.addressLabel.text = address
+        placeSearchView.navigationBar.updateAddress(placemark.address ?? "")
     }
     
     func didFailWithError(_ error: Error) {

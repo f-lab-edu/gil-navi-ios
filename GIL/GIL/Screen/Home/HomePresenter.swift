@@ -9,17 +9,21 @@ import UIKit
 protocol HomePresentationLogic {
     func presentSearchScreen()
     func presentFetchedData(_ data: [PlaceData])
+    func presentRouteMap(place: PlaceModel)
 }
 
 final class HomePresenter: HomePresentationLogic {
     weak var viewController: HomeViewController?
     
     func presentFetchedData(_ data: [PlaceData]) {
-        let recentPlace = Array(data.prefix(min(3, data.count)))
-        viewController?.displayFetchedData(recentPlace)
+        viewController?.displayFetchedData(data)
     }
     
     func presentSearchScreen() {
         viewController?.displaySearchScreen()
+    }
+    
+    func presentRouteMap(place: PlaceModel) {
+        viewController?.displayRouteMap(place: place)
     }
 }

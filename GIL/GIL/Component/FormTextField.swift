@@ -48,7 +48,7 @@ final class FormTextField: UITextField {
         type: FormType,
         returnKeyType: UIReturnKeyType = .default,
         clearButtonMode: UITextField.ViewMode = .never,
-        textColor: UIColor = .text,
+        textColor: UIColor = .mainText,
         fontSize: CGFloat = 10,
         fontWeight: UIFont.Weight = .medium
     ) {
@@ -101,7 +101,7 @@ extension FormTextField {
         returnKeyType = returnType
         clearButtonMode = clearMode
         textColor = txtColor
-        applyDynamicTypeFont(textStyle: .body, size: fontSize, weight: fontWeight)
+        setFont(textStyle: .body, size: fontSize, weight: fontWeight)
         backgroundColor = .systemBackground
         layer.borderWidth = 1
         layer.cornerRadius = 6
@@ -111,11 +111,11 @@ extension FormTextField {
     }
 
     private func configurePlaceholderAndBorder() {
-        layer.borderColor = UIColor.borderGray.cgColor
+        layer.borderColor = UIColor.lightGray.cgColor
         if let placeholder = placeholder {
             attributedPlaceholder = NSAttributedString(
                 string: placeholder,
-                attributes: [.foregroundColor: UIColor.placeholder]
+                attributes: [.foregroundColor: UIColor.mainPlaceholder]
             )
         }
     }

@@ -8,7 +8,7 @@
 import MapKit
 
 protocol PlacesSearchServiceProtocol {
-    func searchPlacesNearby(location: CLLocation, query: String, regionRadius: CLLocationDistance) async throws -> [MKMapItem]
+    func searchPlacesNearby(location: CLLocationModel, query: String, regionRadius: CLLocationDistance) async throws -> [MKMapItem]
 }
 
 class PlacesSearchService: PlacesSearchServiceProtocol {
@@ -19,20 +19,20 @@ class PlacesSearchService: PlacesSearchServiceProtocol {
     ///   - regionRadius: 검색할 반경(미터 단위)
     /// - Returns: 검색된 장소의 배열(MKMapItem)을 반환합니다. 오류 발생 시 예외를 던집니다.
     func searchPlacesNearby(
-        location: CLLocation,
+        location: CLLocationModel,
         query: String,
         regionRadius: CLLocationDistance = 1000
     ) async throws -> [MKMapItem] {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
-        request.region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        request.region = MKCoordinateRegion(center: location.location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
 
         let search = MKLocalSearch(request: request)
         let response = try await search.start()
 
         return response.mapItems.filter({
             if let itemLocation = $0.placemark.location {
-                return location.distance(from: itemLocation) <= regionRadius
+                return location.location.distance(from: itemLocation) <= regionRadius
             }
             return false
         })

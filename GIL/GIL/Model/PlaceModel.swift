@@ -7,27 +7,33 @@
 
 import MapKit
 
-struct Place: Hashable, Codable {
+struct PlaceModel: Hashable, Codable {
     let name: String
-    let address: String
-    let category: String
-    let distance: Double
+    let phoneNumber: String?
+    let url: URL?
+    let category: String?
+    var distance: Double?
+    var formattedDistance: String?
+    let placemark: PlacemarkModel
     
+    // MARK: - Initialization
     init(
         mapItem: MKMapItem,
-        distance: Double = 0.0
+        distance: Double?
     ) {
         self.name = mapItem.name ?? ""
-        self.address = mapItem.placemark.title ?? ""
-        self.category = mapItem.pointOfInterestCategory?.rawValue ?? ""
+        self.phoneNumber = mapItem.phoneNumber
+        self.url = mapItem.url
+        self.category = mapItem.pointOfInterestCategory?.rawValue
         self.distance = distance
-    }
-    
-    func formattedDistanceString() -> String {
-        if distance < 1000 {
-            return "\(Int(distance))m"
-        } else {
-            return String(format: "%.2fkm", distance / 1000)
-        }
+        self.placemark = PlacemarkModel(mkPlacemark: mapItem.placemark)
+        self.formattedDistance = distance?.formattedDistanceCompact()
+        Log.info("PlaceModel", [
+            "name":self.name,
+            "phoneNumber":self.phoneNumber ?? "",
+            "url": self.url?.absoluteString ?? "",
+            "category": self.category ?? "",
+            "distance" : self.formattedDistance
+        ])
     }
 }
