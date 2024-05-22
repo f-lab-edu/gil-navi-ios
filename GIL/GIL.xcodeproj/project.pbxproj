@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		5806472A2BCD147A00FB7310 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580647292BCD147A00FB7310 /* UIImage+Extension.swift */; };
 		5810DE202BE1F78400180BFB /* MappinImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE1F2BE1F78400180BFB /* MappinImageView.swift */; };
+		5810DE2B2BE2001600180BFB /* PlaceSearchViewController+CollectionViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE2A2BE2001600180BFB /* PlaceSearchViewController+CollectionViewSetup.swift */; };
+		5810DE2D2BE2006600180BFB /* PlaceSearchViewController+DataSourceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE2C2BE2006600180BFB /* PlaceSearchViewController+DataSourceConfiguration.swift */; };
+		5810DE2F2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE2E2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift */; };
+		5810DE312BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE302BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift */; };
+		5810DE332BE2013D00180BFB /* PlaceSearchViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE322BE2013D00180BFB /* PlaceSearchViewController+Actions.swift */; };
 		5810DE462BE35D4600180BFB /* BaseStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE452BE35D4600180BFB /* BaseStackView.swift */; };
 		5810DE482BE36A5700180BFB /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE472BE36A5700180BFB /* BaseButton.swift */; };
 		5810DE4A2BE37C9400180BFB /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE492BE37C9400180BFB /* FirebaseAuthManager.swift */; };
@@ -53,6 +58,9 @@
 		584FA44A2BB15D51002600F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4492BB15D51002600F1 /* LoginViewModel.swift */; };
 		586F030C2BE0C4A2008660A0 /* LanguageCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030B2BE0C4A1008660A0 /* LanguageCode.swift */; };
 		586F030F2BE0D050008660A0 /* PlaceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030E2BE0D050008660A0 /* PlaceData.swift */; };
+		586F03122BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03112BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift */; };
+		586F03142BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03132BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift */; };
+		586F03162BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03152BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift */; };
 		586F03182BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */; };
 		58A6808E2BDE7C02004E6706 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A6808D2BDE7C02004E6706 /* LocationService.swift */; };
 		58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */; };
@@ -70,7 +78,6 @@
 		58BDFBD52BBE889D006AC994 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 58BDFBD42BBE889D006AC994 /* FirebaseAuth */; };
 		58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */; };
 		58CC1AA32BE9EC4A0004FEAE /* HomeCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1AA22BE9EC4A0004FEAE /* HomeCollectionViewHandler.swift */; };
-		58CC1AA82BEA143F0004FEAE /* PlaceSearchCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC1AA72BEA143F0004FEAE /* PlaceSearchCollectionViewHandler.swift */; };
 		58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93052BDF79C600C97575 /* PlacesSearchService.swift */; };
 		58DE93092BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE93082BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift */; };
 		58DE930D2BDF94B600C97575 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE930C2BDF94B600C97575 /* PlaceModel.swift */; };
@@ -97,6 +104,11 @@
 /* Begin PBXFileReference section */
 		580647292BCD147A00FB7310 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		5810DE1F2BE1F78400180BFB /* MappinImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappinImageView.swift; sourceTree = "<group>"; };
+		5810DE2A2BE2001600180BFB /* PlaceSearchViewController+CollectionViewSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+CollectionViewSetup.swift"; sourceTree = "<group>"; };
+		5810DE2C2BE2006600180BFB /* PlaceSearchViewController+DataSourceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+DataSourceConfiguration.swift"; sourceTree = "<group>"; };
+		5810DE2E2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+BindigSetup.swift"; sourceTree = "<group>"; };
+		5810DE302BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+UIUpdates.swift"; sourceTree = "<group>"; };
+		5810DE322BE2013D00180BFB /* PlaceSearchViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+Actions.swift"; sourceTree = "<group>"; };
 		5810DE452BE35D4600180BFB /* BaseStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStackView.swift; sourceTree = "<group>"; };
 		5810DE472BE36A5700180BFB /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		5810DE492BE37C9400180BFB /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
@@ -139,6 +151,9 @@
 		584FA4492BB15D51002600F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		586F030B2BE0C4A1008660A0 /* LanguageCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCode.swift; sourceTree = "<group>"; };
 		586F030E2BE0D050008660A0 /* PlaceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceData.swift; sourceTree = "<group>"; };
+		586F03112BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+LocationService.swift"; sourceTree = "<group>"; };
+		586F03132BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+SearchBar.swift"; sourceTree = "<group>"; };
+		586F03152BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceSearchViewController+UICollectionView.swift"; sourceTree = "<group>"; };
 		586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRecentSearchPlaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		58A6808D2BDE7C02004E6706 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		58BAC8962BC52F8500CDEB1F /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -159,7 +174,6 @@
 		58BDFBD02BBE5B53006AC994 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		58BDFBDB2BBEA5D0006AC994 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		58CC1AA22BE9EC4A0004FEAE /* HomeCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewHandler.swift; sourceTree = "<group>"; };
-		58CC1AA72BEA143F0004FEAE /* PlaceSearchCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCollectionViewHandler.swift; sourceTree = "<group>"; };
 		58DE93052BDF79C600C97575 /* PlacesSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchService.swift; sourceTree = "<group>"; };
 		58DE93082BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		58DE930C2BDF94B600C97575 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
@@ -198,6 +212,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5810DE292BE1FFEC00180BFB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5810DE2A2BE2001600180BFB /* PlaceSearchViewController+CollectionViewSetup.swift */,
+				5810DE2C2BE2006600180BFB /* PlaceSearchViewController+DataSourceConfiguration.swift */,
+				5810DE2E2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift */,
+				5810DE302BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift */,
+				5810DE322BE2013D00180BFB /* PlaceSearchViewController+Actions.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		583210B62BE69EA800D9DCA1 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,9 +263,10 @@
 			children = (
 				58368F1B2BDE4650009E008C /* Views */,
 				58DE93072BDF841300C97575 /* Cells */,
+				5810DE292BE1FFEC00180BFB /* Extension */,
+				586F03102BE0FC24008660A0 /* Delegate */,
 				58368F152BDE41FC009E008C /* PlaceSearchViewController.swift */,
 				58368F172BDE4243009E008C /* PlaceSearchViewModel.swift */,
-				58CC1AA72BEA143F0004FEAE /* PlaceSearchCollectionViewHandler.swift */,
 			);
 			path = PlaceSearch;
 			sourceTree = "<group>";
@@ -377,6 +404,16 @@
 				586F030E2BE0D050008660A0 /* PlaceData.swift */,
 			);
 			path = SwiftData;
+			sourceTree = "<group>";
+		};
+		586F03102BE0FC24008660A0 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				586F03112BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift */,
+				586F03132BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift */,
+				586F03152BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		58BDFBA02BB2B865006AC994 /* SignUp */ = {
@@ -615,6 +652,7 @@
 				584FA41B2BA7F606002600F1 /* LoginViewController.swift in Sources */,
 				58368F032BD80472009E008C /* HomeInteractor.swift in Sources */,
 				58368F052BD8047E009E008C /* HomePresenter.swift in Sources */,
+				586F03122BE0FC55008660A0 /* PlaceSearchViewController+LocationService.swift in Sources */,
 				58368F162BDE41FC009E008C /* PlaceSearchViewController.swift in Sources */,
 				58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */,
 				584FA4282BA84D00002600F1 /* UIColor+Extension.swift in Sources */,
@@ -624,6 +662,7 @@
 				58368F122BD8B7D5009E008C /* HomeSearchBarView.swift in Sources */,
 				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
 				58BAC8B02BCCF59800CDEB1F /* NavigationActionButton.swift in Sources */,
+				586F03162BE0FD9A008660A0 /* PlaceSearchViewController+UICollectionView.swift in Sources */,
 				583210BC2BE8F24200D9DCA1 /* BaseImageView.swift in Sources */,
 				58DE93062BDF79C600C97575 /* PlacesSearchService.swift in Sources */,
 				584FA4222BA84254002600F1 /* InteractiveButton.swift in Sources */,
@@ -639,15 +678,19 @@
 				58368F1A2BDE424A009E008C /* PlaceSearchView.swift in Sources */,
 				58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */,
 				584FA3E72BA41484002600F1 /* AppDelegate.swift in Sources */,
-				58CC1AA82BEA143F0004FEAE /* PlaceSearchCollectionViewHandler.swift in Sources */,
+				5810DE2D2BE2006600180BFB /* PlaceSearchViewController+DataSourceConfiguration.swift in Sources */,
 				58368F1D2BDE4AD2009E008C /* PlaceSearchNavigationBar.swift in Sources */,
 				584FA41E2BA82886002600F1 /* FormTextField.swift in Sources */,
+				5810DE332BE2013D00180BFB /* PlaceSearchViewController+Actions.swift in Sources */,
 				58DE93092BDF850B00C97575 /* PlaceSearchCollectionViewCell.swift in Sources */,
 				58DE930F2BDFA23200C97575 /* UIView+Extension.swift in Sources */,
 				583210BA2BE76DAA00D9DCA1 /* BaseLabel.swift in Sources */,
+				586F03142BE0FCB5008660A0 /* PlaceSearchViewController+SearchBar.swift in Sources */,
 				58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */,
 				58BDFBA42BB2E536006AC994 /* SignUpView.swift in Sources */,
 				584FA4302BABC0EE002600F1 /* LoginView.swift in Sources */,
+				5810DE2B2BE2001600180BFB /* PlaceSearchViewController+CollectionViewSetup.swift in Sources */,
+				5810DE2F2BE200AC00180BFB /* PlaceSearchViewController+BindigSetup.swift in Sources */,
 				584FA3E92BA41484002600F1 /* SceneDelegate.swift in Sources */,
 				58368F0D2BD828C6009E008C /* HomeSearchCollectionViewCell.swift in Sources */,
 				58368F0B2BD81C6C009E008C /* UIViewController+NavigationBarHideable.swift in Sources */,
@@ -656,6 +699,7 @@
 				586F030C2BE0C4A2008660A0 /* LanguageCode.swift in Sources */,
 				58BDFBCC2BBAA78F006AC994 /* String+Extension.swift in Sources */,
 				58BAC8992BC5399D00CDEB1F /* UITextField+Extension.swift in Sources */,
+				5810DE312BE200F600180BFB /* PlaceSearchViewController+UIUpdates.swift in Sources */,
 				586F03182BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift in Sources */,
 				583210B82BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift in Sources */,
 				584FA44A2BB15D51002600F1 /* LoginViewModel.swift in Sources */,
