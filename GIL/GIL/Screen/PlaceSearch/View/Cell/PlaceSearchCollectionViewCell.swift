@@ -10,9 +10,9 @@ import UIKit
 class PlaceSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
     static let reuseIdentifier = "PlaceSearchCell"
     private let mappinIcon = MappinImageView(iconType: .outline)
-    private let stackView = BaseStackView(distribution: .equalCentering,spacing: 5)
-    private let nameLabel = BaseLabel(text: "", fontSize: 15, fontWeight: .bold)
-    private let addressLabel = BaseLabel(text: "", textColor: .lightGray, fontSize: 13, fontWeight: .medium, numberOfLines: 0)
+    private let stackView = UIStackView()
+    private let nameLabel = UILabel()
+    private let addressLabel = UILabel()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -48,23 +48,37 @@ extension PlaceSearchCollectionViewCell {
     private func setupMappinIcon() {
         mappinIcon
             .setIsAccessibilityElement(false)
-            .size(CGSize(width: 30, height: 30))
-            .applyConstraints(to: contentView, attributes: [.centerY, .leading])
+            .makeConstraints({
+                $0.size(CGSize(width: 30, height: 30))
+                $0.matchParent(contentView, attributes: [.centerY, .leading])
+            })
     }
     
     private func setupStackView() {
         stackView
-            .centerY(equalTo: mappinIcon.centerYAnchor)
-            .left(equalTo: mappinIcon.trailingAnchor, constant: 11)
-            .right(equalTo: contentView.trailingAnchor, constant: -11)
+            .setAxis(.vertical)
+            .setDistribution(.equalCentering)
+            .setSpacing(5)
+            .makeConstraints({
+                $0.centerY(equalTo: mappinIcon.centerYAnchor)
+                $0.leading(equalTo: mappinIcon.trailingAnchor, constant: 11)
+                $0.trailing(equalTo: contentView.trailingAnchor, constant: 11)
+            })
     }
     
     private func setupNameLabel() {
-        nameLabel.setAccessibilityHint("해당 장소로 길을 찾으려면 두 번 탭하세요")
+        nameLabel
+            .setAccessibilityHint("해당 장소로 길을 찾으려면 두 번 탭하세요")
+            .setTextColor(textColor: .mainText)
+            .setFont(textStyle: .body, size: 15, weight: .bold)
     }
     
     private func setupAddressLabel() {
-        addressLabel.setAccessibilityHint("해당 장소로 길을 찾으려면 두 번 탭하세요")
+        addressLabel
+            .setAccessibilityHint("해당 장소로 길을 찾으려면 두 번 탭하세요")
+            .setTextColor(textColor: .lightGray)
+            .setFont(textStyle: .body, size: 13, weight: .medium)
+            .setNumberOfLines(lineCount: 0)
     }
 }
 

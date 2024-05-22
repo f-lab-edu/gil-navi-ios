@@ -22,18 +22,14 @@ final class PlaceSearchViewModel {
         placeContainer = try? ModelContainer(for: PlaceData.self)
     }
     
-    func searchPlace(_ query: String) {
-        guard let location = locationService.currentLocation else { return }
+    func searchPlace(_ query: String) throws {
         Task {
-            do {
-                let mapItems = try await placesSearchService.searchPlacesNearby(location: location, query: query, regionRadius: 5000)
-                await MainActor.run {
-                    self.mapItems = mapItems
-                        .map({ PlaceModel(mapItem: $0, distance: location.distance(to: $0.placemark.coordinate) ?? 0) })
-                        .sorted(by: { $0.distance ?? 0 < $1.distance ?? 0 })
-                }
-            } catch {
-                Log.error(#function, error)
+            guard let location = locationService.currentLocation else { return }
+            let mapItems = try await placesSearchService.searchPlacesNearby(location: location, query: query, regionRadius: 5000)
+            await MainActor.run {
+                self.mapItems = mapItems
+                    .map({ PlaceModel(mapItem: $0, distance: location.distance(to: $0.placemark.coordinate) ?? 0) })
+                    .sorted(by: { $0.distance ?? 0 < $1.distance ?? 0 })
             }
         }
     }

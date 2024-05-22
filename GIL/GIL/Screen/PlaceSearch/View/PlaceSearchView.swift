@@ -46,15 +46,17 @@ extension PlaceSearchView {
     }
     
     private func setupNavigationBar() {
-        navigationBar
-            .top(equalTo: safeAreaLayoutGuide.topAnchor)
-            .height(80)
-            .applyConstraints(to: self, attributes: [.leading, .trailing])
+        navigationBar.makeConstraints({
+            $0.top(equalTo: safeAreaLayoutGuide.topAnchor)
+            $0.height(equalToConstant: 80)
+            $0.matchParent(self, attributes: [.leading, .trailing])
+        })
     }
     
     private func setupCollectionView() {
-        searchResultsCollectionView
-            .top(equalTo: navigationBar.bottomAnchor)
-            .applyConstraints(to: self, attributes: [.leading, .trailing, .bottom])
+        searchResultsCollectionView.makeConstraints({
+            $0.top(equalTo: navigationBar.bottomAnchor)
+            $0.matchParent(self, attributes: [.leading, .trailing, .bottom])
+        })
     }
 }

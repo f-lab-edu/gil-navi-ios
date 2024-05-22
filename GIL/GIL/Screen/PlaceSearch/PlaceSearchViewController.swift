@@ -88,8 +88,13 @@ extension PlaceSearchViewController {
 extension PlaceSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else { return }
-        dismissKeyboard()
-        viewModel.searchPlace(query)
+        do {
+            try viewModel.searchPlace(query)
+            dismissKeyboard()
+        } catch {
+            Log.error(#function, error.localizedDescription)
+            ToastManager.shared.showToast(message: "관련된 장소를 찾을 수 없습니다.", position: .top)
+        }
     }
 }
 

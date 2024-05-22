@@ -47,7 +47,9 @@ extension RouteMapView {
     private func setupMapView() {
         mapView
             .setIsAccessibilityElement(false)
-            .applyConstraints(to: self, attributes: [.top, .bottom, .leading, .trailing])
+            .makeConstraints({
+                $0.matchParent(self, attributes: [.top, .bottom, .leading, .trailing])
+            })
     }
     
     private func setupBackButton() {
@@ -57,8 +59,10 @@ extension RouteMapView {
             .setBackgroundColor(.white, for: .normal)
             .setShadow(color: .black, offset: CGSize(width: 0, height: 1), radius: 3, opacity: 1)
             .setLayer(cornerRadius: 20)
-            .top(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10)
-            .left(equalTo: leadingAnchor, constant: 16)
-            .size(CGSize(width: 40, height: 40))
+            .makeConstraints({
+                $0.top(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10)
+                $0.leading(equalTo: leadingAnchor, constant: 16)
+                $0.size(CGSize(width: 40, height: 40))
+            })
     }
 }
