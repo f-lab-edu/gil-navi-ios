@@ -10,15 +10,20 @@ import Combine
 import SwiftData
 
 final class PlaceSearchViewModel {
-    private let placesSearchService = PlacesSearchService()
-    private var placeContainer: ModelContainer?
-    let locationService = LocationService()
+    var locationService: LocationServiceProtocol
+    let placesSearchService: PlacesSearchServiceProtocol
+    var placeContainer: ModelContainer?
     
     @Published var mapItems: [PlaceModel] = []
     
     var cancellables: Set<AnyCancellable> = []
     
-    init() {
+    init(
+        locationService: LocationServiceProtocol = LocationService(),
+        placesSearchService: PlacesSearchServiceProtocol = PlacesSearchService()
+    ) {
+        self.locationService = locationService
+        self.placesSearchService = placesSearchService
         placeContainer = try? ModelContainer(for: PlaceData.self)
     }
     

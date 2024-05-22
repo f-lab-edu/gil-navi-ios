@@ -72,17 +72,7 @@ extension RouteManager {
         from departure: CLLocationCoordinate2D,
         to destination: CLLocationCoordinate2D
     ) -> CLLocationCoordinate2D {
-        let lat1 = departure.latitude * .pi / 180
-        let lon1 = departure.longitude * .pi / 180
-        let lat2 = destination.latitude * .pi / 180
-        let dLon = (destination.longitude - departure.longitude) * .pi / 180
-
-        let bx = cos(lat2) * cos(dLon)
-        let by = cos(lat2) * sin(dLon)
-        let midLat = atan2(sin(lat1) + sin(lat2), sqrt((cos(lat1) + bx) * (cos(lat1) + bx) + by * by))
-        let midLon = lon1 + atan2(by, cos(lat1) + bx)
-
-        return CLLocationCoordinate2D(latitude: midLat * 180 / .pi, longitude: midLon * 180 / .pi)
+        CLLocationCoordinate2D(latitude: (departure.latitude + destination.latitude) / 2, longitude: (departure.longitude + destination.longitude) / 2)
     }
     
     /// 두 좌표 사이의 거리 계산
