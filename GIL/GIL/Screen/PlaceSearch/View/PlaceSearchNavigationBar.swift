@@ -17,6 +17,7 @@ final class PlaceSearchNavigationBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        searchBar.becomeFirstResponder()
     }
     
     required init?(coder: NSCoder) {
@@ -57,7 +58,6 @@ extension PlaceSearchNavigationBar {
         searchBar.layer.borderColor = UIColor.lightGray.cgColor
         searchBar.layer.borderWidth = 1
         searchBar.searchTextField.borderStyle = .none
-        
         searchBar
             .top(equalTo: backButton.bottomAnchor, constant: 10)
             .left(equalTo: leadingAnchor, constant: 16)

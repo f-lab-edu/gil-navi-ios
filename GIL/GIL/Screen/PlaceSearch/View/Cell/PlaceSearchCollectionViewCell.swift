@@ -65,3 +65,11 @@ extension PlaceSearchCollectionViewCell {
         addressLabel.text = viewModel.getAddressForPlace(item)
     }
 }
+
+// MARK: - Cell Layout
+extension PlaceSearchCollectionViewCell {
+    static func layoutItem() -> NSCollectionLayoutItem {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(70))
+        return NSCollectionLayoutItem(layoutSize: itemSize)
+    }
+}
