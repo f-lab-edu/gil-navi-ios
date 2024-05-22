@@ -100,7 +100,6 @@ extension PlaceSearchViewController: LocationServiceDelegate {
     }
     
     func didFailWithError(_ error: Error) {
-        placeSearchView.navigationBar.addressLabel.text = "위치를 찾을 수 없습니다.".localized()
         Log.error("LocationService Error: \(error.localizedDescription)", error)
     }
 }

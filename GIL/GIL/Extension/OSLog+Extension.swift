@@ -83,7 +83,7 @@ struct Log {
     }
     
     static private func log(_ message: Any, _ arguments: [Any], level: Level) {
-        #if DEBUG
+        #if DEV
         let extraMessage: String = arguments.map({ String(describing: $0) }).joined(separator: "\n")
         let logger = Logger(subsystem: OSLog.subsystem, category: level.category)
         let logMessage = "\(level.category) \(message)\n\(extraMessage)"
