@@ -57,8 +57,10 @@ extension RouteCollectionViewCell {
         labelStackView
             .setAxis(.vertical)
             .setSpacing(5)
-            .left(equalTo: contentView.leadingAnchor, constant: 16)
-            .centerY(equalTo: contentView.centerYAnchor)
+            .makeConstraints({
+                $0.leading(equalTo: contentView.leadingAnchor, constant: 16)
+                $0.centerY(equalTo: contentView.centerYAnchor)
+            })
     }
     
     private func setupExpectedTimeLabel() {
@@ -85,9 +87,11 @@ extension RouteCollectionViewCell {
             .setFont(textStyle: .body, size: 22, weight: .bold)
             .setBackgroundColor(.mainGreen, for: .normal)
             .setLayer(cornerRadius: 4)
-            .right(equalTo: contentView.trailingAnchor, constant: -16)
-            .centerY(equalTo: contentView.centerYAnchor)
-            .size(CGSize(width: 50, height: 50))
+            .makeConstraints({
+                $0.trailing(equalTo: contentView.trailingAnchor, constant: 16)
+                $0.centerY(equalTo: contentView.centerYAnchor)
+                $0.size(CGSize(width: 50, height: 50))
+            })
     }
 }
 

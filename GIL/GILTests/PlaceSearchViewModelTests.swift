@@ -31,7 +31,7 @@ final class PlaceSearchViewModelTests: XCTestCase {
         mockPlacesSearchService.mapItems = [mapItem]
         
         // When
-        viewModel.searchPlace("test query")
+        try! viewModel.searchPlace("test query")
         try! await Task.sleep(nanoseconds: 1 * 1_000_000_000)
         
         // Then
