@@ -13,11 +13,11 @@ final class HomeCollectionViewHandler: NSObject {
     }
     private enum Item: Hashable {
         case search
-        case recentSearchPlace([PlaceData])
+        case recentSearchPlace
     }
     private var interactor: HomeBusinessLogic
     private var homeView: HomeView
-    private var recentSearchCount = 0 // 최근 검색 개수를 추적하는 변수
+    private var recentSearchPlaces: [PlaceData] = [] // 최근 검색 장소 데이터를 저장하는 배열
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
     
     // MARK: - Initialization
@@ -41,7 +41,7 @@ extension HomeCollectionViewHandler {
     
     private func createLayout() -> UICollectionViewLayout {
         let searchItem = HomeSearchCollectionViewCell.layoutItem()
-        let recentSearchItem = HomeRecentSearchPlaceCollectionViewCell.layoutItem(count: recentSearchCount)
+        let recentSearchItem = HomeRecentSearchPlaceCollectionViewCell.layoutItem(count: recentSearchPlaces.count)
         
         let groupHeight = searchItem.layoutSize.heightDimension.dimension + recentSearchItem.layoutSize.heightDimension.dimension
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(groupHeight))
@@ -56,12 +56,12 @@ extension HomeCollectionViewHandler {
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: homeView.mainCollectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             switch item {
             case .search: return self.configureSearchCell(for: collectionView, at: indexPath)
-            case let .recentSearchPlace(placeData): return self.configureRecentSearchPlaceCell(for: collectionView, at: indexPath, with: placeData)
+            case .recentSearchPlace: return self.configureRecentSearchPlaceCell(for: collectionView, at: indexPath, with: self.recentSearchPlaces)
             }
         }
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.main])
-        snapshot.appendItems([.search], toSection: .main)
+        snapshot.appendItems([.search, .recentSearchPlace], toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 }
@@ -69,14 +69,9 @@ extension HomeCollectionViewHandler {
 // MARK: - DataSource Updates
 extension HomeCollectionViewHandler {
     func updateSnapshot(with data: [PlaceData]) {
-        recentSearchCount = data.count
+        recentSearchPlaces = data
         var snapshot = dataSource.snapshot()
-        snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .main).filter {
-            if case .recentSearchPlace = $0 { return true }
-            return false
-        })
-        let newItems = [Item.recentSearchPlace(data)]
-        snapshot.appendItems(newItems, toSection: .main)
+        snapshot.reloadItems([.recentSearchPlace])
         dataSource.apply(snapshot, animatingDifferences: true)
         resetLayout()
     }
@@ -92,9 +87,9 @@ extension HomeCollectionViewHandler {
     private func configureSearchCell(
         for collectionView: UICollectionView,
         at indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeSearchCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeSearchCollectionViewCell else { return UICollectionViewCell() }
-        cell.onSearchBarTapped = { [weak self] in
+    ) -> UICollectionViewCell? {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeSearchCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeSearchCollectionViewCell
+        cell?.onSearchBarTapped = { [weak self] in
             guard let self else { return }
             self.interactor.performSearch()
         }
@@ -105,10 +100,10 @@ extension HomeCollectionViewHandler {
         for collectionView: UICollectionView,
         at indexPath: IndexPath,
         with data: [PlaceData]
-    ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRecentSearchPlaceCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeRecentSearchPlaceCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(with: data)
-        cell.onplaceButtonTapped = { [weak self] place in
+    ) -> UICollectionViewCell? {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRecentSearchPlaceCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeRecentSearchPlaceCollectionViewCell
+        cell?.configure(with: data)
+        cell?.onplaceButtonTapped = { [weak self] place in
             guard let self else { return }
             interactor.navigateToRouteMap(with: place)
         }
