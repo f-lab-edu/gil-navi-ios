@@ -66,6 +66,14 @@ extension UIView {
         self.isHidden = isHidden
         return self
     }
+    
+    /// 뷰의 투명도를 설정합니다.
+    /// - Parameter alpha: 투명도 CGFloat 값
+    @discardableResult
+    func setAlpha(_ alpha: CGFloat) -> Self {
+        self.alpha = alpha
+        return self
+    }
 
     /// 뷰의 레이어 속성(모서리 둥글기, 테두리 색상, 테두리 너비)을 설정합니다
     /// - Parameters:
