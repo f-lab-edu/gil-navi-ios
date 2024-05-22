@@ -10,10 +10,7 @@ import SwiftData
 
 protocol PlaceRepository {
     func storePlace(_ mapItem: MapItem)
-    
-    func fetchPlaces() -> [Place]
-    func updatePlace(_ place: Place)
-    func deletePlace(_ place: Place)
+    func fetchPlaces(limit: Int, order: SortOrder) -> [Place]
 }
 
 final class DefaultPlaceRepository: PlaceRepository {
@@ -29,13 +26,13 @@ final class DefaultPlaceRepository: PlaceRepository {
         placeContainer?.mainContext.insert(data)
     }
 
-    func fetchPlaces() -> [Place] {
-        return []
-    }
-
-    func updatePlace(_ place: Place) {
-    }
-
-    func deletePlace(_ place: Place) {
+    @MainActor 
+    func fetchPlaces(
+        limit: Int,
+        order: SortOrder
+    ) -> [Place] {
+        let descriptor = FetchDescriptor<Place>(sortBy: [SortDescriptor(\.saveDate, order: order)])
+        let places = (try? placeContainer?.mainContext.fetch(descriptor)) ?? []
+        return Array(places.prefix(limit))
     }
 }

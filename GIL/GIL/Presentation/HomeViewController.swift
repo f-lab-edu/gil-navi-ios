@@ -14,7 +14,7 @@ struct HomeActions {
 
 protocol HomeDisplayLogic {
     func displaySearchScreen()
-    func displayFetchedData(_ data: [Place])
+    func displayFetchedPlaces(_ data: [Place])
     func displayRouteMap(place: MapItem)
 }
 
@@ -25,16 +25,20 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
     private var actions: HomeActions?
     
     // MARK: - Initialization
-    init(actions: HomeActions? = nil) {
-        let presenter = HomePresenter()
-        let interactor = HomeInteractor()
+    init(
+        interactor: HomeInteractor,
+        presenter: HomePresenter,
+        actions: HomeActions? = nil)
+    {
         interactor.presenter = presenter
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
-        
-        self.actions = actions
         presenter.viewController = self
-        homeCollectionViewHandler = HomeCollectionViewHandler(interactor: self.interactor, homeView: homeView)
+        self.actions = actions
+        homeCollectionViewHandler = HomeCollectionViewHandler(
+            interactor: self.interactor,
+            homeView: homeView
+        )
     }
     
     required init?(coder: NSCoder) {
@@ -49,7 +53,7 @@ final class HomeViewController: BaseViewController, NavigationBarHideable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar(animated: false)
-        interactor.fetchPlaceData()
+        interactor.fetchPlaces()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -66,7 +70,7 @@ extension HomeViewController: HomeDisplayLogic {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func displayFetchedData(_ data: [Place]) {
+    func displayFetchedPlaces(_ data: [Place]) {
         homeCollectionViewHandler?.updateSnapshot(with: data)
     }
     

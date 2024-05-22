@@ -8,9 +8,28 @@
 import UIKit
 
 final class HomeSceneDIContainer: HomeFlowCoordinatorDependencies {
+    // MARK: - Repositories
+    func makePlaceRepository() -> PlaceRepository {
+        DefaultPlaceRepository()
+    }
+    
     // MARK: - Home
     func makeHomeViewController(actions: HomeActions) -> HomeViewController {
-        HomeViewController(actions: actions)
+        HomeViewController(
+            interactor: makeHomeInteractor(),
+            presenter: makeHomePresenter(),
+            actions: actions
+        )
+    }
+    
+    func makeHomeInteractor() -> HomeInteractor {
+        HomeInteractor(
+            placeRepository: makePlaceRepository()
+        )
+    }
+    
+    func makeHomePresenter() -> HomePresenter {
+        HomePresenter()
     }
     
     // MARK: - Flow Coordinators
