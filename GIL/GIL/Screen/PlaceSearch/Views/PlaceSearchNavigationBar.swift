@@ -17,7 +17,6 @@ final class PlaceSearchNavigationBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
-        searchBar.becomeFirstResponder()
     }
     
     required init?(coder: NSCoder) {

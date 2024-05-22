@@ -10,13 +10,13 @@ import UIKit
 final class PlaceSearchViewController: BaseViewController, NavigationBarHideable {
     private var viewModel: PlaceSearchViewModel
     private var placeSearchView = PlaceSearchView()
-    private var placeSearchCollectionController: PlaceSearchCollectionController?
+    private var placeSearchCollectionViewHandler: PlaceSearchCollectionViewHandler?
     
     // MARK: - Initialization
     init(viewModel: PlaceSearchViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        placeSearchCollectionController = PlaceSearchCollectionController(viewModel: viewModel, placeSearchView: placeSearchView)
+        placeSearchCollectionViewHandler = PlaceSearchCollectionViewHandler(viewModel: viewModel, placeSearchView: placeSearchView)
     }
     
     required init?(coder: NSCoder) {
@@ -77,7 +77,7 @@ extension PlaceSearchViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] mapItems in
                 guard let self else { return }
-                self.placeSearchCollectionController?.applySnapshot(with: mapItems)
+                self.placeSearchCollectionViewHandler?.applySnapshot(with: mapItems)
             }
             .store(in: &viewModel.cancellables)
     }
@@ -85,10 +85,11 @@ extension PlaceSearchViewController {
 
 // MARK: - UISearchBarDelegate
 extension PlaceSearchViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let query = searchBar.text else { return }
-        dismissKeyboard()
-        viewModel.searchPlace(query)
+    func searchBar(
+        _ searchBar: UISearchBar,
+        textDidChange searchText: String
+    ) {
+        viewModel.searchPlace(searchText)
     }
 }
 
@@ -100,7 +101,6 @@ extension PlaceSearchViewController: LocationServiceDelegate {
     }
     
     func didFailWithError(_ error: Error) {
-        placeSearchView.navigationBar.addressLabel.text = "위치를 찾을 수 없습니다.".localized()
         Log.error("LocationService Error: \(error.localizedDescription)", error)
     }
 }
