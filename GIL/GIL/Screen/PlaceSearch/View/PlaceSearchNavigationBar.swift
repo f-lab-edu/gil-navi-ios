@@ -8,8 +8,8 @@
 import UIKit
 
 final class PlaceSearchNavigationBar: UIView {
-    private let myLocationLabel = BaseLabel(text: "내 위치".localized(), fontSize: 11, fontWeight: .regular)
-    private let addressLabel = BaseLabel(text: "", textColor: .lightBlackDarkWhite, fontSize: 13, fontWeight: .bold)
+    private let myLocationLabel = UILabel()
+    private let addressLabel = UILabel()
     let backButton = UIButton()
     let searchBar = UISearchBar()
     
@@ -17,6 +17,7 @@ final class PlaceSearchNavigationBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        searchBar.becomeFirstResponder()
     }
     
     required init?(coder: NSCoder) {
@@ -48,9 +49,11 @@ extension PlaceSearchNavigationBar {
             .setAccessibilityIdentifier("PlaceSearchNavigationBarBackButton")
             .setAccessibility(label: "뒤로가기 버튼", hint: "장소 검색 화면을 닫으려면 두 번 탭하세요", traits: .button)
             .configureNavigationStyle(type: .back)
-            .top(equalTo: topAnchor)
-            .left(equalTo: leadingAnchor, constant: 11)
-            .size(CGSize(width: 36, height: 30))
+            .makeConstraints({
+                $0.top(equalTo: topAnchor)
+                $0.leading(equalTo: leadingAnchor, constant: 12)
+                $0.size(CGSize(width: 36, height: 30))
+            })
     }
     
     private func setupSearchBar() {
@@ -59,25 +62,35 @@ extension PlaceSearchNavigationBar {
             .setAccessibility(label: "검색 필드", hint: "찾고자 하는 장소를 입력하세요", traits: .searchField)
             .setBackgroundColor(.gray)
             .setLayer(cornerRadius: 4, borderColor: .lightGray, borderWidth: 1)
-            .top(equalTo: backButton.bottomAnchor, constant: 10)
-            .left(equalTo: leadingAnchor, constant: 16)
-            .right(equalTo: trailingAnchor, constant: -16)
-            .height(40)
+            .makeConstraints({
+                $0.top(equalTo: backButton.bottomAnchor, constant: 10)
+                $0.height(equalToConstant: 40)
+                $0.matchParent(self, attributes: [.leading, .trailing], insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+            })
     }
     
     private func setupMyLocationLabel() {
         myLocationLabel
             .setIsAccessibilityElement(false)
-            .top(equalTo: topAnchor)
-            .left(equalTo: backButton.trailingAnchor, constant: 8)
+            .setText(text: "내 위치")
+            .setTextColor(textColor: .mainText)
+            .setFont(textStyle: .body, size: 11, weight: .regular)
+            .makeConstraints({
+                $0.top(equalTo: topAnchor)
+                $0.leading(equalTo: backButton.trailingAnchor, constant: 8)
+            })
     }
     
     private func setupAddressLabel() {
         addressLabel
             .setAccessibility(label: "주소 레이블", hint: "현재 위치의 주소를 표시합니다")
-            .top(equalTo: myLocationLabel.bottomAnchor)
-            .left(equalTo: myLocationLabel.leadingAnchor)
-            .right(equalTo: trailingAnchor, constant: -11)
+            .setTextColor(textColor: .lightBlackDarkWhite)
+            .setFont(textStyle: .body, size: 13, weight: .bold)
+            .makeConstraints({
+                $0.top(equalTo: myLocationLabel.bottomAnchor)
+                $0.leading(equalTo: myLocationLabel.leadingAnchor)
+                $0.trailing(equalTo: trailingAnchor, constant: 11)
+            })
     }
 }
 
@@ -85,7 +98,7 @@ extension PlaceSearchNavigationBar {
 extension PlaceSearchNavigationBar {
     func updateAddress(_ address: String) {
         addressLabel.text = address
-        
+        postAccessibilityUpdateAddress(address)
     }
 }
 

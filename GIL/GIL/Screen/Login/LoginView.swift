@@ -58,11 +58,11 @@ extension LoginView {
         passwordTextField
             .setAccessibilityIdentifier("LoginViewPasswordTextField")
             .setAccessibility(label: "비밀번호 입력 필드", hint: "비밀번호를 입력하세요")
-        formStackView
-            .top(equalTo: topAnchor, constant: 120)
-            .left(equalTo: leadingAnchor, constant: 16)
-            .right(equalTo: trailingAnchor, constant: -16)
-            .height(120)
+        formStackView.makeConstraints {
+            $0.top(equalTo: topAnchor, constant: 120)
+            $0.matchParent(self, attributes: [.leading, .trailing], insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+            $0.height(equalToConstant: 120)
+        }
     }
     
     private func setupLoginButton() {
@@ -70,9 +70,11 @@ extension LoginView {
             .setAccessibilityIdentifier("LoginViewSignInButton")
             .setAccessibility(label: "로그인 버튼", hint: "로그인하려면 눌러주세요", traits: .button)
             .configureSubmitStyle(title: "로그인")
-            .top(equalTo: formStackView.bottomAnchor, constant: 30)
-            .applyConstraints(to: formStackView, attributes: [.leading, .trailing])
-            .height(60)
+            .makeConstraints({
+                $0.top(equalTo: formStackView.bottomAnchor, constant: 30)
+                $0.matchParent(formStackView, attributes: [.leading, .trailing])
+                $0.height(equalToConstant: 60)
+            })
     }
     
     private func setupSingUpStackView() {
@@ -83,16 +85,19 @@ extension LoginView {
             .setTitle(title: "회원가입", state: .normal)
             .setTitleColor(color: .red, state: .normal)
             .setFont(textStyle: .body, size: 15, weight: .semibold)
-        singUpStackView
-            .top(equalTo: loginButton.bottomAnchor, constant: 40)
-            .centerX(equalTo: centerXAnchor)
+        singUpStackView.makeConstraints({
+            $0.top(equalTo: loginButton.bottomAnchor, constant: 40)
+            $0.centerX(equalTo: centerXAnchor)
+        })
     }
     
     private func setupSocialLabel() {
         socialLabel
             .setAccessibility(label: "SNS 계정으로 로그인 안내")
-            .centerX(equalTo: centerXAnchor)
-            .bottom(equalTo: bottomAnchor, constant: -120)
+            .makeConstraints({
+                $0.centerX(equalTo: centerXAnchor)
+                $0.bottom(equalTo: bottomAnchor, constant: 120)
+            })
     }
     
     private func setupAppleLoginButton() {
@@ -100,8 +105,10 @@ extension LoginView {
             .setAccessibility(label: "Apple 로그인 버튼", hint: "Apple 계정으로 로그인하려면 눌러주세요", traits: .button)
             .setLayer(cornerRadius: 25)
             .setBackgroundImage(image: UIImage(named: "logo-apple"), state: .normal)
-            .top(equalTo: socialLabel.bottomAnchor, constant: 20)
-            .centerX(equalTo: socialLabel.centerXAnchor)
-            .size(CGSize(width: 50, height: 50))
+            .makeConstraints({
+                $0.top(equalTo: socialLabel.bottomAnchor, constant: 20)
+                $0.centerX(equalTo: socialLabel.centerXAnchor)
+                $0.size(CGSize(width: 50, height: 50))
+            })
     }
 }

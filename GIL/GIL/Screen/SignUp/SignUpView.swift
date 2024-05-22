@@ -95,74 +95,91 @@ extension SignUpView {
             .setAccessibilityIdentifier("SignUpViewCloseButton")
             .setAccessibility(label: "닫기 버튼", hint: "회원가입 화면을 닫으려면 두 번 탭하세요", traits: .button)
             .configureNavigationStyle(type: .close)
-            .top(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10)
-            .left(equalTo: leadingAnchor, constant: 10)
-            .size(CGSize(width: 44, height: 44))
+            .makeConstraints({
+                $0.top(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10)
+                $0.leading(equalTo: leadingAnchor, constant: 10)
+                $0.size(CGSize(width: 44, height: 44))
+            })
     }
     
     private func setupEmail() {
         let constraint = getConstraintForLabel(emailLabel)
         emailLabel
             .setIsAccessibilityElement(false)
-            .top(equalTo: closeButton.bottomAnchor, constant: 15)
-            .left(equalTo: leadingAnchor, constant: 20)
-            .height(constraint.constant)
+            .makeConstraints({
+                $0.top(equalTo: closeButton.bottomAnchor, constant: 15)
+                $0.leading(equalTo: leadingAnchor, constant: 20)
+                $0.height(equalToConstant: constraint.constant)
+            })
         emailTextField
             .setAccessibilityIdentifier("SignUpViewEmailTextField")
             .setAccessibility(label: "이메일 입력 필드", hint: "이메일을 입력하세요")
-            .top(equalTo: emailLabel.bottomAnchor, constant: 2)
-            .left(equalTo: leadingAnchor, constant: 16)
-            .right(equalTo: trailingAnchor, constant: -16)
-            .height(60)
+            .makeConstraints({
+                $0.top(equalTo: emailLabel.bottomAnchor, constant: 2)
+                $0.matchParent(self, attributes: [.leading, .trailing], insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+                $0.height(equalToConstant: 60)
+            })
     }
     
     private func setupName() {
         let constraint = getConstraintForLabel(nameLabel)
         nameLabel
             .setIsAccessibilityElement(false)
-            .top(equalTo: emailTextField.bottomAnchor, constant: 10)
-            .applyConstraints(to: emailLabel, attributes: [.leading])
-            .height(constraint.constant)
+            .makeConstraints({
+                $0.top(equalTo: emailTextField.bottomAnchor, constant: 10)
+                $0.leading(equalTo: emailLabel.leadingAnchor)
+                $0.height(equalToConstant: constraint.constant)
+            })
         nameTextField
             .setAccessibilityIdentifier("SignUpViewNameTextField")
             .setAccessibility(label: "이름 입력 필드", hint: "이름을 입력하세요")
-            .top(equalTo: nameLabel.bottomAnchor, constant: 2)
-            .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
+            .makeConstraints({
+                $0.top(equalTo: nameLabel.bottomAnchor, constant: 2)
+                $0.matchParent(emailTextField, attributes: [.leading, .trailing, .height])
+            })
     }
     
     private func setupPassword() {
         let constraint = getConstraintForLabel(passwordLabel)
         passwordLabel
             .setIsAccessibilityElement(false)
-            .top(equalTo: nameTextField.bottomAnchor, constant: 10)
-            .applyConstraints(to: emailLabel, attributes: [.leading])
-            .height(constraint.constant)
+            .makeConstraints({
+                $0.top(equalTo: nameTextField.bottomAnchor, constant: 10)
+                $0.leading(equalTo: emailLabel.leadingAnchor)
+                $0.height(equalToConstant: constraint.constant)
+            })
         passwordTextField
             .setAccessibilityIdentifier("SignUpViewPasswordTextField")
             .setAccessibility(label: "비밀번호 입력 필드", hint: "비밀번호를 입력하세요")
-            .top(equalTo: passwordLabel.bottomAnchor, constant: 2)
-            .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
+            .makeConstraints({
+                $0.top(equalTo: passwordLabel.bottomAnchor, constant: 2)
+                $0.matchParent(emailTextField, attributes: [.leading, .trailing, .height])
+            })
     }
     
     private func setupVerifyPassword() {
         let constraint = getConstraintForLabel(verifyPasswordLabel)
         verifyPasswordLabel
             .setIsAccessibilityElement(false)
-            .top(equalTo: passwordTextField.bottomAnchor, constant: 10)
-            .applyConstraints(to: emailLabel, attributes: [.leading])
-            .height(constraint.constant)
+            .makeConstraints({
+                $0.top(equalTo: passwordTextField.bottomAnchor, constant: 10)
+                $0.leading(equalTo: emailLabel.leadingAnchor)
+                $0.height(equalToConstant: constraint.constant)
+            })
         verifyPasswordTextField
             .setAccessibilityIdentifier("SignUpViewVerifyPasswordTextField")
             .setAccessibility(label: "비밀번호 확인 입력 필드", hint: "비밀번호를 다시 입력하세요")
-            .top(equalTo: verifyPasswordLabel.bottomAnchor, constant: 2)
-            .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
+            .makeConstraints({
+                $0.top(equalTo: verifyPasswordLabel.bottomAnchor, constant: 2)
+                $0.matchParent(emailTextField, attributes: [.leading, .trailing, .height])
+            })
     }
     
     private func setupCheckPasswordStackView() {
-        checkPasswordStackView
-            .top(equalTo: verifyPasswordTextField.bottomAnchor, constant: 15)
-            .left(equalTo: verifyPasswordTextField.leadingAnchor, constant: 10)
-            .right(equalTo: verifyPasswordTextField.trailingAnchor, constant: -10)
+        checkPasswordStackView.makeConstraints({
+            $0.top(equalTo: verifyPasswordTextField.bottomAnchor, constant: 15)
+            $0.matchParent(verifyPasswordTextField, attributes: [.leading, .trailing], insets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+        })
     }
     
     private func setupDoneButton() {
@@ -170,8 +187,10 @@ extension SignUpView {
             .setAccessibilityIdentifier("SignUpViewDoneButton")
             .setAccessibility(label: "완료 버튼", hint: "회원가입을 완료하려면 두 번 탭하세요", traits: .button)
             .configureSubmitStyle(title: "완료")
-            .top(equalTo: checkPasswordStackView.bottomAnchor, constant: 30)
-            .applyConstraints(to: emailTextField, attributes: [.leading, .trailing, .height])
+            .makeConstraints({
+                $0.top(equalTo: checkPasswordStackView.bottomAnchor, constant: 30)
+                $0.matchParent(emailTextField, attributes: [.leading, .trailing, .height])
+            })
     }
 }
 

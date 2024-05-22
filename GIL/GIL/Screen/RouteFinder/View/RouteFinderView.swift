@@ -9,7 +9,7 @@ import UIKit
 
 final class RouteFinderView: UIView {
     let pathTitleLabel = UILabel()
-    let transportStackView = BaseStackView(axis: .horizontal, spacing: 6)
+    let transportStackView = UIStackView()
     lazy var transportButtons: [UIButton] = [Transport.walking, Transport.automobile].map({ createTransportButton($0) })
     lazy var routeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -55,25 +55,32 @@ extension RouteFinderView {
             .setText(text: "경로")
             .setTextColor(textColor: .lightBlackDarkWhite)
             .setFont(textStyle: .title1, size: 24, weight: .bold)
-            .top(equalTo: topAnchor, constant: 20)
-            .left(equalTo: leadingAnchor, constant: 20)
+            .makeConstraints({
+                $0.matchParent(self, attributes: [.top, .leading], insets: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 0))
+            })
     }
     
     private func setupTransportButtons() {
         transportStackView
-            .top(equalTo: pathTitleLabel.bottomAnchor, constant: 14)
-            .left(equalTo: pathTitleLabel.leadingAnchor)
-            .right(equalTo: trailingAnchor, constant: -16)
-            .height(34)
+            .setAxis(.horizontal)
+            .setDistribution(.fillEqually)
+            .setSpacing(6)
+            .makeConstraints({
+                $0.top(equalTo: pathTitleLabel.bottomAnchor, constant: 14)
+                $0.leading(equalTo: pathTitleLabel.leadingAnchor)
+                $0.trailing(equalTo: trailingAnchor, constant: 16)
+                $0.height(equalToConstant: 34)
+            })
     }
     
     private func setupRouteCollectionView() {
         routeCollectionView
             .setBackgroundColor(.systemBackground)
-            .top(equalTo: transportStackView.bottomAnchor, constant: 14)
-            .left(equalTo: transportStackView.leadingAnchor)
-            .right(equalTo: transportStackView.trailingAnchor)
-            .bottom(equalTo: bottomAnchor, constant: -10)
+            .makeConstraints({
+                $0.top(equalTo: transportStackView.bottomAnchor, constant: 14)
+                $0.matchParent(transportStackView, attributes: [.leading, .trailing])
+                $0.bottom(equalTo: bottomAnchor, constant: 10)
+            })
     }
 }
 
@@ -83,6 +90,7 @@ extension RouteFinderView {
         UIButton()
             .setAccessibilityIdentifier(type.rawValue)
             .setAccessibility(label: "이동 수단 \(type.rawValue) 버튼", hint: "해당 이동 수단을 선택하려면 두 번 탭하세요", traits: .button)
+            .setAccessibilityIdentifier(type.rawValue)
             .setSysyemImage(name: type.systemImageName)
             .setTintColor(.gray)
             .setBackgroundColor(.systemGray6, for: .normal)
