@@ -94,13 +94,11 @@ extension DefaultSignUpViewModel {
             name: namePublisher.value,
             password: passwordPublisher.value
         ).sink(receiveCompletion: { [weak self] completion in
-            guard let self else { return }
             if case let .failure(error) = completion {
-                handleError(error)
+                self?.handleError(error)
             }
         }, receiveValue: { [weak self] member in
-            guard let self else { return }
-            createUserPublisher.send(.success(member))
+            self?.createUserPublisher.send(.success(member))
         })
         .store(in: &cancellables)
     }

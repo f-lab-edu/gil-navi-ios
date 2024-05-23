@@ -86,9 +86,9 @@ extension PlaceSearchCollectionViewHandler {
         for collectionView: UICollectionView,
         at indexPath: IndexPath,
         item: MapItem
-    ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceSearchCollectionViewCell.reuseIdentifier, for: indexPath) as? PlaceSearchCollectionViewCell else { return UICollectionViewCell() }
-        cell.updateContent(with: item)
+    ) -> UICollectionViewCell? {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceSearchCollectionViewCell.reuseIdentifier, for: indexPath) as? PlaceSearchCollectionViewCell
+        cell?.updateContent(with: item)
         return cell
     }
 }

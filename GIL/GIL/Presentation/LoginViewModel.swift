@@ -66,13 +66,11 @@ final class DefaultLoginViewModel: NSObject, LoginViewModel {
     private func signInWithApple(authorization: ASAuthorization) {
         authenticationUseCase.signInWithApple(authorization: authorization)
             .sink { [weak self] completion in
-                guard let self else { return }
                 if case let .failure(error) = completion {
-                    handleError(error)
+                    self?.handleError(error)
                 }
             } receiveValue: { [weak self] member in
-                guard let self else { return }
-                loginPublisher.send(.success(member))
+                self?.loginPublisher.send(.success(member))
             }
             .store(in: &cancellables)
     }
@@ -83,9 +81,8 @@ extension DefaultLoginViewModel {
     func signInAnonymously() {
         authenticationUseCase.signInAnonymously()
             .sink(receiveCompletion: { [weak self] completion in
-                guard let self else { return }
                 if case let .failure(error) = completion {
-                    handleError(error)
+                    self?.handleError(error)
                 }
             }, receiveValue: { _ in })
             .store(in: &cancellables)
@@ -94,9 +91,8 @@ extension DefaultLoginViewModel {
     func prepareAppleSignIn() {
         authenticationUseCase.prepareAppleSignIn()
             .sink(receiveCompletion: { [weak self] completion in
-                guard let self else { return }
                 if case let .failure(error) = completion {
-                    handleError(error)
+                    self?.handleError(error)
                 }
             }, receiveValue: { controller in
                 controller.delegate = self
@@ -111,13 +107,11 @@ extension DefaultLoginViewModel {
     ) {
         authenticationUseCase.signInWithEmail(email: email, password: password)
             .sink(receiveCompletion: { [weak self] completion in
-                guard let self else { return }
                 if case let .failure(error) = completion {
-                    handleError(error)
+                    self?.handleError(error)
                 }
             }, receiveValue: { [weak self] member in
-                guard let self else { return }
-                loginPublisher.send(.success(member))
+                self?.loginPublisher.send(.success(member))
             })
             .store(in: &cancellables)
     }

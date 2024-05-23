@@ -56,19 +56,17 @@ extension DefaultAuthenticationUseCase {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
               let nonce = currentNonce,
               let appleIDToken = appleIDCredential.identityToken,
-              let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-            return Fail(error: AuthenticationError.invalidAppleIDCredentials).eraseToAnyPublisher()
-        }
+              let idTokenString = String(data: appleIDToken, encoding: .utf8) 
+        else { return Fail(error: AuthenticationError.invalidAppleIDCredentials).eraseToAnyPublisher() }
         return firebaseAuthManager.signInWithApple(idTokenString: idTokenString, nonce: nonce, fullName: appleIDCredential.fullName)
     }
     
     func prepareAppleSignIn() -> AnyPublisher<ASAuthorizationController, Error> {
         Deferred {
             Future { [weak self] promise in
-                guard let self else { return }
                 do {
                     let nonce = try CryptoUtils.randomNonceString()
-                    self.currentNonce = nonce
+                    self?.currentNonce = nonce
                     let appleProvider = ASAuthorizationAppleIDProvider()
                     let request = appleProvider.createRequest()
                     request.requestedScopes = [.fullName, .email]

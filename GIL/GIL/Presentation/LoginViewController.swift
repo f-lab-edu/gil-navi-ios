@@ -57,9 +57,8 @@ extension LoginViewController {
         viewModel.loginPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] loginResult in
-                guard let self else { return }
                 switch loginResult {
-                case .success(_): viewModel.signInAnonymously()
+                case .success(_): self?.viewModel.signInAnonymously()
                 case .failure(let errorMessage): AlertService.showAlert(title: "로그인 실패", message: errorMessage)
                 case .none: break
                 }
@@ -71,21 +70,21 @@ extension LoginViewController {
 // MARK: - Actions
 extension LoginViewController {
     func loginButtonTapped() {
-        guard let email = loginView.emailTextField.text,
-              !email.isEmpty
+        guard let email = loginView.emailTextField.text, !email.isEmpty,
+              let password = loginView.passwordTextField.text, !password.isEmpty
         else {
-            loginView.emailTextField.becomeFirstResponder()
+            focusFirstEmptyField()
             return
         }
-        
-        guard let password = loginView.passwordTextField.text,
-              !password.isEmpty
-        else {
-            loginView.passwordTextField.becomeFirstResponder()
-            return
-        }
-        
         viewModel.signInWithEmail(email: email, password: password)
+    }
+
+    private func focusFirstEmptyField() {
+        if loginView.emailTextField.text?.isEmpty ?? true {
+            loginView.emailTextField.becomeFirstResponder()
+        } else {
+            loginView.passwordTextField.becomeFirstResponder()
+        }
     }
     
     func signUpButtonTapped() {

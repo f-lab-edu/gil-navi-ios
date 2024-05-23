@@ -75,8 +75,7 @@ extension SignUpViewController {
             .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] email in
-                guard let self else { return }
-                signUpView.emailTextField.updateBorderColor(email.isValidEmail())
+                self?.signUpView.emailTextField.updateBorderColor(email.isValidEmail())
             }
             .store(in: &cancellables)
     }
@@ -86,8 +85,7 @@ extension SignUpViewController {
             .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] name in
-                guard let self else { return }
-                signUpView.nameTextField.updateBorderColor(!name.isEmpty)
+                self?.signUpView.nameTextField.updateBorderColor(!name.isEmpty)
             }
             .store(in: &cancellables)
     }
@@ -102,9 +100,8 @@ extension SignUpViewController {
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
-                guard let self else { return }
-                signUpView.passwordTextField.updateBorderColor(result.isValid)
-                signUpView.updatePasswordValidationLabels(result.validations)
+                self?.signUpView.passwordTextField.updateBorderColor(result.isValid)
+                self?.signUpView.updatePasswordValidationLabels(result.validations)
             }
             .store(in: &cancellables)
     }
@@ -114,8 +111,7 @@ extension SignUpViewController {
             .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isMatch in
-                guard let self else { return }
-                signUpView.verifyPasswordTextField.updateBorderColor(isMatch)
+                self?.signUpView.verifyPasswordTextField.updateBorderColor(isMatch)
             }
             .store(in: &cancellables)
     }
@@ -124,8 +120,7 @@ extension SignUpViewController {
         viewModel.isFormValidPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isValid in
-                guard let self else { return }
-                signUpView.doneButton.isEnabled = isValid
+                self?.signUpView.doneButton.isEnabled = isValid
             }
             .store(in: &cancellables)
     }

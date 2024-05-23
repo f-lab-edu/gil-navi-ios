@@ -95,8 +95,7 @@ extension PlaceSearchViewController {
         viewModel.mapItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] mapItems in
-                guard let self else { return }
-                placeSearchCollectionViewHandler?.applySnapshot(with: mapItems)
+                self?.placeSearchCollectionViewHandler?.applySnapshot(with: mapItems)
             }
             .store(in: &cancellables)
     }
@@ -105,8 +104,7 @@ extension PlaceSearchViewController {
         viewModel.errors
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
-                guard let self else { return }
-                handleError(error)
+                self?.handleError(error)
             }
             .store(in: &cancellables)
     }
@@ -117,6 +115,7 @@ extension PlaceSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else { return }
         viewModel.searchPlace(query)
+        dismissKeyboard()
     }
 }
 

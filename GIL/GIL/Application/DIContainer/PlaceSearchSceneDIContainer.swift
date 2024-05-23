@@ -8,7 +8,6 @@
 import UIKit
 
 final class PlaceSearchSceneDIContainer: PlaceSearchFlowCoordinatorDependencies {
-    
     func makeLocationService() -> LocationService {
         LocationService()
     }

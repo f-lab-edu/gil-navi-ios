@@ -20,7 +20,8 @@ final class DefaultPlaceRepository: PlaceRepository {
         placeContainer = try? ModelContainer(for: Place.self)
     }
 
-    @MainActor 
+    // MARK: - MainActor
+    @MainActor
     func storePlace(_ mapItem: MapItem) {
         let data = Place(saveDate: Date(), mapItem: mapItem)
         placeContainer?.mainContext.insert(data)

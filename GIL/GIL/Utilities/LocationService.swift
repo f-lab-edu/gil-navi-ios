@@ -12,7 +12,14 @@ protocol LocationServiceDelegate: AnyObject {
     func didFailWithError(_ error: Error)
 }
 
-class LocationService: NSObject {
+protocol LocationServiceProtocol {
+    var delegate: LocationServiceDelegate? { get set }
+    var currentLocation: MapLocation? { get }
+    func requestLocation()
+    func stopUpdatingLocation()
+}
+
+class LocationService: NSObject, LocationServiceProtocol {
     weak var delegate: LocationServiceDelegate?
     private let locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()

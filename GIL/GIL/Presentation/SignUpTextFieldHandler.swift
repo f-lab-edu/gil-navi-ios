@@ -34,42 +34,23 @@ final class SignUpTextFieldHandler: NSObject, UITextFieldDelegate {
         signUpView.passwordTextField.delegate = self
         signUpView.verifyPasswordTextField.delegate = self
     }
-    
-    // MARK: - UITextFieldDelegate
+}
+
+// MARK: - UITextFieldDelegate
+extension SignUpTextFieldHandler {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        guard let signUpView = signUpView else { return }
-        switch textField {
-        case signUpView.emailTextField: signUpView.animateLabelVisibility(signUpView.emailLabel, shouldShow: true)
-        case signUpView.nameTextField: signUpView.animateLabelVisibility(signUpView.nameLabel, shouldShow: true)
-        case signUpView.passwordTextField: signUpView.animateLabelVisibility(signUpView.passwordLabel, shouldShow: true)
-        case signUpView.verifyPasswordTextField: signUpView.animateLabelVisibility(signUpView.verifyPasswordLabel, shouldShow: true)
-        default: break
-        }
+        updateLabelVisibility(for: textField, shouldShow: true)
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let signUpView = signUpView else { return }
-        switch textField {
-        case signUpView.emailTextField: signUpView.animateLabelVisibility(signUpView.emailLabel, shouldShow: false)
-        case signUpView.nameTextField: signUpView.animateLabelVisibility(signUpView.nameLabel, shouldShow: false)
-        case signUpView.passwordTextField: signUpView.animateLabelVisibility(signUpView.passwordLabel, shouldShow: false)
-        case signUpView.verifyPasswordTextField: signUpView.animateLabelVisibility(signUpView.verifyPasswordLabel, shouldShow: false)
-        default: break
-        }
+        updateLabelVisibility(for: textField, shouldShow: false)
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let signUpView = signUpView else { return false }
-        switch textField {
-        case signUpView.emailTextField: signUpView.nameTextField.becomeFirstResponder()
-        case signUpView.nameTextField: signUpView.passwordTextField.becomeFirstResponder()
-        case signUpView.passwordTextField: signUpView.verifyPasswordTextField.becomeFirstResponder()
-        case signUpView.verifyPasswordTextField: signUpView.endEditing(true)
-        default: break
-        }
+        moveToNextTextField(textField)
         return true
     }
-    
+
     func textField(
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
@@ -78,10 +59,48 @@ final class SignUpTextFieldHandler: NSObject, UITextFieldDelegate {
         guard let signUpView = signUpView,
               let viewModel = viewModel,
               let currentText = textField.text,
-              (string != " ")
+              string != " "
         else { return false }
-        
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        updateViewModel(for: textField, with: newText)
+        return true
+    }
+}
+
+// MARK: - Update
+extension SignUpTextFieldHandler {
+    private func updateLabelVisibility(
+        for textField: UITextField,
+        shouldShow: Bool
+    ) {
+        guard let signUpView = signUpView else { return }
+        switch textField {
+        case signUpView.emailTextField: signUpView.animateLabelVisibility(signUpView.emailLabel, shouldShow: shouldShow)
+        case signUpView.nameTextField: signUpView.animateLabelVisibility(signUpView.nameLabel, shouldShow: shouldShow)
+        case signUpView.passwordTextField: signUpView.animateLabelVisibility(signUpView.passwordLabel, shouldShow: shouldShow)
+        case signUpView.verifyPasswordTextField: signUpView.animateLabelVisibility(signUpView.verifyPasswordLabel, shouldShow: shouldShow)
+        default: break
+        }
+    }
+
+    private func moveToNextTextField(_ textField: UITextField) {
+        guard let signUpView = signUpView else { return }
+        switch textField {
+        case signUpView.emailTextField: signUpView.nameTextField.becomeFirstResponder()
+        case signUpView.nameTextField: signUpView.passwordTextField.becomeFirstResponder()
+        case signUpView.passwordTextField: signUpView.verifyPasswordTextField.becomeFirstResponder()
+        case signUpView.verifyPasswordTextField: signUpView.endEditing(true)
+        default: break
+        }
+    }
+    
+    private func updateViewModel(
+        for textField: UITextField,
+        with newText: String
+    ) {
+        guard let signUpView = signUpView,
+              let viewModel = viewModel
+        else { return }
         switch textField {
         case signUpView.emailTextField: viewModel.emailPublisher.send(newText)
         case signUpView.nameTextField: viewModel.namePublisher.send(newText)
@@ -89,6 +108,5 @@ final class SignUpTextFieldHandler: NSObject, UITextFieldDelegate {
         case signUpView.verifyPasswordTextField: viewModel.verifyPasswordPublisher.send(newText)
         default: break
         }
-        return true
     }
 }
