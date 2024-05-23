@@ -14,25 +14,31 @@ protocol PlaceSearchFlowCoordinatorDependencies {
 final class PlaceSearchFlowCoordinator {
     private weak var navigationController: UINavigationController?
     private let dependencies: PlaceSearchFlowCoordinatorDependencies
+    private let appDIContainer: AppDIContainer
     
     // MARK: - Initialization
     init(
         navigationController: UINavigationController?,
-        dependencies: PlaceSearchFlowCoordinatorDependencies
+        dependencies: PlaceSearchFlowCoordinatorDependencies,
+        appDIContainer: AppDIContainer
     ) {
         self.navigationController = navigationController
         self.dependencies = dependencies
+        self.appDIContainer = appDIContainer
     }
     
     func start() {
         let actions = PlaceSearchViewModelActions(showRouteFinder: showRouteFinder)
-        let vc = dependencies.makePlaceSearchViewController(actions: actions)
-        navigationController?.pushViewController(vc, animated: true)
+        let viewController = dependencies.makePlaceSearchViewController(actions: actions)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showRouteFinder(departureMapLocation: MapLocation?, destinationMapItem: MapItem) {
-        let viewModel = RouteMapViewModel(departureMapLocation: departureMapLocation, destinationMapItem: destinationMapItem)
-        let vc = RouteMapViewController(viewModel: viewModel)
-        navigationController?.pushViewController(vc, animated: true)
+    private func showRouteFinder(
+        departureMapLocation: MapLocation?,
+        destinationMapItem: MapItem
+    ) {
+        let routeMapSceneDIContainer = appDIContainer.makeRouteFinderDIContainer()
+        let flow = routeMapSceneDIContainer.makeRouteFinderFlowCoordinator(navigationController: navigationController)
+        flow.start(departureMapLocation: departureMapLocation, destinationMapItem: destinationMapItem)
     }
 }

@@ -47,9 +47,7 @@ extension RouteMapView {
     private func setupMapView() {
         mapView
             .setIsAccessibilityElement(false)
-            .makeConstraints({
-                $0.matchParent(self, attributes: [.top, .bottom, .leading, .trailing])
-            })
+            .makeConstraints({ $0.matchParent(self, attributes: [.top, .bottom, .leading, .trailing]) })
     }
     
     private func setupBackButton() {

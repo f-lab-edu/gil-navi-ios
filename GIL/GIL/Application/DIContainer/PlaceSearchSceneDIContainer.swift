@@ -39,10 +39,14 @@ final class PlaceSearchSceneDIContainer: PlaceSearchFlowCoordinatorDependencies 
     }
     
     // MARK: - Flow Coordinators
-    func makePlaceSearchFlowCoordinator(navigationController: UINavigationController?) -> PlaceSearchFlowCoordinator {
+    func makePlaceSearchFlowCoordinator(
+        navigationController: UINavigationController?,
+        appDIContainer: AppDIContainer
+    ) -> PlaceSearchFlowCoordinator {
         PlaceSearchFlowCoordinator(
             navigationController: navigationController,
-            dependencies: self
+            dependencies: self,
+            appDIContainer: appDIContainer
         )
     }
 }

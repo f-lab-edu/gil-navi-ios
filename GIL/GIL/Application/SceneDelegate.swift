@@ -9,7 +9,6 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let appDIContainer = AppDIContainer()
-    let firebaseAuthManager = FirebaseAuthManager()
     var appFlowCoordinator: AppFlowCoordinator?
     var window: UIWindow?
 
@@ -25,8 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         appFlowCoordinator = AppFlowCoordinator(
             window: window,
-            appDIContainer: appDIContainer,
-            firebaseAuthManager: firebaseAuthManager
+            appDIContainer: appDIContainer
         )
         appFlowCoordinator?.start()
     }

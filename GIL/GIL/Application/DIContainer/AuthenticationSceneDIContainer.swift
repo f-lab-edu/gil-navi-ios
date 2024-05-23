@@ -8,17 +8,22 @@
 import UIKit
 
 final class AuthenticationSceneDIContainer: AuthenticationFlowCoordinatorDependencies {
-    private let firebaseAuthManager: FirebaseAuthManaging
+
+    struct Dependencies {
+        let firebaseAuthManager: FirebaseAuthManaging
+    }
+    
+    private let dependencies: Dependencies
 
     // MARK: - Initialization
-    init(firebaseAuthManager: FirebaseAuthManaging) {
-        self.firebaseAuthManager = firebaseAuthManager
+    init(dependencies: Dependencies) {
+        self.dependencies = dependencies
     }
     
     // MARK: - Use Cases
     func makeAuthenticationUseCase() -> AuthenticationUseCase {
         DefaultAuthenticationUseCase(
-            firebaseAuthManager: firebaseAuthManager
+            firebaseAuthManager: dependencies.firebaseAuthManager
         )
     }
 

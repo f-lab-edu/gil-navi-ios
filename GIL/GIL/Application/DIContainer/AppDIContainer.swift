@@ -8,11 +8,14 @@
 import Foundation
 
 final class AppDIContainer {
+    lazy var firebaseAuthManager = FirebaseAuthManager()
+    
     // MARK: - DIContainers of scenes
-    func makeAuthenticationDIContainer(firebaseAuthManager: FirebaseAuthManaging) -> AuthenticationSceneDIContainer {
-        AuthenticationSceneDIContainer(
+    func makeAuthenticationDIContainer() -> AuthenticationSceneDIContainer {
+        let dependencies = AuthenticationSceneDIContainer.Dependencies(
             firebaseAuthManager: firebaseAuthManager
         )
+        return AuthenticationSceneDIContainer(dependencies: dependencies)
     }
     
     func makeHomeDIContainer() -> HomeSceneDIContainer {
@@ -21,5 +24,9 @@ final class AppDIContainer {
     
     func makePlaceSearchDIContainer() -> PlaceSearchSceneDIContainer {
         PlaceSearchSceneDIContainer()
+    }
+    
+    func makeRouteFinderDIContainer() -> RouteFinderSceneDIContainer {
+        RouteFinderSceneDIContainer()
     }
 }

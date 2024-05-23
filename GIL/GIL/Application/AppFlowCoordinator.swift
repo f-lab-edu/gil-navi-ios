@@ -12,23 +12,20 @@ final class AppFlowCoordinator {
     private var cancellables: Set<AnyCancellable> = []
     private var window: UIWindow
     private let appDIContainer: AppDIContainer
-    private let firebaseAuthManager: FirebaseAuthManaging
     
     // MARK: - Initialization
     init(
         window: UIWindow,
-        appDIContainer: AppDIContainer,
-        firebaseAuthManager: FirebaseAuthManaging
+        appDIContainer: AppDIContainer
     ) {
         self.window = window
         self.appDIContainer = appDIContainer
-        self.firebaseAuthManager = firebaseAuthManager
     }
 }
 
 extension AppFlowCoordinator {
     func start() {
-        firebaseAuthManager.authStateDidChangePublisher
+        appDIContainer.firebaseAuthManager.authStateDidChangePublisher
             .receive(on: RunLoop.main)
             .sink { [weak self] user in
                 if user != nil {
@@ -41,7 +38,7 @@ extension AppFlowCoordinator {
     }
     
     private func showLoginViewController() {
-        let authenticationSceneDIContainer = appDIContainer.makeAuthenticationDIContainer(firebaseAuthManager: firebaseAuthManager)
+        let authenticationSceneDIContainer = appDIContainer.makeAuthenticationDIContainer()
         let flow = authenticationSceneDIContainer.makeAuthenticationFlowCoordinator(window: window)
         flow.start()
     }
