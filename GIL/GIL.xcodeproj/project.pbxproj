@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		580477022BF1B92A0093019C /* NavigationButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580477012BF1B92A0093019C /* NavigationButtonType.swift */; };
-		580477052BF1BC7E0093019C /* RouteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580477042BF1BC7E0093019C /* RouteCollectionViewCell.swift */; };
-		580477092BF1BF480093019C /* RouteCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580477082BF1BF480093019C /* RouteCollectionController.swift */; };
+		580477052BF1BC7E0093019C /* RouteFinderSheetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580477042BF1BC7E0093019C /* RouteFinderSheetCollectionViewCell.swift */; };
+		580477092BF1BF480093019C /* RouteFinderSheetCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580477082BF1BF480093019C /* RouteFinderSheetCollectionController.swift */; };
 		5804770C2BF1C46A0093019C /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804770B2BF1C46A0093019C /* Route.swift */; };
 		5806472A2BCD147A00FB7310 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580647292BCD147A00FB7310 /* UIImage+Extension.swift */; };
 		5810DE202BE1F78400180BFB /* MappinImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE1F2BE1F78400180BFB /* MappinImageView.swift */; };
@@ -18,9 +18,9 @@
 		5810DE4C2BE3890200180BFB /* CryptoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5810DE4B2BE3890200180BFB /* CryptoUtils.swift */; };
 		581F796D2BEC9A98001F81A0 /* Placemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581F796C2BEC9A98001F81A0 /* Placemark.swift */; };
 		581F79752BEE212D001F81A0 /* RouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581F79742BEE212D001F81A0 /* RouteManager.swift */; };
-		581F79782BEF1D83001F81A0 /* RouteFinderPageSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581F79772BEF1D83001F81A0 /* RouteFinderPageSheet.swift */; };
-		581F797A2BEF32B3001F81A0 /* RouteFinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581F79792BEF32B3001F81A0 /* RouteFinderView.swift */; };
-		581F797C2BEF3F97001F81A0 /* RouteFinderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581F797B2BEF3F97001F81A0 /* RouteFinderViewModel.swift */; };
+		581F79782BEF1D83001F81A0 /* RouteFinderSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581F79772BEF1D83001F81A0 /* RouteFinderSheetViewController.swift */; };
+		581F797A2BEF32B3001F81A0 /* RouteFinderSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581F79792BEF32B3001F81A0 /* RouteFinderSheetView.swift */; };
+		581F797C2BEF3F97001F81A0 /* RouteFinderSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581F797B2BEF3F97001F81A0 /* RouteFinderSheetViewModel.swift */; };
 		581F79802BEF687B001F81A0 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581F797F2BEF687B001F81A0 /* Transport.swift */; };
 		583210B52BE6610300D9DCA1 /* SignUpTextFieldHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583210B42BE6610300D9DCA1 /* SignUpTextFieldHandler.swift */; };
 		583210B82BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583210B72BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift */; };
@@ -55,6 +55,7 @@
 		585889102BFE474000F3F642 /* PlaceSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5858890F2BFE474000F3F642 /* PlaceSearchViewModel.swift */; };
 		585889162BFF213F00F3F642 /* RouteFinderFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585889152BFF213F00F3F642 /* RouteFinderFlowCoordinator.swift */; };
 		5858891B2BFF22A700F3F642 /* RouteFinderSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5858891A2BFF22A700F3F642 /* RouteFinderSceneDIContainer.swift */; };
+		585889222BFF7F8900F3F642 /* RouteFinderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585889212BFF7F8900F3F642 /* RouteFinderUseCase.swift */; };
 		586F030C2BE0C4A2008660A0 /* LanguageCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030B2BE0C4A1008660A0 /* LanguageCode.swift */; };
 		586F030F2BE0D050008660A0 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030E2BE0D050008660A0 /* Place.swift */; };
 		586F03182BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */; };
@@ -126,8 +127,8 @@
 
 /* Begin PBXFileReference section */
 		580477012BF1B92A0093019C /* NavigationButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonType.swift; sourceTree = "<group>"; };
-		580477042BF1BC7E0093019C /* RouteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteCollectionViewCell.swift; sourceTree = "<group>"; };
-		580477082BF1BF480093019C /* RouteCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteCollectionController.swift; sourceTree = "<group>"; };
+		580477042BF1BC7E0093019C /* RouteFinderSheetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderSheetCollectionViewCell.swift; sourceTree = "<group>"; };
+		580477082BF1BF480093019C /* RouteFinderSheetCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderSheetCollectionController.swift; sourceTree = "<group>"; };
 		5804770B2BF1C46A0093019C /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		580647292BCD147A00FB7310 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		5810DE1F2BE1F78400180BFB /* MappinImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappinImageView.swift; sourceTree = "<group>"; };
@@ -136,9 +137,9 @@
 		5810DE4B2BE3890200180BFB /* CryptoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtils.swift; sourceTree = "<group>"; };
 		581F796C2BEC9A98001F81A0 /* Placemark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placemark.swift; sourceTree = "<group>"; };
 		581F79742BEE212D001F81A0 /* RouteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteManager.swift; sourceTree = "<group>"; };
-		581F79772BEF1D83001F81A0 /* RouteFinderPageSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderPageSheet.swift; sourceTree = "<group>"; };
-		581F79792BEF32B3001F81A0 /* RouteFinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderView.swift; sourceTree = "<group>"; };
-		581F797B2BEF3F97001F81A0 /* RouteFinderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderViewModel.swift; sourceTree = "<group>"; };
+		581F79772BEF1D83001F81A0 /* RouteFinderSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderSheetViewController.swift; sourceTree = "<group>"; };
+		581F79792BEF32B3001F81A0 /* RouteFinderSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderSheetView.swift; sourceTree = "<group>"; };
+		581F797B2BEF3F97001F81A0 /* RouteFinderSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderSheetViewModel.swift; sourceTree = "<group>"; };
 		581F797F2BEF687B001F81A0 /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
 		583210B42BE6610300D9DCA1 /* SignUpTextFieldHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextFieldHandler.swift; sourceTree = "<group>"; };
 		583210B72BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellProtocol.swift; sourceTree = "<group>"; };
@@ -173,6 +174,7 @@
 		5858890F2BFE474000F3F642 /* PlaceSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceSearchViewModel.swift; sourceTree = "<group>"; };
 		585889152BFF213F00F3F642 /* RouteFinderFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderFlowCoordinator.swift; sourceTree = "<group>"; };
 		5858891A2BFF22A700F3F642 /* RouteFinderSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderSceneDIContainer.swift; sourceTree = "<group>"; };
+		585889212BFF7F8900F3F642 /* RouteFinderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderUseCase.swift; sourceTree = "<group>"; };
 		586F030B2BE0C4A1008660A0 /* LanguageCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCode.swift; sourceTree = "<group>"; };
 		586F030E2BE0D050008660A0 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRecentSearchPlaceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -261,50 +263,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		580477032BF1BC550093019C /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				580477042BF1BC7E0093019C /* RouteCollectionViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		5804770A2BF1BF4D0093019C /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				580477082BF1BF480093019C /* RouteCollectionController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		581F79812BEFAE7B001F81A0 /* RouteFinder */ = {
-			isa = PBXGroup;
-			children = (
-				5804770A2BF1BF4D0093019C /* Controller */,
-				581F79832BEFAE99001F81A0 /* View */,
-				581F79822BEFAE90001F81A0 /* ViewModel */,
-				581F79772BEF1D83001F81A0 /* RouteFinderPageSheet.swift */,
-			);
-			path = RouteFinder;
-			sourceTree = "<group>";
-		};
-		581F79822BEFAE90001F81A0 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				581F797B2BEF3F97001F81A0 /* RouteFinderViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		581F79832BEFAE99001F81A0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				581F79792BEF32B3001F81A0 /* RouteFinderView.swift */,
-				580477032BF1BC550093019C /* Cell */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		583210B62BE69EA800D9DCA1 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,7 +311,6 @@
 				58D946B22BFB9EC7006417AF /* Presentation */,
 				58D946CB2BFC2DCF006417AF /* Domain */,
 				58D946F32BFD86A8006417AF /* Data */,
-				584FA4192BA7F5E1002600F1 /* Screen */,
 				584FA4202BA82D26002600F1 /* Component */,
 				584FA4262BA84CF5002600F1 /* Extension */,
 				583210B62BE69EA800D9DCA1 /* Protocol */,
@@ -381,14 +338,6 @@
 				584FA4092BA41485002600F1 /* GILUITestsLaunchTests.swift */,
 			);
 			path = GILUITests;
-			sourceTree = "<group>";
-		};
-		584FA4192BA7F5E1002600F1 /* Screen */ = {
-			isa = PBXGroup;
-			children = (
-				581F79812BEFAE7B001F81A0 /* RouteFinder */,
-			);
-			path = Screen;
 			sourceTree = "<group>";
 		};
 		584FA4202BA82D26002600F1 /* Component */ = {
@@ -436,8 +385,8 @@
 			isa = PBXGroup;
 			children = (
 				585889122BFF210400F3F642 /* Flows */,
-				585889132BFF210E00F3F642 /* FinderSheet */,
 				585889142BFF211500F3F642 /* Map */,
+				585889132BFF210E00F3F642 /* FinderSheet */,
 			);
 			name = RouteFinderScene;
 			sourceTree = "<group>";
@@ -453,6 +402,8 @@
 		585889132BFF210E00F3F642 /* FinderSheet */ = {
 			isa = PBXGroup;
 			children = (
+				5858891C2BFF384400F3F642 /* ViewModel */,
+				5858891D2BFF385700F3F642 /* View */,
 			);
 			name = FinderSheet;
 			sourceTree = "<group>";
@@ -489,6 +440,49 @@
 				58CC1B022BEB0F450004FEAE /* RouteMapView.swift */,
 			);
 			path = RouteMapView;
+			sourceTree = "<group>";
+		};
+		5858891C2BFF384400F3F642 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				581F797B2BEF3F97001F81A0 /* RouteFinderSheetViewModel.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		5858891D2BFF385700F3F642 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				581F79772BEF1D83001F81A0 /* RouteFinderSheetViewController.swift */,
+				5858891E2BFF387300F3F642 /* RouteFinderSheetView */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		5858891E2BFF387300F3F642 /* RouteFinderSheetView */ = {
+			isa = PBXGroup;
+			children = (
+				581F79792BEF32B3001F81A0 /* RouteFinderSheetView.swift */,
+				5858891F2BFF389200F3F642 /* RouteFinderSheetCollectionView */,
+			);
+			name = RouteFinderSheetView;
+			sourceTree = "<group>";
+		};
+		5858891F2BFF389200F3F642 /* RouteFinderSheetCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				580477082BF1BF480093019C /* RouteFinderSheetCollectionController.swift */,
+				585889202BFF389D00F3F642 /* Cells */,
+			);
+			name = RouteFinderSheetCollectionView;
+			sourceTree = "<group>";
+		};
+		585889202BFF389D00F3F642 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				580477042BF1BC7E0093019C /* RouteFinderSheetCollectionViewCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		58BDFBC32BB6AFFB006AC994 /* Frameworks */ = {
@@ -679,6 +673,7 @@
 			children = (
 				58D946CD2BFC2DF2006417AF /* AuthenticationUseCase.swift */,
 				58D946F12BFCD8B9006417AF /* PlaceSearchUseCase.swift */,
+				585889212BFF7F8900F3F642 /* RouteFinderUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1053,13 +1048,13 @@
 				58D946B12BFB9E6B006417AF /* AppDIContainer.swift in Sources */,
 				58368F162BDE41FC009E008C /* PlaceSearchViewController.swift in Sources */,
 				58BDFBDC2BBEA5D0006AC994 /* HomeView.swift in Sources */,
-				581F79782BEF1D83001F81A0 /* RouteFinderPageSheet.swift in Sources */,
+				581F79782BEF1D83001F81A0 /* RouteFinderSheetViewController.swift in Sources */,
 				5810DE4C2BE3890200180BFB /* CryptoUtils.swift in Sources */,
 				58A6808E2BDE7C02004E6706 /* LocationService.swift in Sources */,
 				58368F122BD8B7D5009E008C /* HomeSearchBarView.swift in Sources */,
 				58CC1B032BEB0F450004FEAE /* RouteMapView.swift in Sources */,
 				58BDFBA22BB2B8F5006AC994 /* SignUpViewController.swift in Sources */,
-				581F797A2BEF32B3001F81A0 /* RouteFinderView.swift in Sources */,
+				581F797A2BEF32B3001F81A0 /* RouteFinderSheetView.swift in Sources */,
 				58C1DE872BF3382400B169CF /* MapLocation.swift in Sources */,
 				58D946D42BFCAEB7006417AF /* Member.swift in Sources */,
 				585889162BFF213F00F3F642 /* RouteFinderFlowCoordinator.swift in Sources */,
@@ -1070,7 +1065,7 @@
 				58DE930D2BDF94B600C97575 /* MapItem.swift in Sources */,
 				58368F102BD83490009E008C /* BaseViewController.swift in Sources */,
 				58D946A72BF7489F006417AF /* ToastManager.swift in Sources */,
-				581F797C2BEF3F97001F81A0 /* RouteFinderViewModel.swift in Sources */,
+				581F797C2BEF3F97001F81A0 /* RouteFinderSheetViewModel.swift in Sources */,
 				5858891B2BFF22A700F3F642 /* RouteFinderSceneDIContainer.swift in Sources */,
 				58BAC89B2BC53A4D00CDEB1F /* UIButton+Extension.swift in Sources */,
 				58CC1AA32BE9EC4A0004FEAE /* HomeCollectionViewHandler.swift in Sources */,
@@ -1082,7 +1077,7 @@
 				58BDFBC22BB6A748006AC994 /* OSLog.swift in Sources */,
 				58368F1A2BDE424A009E008C /* PlaceSearchView.swift in Sources */,
 				58BAC8972BC52F8500CDEB1F /* UILabel+Extension.swift in Sources */,
-				580477052BF1BC7E0093019C /* RouteCollectionViewCell.swift in Sources */,
+				580477052BF1BC7E0093019C /* RouteFinderSheetCollectionViewCell.swift in Sources */,
 				58C1DE852BF327C400B169CF /* NavigationBarHideable.swift in Sources */,
 				58D946BC2BFBA6D6006417AF /* AuthenticationFlowCoordinator.swift in Sources */,
 				58D946B82BFBA09B006417AF /* AuthenticationSceneDIContainer.swift in Sources */,
@@ -1095,7 +1090,7 @@
 				58C1DE892BF3386500B169CF /* Coordinate.swift in Sources */,
 				58D946CE2BFC2DF2006417AF /* AuthenticationUseCase.swift in Sources */,
 				58D946F62BFD86CD006417AF /* PlaceRepository.swift in Sources */,
-				580477092BF1BF480093019C /* RouteCollectionController.swift in Sources */,
+				580477092BF1BF480093019C /* RouteFinderSheetCollectionController.swift in Sources */,
 				58DE930F2BDFA23200C97575 /* UIView+Extension.swift in Sources */,
 				583210BA2BE76DAA00D9DCA1 /* BaseLabel.swift in Sources */,
 				58BDFBD12BBE5B53006AC994 /* HomeViewController.swift in Sources */,
@@ -1121,6 +1116,7 @@
 				58D946A92BF74FB7006417AF /* ToastView.swift in Sources */,
 				58BAC8992BC5399D00CDEB1F /* UITextField+Extension.swift in Sources */,
 				58D946912BF5B88E006417AF /* RecentSearchPlaceButton.swift in Sources */,
+				585889222BFF7F8900F3F642 /* RouteFinderUseCase.swift in Sources */,
 				5858890E2BFE473400F3F642 /* PlaceSearchCollectionViewHandler.swift in Sources */,
 				586F03182BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift in Sources */,
 				583210B82BE69EB700D9DCA1 /* CollectionViewCellProtocol.swift in Sources */,

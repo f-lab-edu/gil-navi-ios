@@ -8,7 +8,8 @@
 import UIKit
 
 protocol RouteFinderFlowCoordinatorDependencies {
-    func makeRouteMapViewController(departureMapLocation: MapLocation?, destinationMapItem: MapItem) -> RouteMapViewController
+    func makeRouteMapViewController(departureMapLocation: MapLocation?, destinationMapItem: MapItem, actions: RouteMapViewModelActions) -> RouteMapViewController
+    func makeRouteFinderSheetViewController() -> RouteFinderSheetViewController
 }
 
 final class RouteFinderFlowCoordinator {
@@ -28,8 +29,16 @@ final class RouteFinderFlowCoordinator {
         departureMapLocation: MapLocation?,
         destinationMapItem: MapItem
     ) {
-        let viewController = dependencies.makeRouteMapViewController(departureMapLocation: departureMapLocation, destinationMapItem: destinationMapItem)
+        let actions = RouteMapViewModelActions(
+            showRouteFinderPageSheet: showRouteFinderPageSheet
+        )
+        let viewController = dependencies.makeRouteMapViewController(departureMapLocation: departureMapLocation, destinationMapItem: destinationMapItem, actions: actions)
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    private func showRouteFinderPageSheet() {
+        let viewController = dependencies.makeRouteFinderSheetViewController()
+        viewController.delegate = navigationController?.topViewController as? RouteFinderSheetViewControllerDelegate
+        navigationController?.present(viewController, animated: true)
+    }
 }

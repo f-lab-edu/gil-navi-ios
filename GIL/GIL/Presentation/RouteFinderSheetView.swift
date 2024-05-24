@@ -1,5 +1,5 @@
 //
-//  RouteFinderView.swift
+//  RouteFinderSheetView.swift
 //  GIL
 //
 //  Created by 송우진 on 5/11/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RouteFinderView: UIView {
+final class RouteFinderSheetView: UIView {
     let pathTitleLabel = UILabel()
     let transportStackView = UIStackView()
     lazy var transportButtons: [UIButton] = [Transport.walking, Transport.automobile].map({ createTransportButton($0) })
@@ -15,7 +15,7 @@ final class RouteFinderView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(RouteCollectionViewCell.self, forCellWithReuseIdentifier: RouteCollectionViewCell.reuseIdentifier)
+        collectionView.register(RouteFinderSheetCollectionViewCell.self, forCellWithReuseIdentifier: RouteFinderSheetCollectionViewCell.reuseIdentifier)
         return collectionView
     }()
     
@@ -31,7 +31,7 @@ final class RouteFinderView: UIView {
 }
 
 // MARK: - Setup UI
-extension RouteFinderView {
+extension RouteFinderSheetView {
     private func setupUI() {
         backgroundColor = .systemBackground
         addSubviews()
@@ -85,7 +85,7 @@ extension RouteFinderView {
 }
 
 // MARK: - Create View
-extension RouteFinderView {
+extension RouteFinderSheetView {
     private func createTransportButton(_ type: Transport) -> UIButton {
         UIButton()
             .setAccessibility(label: "이동 수단 \(type.rawValue) 버튼", hint: "해당 이동 수단을 선택하려면 두 번 탭하세요", traits: .button)
@@ -99,7 +99,7 @@ extension RouteFinderView {
 }
 
 // MARK: - Update UI
-extension RouteFinderView {
+extension RouteFinderSheetView {
     func updateButtonStates(transport: Transport) {
         transportButtons.forEach {
             $0.isSelected = ($0.accessibilityIdentifier == transport.rawValue)

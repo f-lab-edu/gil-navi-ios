@@ -6,19 +6,16 @@
 //
 
 import UIKit
-import MapKit
 
 final class RouteMapViewController: BaseViewController, NavigationBarHideable {
     private var routeMapView = RouteMapView()
     private var viewModel: RouteMapViewModel
-    private let routeFinderViewModel = RouteFinderViewModel(selectedTransport: .walking)
-    private lazy var routeFinderPageSheet = RouteFinderPageSheet(viewModel: routeFinderViewModel)
     
     // MARK: - Initialization
     init(viewModel: RouteMapViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.viewModel.routeManager = RouteManager(mapView: routeMapView.mapView)
+        self.viewModel.configureMapView(mapView: routeMapView.mapView)
     }
     
     required init?(coder: NSCoder) {
@@ -35,12 +32,8 @@ final class RouteMapViewController: BaseViewController, NavigationBarHideable {
         setupBindings()
         
         if viewModel.departureMapLocation != nil {
-            presentRouteFinderPageSheet()
-        } else {
-            routeMapView.mapView.delegate = self
-//            viewModel.setRegion()
+            viewModel.showRouteFinderPageSheet()
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,19 +44,20 @@ final class RouteMapViewController: BaseViewController, NavigationBarHideable {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         showNavigationBar(animated: false)
+        presentedViewController?.dismiss(animated: true)
     }
 }
 
 // MARK: - Setup Binding
 extension RouteMapViewController {
     private func setupBindings() {
-        routeFinderPageSheet.delegate = self
         bindButtons()
     }
     
     private func bindButtons() {
         routeMapView.backButton.addAction(UIAction { [weak self] _ in self?.popViewController()}, for: .touchUpInside)
     }
+
 }
 
 // MARK: - Navigation
@@ -71,44 +65,38 @@ extension RouteMapViewController {
     func popViewController() {
         navigationController?.popViewController(animated: true)
     }
-    
-    func presentRouteFinderPageSheet() {
-        present(routeFinderPageSheet, animated: true, completion: nil)
-    }
 }
 
 // MARK: - PathFinderPageSheetDelegate
-extension RouteMapViewController: RouteFinderPageSheetDelegate {
-    func didSelectRoute(route: Route) {
-        routeFinderPageSheet.updateCellLayer(route: route)
-        routeFinderPageSheet.updateDetent()
-        viewModel.routeManager?.selectedRoute = route
+extension RouteMapViewController: RouteFinderSheetViewControllerDelegate {
+    
+    func didSelectRoute(
+        sender: RouteFinderSheetViewController,
+        routes: [Route]
+    ) {
+        viewModel.updateRoutesPolyline(routes: routes)
     }
     
-    func requestRouteUpdate(transportType: Transport) {
+    func requestRouteUpdate(
+        sender: RouteFinderSheetViewController,
+        transportType: Transport
+    ) {
         Task {
-            do {
-                let routes = try await viewModel.setupMapAndFindRoutes(transportType: transportType)
-                viewModel.routeManager?.addRoutesPolyline(routes)
-                routeFinderPageSheet.updateRoutes(routes)
-            } catch {
-                Log.error("길 찾기 실패", [
-                    "transportType" : transportType.rawValue,
-                    "error" : error
-                ])
-                routeFinderPageSheet.updateRoutes(nil)
+            let routes = await viewModel.fetchAndDisplayRoutes(transportType: transportType)
+            await MainActor.run {
+                sender.updateRoutes(routes)
             }
         }
     }
 }
 
 // MARK: - MKMapViewDelegate
-extension RouteMapViewController: MKMapViewDelegate {
-    func mapView(
-        _ mapView: MKMapView,
-        didUpdate userLocation: MKUserLocation
-    ) {
-        let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        mapView.setRegion(region, animated: true)
-    }
-}
+//extension RouteMapViewController: MKMapViewDelegate {
+//    func mapView(
+//        _ mapView: MKMapView,
+//        didUpdate userLocation: MKUserLocation
+//    ) {
+//        let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+//        mapView.setRegion(region, animated: true)
+//    }
+//}

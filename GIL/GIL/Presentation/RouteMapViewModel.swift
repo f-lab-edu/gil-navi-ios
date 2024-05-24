@@ -5,47 +5,80 @@
 //  Created by 송우진 on 5/8/24.
 //
 
-import Foundation
+import Combine
+import MapKit
 
-// MARK: - RouteFinderError
+struct RouteMapViewModelActions {
+    let showRouteFinderPageSheet: () -> Void
+}
+
 enum RouteMapError: Error {
     case routeManagerUnavailable
     case departureLocationEmpty
 }
 
-final class RouteMapViewModel {
-    let locationService = LocationService()
-    var routeManager: RouteManagerProtocol?
-    let departureMapLocation: MapLocation?
-    let destinationMapItem: MapItem
+protocol RouteMapViewModelInput {
+    var departureMapLocation: MapLocation? { get }
+    func showRouteFinderPageSheet()
+    func configureMapView(mapView: MKMapView)
+    func fetchAndDisplayRoutes(transportType: Transport) async -> [Route]?
+    func updateRoutesPolyline(routes: [Route])
+}
 
+protocol RouteMapViewModelOutput {}
+
+typealias RouteMapViewModel = RouteMapViewModelInput & RouteMapViewModelOutput
+
+final class DefaultRouteMapViewModel: RouteMapViewModel {
+    private let routeFinderUseCase: RouteFinderUseCase
+    private let actions: RouteMapViewModelActions?
+    private var cancellables: Set<AnyCancellable> = []
+    private let destinationMapItem: MapItem
+    
+    // MARK: - Input
+    let departureMapLocation: MapLocation?
+
+    // MARK: - Initialization
     init(
         departureMapLocation: MapLocation?,
-        destinationMapItem: MapItem
+        destinationMapItem: MapItem,
+        routeFinderUseCase: RouteFinderUseCase,
+        actions: RouteMapViewModelActions
     ) {
         self.departureMapLocation = departureMapLocation
         self.destinationMapItem = destinationMapItem
+        self.routeFinderUseCase = routeFinderUseCase
+        self.actions = actions
     }
     
-    @MainActor
-    func setupMapAndFindRoutes(transportType: Transport) async throws -> [Route] {
-        guard let routeManager = routeManager else { throw RouteMapError.routeManagerUnavailable }
-        let destinationCoordinate = destinationMapItem.placemark.coordinate.toCLLocationCoordinate2D()
+    // MARK: - Private
+    private func handleError(_ error: Error) {
         
-        let destinationPinAnnotation = routeManager.createPinAnnotation(coordinate: destinationCoordinate, title: destinationMapItem.name, subtitle: nil)
-        routeManager.addAnnotations([destinationPinAnnotation])
-        
-        guard let departureCoordinate = departureMapLocation?.coordinate.toCLLocationCoordinate2D() else { throw RouteMapError.departureLocationEmpty }
-        
-        let region = routeManager.fetchCoordinateRegion(from: departureCoordinate, to: destinationCoordinate)
-        routeManager.setRegion(region)
-        
-        return try await routeManager.findRoute(from: departureCoordinate, to: destinationCoordinate, transportType: transportType)
+    }
+}
+
+// MARK: - Input
+extension DefaultRouteMapViewModel {
+    func showRouteFinderPageSheet() {
+        actions?.showRouteFinderPageSheet()
     }
     
-//    func setRegion() {
-//        guard let routeManager = routeManager else { return }
-//        let myRegion = routeManager.getRegion()
-//        routeManager.setRegion(myRegion)
-//    }
+    func configureMapView(mapView: MKMapView) {
+        routeFinderUseCase.configureMapView(mapView: mapView)
+    }
+    
+    func updateRoutesPolyline(routes: [Route]) {
+        routeFinderUseCase.updateRoutesPolyline(routes: routes)
+    }
+    
+    func fetchAndDisplayRoutes(transportType: Transport) async -> [Route]? {
+        do {
+            guard let departureCoordinate = departureMapLocation?.coordinate else { throw RouteMapError.departureLocationEmpty }
+            let routes = try await routeFinderUseCase.setupRouteAndDisplay(from: departureCoordinate, to: destinationMapItem, transportType: transportType)
+            return routes
+        } catch {
+            handleError(error)
+            return nil
+        }
+    }
 }

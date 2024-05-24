@@ -28,7 +28,9 @@ final class PlaceSearchFlowCoordinator {
     }
     
     func start() {
-        let actions = PlaceSearchViewModelActions(showRouteFinder: showRouteFinder)
+        let actions = PlaceSearchViewModelActions(
+            showRouteFinder: showRouteFinder
+        )
         let viewController = dependencies.makePlaceSearchViewController(actions: actions)
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -41,4 +43,5 @@ final class PlaceSearchFlowCoordinator {
         let flow = routeMapSceneDIContainer.makeRouteFinderFlowCoordinator(navigationController: navigationController)
         flow.start(departureMapLocation: departureMapLocation, destinationMapItem: destinationMapItem)
     }
+
 }

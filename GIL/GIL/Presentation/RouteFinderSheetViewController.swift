@@ -1,29 +1,34 @@
 //
-//  RouteFinderPageSheet.swift
+//  RouteFinderSheetViewController.swift
 //  GIL
 //
 //  Created by 송우진 on 5/11/24.
 //
 
 import UIKit
+import Combine
 
-// MARK: - RouteFinderPageSheetDelegate
-protocol RouteFinderPageSheetDelegate: AnyObject {
-    func requestRouteUpdate(transportType: Transport)
-    func didSelectRoute(route: Route)
+protocol RouteFinderSheetViewControllerDelegate: AnyObject {
+    func requestRouteUpdate(sender: RouteFinderSheetViewController, transportType: Transport)
+    func didSelectRoute(sender: RouteFinderSheetViewController, routes: [Route])
 }
 
-final class RouteFinderPageSheet: UIViewController {
-    weak var delegate: RouteFinderPageSheetDelegate?
-    private var routeFinderView = RouteFinderView()
-    private var viewModel: RouteFinderViewModel
-    private var routeCollectionController: RouteCollectionController?
+final class RouteFinderSheetViewController: UIViewController {
+    weak var delegate: RouteFinderSheetViewControllerDelegate?
+    
+    private var routeFinderSheetView = RouteFinderSheetView()
+    private var viewModel: RouteFinderSheetViewModel
+    private var routeFinderSheetCollectionController: RouteFinderSheetCollectionController?
+    private var cancellables: Set<AnyCancellable> = []
 
     // MARK: - Initialization
-    init(viewModel: RouteFinderViewModel) {
+    init(viewModel: RouteFinderSheetViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        routeCollectionController = RouteCollectionController(viewModel: viewModel, routeFinderView: routeFinderView)
+        routeFinderSheetCollectionController = RouteFinderSheetCollectionController(
+            viewModel: viewModel,
+            routeFinderSheetView: routeFinderSheetView
+        )
     }
     
     required init?(coder: NSCoder) {
@@ -32,7 +37,7 @@ final class RouteFinderPageSheet: UIViewController {
     
     // MARK: - Life Cycle
     override func loadView() {
-        view = routeFinderView
+        view = routeFinderSheetView
     }
     
     override func viewDidLoad() {
@@ -43,19 +48,18 @@ final class RouteFinderPageSheet: UIViewController {
 }
 
 // MARK: - UI Updates
-extension RouteFinderPageSheet {
+extension RouteFinderSheetViewController {
     func updateRoutes(_ routes: [Route]?) {
         guard let routes = routes else { return }
-        routeCollectionController?.applySnapshot(with: routes)
-        viewModel.selectedRoute = routes.first
+        viewModel.routes.send(routes)
+        routeFinderSheetCollectionController?.applySnapshot(with: routes)
     }
     
-    func updateCellLayer(route: Route?) {
-        guard let route = route else { return }
-        routeCollectionController?.updateCellLayer(route)
+    private func updateCellLayer(routes: [Route]) {
+        routeFinderSheetCollectionController?.updateCellLayer(routes)
     }
 
-    func updateDetent() {
+    private func updateDetent() {
         guard let customDetent = viewModel.customDetent else { return }
         if let sheet = sheetPresentationController, sheet.detents.contains(.large()) {
             sheet.animateChanges {
@@ -66,14 +70,14 @@ extension RouteFinderPageSheet {
 }
 
 // MARK: - Setup Bindig
-extension RouteFinderPageSheet {
+extension RouteFinderSheetViewController {
     private func setupBindings() {
         bindButtons()
         subscribeToPublishers()
     }
     
     private func bindButtons() {
-        routeFinderView.transportButtons.forEach { [weak self] button in
+        routeFinderSheetView.transportButtons.forEach { [weak self] button in
             let action = UIAction { [weak self] _ in self?.transportButtonTapped(button) }
             button.addAction(action, for: .touchUpInside)
         }
@@ -81,45 +85,47 @@ extension RouteFinderPageSheet {
     
     private func subscribeToPublishers() {
         setupBindSelectedTransport()
-        setupBindSelectedRoute()
+        setupBindRoutes()
     }
     
     private func setupBindSelectedTransport() {
-        viewModel.$selectedTransport
+        viewModel.selectedTransport
             .receive(on: DispatchQueue.main)
             .compactMap{ $0}
             .sink { [weak self] transport in
                 guard let self else { return }
-                routeFinderView.updateButtonStates(transport: transport)
-                delegate?.requestRouteUpdate(transportType: transport)
+                routeFinderSheetView.updateButtonStates(transport: transport)
+                delegate?.requestRouteUpdate(sender: self, transportType: transport)
             }
-            .store(in: &viewModel.cancellables)
+            .store(in: &cancellables)
     }
     
-    private func setupBindSelectedRoute() {
-        viewModel.$selectedRoute
+    private func setupBindRoutes() {
+        viewModel.routes
             .dropFirst()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] route in
-                guard let self, let route = route else { return }
-                delegate?.didSelectRoute(route: route)
+            .sink { [weak self] routes in
+                guard let self else { return }
+                updateDetent()
+                updateCellLayer(routes: routes)
+                delegate?.didSelectRoute(sender: self, routes: routes)
             }
-            .store(in: &viewModel.cancellables)
+            .store(in: &cancellables)
     }
 }
 
 // MARK: - Action
-extension RouteFinderPageSheet {
+extension RouteFinderSheetViewController {
     private func transportButtonTapped(_ selectedButton: UIButton) {
         guard let identifier = selectedButton.accessibilityIdentifier,
               let transport = Transport(rawValue: identifier)
         else { return }
-        viewModel.selectedTransport = transport
+        viewModel.selectedTransport.send(transport)
     }
 }
 
 // MARK: - Configure
-extension RouteFinderPageSheet {
+extension RouteFinderSheetViewController {
     private func configurePageSheet() {
         modalPresentationStyle = .pageSheet
         isModalInPresentation = true

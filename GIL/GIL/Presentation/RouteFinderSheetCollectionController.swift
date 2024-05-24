@@ -1,5 +1,5 @@
 //
-//  RouteCollectionController.swift
+//  RouteFinderSheetCollectionController.swift
 //  GIL
 //
 //  Created by 송우진 on 5/13/24.
@@ -7,21 +7,21 @@
 
 import UIKit
 
-final class RouteCollectionController: NSObject {
+final class RouteFinderSheetCollectionController: NSObject {
     private enum Section: CaseIterable {
         case main
     }
-    private var routeFinderView: RouteFinderView
-    private var viewModel: RouteFinderViewModel
+    private var routeFinderSheetView: RouteFinderSheetView
+    private var viewModel: RouteFinderSheetViewModel
     private var dataSource: UICollectionViewDiffableDataSource<Section, Route>!
     
     // MARK: - Initialization
     init(
-        viewModel: RouteFinderViewModel,
-        routeFinderView: RouteFinderView
+        viewModel: RouteFinderSheetViewModel,
+        routeFinderSheetView: RouteFinderSheetView
     ) {
         self.viewModel = viewModel
-        self.routeFinderView = routeFinderView
+        self.routeFinderSheetView = routeFinderSheetView
         super.init()
         setupCollectionView()
         configureDataSource()
@@ -29,7 +29,7 @@ final class RouteCollectionController: NSObject {
 }
 
 // MARK: - UICollectionViewDelegate {
-extension RouteCollectionController: UICollectionViewDelegate {
+extension RouteFinderSheetCollectionController: UICollectionViewDelegate {
     func collectionView(
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
@@ -38,13 +38,12 @@ extension RouteCollectionController: UICollectionViewDelegate {
         guard snapshot.sectionIdentifiers.contains(.main) else { return }
         let itemsInSection = snapshot.itemIdentifiers(inSection: .main)
         guard itemsInSection.indices.contains(indexPath.row) else { return }
-        let route = itemsInSection[indexPath.row]
-        viewModel.selectedRoute = route
+        viewModel.updateRoutes(selectedRoute: itemsInSection[indexPath.row])
     }
 }
 
 // MARK: - DataSource Updates
-extension RouteCollectionController {
+extension RouteFinderSheetCollectionController {
     func applySnapshot(with items: [Route]) {
         var snapshot = dataSource.snapshot()
         snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .main))
@@ -54,14 +53,14 @@ extension RouteCollectionController {
 }
 
 // MARK: - Setup and Configuration
-extension RouteCollectionController {
+extension RouteFinderSheetCollectionController {
     private func setupCollectionView() {
-        routeFinderView.routeCollectionView.delegate = self
-        routeFinderView.routeCollectionView.collectionViewLayout = createLayout()
+        routeFinderSheetView.routeCollectionView.delegate = self
+        routeFinderSheetView.routeCollectionView.collectionViewLayout = createLayout()
     }
     
     private func createLayout() -> UICollectionViewLayout {
-        let placeItem = RouteCollectionViewCell.layoutItem()
+        let placeItem = RouteFinderSheetCollectionViewCell.layoutItem()
         let group = NSCollectionLayoutGroup.vertical(layoutSize: placeItem.layoutSize, subitems: [placeItem])
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 2
@@ -69,7 +68,7 @@ extension RouteCollectionController {
     }
     
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Route>(collectionView: routeFinderView.routeCollectionView) { (collectionView, indexPath, route) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, Route>(collectionView: routeFinderSheetView.routeCollectionView) { (collectionView, indexPath, route) -> UICollectionViewCell? in
             self.configureRouteCell(for: collectionView, at: indexPath, item: route)
         }
         var snapshot = NSDiffableDataSourceSnapshot<Section, Route>()
@@ -80,27 +79,27 @@ extension RouteCollectionController {
 }
 
 // MARK: - Cell Configuration
-extension RouteCollectionController {
+extension RouteFinderSheetCollectionController {
     private func configureRouteCell(
         for collectionView: UICollectionView,
         at indexPath: IndexPath,
         item: Route
     ) -> UICollectionViewCell? {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RouteCollectionViewCell.reuseIdentifier, for: indexPath) as? RouteCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RouteFinderSheetCollectionViewCell.reuseIdentifier, for: indexPath) as? RouteFinderSheetCollectionViewCell
         cell?.updateContent(with: item)
         return cell
     }
 }
 
 // MARK: - Cell Update
-extension RouteCollectionController {
-    func updateCellLayer(_ route: Route) {
+extension RouteFinderSheetCollectionController {
+    func updateCellLayer(_ routes: [Route]) {
         let snapshot = dataSource.snapshot()
         guard snapshot.sectionIdentifiers.contains(.main) else { return }
         let itemsInSection = snapshot.itemIdentifiers(inSection: .main)
         for index in 0..<itemsInSection.count {
-            if let cell = routeFinderView.routeCollectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? RouteCollectionViewCell {
-                let isSelected = itemsInSection[index] == route
+            if let cell = routeFinderSheetView.routeCollectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? RouteFinderSheetCollectionViewCell {
+                let isSelected = routes[index].polyline.isSelected
                 cell.updateLayer(selected: isSelected)
             }
         }

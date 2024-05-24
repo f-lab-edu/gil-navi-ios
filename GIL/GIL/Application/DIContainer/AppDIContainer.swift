@@ -9,6 +9,7 @@ import Foundation
 
 final class AppDIContainer {
     lazy var firebaseAuthManager = FirebaseAuthManager()
+    lazy var routeManager = RouteManager()
     
     // MARK: - DIContainers of scenes
     func makeAuthenticationDIContainer() -> AuthenticationSceneDIContainer {
@@ -27,6 +28,9 @@ final class AppDIContainer {
     }
     
     func makeRouteFinderDIContainer() -> RouteFinderSceneDIContainer {
-        RouteFinderSceneDIContainer()
+        let dependencies = RouteFinderSceneDIContainer.Dependencies(
+            routeManager: routeManager
+        )
+        return RouteFinderSceneDIContainer(dependencies: dependencies)
     }
 }

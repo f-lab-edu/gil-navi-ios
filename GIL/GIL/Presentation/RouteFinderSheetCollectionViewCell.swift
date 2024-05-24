@@ -1,5 +1,5 @@
 //
-//  RouteCollectionViewCell.swift
+//  RouteFinderSheetCollectionViewCell.swift
 //  GIL
 //
 //  Created by 송우진 on 5/13/24.
@@ -7,12 +7,12 @@
 
 import UIKit
 
-final class RouteCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
-    static var reuseIdentifier: String = "RouteCell"
-    let labelStackView = UIStackView()
-    let expectedTimeLabel = UILabel()
-    let distanceLabel = UILabel()
-    let moveButton = UIButton()
+final class RouteFinderSheetCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
+    static var reuseIdentifier: String = String(describing: RouteFinderSheetCollectionViewCell.self)
+    private let labelStackView = UIStackView()
+    private let expectedTimeLabel = UILabel()
+    private let distanceLabel = UILabel()
+    private let moveButton = UIButton()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -32,7 +32,7 @@ final class RouteCollectionViewCell: UICollectionViewCell, CollectionViewCellPro
 }
 
 // MARK: - Setup UI
-extension RouteCollectionViewCell {
+extension RouteFinderSheetCollectionViewCell {
     private func setupUI() {
         contentView
             .setBackgroundColor(.systemGray6)
@@ -96,7 +96,7 @@ extension RouteCollectionViewCell {
 }
 
 // MARK: - Update Content
-extension RouteCollectionViewCell {
+extension RouteFinderSheetCollectionViewCell {
     func updateContent(with route: Route) {
         let formattedTime = route.expectedTravelTime.toHourMinuteFormat()
         expectedTimeLabel.text = formattedTime
@@ -111,7 +111,7 @@ extension RouteCollectionViewCell {
 }
 
 // MARK: - Cell Layout
-extension RouteCollectionViewCell {
+extension RouteFinderSheetCollectionViewCell {
     static func layoutItem() -> NSCollectionLayoutItem {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
         return NSCollectionLayoutItem(layoutSize: itemSize)

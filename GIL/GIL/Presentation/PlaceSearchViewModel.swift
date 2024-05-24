@@ -61,18 +61,15 @@ final class DefaultPlaceSearchViewModel: PlaceSearchViewModel {
 // MARK: - Input
 extension DefaultPlaceSearchViewModel {
     func searchPlace(_ query: String) {
-        guard let location = locationService.currentLocation else { return }
-        placeSearchUseCase.searchPlace(query, location: location)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                if case let .failure(error) = completion {
-                    Log.error("Error searching place", error.localizedDescription)
-                    self?.errors.send(.searchFailed)
-                }
-            }, receiveValue: { [weak self] placeModels in
-                self?.mapItems.value = placeModels
-            })
-            .store(in: &cancellables)
+        guard let location = locationService.currentLocation else { return errors.send(.locationUnavailable) }
+        Task {
+            do {
+                let places = try await placeSearchUseCase.searchPlaceAsync(query, location: location)
+                await MainActor.run { mapItems.value = places }
+            } catch {
+                errors.send(.searchFailed)
+            }
+        }
     }
     
     func storePlace(_ mapItem: MapItem) {
