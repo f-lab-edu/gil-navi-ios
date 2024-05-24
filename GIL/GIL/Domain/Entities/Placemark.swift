@@ -23,11 +23,6 @@ struct Placemark: Hashable, Codable {
         )
         address = formatAddress(for: clPlacemark)
         areasOfInterest = clPlacemark.areasOfInterest
-        Log.info("CL_PlacemarkModel", [
-            "coordinate": coordinate,
-            "address": address ?? "",
-            "areasOfInterest": areasOfInterest ?? []
-        ])
     }
     
     /// `MKPlacemark` 객체를 사용하여 `PlacemarkModel`의 새 인스턴스를 초기화합니다.
@@ -39,11 +34,6 @@ struct Placemark: Hashable, Codable {
         )
         address = formatAddress(for: mkPlacemark)
         areasOfInterest = mkPlacemark.areasOfInterest
-        Log.info("MK_PlacemarkModel", [
-            "coordinate": coordinate,
-            "address": address ?? "",
-            "areasOfInterest": areasOfInterest ?? []
-        ])
     }
 }
 

@@ -98,11 +98,12 @@ extension RouteFinderSheetCollectionViewCell {
 // MARK: - Update Content
 extension RouteFinderSheetCollectionViewCell {
     func updateContent(with route: Route) {
-        let formattedTime = route.expectedTravelTime.toHourMinuteFormat()
+        let formattedTime = route.formatTravelTimeAsHourMinute()
         expectedTimeLabel.text = formattedTime
         
-        let formattedDistance = route.distance.formattedDistanceDetailed()
-        distanceLabel.text = formattedDistance
+        if let formattedDistance = route.distance.formatDistanceAsDetailed() {
+            distanceLabel.text = formattedDistance
+        }
     }
     
     func updateLayer(selected: Bool) {
@@ -117,3 +118,5 @@ extension RouteFinderSheetCollectionViewCell {
         return NSCollectionLayoutItem(layoutSize: itemSize)
     }
 }
+
+

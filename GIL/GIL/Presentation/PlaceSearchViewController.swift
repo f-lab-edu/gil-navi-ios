@@ -127,7 +127,6 @@ extension PlaceSearchViewController: LocationServiceDelegate {
     }
     
     func didFailWithError(_ error: Error) {
-        Log.error("Error LocationService", error.localizedDescription)
         viewModel.errors.send(.locationUnavailable)
     }
 }

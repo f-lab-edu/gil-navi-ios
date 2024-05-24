@@ -26,7 +26,7 @@ final class DefaultPlaceSearchUseCase: PlaceSearchUseCase {
         let mapItems = try await self.searchPlacesNearby(location: location, query: query)
         let models = mapItems
             .map { MapItem(mapItem: $0, distance: location.distance(to: $0.placemark.coordinate) ?? 0) }
-            .sorted(by: { $0.distance ?? 0 < $1.distance ?? 0 })
+            .sorted(by: { $0.distance.value ?? 0 < $1.distance.value ?? 0 })
         return models
     }
     
