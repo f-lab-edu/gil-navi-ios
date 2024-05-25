@@ -57,6 +57,7 @@
 		5858891B2BFF22A700F3F642 /* RouteFinderSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5858891A2BFF22A700F3F642 /* RouteFinderSceneDIContainer.swift */; };
 		585889222BFF7F8900F3F642 /* RouteFinderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585889212BFF7F8900F3F642 /* RouteFinderUseCase.swift */; };
 		585889242C00A12F00F3F642 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585889232C00A12F00F3F642 /* Distance.swift */; };
+		585889282C00AE1300F3F642 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585889272C00AE1300F3F642 /* LoadingView.swift */; };
 		586F030C2BE0C4A2008660A0 /* LanguageCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030B2BE0C4A1008660A0 /* LanguageCode.swift */; };
 		586F030F2BE0D050008660A0 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030E2BE0D050008660A0 /* Place.swift */; };
 		586F03182BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */; };
@@ -175,6 +176,7 @@
 		5858891A2BFF22A700F3F642 /* RouteFinderSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderSceneDIContainer.swift; sourceTree = "<group>"; };
 		585889212BFF7F8900F3F642 /* RouteFinderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderUseCase.swift; sourceTree = "<group>"; };
 		585889232C00A12F00F3F642 /* Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Distance.swift; sourceTree = "<group>"; };
+		585889272C00AE1300F3F642 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		586F030B2BE0C4A1008660A0 /* LanguageCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCode.swift; sourceTree = "<group>"; };
 		586F030E2BE0D050008660A0 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRecentSearchPlaceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				5810DE492BE37C9400180BFB /* FirebaseAuthManager.swift */,
 				581F79742BEE212D001F81A0 /* RouteManager.swift */,
 				58D9468D2BF50698006417AF /* AutoLayoutBuilder.swift */,
+				585889272C00AE1300F3F642 /* LoadingView.swift */,
 				58D946AA2BF75188006417AF /* Toast */,
 			);
 			path = Utilities;
@@ -1039,6 +1042,7 @@
 				58368EFC2BD536B8009E008C /* AlertService.swift in Sources */,
 				584FA41B2BA7F606002600F1 /* LoginViewController.swift in Sources */,
 				58368F032BD80472009E008C /* HomeInteractor.swift in Sources */,
+				585889282C00AE1300F3F642 /* LoadingView.swift in Sources */,
 				58368F052BD8047E009E008C /* HomePresenter.swift in Sources */,
 				58D946B12BFB9E6B006417AF /* AppDIContainer.swift in Sources */,
 				58368F162BDE41FC009E008C /* PlaceSearchViewController.swift in Sources */,
