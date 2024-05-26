@@ -15,7 +15,11 @@ protocol LocationServiceDelegate: AnyObject {
 protocol LocationServiceProtocol {
     var delegate: LocationServiceDelegate? { get set }
     var currentLocation: MapLocation? { get }
+    
+    /// 위치 서비스 사용 권한을 요청하고 위치 업데이트를 시작합니다.
     func requestLocation()
+    
+    /// 위치 업데이트를 중단합니다.
     func stopUpdatingLocation()
 }
 
@@ -33,19 +37,16 @@ class LocationService: NSObject, LocationServiceProtocol {
     }
     
     // MARK: - Location Management
-    /// 위치 서비스 사용 권한을 요청하고 위치 업데이트를 시작합니다.
     func requestLocation() {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
     
-    /// 위치 업데이트를 중단합니다.
     func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
     }
     
     // MARK: - Address Fetching
-    /// 결과 주소를 가져옵니다.
     func fetchAddress(for location: CLLocation) {
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
             if let error = error {

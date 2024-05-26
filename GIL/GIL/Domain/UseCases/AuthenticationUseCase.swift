@@ -23,7 +23,6 @@ enum AuthenticationError: Error {
 }
 
 protocol AuthenticationUseCase {
-    func signInAnonymously() -> AnyPublisher<Member?, Error>
     func signInWithEmail(email: String, password: String) -> AnyPublisher<Member?, Error>
     func signInWithApple(authorization: ASAuthorization) -> AnyPublisher<Member?, Error>
     func prepareAppleSignIn() -> AnyPublisher<ASAuthorizationController, Error>
@@ -40,11 +39,7 @@ final class DefaultAuthenticationUseCase: AuthenticationUseCase {
     }
 }
 
-extension DefaultAuthenticationUseCase {
-    func signInAnonymously() -> AnyPublisher<Member?, Error> {
-        firebaseAuthManager.signInAnonymously()
-    }
-    
+extension DefaultAuthenticationUseCase {    
     func signInWithEmail(
         email: String,
         password: String
@@ -62,21 +57,18 @@ extension DefaultAuthenticationUseCase {
     }
     
     func prepareAppleSignIn() -> AnyPublisher<ASAuthorizationController, Error> {
-        Deferred {
-            Future { [weak self] promise in
-                do {
-                    let nonce = try CryptoUtils.randomNonceString()
-                    self?.currentNonce = nonce
-                    let appleProvider = ASAuthorizationAppleIDProvider()
-                    let request = appleProvider.createRequest()
-                    request.requestedScopes = [.fullName, .email]
-                    request.nonce = CryptoUtils.sha256(nonce)
-
-                    let controller = ASAuthorizationController(authorizationRequests: [request])
-                    promise(.success(controller))
-                } catch {
-                    promise(.failure(error))
-                }
+        Future { [weak self] promise in
+            do {
+                let nonce = try CryptoUtils.randomNonceString()
+                self?.currentNonce = nonce
+                let appleProvider = ASAuthorizationAppleIDProvider()
+                let request = appleProvider.createRequest()
+                request.requestedScopes = [.fullName, .email]
+                request.nonce = CryptoUtils.sha256(nonce)
+                let controller = ASAuthorizationController(authorizationRequests: [request])
+                promise(.success(controller))
+            } catch {
+                promise(.failure(error))
             }
         }.eraseToAnyPublisher()
     }

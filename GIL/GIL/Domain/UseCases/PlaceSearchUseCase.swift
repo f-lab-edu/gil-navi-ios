@@ -23,7 +23,7 @@ final class DefaultPlaceSearchUseCase: PlaceSearchUseCase {
         _ query: String,
         location: MapLocation
     ) async throws -> [MapItem] {
-        let mapItems = try await self.searchPlacesNearby(location: location, query: query)
+        let mapItems = try await searchPlacesNearby(location: location, query: query)
         let models = mapItems
             .map { MapItem(mapItem: $0, distance: location.distance(to: $0.placemark.coordinate) ?? 0) }
             .sorted(by: { $0.distance.value ?? 0 < $1.distance.value ?? 0 })
@@ -38,7 +38,6 @@ final class DefaultPlaceSearchUseCase: PlaceSearchUseCase {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
         request.region = MKCoordinateRegion(center: location.location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-
         let search = MKLocalSearch(request: request)
         let response = try await search.start()
         return response.mapItems.filter({

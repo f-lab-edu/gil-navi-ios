@@ -12,21 +12,14 @@ struct LoginViewModelActions {
     let showSignUp: () -> Void
 }
 
-enum LoginResult {
-    case none
-    case success(Member?)
-    case failure(String)
-}
-
 protocol LoginViewModelInput {
     func prepareAppleSignIn()
-    func signInAnonymously()
     func signInWithEmail(email: String, password: String)
     func showSignUp()
 }
 
 protocol LoginViewModelOutput {
-    var loginPublisher: CurrentValueSubject<LoginResult, Never> { get }
+    var errors: PassthroughSubject<Error, Never> { get }
     var isFormValidPublisher: CurrentValueSubject<Bool, Never> { get }
 }
 
@@ -38,7 +31,7 @@ final class DefaultLoginViewModel: NSObject, LoginViewModel {
     private var cancellables: Set<AnyCancellable> = []
     
     // MARK: - Output
-    var loginPublisher = CurrentValueSubject<LoginResult, Never>(.none)
+    var errors = PassthroughSubject<Error, Never>()
     var isFormValidPublisher = CurrentValueSubject<Bool, Never>(false)
     
     // MARK: - Initialization
@@ -50,48 +43,24 @@ final class DefaultLoginViewModel: NSObject, LoginViewModel {
         self.actions = actions
     }
     
-    // MARK: - Private
-    private func handleError(_ error: Error) {
-        #if DEV
-        switch error {
-        case let authenticationError as AuthenticationError: Log.error("AuthenticationError", authenticationError.errorDescription)
-        case let cryptoUtilsError as CryptoUtilsError: Log.error("CryptoUtilsError", cryptoUtilsError.localizedDescription)
-        default: Log.error("Unknown Login Error", error.localizedDescription)
-        }
-        #endif
-        loginPublisher.send(.failure("로그인을 다시 시도해주세요."))
-    }
-    
     private func signInWithApple(authorization: ASAuthorization) {
         authenticationUseCase.signInWithApple(authorization: authorization)
             .sink { [weak self] completion in
                 if case let .failure(error) = completion {
-                    self?.handleError(error)
+                    self?.errors.send(error)
                 }
-            } receiveValue: { [weak self] member in
-                self?.loginPublisher.send(.success(member))
-            }
+            } receiveValue: { _ in }
             .store(in: &cancellables)
     }
 }
 
 // MARK: - Input
 extension DefaultLoginViewModel {
-    func signInAnonymously() {
-        authenticationUseCase.signInAnonymously()
-            .sink(receiveCompletion: { [weak self] completion in
-                if case let .failure(error) = completion {
-                    self?.handleError(error)
-                }
-            }, receiveValue: { _ in })
-            .store(in: &cancellables)
-    }
-    
     func prepareAppleSignIn() {
         authenticationUseCase.prepareAppleSignIn()
             .sink(receiveCompletion: { [weak self] completion in
                 if case let .failure(error) = completion {
-                    self?.handleError(error)
+                    self?.errors.send(error)
                 }
             }, receiveValue: { controller in
                 controller.delegate = self
@@ -107,11 +76,9 @@ extension DefaultLoginViewModel {
         authenticationUseCase.signInWithEmail(email: email, password: password)
             .sink(receiveCompletion: { [weak self] completion in
                 if case let .failure(error) = completion {
-                    self?.handleError(error)
+                    self?.errors.send(error)
                 }
-            }, receiveValue: { [weak self] member in
-                self?.loginPublisher.send(.success(member))
-            })
+            }, receiveValue: { _ in })
             .store(in: &cancellables)
     }
     
@@ -133,6 +100,6 @@ extension DefaultLoginViewModel: ASAuthorizationControllerDelegate {
         controller: ASAuthorizationController,
         didCompleteWithError error: Error
     ) {
-        handleError(error)
+        errors.send(error)
     }
 }

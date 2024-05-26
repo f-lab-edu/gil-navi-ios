@@ -39,7 +39,7 @@ extension LoginViewController {
     private func setupBindings() {
         setupBindTextFields()
         setupBindButtons()
-        subscribeToPublishers()
+        bindErrors()
     }
     
     private func setupBindTextFields() {
@@ -53,18 +53,29 @@ extension LoginViewController {
         loginView.appleLoginButton.addAction(UIAction { [weak self] _ in self?.appleLoginButtonTapped()}, for: .touchUpInside)
     }
     
-    private func subscribeToPublishers() {
-        viewModel.loginPublisher
+    private func bindErrors() {
+        viewModel.errors
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] loginResult in
-                LoadingView.hide()
-                switch loginResult {
-                case .success(_): self?.viewModel.signInAnonymously()
-                case .failure(let errorMessage): AlertService.showAlert(title: "로그인 실패", message: errorMessage)
-                case .none: break
-                }
+            .sink { [weak self] error in
+                self?.handleError(error)
             }
             .store(in: &cancellables)
+    }
+    
+}
+
+// MARK: - Error
+extension LoginViewController {
+    private func handleError(_ error: Error) {
+        #if DEV
+        switch error {
+        case let authenticationError as AuthenticationError: Log.error("AuthenticationError", authenticationError.errorDescription)
+        case let cryptoUtilsError as CryptoUtilsError: Log.error("CryptoUtilsError", cryptoUtilsError.localizedDescription)
+        default: Log.error("Unknown Login Error", error.localizedDescription)
+        }
+        #endif
+        LoadingView.hide()
+        AlertService.showAlert(title: "로그인 실패", message: "로그인을 다시 시도해주세요.")
     }
 }
 

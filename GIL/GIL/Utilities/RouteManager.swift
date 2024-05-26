@@ -9,9 +9,14 @@ import MapKit
 
 protocol RouteManaging {
     func configureMapView(mapView: MKMapView)
+    
+    /// 출발지와 도착지로부터 경로를 계산합니다.
+    /// - Returns: 계산된 경로를 `Route`객체의 배열로 반환됩니다. 실패하면 오류를 던집니다.
     func calculateRouteAsync(from start: Coordinate, to end: Coordinate, transportType: Transport) async throws -> [Route]
     func addRoutesPolyline(_ routes: [Route])
     func addAnnotation(at coordinate: Coordinate, title: String, subtitle: String?)
+    
+    /// 모든 경로를 포함할 수 있도록 지도의 보기 범위를 조정합니다.
     func focusMapToShowAllRoutes(routes: [Route])
     func clearMap()
     func removeAnnotations()
@@ -24,7 +29,9 @@ final class RouteManager: NSObject, RouteManaging {
             mapView?.delegate = self
         }
     }
-    
+}
+
+extension RouteManager {
     func configureMapView(mapView: MKMapView) {
         self.mapView = mapView
     }
@@ -84,12 +91,11 @@ final class RouteManager: NSObject, RouteManaging {
     func removeOverlays() {
         mapView?.removeOverlays(mapView?.overlays ?? [])
     }
-    
-    
 }
 
 // MARK: - MKMapViewDelegate
 extension RouteManager: MKMapViewDelegate {
+    /// 루트의 폴리라인 시각적 표현을 설정합니다.
     func mapView(
         _ mapView: MKMapView,
         rendererFor overlay: MKOverlay
