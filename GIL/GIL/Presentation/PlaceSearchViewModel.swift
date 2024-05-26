@@ -34,8 +34,7 @@ typealias PlaceSearchViewModel = PlaceSearchViewModelInput & PlaceSearchViewMode
 final class DefaultPlaceSearchViewModel: PlaceSearchViewModel {
     private let placeSearchUseCase: PlaceSearchUseCase
     private var placeRepository: PlaceRepository
-    private let actions: PlaceSearchViewModelActions?
-    private var cancellables: Set<AnyCancellable> = []
+    private let actions: PlaceSearchViewModelActions?    
     
     // MARK: - Input
     let locationService: LocationService

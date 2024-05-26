@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 struct HomeActions {
     let showPlaceSearch: () -> Void

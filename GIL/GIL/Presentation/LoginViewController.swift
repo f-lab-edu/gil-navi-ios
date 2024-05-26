@@ -57,6 +57,7 @@ extension LoginViewController {
         viewModel.loginPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] loginResult in
+                LoadingView.hide()
                 switch loginResult {
                 case .success(_): self?.viewModel.signInAnonymously()
                 case .failure(let errorMessage): AlertService.showAlert(title: "로그인 실패", message: errorMessage)
@@ -76,6 +77,7 @@ extension LoginViewController {
             focusFirstEmptyField()
             return
         }
+        LoadingView.show()
         viewModel.signInWithEmail(email: email, password: password)
     }
 
@@ -92,6 +94,7 @@ extension LoginViewController {
     }
     
     func appleLoginButtonTapped() {
+        LoadingView.show()
         viewModel.prepareAppleSignIn()
     }
 }

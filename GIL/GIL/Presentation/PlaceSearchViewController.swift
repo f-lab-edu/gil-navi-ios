@@ -42,6 +42,7 @@ final class PlaceSearchViewController: BaseViewController, NavigationBarHideable
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar(animated: false)
+        LoadingView.show()
         viewModel.locationService.requestLocation()
     }
     
@@ -61,6 +62,7 @@ extension PlaceSearchViewController {
 // MARK: - Error
 extension PlaceSearchViewController {
     private func handleError(_ error: PlaceSearchError) {
+        LoadingView.hide()
         let message: String
         switch error {
         case .locationUnavailable: message = "위치 서비스를 사용할 수 없습니다. 위치 설정을 확인해 주세요."
@@ -95,6 +97,7 @@ extension PlaceSearchViewController {
         viewModel.mapItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] mapItems in
+                LoadingView.hide()
                 self?.placeSearchCollectionViewHandler?.applySnapshot(with: mapItems)
             }
             .store(in: &cancellables)
@@ -114,6 +117,7 @@ extension PlaceSearchViewController {
 extension PlaceSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else { return }
+        LoadingView.show()
         viewModel.searchPlace(query)
         dismissKeyboard()
     }
@@ -122,6 +126,7 @@ extension PlaceSearchViewController: UISearchBarDelegate {
 // MARK: - LocationServiceDelegate
 extension PlaceSearchViewController: LocationServiceDelegate {
     func didFetchPlacemark(_ placemark: Placemark) {
+        LoadingView.hide()
         viewModel.locationService.stopUpdatingLocation()
         placeSearchView.navigationBar.updateAddress(placemark.address ?? "")
     }

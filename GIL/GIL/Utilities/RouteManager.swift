@@ -19,11 +19,14 @@ protocol RouteManaging {
 }
 
 final class RouteManager: NSObject, RouteManaging {
-    private var mapView: MKMapView?
+    private var mapView: MKMapView? {
+        didSet {
+            mapView?.delegate = self
+        }
+    }
     
     func configureMapView(mapView: MKMapView) {
         self.mapView = mapView
-        self.mapView?.delegate = self
     }
     
     func calculateRouteAsync(

@@ -61,6 +61,7 @@ extension SignUpViewController {
         viewModel.createUserPublisher
             .receive(on: DispatchQueue.main)
             .sink { signUpResult in
+                LoadingView.hide()
                 switch signUpResult {
                 case .success(_): ToastManager.shared.showToast(message: "회원가입 성공")
                 case .failure(let errorMessage): AlertService.showAlert(title: "회원가입 실패", message: errorMessage)
@@ -133,6 +134,7 @@ extension SignUpViewController {
     }
     
     private func signUpButtonTapped() {
+        LoadingView.show()
         viewModel.signUp()
     }
 }

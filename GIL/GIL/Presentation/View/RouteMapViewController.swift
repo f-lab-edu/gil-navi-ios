@@ -82,8 +82,10 @@ extension RouteMapViewController: RouteFinderSheetViewControllerDelegate {
         transportType: Transport
     ) {
         Task {
+            LoadingView.show()
             let routes = await viewModel.fetchAndDisplayRoutes(transportType: transportType)
             await MainActor.run {
+                LoadingView.hide()
                 sender.updateRoutes(routes)
             }
         }

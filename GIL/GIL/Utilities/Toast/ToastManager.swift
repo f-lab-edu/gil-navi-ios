@@ -11,7 +11,6 @@ final class ToastManager {
     static let shared = ToastManager()
     
     private weak var toastView: UIView?
-    
     private init() {}
     
     enum ToastPosition {
@@ -25,9 +24,7 @@ final class ToastManager {
         duration: TimeInterval = 2.0,
         position: ToastPosition = .bottom
     ) {
-        if let existingView = toastView {
-            existingView.removeFromSuperview()
-        }
+        if let existingView = toastView { existingView.removeFromSuperview() }
         let view = ToastView(message: message)
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         if let window = windowScene?.windows.first {
