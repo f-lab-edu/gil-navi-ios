@@ -1,5 +1,5 @@
 //
-//  PlaceRepository.swift
+//  DefaultPlaceRepository.swift
 //  GIL
 //
 //  Created by 송우진 on 5/22/24.
@@ -8,26 +8,22 @@
 import Foundation
 import SwiftData
 
-protocol PlaceRepository {
-    func storePlace(_ mapItem: MapItem)
-    func fetchPlaces(limit: Int, order: SortOrder) -> [Place]
-}
-
-final class DefaultPlaceRepository: PlaceRepository {
+final class DefaultPlaceRepository {
     private var placeContainer: ModelContainer?
 
     init() {
         placeContainer = try? ModelContainer(for: Place.self)
     }
+}
 
-    // MARK: - MainActor
+extension DefaultPlaceRepository: PlaceRepository {
     @MainActor
     func storePlace(_ mapItem: MapItem) {
         let data = Place(saveDate: Date(), mapItem: mapItem)
         placeContainer?.mainContext.insert(data)
     }
 
-    @MainActor 
+    @MainActor
     func fetchPlaces(
         limit: Int,
         order: SortOrder
