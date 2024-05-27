@@ -61,6 +61,7 @@
 		5858892C2C030E3200F3F642 /* PlaceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5858892B2C030E3200F3F642 /* PlaceRepository.swift */; };
 		5858892F2C046AF000F3F642 /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 5858892E2C046AF000F3F642 /* InlineSnapshotTesting */; };
 		585889312C046AF000F3F642 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 585889302C046AF000F3F642 /* SnapshotTesting */; };
+		585889342C046F4900F3F642 /* GILSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585889332C046F4900F3F642 /* GILSnapshotTests.swift */; };
 		585889362C0474CF00F3F642 /* MockFirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585889352C0474CF00F3F642 /* MockFirebaseAuthManager.swift */; };
 		586F030C2BE0C4A2008660A0 /* LanguageCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030B2BE0C4A1008660A0 /* LanguageCode.swift */; };
 		586F030F2BE0D050008660A0 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030E2BE0D050008660A0 /* Place.swift */; };
@@ -182,6 +183,7 @@
 		585889232C00A12F00F3F642 /* Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Distance.swift; sourceTree = "<group>"; };
 		585889272C00AE1300F3F642 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		5858892B2C030E3200F3F642 /* PlaceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRepository.swift; sourceTree = "<group>"; };
+		585889332C046F4900F3F642 /* GILSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GILSnapshotTests.swift; sourceTree = "<group>"; };
 		585889352C0474CF00F3F642 /* MockFirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFirebaseAuthManager.swift; sourceTree = "<group>"; };
 		586F030B2BE0C4A1008660A0 /* LanguageCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCode.swift; sourceTree = "<group>"; };
 		586F030E2BE0D050008660A0 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -1178,6 +1180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				585889362C0474CF00F3F642 /* MockFirebaseAuthManager.swift in Sources */,
+				585889342C046F4900F3F642 /* GILSnapshotTests.swift in Sources */,
 				58DA598E2BF4C39B0039630D /* PlaceSearchViewModelTests.swift in Sources */,
 				58DA598C2BF4C2FA0039630D /* MockClass.swift in Sources */,
 			);
