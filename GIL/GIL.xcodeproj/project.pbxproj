@@ -59,6 +59,8 @@
 		585889242C00A12F00F3F642 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585889232C00A12F00F3F642 /* Distance.swift */; };
 		585889282C00AE1300F3F642 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585889272C00AE1300F3F642 /* LoadingView.swift */; };
 		5858892C2C030E3200F3F642 /* PlaceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5858892B2C030E3200F3F642 /* PlaceRepository.swift */; };
+		5858892F2C046AF000F3F642 /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 5858892E2C046AF000F3F642 /* InlineSnapshotTesting */; };
+		585889312C046AF000F3F642 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 585889302C046AF000F3F642 /* SnapshotTesting */; };
 		586F030C2BE0C4A2008660A0 /* LanguageCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030B2BE0C4A1008660A0 /* LanguageCode.swift */; };
 		586F030F2BE0D050008660A0 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F030E2BE0D050008660A0 /* Place.swift */; };
 		586F03182BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F03172BE13696008660A0 /* HomeRecentSearchPlaceCollectionViewCell.swift */; };
@@ -252,6 +254,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5858892F2C046AF000F3F642 /* InlineSnapshotTesting in Frameworks */,
+				585889312C046AF000F3F642 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,6 +932,10 @@
 				584FA3FB2BA41485002600F1 /* PBXTargetDependency */,
 			);
 			name = GILTests;
+			packageProductDependencies = (
+				5858892E2C046AF000F3F642 /* InlineSnapshotTesting */,
+				585889302C046AF000F3F642 /* SnapshotTesting */,
+			);
 			productName = GILTests;
 			productReference = 584FA3F92BA41485002600F1 /* GILTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -986,6 +994,7 @@
 			mainGroup = 584FA3DA2BA41483002600F1;
 			packageReferences = (
 				584FA4352BAD5607002600F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5858892D2C046AF000F3F642 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = 584FA3E42BA41484002600F1 /* Products */;
 			projectDirPath = "";
@@ -1687,6 +1696,14 @@
 				minimumVersion = 10.23.0;
 			};
 		};
+		5858892D2C046AF000F3F642 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.16.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1714,6 +1731,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 584FA4352BAD5607002600F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		5858892E2C046AF000F3F642 /* InlineSnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5858892D2C046AF000F3F642 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = InlineSnapshotTesting;
+		};
+		585889302C046AF000F3F642 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5858892D2C046AF000F3F642 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 		58BDFBD42BBE889D006AC994 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
