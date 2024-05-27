@@ -20,4 +20,14 @@ final class GILSnapshotTests: XCTestCase {
         
         assertSnapshot(matching: loginViewController, as: .image, named: "login_view_controller", testName: "ViewController")
     }
+    
+    func test_회원가입화면() {
+        let mockAuthManager = MockFirebaseAuthManager()
+        let dependencies = AuthenticationSceneDIContainer.Dependencies(firebaseAuthManager: mockAuthManager)
+        let diContainer = AuthenticationSceneDIContainer(dependencies: dependencies)
+        
+        let signUpViewController = diContainer.makeSignUpViewController()
+        assertSnapshot(matching: signUpViewController, as: .image, named: "sign_up_view_controller", testName: "ViewController")
+    }
+    
 }
