@@ -18,7 +18,7 @@ final class GILSnapshotTests: XCTestCase {
         let actions = LoginViewModelActions(showSignUp: {})
         let loginViewController = diContainer.makeLoginViewController(actions: actions)
         
-        assertSnapshot(of: loginViewController, as: .image, named: "login_view_controller", testName: "ViewController")
+        assertSnapshot(of: loginViewController, as: .image)
     }
     
     func test_회원가입화면() {
@@ -27,7 +27,7 @@ final class GILSnapshotTests: XCTestCase {
         let diContainer = AuthenticationSceneDIContainer(dependencies: dependencies)
         
         let signUpViewController = diContainer.makeSignUpViewController()
-        assertSnapshot(of: signUpViewController, as: .image, named: "sign_up_view_controller", testName: "ViewController")
+        assertSnapshot(of: signUpViewController, as: .image)
     }
     
     func test_장소검색화면() {
@@ -36,6 +36,6 @@ final class GILSnapshotTests: XCTestCase {
         let actions = PlaceSearchViewModelActions(showRouteFinder: {_,_ in })
         let placeSearchViewController = diContainer.makePlaceSearchViewController(actions: actions)
         
-        assertSnapshot(of: placeSearchViewController, as: .image, named: "place_search_view_controller", testName: "ViewController")
+        assertSnapshot(of: placeSearchViewController, as: .image)
     }
 }
