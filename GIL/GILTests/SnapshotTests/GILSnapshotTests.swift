@@ -7,6 +7,8 @@
 
 import XCTest
 import SnapshotTesting
+import CoreLocation
+import MapKit
 @testable import GIL
 
 final class GILSnapshotTests: XCTestCase {
@@ -37,5 +39,24 @@ final class GILSnapshotTests: XCTestCase {
         let placeSearchViewController = diContainer.makePlaceSearchViewController(actions: actions)
         
         assertSnapshot(of: placeSearchViewController, as: .image)
+    }
+    
+    func test_경로안내화면() {
+        let mockRouteManager = MockRouteManager()
+        let dependencies = RouteFinderSceneDIContainer.Dependencies(routeManager: mockRouteManager)
+        let diContainer = RouteFinderSceneDIContainer(dependencies: dependencies)
+        
+        let mapLocation = MapLocation(CLLocation(latitude: 37.785824, longitude: -122.406417))
+        let mapItem = MapItem(mapItem: MKMapItem(), distance: nil)
+        let actions = RouteMapViewModelActions(showRouteFinderPageSheet: {})
+        let routeMapViewController = diContainer.makeRouteMapViewController(
+            departureMapLocation: mapLocation,
+            destinationMapItem: mapItem,
+            actions: actions
+        )
+        assertSnapshot(of: routeMapViewController, as: .image)
+        
+        let routeFinderSheetViewController = diContainer.makeRouteFinderSheetViewController()
+        assertSnapshot(of: routeFinderSheetViewController, as: .image)
     }
 }
