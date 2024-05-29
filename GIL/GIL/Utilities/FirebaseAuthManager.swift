@@ -9,6 +9,25 @@ import FirebaseAuth
 import Combine
 import AuthenticationServices
 
+enum FirebaseAuthError: Error, Equatable {
+    case invalidEmail
+    case emailAlreadyInUse
+    case wrongPassword
+    case userNotFound
+    case appleSignInFailed
+    case customError(description: String)
+    var errorDescription: String {
+        switch self {
+        case .invalidEmail: return "입력한 이메일이 유효하지 않습니다."
+        case .emailAlreadyInUse: return "이미 사용 중인 이메일입니다."
+        case .wrongPassword: return "잘못된 비밀번호입니다."
+        case .userNotFound: return "사용자를 찾을 수 없습니다."
+        case .appleSignInFailed: return "Apple 로그인에 실패했습니다."
+        case .customError(let description): return description
+        }
+    }
+}
+
 protocol FirebaseAuthManaging {
     /// Firebase 인증 상태 변화
     var authStateDidChangePublisher: AnyPublisher<User?, Never> { get }
@@ -37,6 +56,18 @@ final class FirebaseAuthManager: FirebaseAuthManaging {
             Auth.auth().removeStateDidChangeListener(handle)
         }
     }
+    
+    // MARK: - Private
+    private func handleAuthError(_ error: NSError) -> FirebaseAuthError {
+        switch error.code {
+        case AuthErrorCode.invalidEmail.rawValue: return .invalidEmail
+        case AuthErrorCode.wrongPassword.rawValue: return .wrongPassword
+        case AuthErrorCode.emailAlreadyInUse.rawValue: return .emailAlreadyInUse
+        case AuthErrorCode.userNotFound.rawValue: return .userNotFound
+        case AuthErrorCode.accountExistsWithDifferentCredential.rawValue: return .emailAlreadyInUse
+        default: return .customError(description: error.localizedDescription)
+        }
+    }
 }
 
 extension FirebaseAuthManager {
@@ -46,8 +77,8 @@ extension FirebaseAuthManager {
     ) -> AnyPublisher<Member?, Error> {
         Future { promise in
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                if let error = error {
-                    promise(.failure(error))
+                if let error = error as NSError? {
+                    promise(.failure(self.handleAuthError(error)))
                 } else {
                     promise(.success(Member(user: authResult?.user)))
                 }
@@ -63,14 +94,13 @@ extension FirebaseAuthManager {
         Future { promise in
             let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: fullName)
             Auth.auth().signIn(with: credential) { authResult, error in
-                if let error = error {
-                    promise(.failure(error))
+                if let error = error as NSError? {
+                    promise(.failure(self.handleAuthError(error)))
                 } else {
                     promise(.success(Member(user: authResult?.user)))
                 }
             }
-        }
-        .eraseToAnyPublisher()
+        }.eraseToAnyPublisher()
     }
     
     func createUser(
@@ -80,8 +110,8 @@ extension FirebaseAuthManager {
     ) -> AnyPublisher<Member?, Error> {
         Future { promise in
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                if let error = error {
-                    promise(.failure(error))
+                if let error = error as NSError? {
+                    promise(.failure(self.handleAuthError(error)))
                 } else {
                     promise(.success(Member(user: authResult?.user)))
                 }
@@ -94,8 +124,8 @@ extension FirebaseAuthManager {
             do {
                 try Auth.auth().signOut()
                 promise(.success(()))
-            } catch {
-                promise(.failure(error))
+            } catch let signOutError as NSError {
+                promise(.failure(self.handleAuthError(signOutError)))
             }
         }.eraseToAnyPublisher()
     }

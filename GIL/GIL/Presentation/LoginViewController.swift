@@ -70,6 +70,7 @@ extension LoginViewController {
         #if DEV
         switch error {
         case let authenticationError as AuthenticationError: Log.error("AuthenticationError", authenticationError.errorDescription)
+        case let firebaseAuthError as FirebaseAuthError: Log.error("firebaseAuthError", firebaseAuthError.errorDescription)
         case let cryptoUtilsError as CryptoUtilsError: Log.error("CryptoUtilsError", cryptoUtilsError.localizedDescription)
         default: Log.error("Unknown Login Error", error.localizedDescription)
         }
