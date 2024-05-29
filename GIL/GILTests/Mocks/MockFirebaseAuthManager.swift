@@ -11,14 +11,18 @@ import FirebaseAuth
 @testable import GIL
 
 class MockFirebaseAuthManager: FirebaseAuthManaging {
+    var signInWithEmailResult: Result<Member?, Error>?
+    
     var authStateDidChangePublisher: AnyPublisher<User?, Never> {
         Just(nil).eraseToAnyPublisher()
     }
     
     func signInWithEmail(email: String, password: String) -> AnyPublisher<GIL.Member?, Error> {
-        Just(Member(user: nil))
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
+        if let result = signInWithEmailResult {
+            return result.publisher.eraseToAnyPublisher()
+        } else {
+            return Fail(error: FirebaseAuthError.customError(description: "이메일 로그인 실패")).eraseToAnyPublisher()
+        }
     }
     
     func signInWithApple(idTokenString: String, nonce: String, fullName: PersonNameComponents?) -> AnyPublisher<GIL.Member?, Error> {

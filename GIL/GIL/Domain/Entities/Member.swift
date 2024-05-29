@@ -7,6 +7,6 @@
 
 import FirebaseAuth
 
-struct Member {
+struct Member: Equatable {
     var user: User?
 }
