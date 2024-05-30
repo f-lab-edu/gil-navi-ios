@@ -23,7 +23,9 @@ enum AlertService {
             } else {
                 await alertController.addAction(okAction())
             }
-            await MainActor.run { viewController.present(alertController, animated: true, completion: nil) }
+            await MainActor.run {
+                viewController.present(alertController, animated: true, completion: nil)
+            }
         }
     }
     

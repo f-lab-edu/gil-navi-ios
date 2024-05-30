@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class PlaceSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
-    static let reuseIdentifier = String(describing: PlaceSearchCollectionViewCell.self)
+class PlaceSearchCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocol {
+    static let reuseIdentifier = "PlaceSearchCell"
     private let mappinIcon = MappinImageView(iconType: .outline)
     private let stackView = UIStackView()
     private let nameLabel = UILabel()
@@ -84,9 +84,10 @@ extension PlaceSearchCollectionViewCell {
 
 // MARK: - Update Content
 extension PlaceSearchCollectionViewCell {
-    func updateContent(with item: MapItem) {
+    func updateContent(with item: PlaceModel) {
+        let viewModel = PlaceSearchViewModel()
         nameLabel.text = item.name
-        addressLabel.text = item.formattedAddressWithDistance()
+        addressLabel.text = viewModel.getAddressForPlace(item)
     }
 }
 

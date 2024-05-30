@@ -7,103 +7,152 @@
 
 import MapKit
 
-protocol RouteManaging {
-    func configureMapView(mapView: MKMapView)
-    
-    /// 출발지와 도착지로부터 경로를 계산합니다.
-    /// - Returns: 계산된 경로를 `Route`객체의 배열로 반환됩니다. 실패하면 오류를 던집니다.
-    func calculateRouteAsync(from start: Coordinate, to end: Coordinate, transportType: Transport) async throws -> [Route]
-    func addRoutesPolyline(_ routes: [Route])
-    func addAnnotation(at coordinate: Coordinate, title: String, subtitle: String?)
-    
-    /// 모든 경로를 포함할 수 있도록 지도의 보기 범위를 조정합니다.
-    func focusMapToShowAllRoutes(routes: [Route])
-    func clearMap()
-    func removeAnnotations()
-    func removeOverlays()
+// MARK: - RouteManagerProtocol
+protocol RouteManagerProtocol {
+    var selectedRoute: RouteModel? { get set }
+    func createPinAnnotation(coordinate: CLLocationCoordinate2D, title: String, subtitle: String?) -> MKPointAnnotation
+    func addAnnotations(_ annotations: [MKAnnotation])
+    func addRoutesPolyline(_ routes: [RouteModel])
+    func setRegion(_ region: MKCoordinateRegion)
+    func fetchCoordinateRegion(from departureCoordinate: CLLocationCoordinate2D, to destinationCoordinate: CLLocationCoordinate2D) -> MKCoordinateRegion
+    func findRoute(from departure: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, transportType: Transport) async throws -> [RouteModel]
 }
 
-final class RouteManager: NSObject, RouteManaging {
-    private var mapView: MKMapView? {
+final class RouteManager: NSObject, MKMapViewDelegate, RouteManagerProtocol {
+    private var mapView: MKMapView
+    var selectedRoute: RouteModel? {
         didSet {
-            mapView?.delegate = self
+            Task {
+                await reloadOverlays()
+                postAccessibilitySelectRoute()
+            }
         }
     }
-}
-
-extension RouteManager {
-    func configureMapView(mapView: MKMapView) {
+    
+    // MARK: - Initialization
+    init(mapView: MKMapView) {
         self.mapView = mapView
-    }
-    
-    func calculateRouteAsync(
-        from start: Coordinate,
-        to end: Coordinate,
-        transportType: Transport
-    ) async throws -> [Route] {
-        let directionRequest = MKDirections.Request()
-        directionRequest.source = start.toMKMapItem()
-        directionRequest.destination = end.toMKMapItem()
-        directionRequest.transportType = transportType.mkTransportType
-        directionRequest.requestsAlternateRoutes = true
-        let directions = MKDirections(request: directionRequest)
-        return try await directions.calculate().routes.map({ Route($0) })
-    }
-    
-    @MainActor
-    func focusMapToShowAllRoutes(routes: [Route]) {
-        let mapRects = routes.map { $0.polyline.boundingMapRect }
-        let combinedMapRect = mapRects.reduce(MKMapRect.null) { $0.union($1) }
-        mapView?.setVisibleMapRect(combinedMapRect, edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 100, right: 50), animated: true)
-    }
-    
-    @MainActor
-    func addRoutesPolyline(_ routes: [Route]) {
-        let polylines = routes.map({ $0.polyline })
-        mapView?.addOverlays(polylines, level: .aboveRoads)
-    }
-    
-    @MainActor
-    func addAnnotation(
-        at coordinate: Coordinate,
-        title: String,
-        subtitle: String? = nil
-    ) {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate.toCLLocationCoordinate2D()
-        annotation.title = title
-        annotation.subtitle = subtitle
-        mapView?.addAnnotation(annotation)
-    }
-    
-    @MainActor
-    func clearMap() {
-        removeAnnotations()
-        removeOverlays()
-    }
-    
-    @MainActor
-    func removeAnnotations() {
-        mapView?.removeAnnotations(mapView?.annotations ?? [])
-    }
-    
-    @MainActor
-    func removeOverlays() {
-        mapView?.removeOverlays(mapView?.overlays ?? [])
+        super.init()
+        mapView.delegate = self
     }
 }
 
 // MARK: - MKMapViewDelegate
-extension RouteManager: MKMapViewDelegate {
-    /// 루트의 폴리라인 시각적 표현을 설정합니다.
+extension RouteManager {
     func mapView(
         _ mapView: MKMapView,
         rendererFor overlay: MKOverlay
     ) -> MKOverlayRenderer {
-        guard let polyline = overlay as? CustomPolyline else { return MKOverlayRenderer() }
+        guard let polyline = overlay as? MKPolyline else { return MKOverlayRenderer() }
         let renderer = MKPolylineRenderer(polyline: polyline)
-        renderer.lineWidth = 5
-        renderer.strokeColor = polyline.isSelected ? .mainGreen : .mainGreen.withAlphaComponent(0.25)
+        renderer.strokeColor = .mainGreen.withAlphaComponent(0.3)
+        renderer.lineWidth = 3
+        if let selectedRoute = selectedRoute, mapView.overlays.contains(where: { $0 as? MKPolyline == selectedRoute.polyline }) {
+            renderer.strokeColor = (selectedRoute.polyline == polyline) ? .mainGreen : .mainGreen.withAlphaComponent(0.3)
+            renderer.lineWidth = (selectedRoute.polyline == polyline) ? 4 : 3
+        }
         return renderer
+    }
+}
+
+extension RouteManager {
+    /// 두 좌표를 이용해 MKCoordinateRegion 생성
+    func fetchCoordinateRegion(
+        from departureCoordinate: CLLocationCoordinate2D,
+        to destinationCoordinate: CLLocationCoordinate2D
+    ) -> MKCoordinateRegion {
+        let centerCoordinate = midPoint(from: departureCoordinate, to: destinationCoordinate)
+        let distance = calculateDistance(from: departureCoordinate, to: destinationCoordinate)
+        let region = MKCoordinateRegion(center: centerCoordinate, latitudinalMeters: distance * 1.5, longitudinalMeters: distance * 1.5)
+        return region
+    }
+    
+    /// 두 좌표의 중간 지점 계산
+    private func midPoint(
+        from departure: CLLocationCoordinate2D,
+        to destination: CLLocationCoordinate2D
+    ) -> CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: (departure.latitude + destination.latitude) / 2, longitude: (departure.longitude + destination.longitude) / 2)
+    }
+    
+    /// 두 좌표 사이의 거리 계산
+    private func calculateDistance(
+        from: CLLocationCoordinate2D,
+        to: CLLocationCoordinate2D
+    ) -> CLLocationDistance {
+        let fromLocation = CLLocation(latitude: from.latitude, longitude: from.longitude)
+        let toLocation = CLLocation(latitude: to.latitude, longitude: to.longitude)
+        return fromLocation.distance(from: toLocation)
+    }
+    
+    /// 핀 어노테이션 생성후 반환합니다
+    /// - Parameters:
+    ///   - coordinate:
+    func createPinAnnotation(
+        coordinate: CLLocationCoordinate2D,
+        title: String,
+        subtitle: String? = nil
+    ) -> MKPointAnnotation {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = title
+        annotation.subtitle = subtitle
+        return annotation
+    }
+}
+
+@MainActor
+extension RouteManager {
+    /// 맵뷰에 어노테이션을 추가합니다
+    func addAnnotations(_ annotations: [MKAnnotation]) {
+        mapView.addAnnotations(annotations)
+    }
+    
+    /// 맵뷰에 영역을 설정합니다
+    func setRegion(_ region: MKCoordinateRegion) {
+        mapView.setRegion(region, animated: true)
+    }
+    
+    /// 맵뷰에 경로 폴리라인을 추가합니다
+    func addRoutesPolyline(_ routes: [RouteModel]) {
+        let polylines = routes.map({ $0.polyline })
+        mapView.addOverlays(polylines, level: .aboveRoads)
+    }
+    
+    /// 맵뷰의 오버레이들을 새로고침합니다
+    func reloadOverlays() {
+        let overlays = mapView.overlays
+        mapView.removeOverlays(overlays)
+        mapView.addOverlays(overlays, level: .aboveRoads)
+    }
+    
+    /// 출발지와 목적지까지 경로를 찾습니다
+    /// - Parameters:
+    ///  - departure: 출발지
+    ///  - destination: 목적지
+    ///  - transportType: 이동수단
+    /// - Returns: 검색된 루트들을 반환합니다
+    func findRoute(
+        from departure: CLLocationCoordinate2D,
+        to destination: CLLocationCoordinate2D,
+        transportType: Transport
+    ) async throws -> [RouteModel] {
+        mapView.overlays.forEach { mapView.removeOverlay($0) }
+        let departurePlacemark = MKPlacemark(coordinate: departure)
+        let destinationPlacemark = MKPlacemark(coordinate: destination)
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = MKMapItem(placemark: departurePlacemark)
+        directionRequest.destination = MKMapItem(placemark: destinationPlacemark)
+        directionRequest.transportType = transportType.mkTransportType
+        directionRequest.requestsAlternateRoutes = true
+        let directions = MKDirections(request: directionRequest)
+        return try await directions.calculate().routes.map({ RouteModel($0) })
+    }
+}
+
+// MARK: - Accessibility
+extension RouteManager {
+    func postAccessibilitySelectRoute() {
+        UIAccessibility.post(notification: .announcement, argument: "선택한 경로로 변경되었습니다")
     }
 }
