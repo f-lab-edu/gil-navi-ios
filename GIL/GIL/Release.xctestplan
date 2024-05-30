@@ -18,6 +18,13 @@
         "identifier" : "584FA3F82BA41485002600F1",
         "name" : "GILTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:GIL.xcodeproj",
+        "identifier" : "584FA4022BA41485002600F1",
+        "name" : "GILUITests"
+      }
     }
   ],
   "version" : 1
