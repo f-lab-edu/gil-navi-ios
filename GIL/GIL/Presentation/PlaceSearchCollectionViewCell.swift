@@ -86,7 +86,7 @@ extension PlaceSearchCollectionViewCell {
 extension PlaceSearchCollectionViewCell {
     func updateContent(with item: MapItem) {
         nameLabel.text = item.name
-        addressLabel.text = item.formattedAddressWithDistance()
+        addressLabel.text = item.formatAddressWithDistance()
     }
 }
 

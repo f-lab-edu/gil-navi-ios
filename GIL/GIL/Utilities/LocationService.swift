@@ -8,14 +8,18 @@
 import CoreLocation
 
 protocol LocationServiceDelegate: AnyObject {
-    func didFetchPlacemark(_ placemark: PlacemarkModel)
+    func didFetchPlacemark(_ placemark: Placemark)
     func didFailWithError(_ error: Error)
 }
 
 protocol LocationServiceProtocol {
     var delegate: LocationServiceDelegate? { get set }
-    var currentLocation: CLLocationModel? { get }
+    var currentLocation: MapLocation? { get }
+    
+    /// 위치 서비스 사용 권한을 요청하고 위치 업데이트를 시작합니다.
     func requestLocation()
+    
+    /// 위치 업데이트를 중단합니다.
     func stopUpdatingLocation()
 }
 
@@ -23,7 +27,7 @@ class LocationService: NSObject, LocationServiceProtocol {
     weak var delegate: LocationServiceDelegate?
     private let locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()
-    var currentLocation: CLLocationModel?
+    var currentLocation: MapLocation?
     
     // MARK: - Initialization
     override init() {
@@ -33,19 +37,16 @@ class LocationService: NSObject, LocationServiceProtocol {
     }
     
     // MARK: - Location Management
-    /// 위치 서비스 사용 권한을 요청하고 위치 업데이트를 시작합니다.
     func requestLocation() {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
     
-    /// 위치 업데이트를 중단합니다.
     func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
     }
     
     // MARK: - Address Fetching
-    /// 결과 주소를 가져옵니다.
     func fetchAddress(for location: CLLocation) {
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
             if let error = error {
@@ -53,7 +54,7 @@ class LocationService: NSObject, LocationServiceProtocol {
                 return
             }
             if let placemark = placemarks?.first {
-                let model = PlacemarkModel(clPlacemark: placemark)
+                let model = Placemark(clPlacemark: placemark)
                 self.delegate?.didFetchPlacemark(model)
             }
         }
@@ -68,7 +69,7 @@ extension LocationService: CLLocationManagerDelegate {
         didUpdateLocations locations: [CLLocation]
     ) {
         if let location = locations.first {
-            currentLocation = CLLocationModel(location)
+            currentLocation = MapLocation(location)
             fetchAddress(for: location)
         }
     }
