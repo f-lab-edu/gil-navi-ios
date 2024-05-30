@@ -52,9 +52,13 @@ extension LoginView {
     }
     
     private func setupForm() {
-        emailTextField.setAccessibility(label: "이메일 입력 필드", hint: "이메일을 입력하세요")
-        passwordTextField.setAccessibility(label: "비밀번호 입력 필드", hint: "비밀번호를 입력하세요")
-        formStackView.makeConstraints { 
+        emailTextField
+            .setAccessibilityIdentifier("LoginViewEmailTextField")
+            .setAccessibility(label: "이메일 입력 필드", hint: "이메일을 입력하세요")
+        passwordTextField
+            .setAccessibilityIdentifier("LoginViewPasswordTextField")
+            .setAccessibility(label: "비밀번호 입력 필드", hint: "비밀번호를 입력하세요")
+        formStackView.makeConstraints {
             $0.top(equalTo: topAnchor, constant: 120)
             $0.matchParent(self, attributes: [.leading, .trailing], insets: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
             $0.height(equalToConstant: 120)
@@ -63,6 +67,7 @@ extension LoginView {
     
     private func setupLoginButton() {
         loginButton
+            .setAccessibilityIdentifier("LoginViewSignInButton")
             .setAccessibility(label: "로그인 버튼", hint: "로그인하려면 눌러주세요", traits: .button)
             .configureSubmitStyle(title: "로그인")
             .makeConstraints({
@@ -75,6 +80,7 @@ extension LoginView {
     private func setupSingUpStackView() {
         signUpLabel.setAccessibility(label: "아직 회원이 아니신가요?")
         signUpButton
+            .setAccessibilityIdentifier("LoginViewSignUpButton")
             .setAccessibility(label: "회원가입 버튼", hint: "회원가입하려면 눌러주세요", traits: .button)
             .setTitle(title: "회원가입", state: .normal)
             .setTitleColor(color: .red, state: .normal)
