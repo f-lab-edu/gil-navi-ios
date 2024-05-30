@@ -52,6 +52,7 @@ extension RouteMapView {
     
     private func setupBackButton() {
         backButton
+            .setAccessibilityIdentifier("RouteMapViewBackButton")
             .setAccessibility(label: "뒤로가기 버튼", hint: "경로 지도 화면을 닫으려면 두 번 탭하세요", traits: .button)
             .configureNavigationStyle(type: .back)
             .setBackgroundColor(.white, for: .normal)

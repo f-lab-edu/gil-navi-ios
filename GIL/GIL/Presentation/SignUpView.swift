@@ -92,6 +92,7 @@ extension SignUpView {
     
     private func setupCloseButton() {
         closeButton
+            .setAccessibilityIdentifier("SignUpViewCloseButton")
             .setAccessibility(label: "닫기 버튼", hint: "회원가입 화면을 닫으려면 두 번 탭하세요", traits: .button)
             .configureNavigationStyle(type: .close)
             .makeConstraints({
@@ -111,6 +112,7 @@ extension SignUpView {
                 $0.height(equalToConstant: constraint.constant)
             })
         emailTextField
+            .setAccessibilityIdentifier("SignUpViewEmailTextField")
             .setAccessibility(label: "이메일 입력 필드", hint: "이메일을 입력하세요")
             .makeConstraints({
                 $0.top(equalTo: emailLabel.bottomAnchor, constant: 2)
@@ -129,6 +131,7 @@ extension SignUpView {
                 $0.height(equalToConstant: constraint.constant)
             })
         nameTextField
+            .setAccessibilityIdentifier("SignUpViewNameTextField")
             .setAccessibility(label: "이름 입력 필드", hint: "이름을 입력하세요")
             .makeConstraints({
                 $0.top(equalTo: nameLabel.bottomAnchor, constant: 2)
@@ -146,6 +149,7 @@ extension SignUpView {
                 $0.height(equalToConstant: constraint.constant)
             })
         passwordTextField
+            .setAccessibilityIdentifier("SignUpViewPasswordTextField")
             .setAccessibility(label: "비밀번호 입력 필드", hint: "비밀번호를 입력하세요")
             .makeConstraints({
                 $0.top(equalTo: passwordLabel.bottomAnchor, constant: 2)
@@ -163,6 +167,7 @@ extension SignUpView {
                 $0.height(equalToConstant: constraint.constant)
             })
         verifyPasswordTextField
+            .setAccessibilityIdentifier("SignUpViewVerifyPasswordTextField")
             .setAccessibility(label: "비밀번호 확인 입력 필드", hint: "비밀번호를 다시 입력하세요")
             .makeConstraints({
                 $0.top(equalTo: verifyPasswordLabel.bottomAnchor, constant: 2)
@@ -179,6 +184,7 @@ extension SignUpView {
     
     private func setupDoneButton() {
         doneButton
+            .setAccessibilityIdentifier("SignUpViewDoneButton")
             .setAccessibility(label: "완료 버튼", hint: "회원가입을 완료하려면 두 번 탭하세요", traits: .button)
             .configureSubmitStyle(title: "완료")
             .makeConstraints({
