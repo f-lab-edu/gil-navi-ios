@@ -16,15 +16,19 @@ jobs:
     - name: List available Xcode versions
       run: ls /Applications | grep Xcode
 
-    - name: Show current version of Xcode
-      run: xcodebuild -version
-
     - name: Setup Xcode version
       uses: maxim-lobanov/setup-xcode@v1
       with: 
         xcode-version: '15.4'
+
+    - name: Show current version of Xcode
+      run: xcodebuild -version
     
     - uses: actions/checkout@v4
+    
+    - name: List schemes
+      run: xcodebuild -list -project GIL/GIL.xcodeproj
+      
     - name: Run tests
       run: | 
         xcodebuild clean test -project GIL/GIL.xcodeproj -scheme GIL -destination "platform=iOS Simulator,name=iPhone 15"
