@@ -7,7 +7,7 @@ jobs:
     runs-on: macos-latest
     env:
       XC_PROJECT: ${{ 'GIL/GIL.xcodeproj' }}
-      XC_SCHEME: ${{ 'GIL' }}
+      XC_SCHEME: ${{ 'Release' }}
       XC_ARCHIVE: ${{ 'GIL.xcarchive' }}
       
       # certificate 
@@ -26,6 +26,8 @@ jobs:
       KEYCHAIN: ${{ 'test.keychain' }}
       
     steps:
+      - name: Check List
+        list: 
       - name: Select latest Xcode
         run: "sudo xcode-select -s /Applications/Xcode.app"
       - name: Checkout project
