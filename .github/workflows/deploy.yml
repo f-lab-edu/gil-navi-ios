@@ -26,8 +26,6 @@ jobs:
       KEYCHAIN: ${{ 'test.keychain' }}
       
     steps:
-      - name: Check List
-        list: 
       - name: Select latest Xcode
         run: "sudo xcode-select -s /Applications/Xcode.app"
       - name: Checkout project
