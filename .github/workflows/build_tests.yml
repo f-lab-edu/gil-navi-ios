@@ -13,6 +13,11 @@ jobs:
     runs-on: macos-14
 
     steps:
+    - name: List available Xcode versions
+      run: ls /Applications | grep Xcode
+
+    - name: Show current version of Xcode
+      run: xcodebuild -version
 
     - name: Setup Xcode version
       uses: maxim-lobanov/setup-xcode@v1
