@@ -66,3 +66,9 @@ jobs:
           issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
           api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
           api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+      - name: Clean up Keychain
+        if: always()
+        run: |
+          security delete-keychain "$KEYCHAIN"
+          rm "$DECRYPTED_CERT_FILE_PATH"
+          rm "$DECRYPTED_PROVISION_FILE_PATH"
