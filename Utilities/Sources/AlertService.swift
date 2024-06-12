@@ -7,6 +7,7 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 enum AlertService {
     static func showAlert(
         title: String,

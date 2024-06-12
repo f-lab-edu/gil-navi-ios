@@ -23,7 +23,7 @@ protocol RouteManaging {
     func removeOverlays()
 }
 
-final class RouteManager: NSObject, RouteManaging {
+public final class RouteManager: NSObject, RouteManaging {
     private var mapView: MKMapView? {
         didSet {
             mapView?.delegate = self

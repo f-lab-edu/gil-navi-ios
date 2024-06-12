@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Utilities
+
 
 final class AppDIContainer {
     lazy var firebaseAuthManager = FirebaseAuthManager()
